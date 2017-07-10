@@ -6,6 +6,8 @@ target 'events' do
   use_frameworks!
 
   # Pods for events
+  pod 'Firebase/Core'
+
 
   target 'eventsTests' do
     inherit! :search_paths
