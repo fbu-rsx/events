@@ -7,6 +7,8 @@ target 'events' do
 
   # Pods for events
   pod 'Firebase/Core'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 
   target 'eventsTests' do
