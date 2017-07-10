@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3AF83A15E164D2366EE880C1 /* Pods_eventsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */; };
+		4F9887281F144AD700759564 /* FirebaseAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9887271F144AD700759564 /* FirebaseAPIManager.swift */; };
 		4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */; };
 		4FCB627E1F143DC400BBDC71 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627D1F143DC400BBDC71 /* ViewController.swift */; };
 		4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB627F1F143DC400BBDC71 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E325F93B30E087012B5B727 /* Pods-eventsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventsUITests/Pods-eventsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C04120232A3D15602FB929F /* Pods_eventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F9887271F144AD700759564 /* FirebaseAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAPIManager.swift; sourceTree = "<group>"; };
 		4FCB62781F143DC400BBDC71 /* events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = events.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FCB627D1F143DC400BBDC71 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4F9887261F144A7B00759564 /* APIManagers */ = {
+			isa = PBXGroup;
+			children = (
+				4F9887271F144AD700759564 /* FirebaseAPIManager.swift */,
+			);
+			name = APIManagers;
+			sourceTree = "<group>";
+		};
 		4FCB626F1F143DC400BBDC71 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 		4FCB627A1F143DC400BBDC71 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				4F9887261F144A7B00759564 /* APIManagers */,
 				4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */,
 				4FCB627D1F143DC400BBDC71 /* ViewController.swift */,
 				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
@@ -452,6 +463,7 @@
 			files = (
 				4FCB627E1F143DC400BBDC71 /* ViewController.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
+				4F9887281F144AD700759564 /* FirebaseAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +716,7 @@
 				4FCB62A21F143DC400BBDC71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4FCB62A31F143DC400BBDC71 /* Build configuration list for PBXNativeTarget "eventsTests" */ = {
 			isa = XCConfigurationList;
@@ -712,6 +725,7 @@
 				4FCB62A51F143DC400BBDC71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4FCB62A61F143DC400BBDC71 /* Build configuration list for PBXNativeTarget "eventsUITests" */ = {
 			isa = XCConfigurationList;
@@ -720,6 +734,7 @@
 				4FCB62A81F143DC400BBDC71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,6 +7,8 @@ target 'events' do
 
   # Pods for events
   pod 'Firebase/Core'
+  pod 'Firebase/Database'
+
 
 
   target 'eventsTests' do
