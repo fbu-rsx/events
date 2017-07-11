@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Use Firebase library to configure APIs
         FirebaseApp.configure()
+        GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
         return true
     }
 
