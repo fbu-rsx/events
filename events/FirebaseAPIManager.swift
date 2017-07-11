@@ -16,4 +16,8 @@ class FirebaseAPIManager {
     var ref: DatabaseReference!
     ref = Database.database().reference()
     */
+    
+    init() {
+        
+    }
 }
