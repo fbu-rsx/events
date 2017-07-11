@@ -11,6 +11,7 @@ target 'events' do
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.4'
+  pod 'OAuthSwift', '~> 1.1.2'
 
 
   target 'eventsTests' do
