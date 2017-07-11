@@ -10,6 +10,7 @@ target 'events' do
   pod 'Firebase/Database'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'Alamofire', '~> 4.4'
 
 
   target 'eventsTests' do
