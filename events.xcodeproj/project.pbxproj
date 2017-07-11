@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */; };
+		09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */; };
+		09A15CC11F1568F300E847CC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC01F1568F300E847CC /* Transaction.swift */; };
 		3AF83A15E164D2366EE880C1 /* Pods_eventsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */; };
 		4F9887281F144AD700759564 /* FirebaseAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9887271F144AD700759564 /* FirebaseAPIManager.swift */; };
 		4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */; };
@@ -41,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSwiftManager.swift; sourceTree = "<group>"; };
+		09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaDirectAPIManager.swift; sourceTree = "<group>"; };
+		09A15CC01F1568F300E847CC /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E325F93B30E087012B5B727 /* Pods-eventsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventsUITests/Pods-eventsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C04120232A3D15602FB929F /* Pods_eventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +107,14 @@
 			name = OAuthSwift;
 			sourceTree = "<group>";
 		};
+		09A15CBF1F1568E300E847CC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				09A15CC01F1568F300E847CC /* Transaction.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		20D303D004903CD73037EFE1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				4F9887271F144AD700759564 /* FirebaseAPIManager.swift */,
+				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
 			);
 			name = APIManagers;
 			sourceTree = "<group>";
@@ -149,6 +162,7 @@
 		4FCB627A1F143DC400BBDC71 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				09A15CBF1F1568E300E847CC /* Models */,
 				09A15CBA1F15485900E847CC /* OAuthSwift */,
 				4F9887261F144A7B00759564 /* APIManagers */,
 				4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */,
@@ -473,6 +487,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FCB627E1F143DC400BBDC71 /* ViewController.swift in Sources */,
+				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
+				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseAPIManager.swift in Sources */,
 				09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */,
