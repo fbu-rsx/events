@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--SignInViewController-->
         <scene sceneID="qak-0Z-ib2">
             <objects>
-                <viewController id="cGH-m4-fGU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" title="SignInViewController" id="cGH-m4-fGU" customClass="SignInViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ttf-Iz-reH"/>
                         <viewControllerLayoutGuide type="bottom" id="N27-uq-1sF"/>
