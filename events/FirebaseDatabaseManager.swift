@@ -16,7 +16,7 @@ class FirebaseDatabaseManager {
     private init() {
         Database.database().isPersistenceEnabled = true
         
-        setupConnectionObservers()
+//        setupConnectionObservers()
     }
     
     
