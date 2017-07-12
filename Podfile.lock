@@ -114,8 +114,9 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - Firebase/Auth
-  - Firebase/Core
   - Firebase/Database
+  - Firebase/Storage
+  - FirebaseCore
   - FirebaseUI (~> 4.1.1)
   - GoogleMaps
   - GooglePlaces
@@ -146,6 +147,6 @@ SPEC CHECKSUMS:
   TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 102316577fe414957011a2095b267147ccd275a6
+PODFILE CHECKSUM: b97d8f4826584c18dc63d15773792ce1abe11712
 
 COCOAPODS: 1.2.1
