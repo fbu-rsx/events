@@ -10,6 +10,7 @@
 		09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */; };
 		09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */; };
 		09A15CC11F1568F300E847CC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC01F1568F300E847CC /* Transaction.swift */; };
+		09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC21F159DB000E847CC /* PKCS12.swift */; };
 		3AF83A15E164D2366EE880C1 /* Pods_eventsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */; };
 		4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */; };
 		4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */; };
@@ -50,6 +51,8 @@
 		09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSwiftManager.swift; sourceTree = "<group>"; };
 		09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaDirectAPIManager.swift; sourceTree = "<group>"; };
 		09A15CC01F1568F300E847CC /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		09A15CC21F159DB000E847CC /* PKCS12.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS12.swift; sourceTree = "<group>"; };
+		09A15CC51F15A2B600E847CC /* eventsKeyCertBundle.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = eventsKeyCertBundle.p12; sourceTree = "<group>"; };
 		1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E325F93B30E087012B5B727 /* Pods-eventsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventsUITests/Pods-eventsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C04120232A3D15602FB929F /* Pods_eventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +130,14 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		09A15CC41F15A28700E847CC /* certs */ = {
+			isa = PBXGroup;
+			children = (
+				09A15CC51F15A2B600E847CC /* eventsKeyCertBundle.p12 */,
+			);
+			name = certs;
+			sourceTree = "<group>";
+		};
 		20D303D004903CD73037EFE1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +173,7 @@
 				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
 				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
 				4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */,
+				09A15CC21F159DB000E847CC /* PKCS12.swift */,
 			);
 			name = APIManagers;
 			sourceTree = "<group>";
@@ -193,6 +205,7 @@
 			children = (
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
 				4F87D3781F168F59007D4E94 /* Views */,
+				09A15CC41F15A28700E847CC /* certs */,
 				09A15CBF1F1568E300E847CC /* Models */,
 				09A15CBA1F15485900E847CC /* OAuthSwift */,
 				4F9887261F144A7B00759564 /* APIManagers */,
@@ -523,6 +536,7 @@
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
+				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
