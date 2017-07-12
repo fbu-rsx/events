@@ -30,6 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         authUI?.delegate = self
         let providers: [FUIAuthProvider] = [FUIGoogleAuth()]
         authUI?.providers = providers
+
+        if Auth.auth().currentUser == nil {
+            let authViewController = authUI!.authViewController()
+            window?.rootViewController = authViewController
+        } else {
+            FirebaseAuthManager.shared.signOut()
+        }
         
         GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
         
@@ -40,8 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         if let error = error {
             print(error.localizedDescription)
         } else {
-            let authViewController = authUI.authViewController()
-            
+          
         }
     }
     
