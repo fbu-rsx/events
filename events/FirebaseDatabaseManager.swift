@@ -11,7 +11,7 @@ import Firebase
 
 class FirebaseDatabaseManager {
     
-    static var shared = FirebaseAPIManager() //shared instance of manager
+    static var shared = FirebaseDatabaseManager() //shared instance of manager
     
     private init() {
         Database.database().isPersistenceEnabled = true
@@ -20,14 +20,14 @@ class FirebaseDatabaseManager {
     }
     
     
-    func setChildValue(_ value: Any?, forPath path: RefPath) {
-        self.ref.child(path).setValue(value)
-    }
-    
-    func createListener(forChild: RefPath) {
-        
-    }
-    
+//    func setChildValue(_ value: Any?, forPath path: RefPath) {
+//        self.ref.child(path).setValue(value)
+//    }
+//    
+//    func createListener(forChild: RefPath) {
+//        
+//    }
+//    
     private func offlineQuery() {
         
     }
