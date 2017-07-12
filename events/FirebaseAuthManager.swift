@@ -27,4 +27,40 @@ class FirebaseAuthManager {
             }
         }
     }
+    
+    func createNewuser(email: String, password: String) {
+        Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as Error {
+            print("Error signing out : %@", signOutError)
+        }
+    }
+    
+    func deleteCurrentUser() {
+        Auth.auth().currentUser?.delete(completion: { (error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        })
+    }
+    
+//    func reauthenticateUser() {
+//        let user = Auth.auth().currentUser
+//        
+//        
+//        
+//        user?.reauthenticate(with: credential, completion: { (error: Error?) in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            }
+//        })
+//    }
 }

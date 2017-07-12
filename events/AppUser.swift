@@ -11,10 +11,15 @@ import FirebaseAuth
 
 class AppUser {
     
-    static var current: User?
+    static var current: User {
+        get {
+            return Auth.auth().currentUser!
+        }
+    }
     
     var name: String
     var email: String
+    var password: String?
     var profileURL: URL?
 //    var location: {
 //        get {
@@ -22,12 +27,14 @@ class AppUser {
 //        }
 //    }
     
-    init(dictionary: [String: Any]) {
-        name = dictionary["name"] as! String
-        email = dictionary["email"] as! String
-        if let url = (dictionary["profileURLString"] as? String) {
-            profileURL = URL(string: url)
-        }
+    init(user: User) {
+        name = user.displayName!
+        email = user.email!
+        profileURL = user.photoURL
+    }
+    
+    func signIn(user: User) {
+//        FirebaseAuthManager.shared.signInExistingWith(email: user.email, password: user.password)
     }
     
 //    private func getLocation() {

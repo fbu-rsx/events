@@ -10,9 +10,12 @@ import UIKit
 import Firebase
 import GoogleMaps
 import Alamofire
+import FirebaseAuthUI
+import FirebaseGoogleAuthUI
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
     
@@ -22,8 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Use Firebase library to configure APIs
         FirebaseApp.configure()
+        let authUI = FUIAuth.defaultAuthUI()
+        // You need to adopt a FUIAuthDelegate protocol to receive callback
+        authUI?.delegate = self
+        
+        let providers :[FUIAuthProvider] = [FUIGoogleAuth()]
+        authUI?.providers = providers
+        
         GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
         return true
+    }
+    
+    public func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
+        
     }
     
 //    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
