@@ -64,6 +64,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ImagePicker-ImagePicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ImagePicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OAuthSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -97,6 +107,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>09A62655F66AE53A474D64E42E6E9DF9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
 		<dict>
 			<key>primary</key>
@@ -107,7 +122,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>356077FEADDE357C93285F3CE09433C2</key>
+		<key>3BFF9F651824EF6D7159B996DAA71D25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>40C157FD4E017078602FE2E7AABECD9A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,7 +147,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6C2EC4B93FF901C81FC010A042BA83F8</key>
+		<key>6ED6C31204688A301A4DF32F1DA8E934</key>
 		<dict>
 			<key>primary</key>
 			<true/>

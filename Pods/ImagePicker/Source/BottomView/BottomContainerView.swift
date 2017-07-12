@@ -14,8 +14,6 @@ open class BottomContainerView: UIView {
     static let height: CGFloat = 101
   }
 
-  var configuration = Configuration()
-
   lazy var pickerButton: ButtonPicker = { [unowned self] in
     let pickerButton = ButtonPicker()
     pickerButton.setTitleColor(UIColor.white, for: UIControlState())
@@ -36,8 +34,8 @@ open class BottomContainerView: UIView {
 
   open lazy var doneButton: UIButton = { [unowned self] in
     let button = UIButton()
-    button.setTitle(self.configuration.cancelButtonTitle, for: UIControlState())
-    button.titleLabel?.font = self.configuration.doneButton
+    button.setTitle(Configuration.cancelButtonTitle, for: UIControlState())
+    button.titleLabel?.font = Configuration.doneButton
     button.addTarget(self, action: #selector(doneButtonDidPress(_:)), for: .touchUpInside)
 
     return button
@@ -47,7 +45,7 @@ open class BottomContainerView: UIView {
 
   lazy var topSeparator: UIView = { [unowned self] in
     let view = UIView()
-    view.backgroundColor = self.configuration.backgroundColor
+    view.backgroundColor = Configuration.backgroundColor
 
     return view
     }()
@@ -64,35 +62,29 @@ open class BottomContainerView: UIView {
 
   // MARK: Initializers
 
-  public init(configuration: Configuration? = nil) {
-    if let configuration = configuration {
-      self.configuration = configuration
-    }
-    super.init(frame: .zero)
-    configure()
-  }
+  public override init(frame: CGRect) {
+    super.init(frame: frame)
 
-  public required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-
-  func configure() {
     [borderPickerButton, pickerButton, doneButton, stackView, topSeparator].forEach {
       addSubview($0)
       $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    backgroundColor = configuration.backgroundColor
+    backgroundColor = Configuration.backgroundColor
     stackView.accessibilityLabel = "Image stack"
     stackView.addGestureRecognizer(tapGestureRecognizer)
 
     setupConstraints()
   }
 
+  public required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   // MARK: - Action methods
 
   func doneButtonDidPress(_ button: UIButton) {
-    if button.currentTitle == configuration.cancelButtonTitle {
+    if button.currentTitle == Configuration.cancelButtonTitle {
       delegate?.cancelButtonDidPress()
     } else {
       delegate?.doneButtonDidPress()
@@ -111,8 +103,8 @@ open class BottomContainerView: UIView {
       }, completion: { _ in
         UIView.animate(withDuration: 0.2, animations: { _ in
           imageView.transform = CGAffineTransform.identity
-        })
-    })
+        }) 
+    }) 
   }
 }
 

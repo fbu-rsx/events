@@ -11,8 +11,6 @@ protocol CameraViewDelegate: class {
 
 class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate {
 
-  var configuration = Configuration()
-
   lazy var blurView: UIVisualEffectView = { [unowned self] in
     let effect = UIBlurEffect(style: .dark)
     let blurView = UIVisualEffectView(effect: effect)
@@ -47,9 +45,9 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
 
   lazy var noCameraLabel: UILabel = { [unowned self] in
     let label = UILabel()
-    label.font = self.configuration.noCameraFont
-    label.textColor = self.configuration.noCameraColor
-    label.text = self.configuration.noCameraTitle
+    label.font = Configuration.noCameraFont
+    label.textColor = Configuration.noCameraColor
+    label.text = Configuration.noCameraTitle
     label.sizeToFit()
 
     return label
@@ -57,16 +55,16 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
 
   lazy var noCameraButton: UIButton = { [unowned self] in
     let button = UIButton(type: .system)
-    let title = NSAttributedString(string: self.configuration.settingsTitle,
+    let title = NSAttributedString(string: Configuration.settingsTitle,
       attributes: [
-        NSFontAttributeName : self.configuration.settingsFont,
-        NSForegroundColorAttributeName : self.configuration.settingsColor,
+        NSFontAttributeName : Configuration.settingsFont,
+        NSForegroundColorAttributeName : Configuration.settingsColor,
       ])
 
     button.setAttributedTitle(title, for: UIControlState())
     button.contentEdgeInsets = UIEdgeInsets(top: 5.0, left: 10.0, bottom: 5.0, right: 10.0)
     button.sizeToFit()
-    button.layer.borderColor = self.configuration.settingsColor.cgColor
+    button.layer.borderColor = Configuration.settingsColor.cgColor
     button.layer.borderWidth = 1
     button.layer.cornerRadius = 4
     button.addTarget(self, action: #selector(settingsButtonDidTap), for: .touchUpInside)
@@ -87,28 +85,15 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
   weak var delegate: CameraViewDelegate?
   var animationTimer: Timer?
   var locationManager: LocationManager?
-  var startOnFrontCamera: Bool = false
-
-
-  public init(configuration: Configuration? = nil) {
-    if let configuration = configuration {
-      self.configuration = configuration
-    }
-    super.init(nibName: nil, bundle: nil)
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    if configuration.recordLocation {
+    if Configuration.recordLocation {
       locationManager = LocationManager()
     }
 
-    view.backgroundColor = configuration.mainColor
+    view.backgroundColor = Configuration.mainColor
 
     view.addSubview(containerView)
     containerView.addSubview(blurView)
@@ -120,7 +105,7 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
     view.addGestureRecognizer(tapGestureRecognizer)
 
     cameraMan.delegate = self
-    cameraMan.setup(self.startOnFrontCamera)
+    cameraMan.setup()
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -138,7 +123,7 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
   func setupPreviewLayer() {
     guard let layer = AVCaptureVideoPreviewLayer(session: cameraMan.session) else { return }
 
-    layer.backgroundColor = configuration.mainColor.cgColor
+    layer.backgroundColor = Configuration.mainColor.cgColor
     layer.autoreverses = true
     layer.videoGravity = AVLayerVideoGravityResizeAspectFill
 
@@ -186,7 +171,7 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
         self.cameraMan.switchCamera {
           UIView.animate(withDuration: 0.7, animations: {
             self.containerView.alpha = 0
-          })
+          }) 
         }
     })
   }
@@ -208,7 +193,7 @@ class CameraView: UIViewController, CLLocationManagerDelegate, CameraManDelegate
       }, completion: { _ in
         UIView.animate(withDuration: 0.1, animations: {
           self.capturedImageView.alpha = 0
-        })
+        }) 
     })
 
     cameraMan.takePhoto(previewLayer, location: locationManager?.latestLocation) {

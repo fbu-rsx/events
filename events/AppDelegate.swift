@@ -19,25 +19,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
     
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         //Use Firebase library to configure APIs
         FirebaseApp.configure()
+        
         let authUI = FUIAuth.defaultAuthUI()
         // You need to adopt a FUIAuthDelegate protocol to receive callback
         authUI?.delegate = self
-        
-        let providers :[FUIAuthProvider] = [FUIGoogleAuth()]
+        let providers: [FUIAuthProvider] = [FUIGoogleAuth()]
         authUI?.providers = providers
+
+        if Auth.auth().currentUser == nil {
+            let authViewController = authUI!.authViewController()
+            window?.rootViewController = authViewController
+        } else {
+            FirebaseAuthManager.shared.signOut()
+        }
         
         GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
+        
         return true
     }
     
-    public func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
-        
+    func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+        } else {
+          
+        }
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
+        if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
+            return true
+        }
+        // other URL handling goes here.
+        return false
     }
     
 //    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {

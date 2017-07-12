@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Fabric (1.6.12)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -98,7 +99,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
-  - ImagePicker (2.1.1)
+  - ImagePicker (2.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -108,7 +109,8 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - TwitterCore (3.0.0)
+  - TwitterCore (2.8.0):
+    - Fabric
   - TwitterKit (2.8.1):
     - TwitterCore (>= 2.8)
 
@@ -118,7 +120,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FirebaseCore
-  - FirebaseUI (~> 4.1.1)
+  - FirebaseUI (~> 4.0)
   - GoogleMaps
   - GooglePlaces
   - ImagePicker
@@ -127,6 +129,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
@@ -143,13 +146,13 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
-  ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
+  ImagePicker: 81175d36c2852cb543cb4f5d6c19e28f3e8d90eb
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
+  TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 709b7be68641c742cea4b6c71d58ddff8ac66f2b
+PODFILE CHECKSUM: 198e0ec7a6f988a1adeb43e06c65f134f4bc37ed
 
 COCOAPODS: 1.2.1

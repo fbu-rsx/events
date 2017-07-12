@@ -17,7 +17,6 @@ class CameraMan {
   var backCamera: AVCaptureDeviceInput?
   var frontCamera: AVCaptureDeviceInput?
   var stillImageOutput: AVCaptureStillImageOutput?
-  var startOnFrontCamera: Bool = false
 
   deinit {
     stop()
@@ -25,8 +24,7 @@ class CameraMan {
 
   // MARK: - Setup
 
-  func setup(_ startOnFrontCamera: Bool = false) {
-    self.startOnFrontCamera = startOnFrontCamera
+  func setup() {
     checkPermission()
   }
 
@@ -102,7 +100,7 @@ class CameraMan {
     // Devices
     setupDevices()
 
-    guard let input = (self.startOnFrontCamera) ? frontCamera ?? backCamera : backCamera, let output = stillImageOutput else { return }
+    guard let input = backCamera, let output = stillImageOutput else { return }
 
     addInput(input)
 
@@ -187,7 +185,7 @@ class CameraMan {
   }
 
   func flash(_ mode: AVCaptureFlashMode) {
-    guard let device = currentInput?.device, device.isFlashModeSupported(mode) else { return }
+    guard let device = currentInput?.device , device.isFlashModeSupported(mode) else { return }
 
     queue.async {
       self.lock {
@@ -197,7 +195,7 @@ class CameraMan {
   }
 
   func focus(_ point: CGPoint) {
-    guard let device = currentInput?.device, device.isFocusModeSupported(AVCaptureFocusMode.locked) else { return }
+    guard let device = currentInput?.device , device.isFocusModeSupported(AVCaptureFocusMode.locked) else { return }
 
     queue.async {
       self.lock {
@@ -209,7 +207,7 @@ class CameraMan {
   // MARK: - Lock
 
   func lock(_ block: () -> Void) {
-    if let device = currentInput?.device, (try? device.lockForConfiguration()) != nil {
+    if let device = currentInput?.device , (try? device.lockForConfiguration()) != nil {
       block()
       device.unlockForConfiguration()
     }
