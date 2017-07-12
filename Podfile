@@ -13,6 +13,7 @@ target 'events' do
   pod 'Alamofire', '~> 4.4'
   pod 'OAuthSwift', '~> 1.1.2'
   pod 'Firebase/Auth'
+  pod 'FirebaseUI', '~> 4.1.1'
 
   target 'eventsTests' do
     inherit! :search_paths

@@ -7,3 +7,24 @@
 //
 
 import Foundation
+import FirebaseAuth
+
+class FirebaseAuthManager {
+    
+    static var shared = FirebaseAuthManager()
+    
+    var handle: AuthStateDidChangeListenerHandle?
+    
+    private init() {
+        
+    }
+    
+    
+    func signInExistingWith(email: String, password: String) {
+        Auth.auth().signIn(withEmail: email, password: password) { (user: User?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
