@@ -12,7 +12,7 @@ target 'events' do
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.4'
   pod 'OAuthSwift', '~> 1.1.2'
-
+  pod 'Firebase/Auth'
 
   target 'eventsTests' do
     inherit! :search_paths
