@@ -99,6 +99,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
+  - ImagePicker (2.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -122,6 +123,7 @@ DEPENDENCIES:
   - FirebaseUI (~> 4.0)
   - GoogleMaps
   - GooglePlaces
+  - ImagePicker
   - OAuthSwift (~> 1.1.2)
 
 SPEC CHECKSUMS:
@@ -144,12 +146,13 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
+  ImagePicker: 81175d36c2852cb543cb4f5d6c19e28f3e8d90eb
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: bb9288a4bb5fb42326d4280ce9101e924495c2d4
+PODFILE CHECKSUM: 198e0ec7a6f988a1adeb43e06c65f134f4bc37ed
 
 COCOAPODS: 1.2.1
