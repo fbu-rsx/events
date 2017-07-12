@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+import FirebaseAuthUI
 
 class AuthViewController: UIViewController {
     

@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - Fabric (1.6.12)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -107,7 +108,8 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - TwitterCore (3.0.0)
+  - TwitterCore (2.8.0):
+    - Fabric
   - TwitterKit (2.8.1):
     - TwitterCore (>= 2.8)
 
@@ -117,7 +119,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FirebaseCore
-  - FirebaseUI (~> 4.1.1)
+  - FirebaseUI (~> 4.0)
   - GoogleMaps
   - GooglePlaces
   - OAuthSwift (~> 1.1.2)
@@ -125,6 +127,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
@@ -144,9 +147,9 @@ SPEC CHECKSUMS:
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
+  TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: b97d8f4826584c18dc63d15773792ce1abe11712
+PODFILE CHECKSUM: bb9288a4bb5fb42326d4280ce9101e924495c2d4
 
 COCOAPODS: 1.2.1
