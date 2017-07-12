@@ -11,12 +11,9 @@ import FirebaseAuth
 
 class AppUser {
     
-    static var current: User {
-        get {
-            return Auth.auth().currentUser!
-        }
-    }
+    static var current: AppUser?
     
+    var user: User
     var name: String
     var email: String
     var password: String?
@@ -28,14 +25,12 @@ class AppUser {
 //    }
     
     init(user: User) {
+        self.user = user
         name = user.displayName!
         email = user.email!
         profileURL = user.photoURL
     }
     
-    func signIn(user: User) {
-//        FirebaseAuthManager.shared.signInExistingWith(email: user.email, password: user.password)
-    }
     
 //    private func getLocation() {
 //        return FirebaseDatabaseManager.

@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
+
+        
         //Use Firebase library to configure APIs
         FirebaseApp.configure()
         
@@ -31,25 +34,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         let providers: [FUIAuthProvider] = [FUIGoogleAuth()]
         authUI?.providers = providers
 
+        
         if Auth.auth().currentUser == nil {
             let authViewController = authUI!.authViewController()
             window?.rootViewController = authViewController
-        } else {
-            FirebaseAuthManager.shared.signOut()
         }
-        
-        GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
-        
         return true
     }
     
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         if let error = error {
             print(error.localizedDescription)
+        } else if let user = user {
+            AppUser.current = AppUser(user: user)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
+            window?.rootViewController = controller
         } else {
-          
+          print("no user and no error. HELP")
         }
     }
+    
+//    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
+//        return CustomAuthPickerViewController(authUI: authUI)
+//    }
+//
+//    func emailEntryViewController(for authUI: FUIAuth) -> FUIEmailEntryViewController {
+//        return CustomEmailEntryViewController(authUI: authUI)
+//    }
+//    
+//    func passwordSignInViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
+//        return CustomPasswordSignInViewController(authUI: authUI, email: email)
+//    }
+//    
+//    func passwordSignUpViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
+//        return CustomPasswordSignUpViewController(authUI: authUI, email: email)
+//    }
+//    
+//    func passwordRecoveryViewController(for authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
+//        return CustomPasswordRecoveryViewController(authUI: authUI, email: email)
+//    }
+//    
+//    func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
+//        return CustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
+//    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
