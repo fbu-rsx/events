@@ -15,6 +15,7 @@ target 'events' do
   pod 'OAuthSwift', '~> 1.1.2'
   pod 'Firebase/Auth'
   pod 'FirebaseUI', '~> 4.1.1'
+  pod 'ImagePicker'
 
   target 'eventsTests' do
     inherit! :search_paths

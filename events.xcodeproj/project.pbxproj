@@ -133,6 +133,7 @@
 		09A15CC41F15A28700E847CC /* certs */ = {
 			isa = PBXGroup;
 			children = (
+				09A15CC21F159DB000E847CC /* PKCS12.swift */,
 				09A15CC51F15A2B600E847CC /* eventsKeyCertBundle.p12 */,
 			);
 			name = certs;
@@ -173,7 +174,6 @@
 				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
 				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
 				4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */,
-				09A15CC21F159DB000E847CC /* PKCS12.swift */,
 			);
 			name = APIManagers;
 			sourceTree = "<group>";
