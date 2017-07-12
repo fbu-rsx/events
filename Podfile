@@ -6,8 +6,9 @@ target 'events' do
   use_frameworks!
 
   # Pods for events
-  pod 'Firebase/Core'
+  pod 'FirebaseCore'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.4'
