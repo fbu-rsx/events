@@ -9,10 +9,46 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--CreateEventViewController-->
+        <scene sceneID="Y14-vE-H7f">
+            <objects>
+                <viewController storyboardIdentifier="CreateEventViewController" title="CreateEventViewController" id="h1v-m1-jDG" customClass="CreateEventViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Hhl-NC-GcZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="jfJ-D7-lms"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="rXo-JW-3t4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2cz-6f-agJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="425" y="-127"/>
+        </scene>
         <!--View Controller-->
+        <scene sceneID="Fqa-zM-ANW">
+            <objects>
+                <viewController id="eCv-vd-3lL" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="87N-rQ-qgQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="WrO-br-xsl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FmM-iw-dLh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xz7-E9-A06" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1275" y="-127"/>
+        </scene>
+        <!--MapViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" title="MapViewController" id="BYZ-38-t0r" customClass="MapViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -38,6 +74,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1274" y="690"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="4xE-bg-KsX">
+            <objects>
+                <viewController id="7T3-ay-Fbl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tue-iN-F8M"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zrc-jt-CWH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7x6-Dl-hAZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gzP-Do-fLk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2226" y="-109"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ufD-yA-eOh">
