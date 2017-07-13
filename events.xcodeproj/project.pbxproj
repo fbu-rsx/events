@@ -29,6 +29,8 @@
 		4FCB62911F143DC400BBDC71 /* eventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB62901F143DC400BBDC71 /* eventsTests.swift */; };
 		4FCB629C1F143DC400BBDC71 /* eventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */; };
 		4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */; };
+		7C4BA2281F17EAFB004739EE /* GeoNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA2271F17EAFB004739EE /* GeoNotification.swift */; };
+		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
 		7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */; };
 		CCB163A1DDBEE3944D6FE0A3 /* Pods_eventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C04120232A3D15602FB929F /* Pods_eventsTests.framework */; };
 /* End PBXBuildFile section */
@@ -82,6 +84,8 @@
 		4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventsUITests.swift; sourceTree = "<group>"; };
 		4FCB629D1F143DC400BBDC71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7C4BA2271F17EAFB004739EE /* GeoNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeoNotification.swift; path = ../GeoNotification.swift; sourceTree = "<group>"; };
+		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-events.release.xcconfig"; path = "Pods/Target Support Files/Pods-events/Pods-events.release.xcconfig"; sourceTree = "<group>"; };
 		CB8C73451CEFA2E4231A3210 /* Pods-eventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventsTests/Pods-eventsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -129,9 +133,10 @@
 		09A15CBF1F1568E300E847CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				09A15CC01F1568F300E847CC /* Transaction.swift */,
 				4F87D3741F168EA0007D4E94 /* AppUser.swift */,
 				4F87D3761F168EB5007D4E94 /* Event.swift */,
+				7C4BA2271F17EAFB004739EE /* GeoNotification.swift */,
+				09A15CC01F1568F300E847CC /* Transaction.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -171,8 +176,8 @@
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
 				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
-				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
+				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -221,6 +226,7 @@
 				4F9887261F144A7B00759564 /* APIManagers */,
 				4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */,
 				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
+				7C4BA22A1F18163B004739EE /* Utilities.swift */,
 				4FCB62821F143DC400BBDC71 /* Assets.xcassets */,
 				4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */,
 				4FCB62871F143DC400BBDC71 /* Info.plist */,
@@ -334,7 +340,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = S5MHKF47DJ;
+						DevelopmentTeam = TM66RGVAQ6;
 						ProvisioningStyle = Automatic;
 					};
 					4FCB628B1F143DC400BBDC71 = {
@@ -542,6 +548,7 @@
 			files = (
 				4F87D37B1F1696E1007D4E94 /* AuthViewController.swift in Sources */,
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
+				7C4BA2281F17EAFB004739EE /* GeoNotification.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
 				4F010D751F16EE7A00E8EA47 /* CreateEventViewController.swift in Sources */,
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
@@ -549,6 +556,7 @@
 				4F010D6D1F16E51800E8EA47 /* SignInViewController.swift in Sources */,
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
+				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
@@ -701,10 +709,10 @@
 			baseConfigurationReference = CCAC109E9CF8667FBF9C91A2 /* Pods-events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				INFOPLIST_FILE = events/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fbu-rsx.events";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fbu-rsx.Events";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -715,10 +723,10 @@
 			baseConfigurationReference = C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				INFOPLIST_FILE = events/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fbu-rsx.events";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fbu-rsx.Events";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
