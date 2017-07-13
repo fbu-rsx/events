@@ -8,24 +8,28 @@
 
 import UIKit
 import Firebase
-import GoogleMaps
 import Alamofire
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
-import GooglePlaces
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
     
+    let locationManager = CLLocationManager()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
-
+        // MAPS: Sets location manager, enables notifications, clears notifications
+        locationManager.delegate = (self as! CLLocationManagerDelegate)
+        locationManager.requestAlwaysAuthorization()
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        UIApplication.shared.cancelAllLocalNotifications()
         
-        //Use Firebase library to configure APIs
+        // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
         let authUI = FUIAuth.defaultAuthUI()
@@ -40,11 +44,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             window?.rootViewController = authViewController
         }
 
-        GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
-        GMSPlacesClient.provideAPIKey("AIzaSyApzaN3MPUEyeDNfAKd0aM9d4piAuO3Xkk")
         return true
     }
     
+    // MAPS
+    func handleEvent(forRegion region: CLRegion!) {
+        // Show an alert if application is active
+        if UIApplication.shared.applicationState == .active {
+//            guard let message = note(fromRegionIdentifier: region.identifier) else { return }
+//            window?.rootViewController?.showAlert(withTitle: nil, message: message)
+            
+        } else {
+            // Otherwise present a local notification
+            let notification = UILocalNotification()
+//            notification.alertBody = note(fromRegionIdentifier: region.identifier)
+            notification.soundName = "Default"
+            UIApplication.shared.presentLocalNotificationNow(notification)
+        }
+    }
+    
+//    func note(fromRegionIdentifier identifier: String) -> String? {
+//        let savedItems = UserDefaults.standard.array(forKey: PreferencesKeys.savedItems) as? [NSData]
+//        let geoNotifications = savedItems?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? GeoNotification }
+//        let index = geoNotifications?.index { $0?.identifier == identifier }
+//        return index != nil ? geoNotifications?[index!]?.note : nil
+//    }
+//    
+    // FIREBASE
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         if let error = error {
             print(error.localizedDescription)
@@ -125,4 +151,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     }
 
 }
+
+// MAPS: Extensions
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+}
+
 
