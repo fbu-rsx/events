@@ -7,140 +7,223 @@
 //
 
 import UIKit
-import GoogleMaps
-import GooglePlaces
+import MapKit
+import CoreLocation
+
+struct PreferencesKeys {
+    static let savedItems = "savedItems"
+}
 
 class MapViewController: UIViewController {
     
-    @IBAction func didHitLogOut(_ sender: Any) {
-        FirebaseAuthManager.shared.signOut()
-    }
+    @IBOutlet weak var mapView: MKMapView!
     
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var mapView: GMSMapView!
-    var placesClient: GMSPlacesClient!
-    var zoomLevel: Float = 15.0
+//    @IBAction func didHitLogOut(_ sender: Any) {
+//        FirebaseAuthManager.shared.signOut()
+//    }
     
-    // The currently selected place.
-    var selectedPlace: GMSPlace?
-    
-    // A default location to use when location permission is not granted.
-    let defaultLocation = CLLocation(latitude: -33.869405, longitude: 151.199)
-    
+    var geoNotifications: [GeoNotification] = []
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
-        //        let camera = GMSCameraPosition.camera(withLatitude: 37.48, longitude: -122.14, zoom: 6.0)
-        //        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        //        view = mapView
-        
-        
-        
-        
-        // Initialize the location manager.
-        locationManager = CLLocationManager()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 50
-        locationManager.startUpdatingLocation()
+        // Set locationManager to view controller to receive delegate calls
         locationManager.delegate = self
         
-        placesClient = GMSPlacesClient.shared()
+        // Prompts user for authorization to use location services
+        locationManager.requestAlwaysAuthorization()
         
-        // Create a map.
-        let camera = GMSCameraPosition.camera(withLatitude: defaultLocation.coordinate.latitude,
-                                              longitude: defaultLocation.coordinate.longitude,
-                                              zoom: zoomLevel)
-        mapView = GMSMapView.map(withFrame: view.bounds, camera: camera)
-        mapView.settings.myLocationButton = true
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.isMyLocationEnabled = true
-        
-        // Add the map to the view, hide it until we've got a location update.
-        view.addSubview(mapView)
-        mapView.isHidden = true
-        
-        // Creates a marker in the center of the map.
-        // ************** Testing how markers are created ***********
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: 37.790696, longitude: -122.405603)
-        
-        
-        //        let ping0 = UIImage(named: "ping0")
-        //        let ping1 = UIImage(named: "ping1")
-        //        //let ping2 = UIImage(named: "ping0")
-        //
-        //        let pingArray = [ping0, ping1, ping0]
-        //        marker.icon = UIImage.animatedImage(with: pingArray as! [UIImage], duration: 0.5)
-        
-        marker.title = "Dragon's Gate"
-        marker.snippet = "SF, California"
-        marker.icon = GMSMarker.markerImage(with: .blue)
-        marker.map = mapView
-        
-        
-        
-        
+        // Deserializes the list of geotifications from User Defaults to local array
+        loadAllGeoNotifications()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            if segue.identifier == "addGeoNotification" {
+                let navigationController = segue.destination as! UINavigationController
+                let vc = navigationController.viewControllers.first as! CreateEventViewController
+                vc.delegate = self
+            }
+        }
+    
+    // MARK: Representation of geofence as a CLCircularRegion
+    func region(withGeotification geotification: GeoNotification) -> CLCircularRegion {
+        let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
+        region.notifyOnEntry = true
+        //region.notifyOnExit = !region.notifyOnEntry
+        return region
     }
-<<<<<<< Updated upstream:events/MapViewController.swift
-=======
     
+    // MARK: Start monitoring notification upon addition
+    func startMonitoring(geotification: GeoNotification) {
+        // 1: Checks if device has the necessary hardware for geomonitering, else quit
+        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
+            showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
+            return
+        }
+        // 2: Ensure that authorization access has been granted
+        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+            showAlert(withTitle:"Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.")
+        }
+        // 3: Creates a CLCircularRegion region
+        let region = self.region(withGeotification: geotification)
+        // 4: Registers the CLCircularRegion region with iOS Core Location
+        locationManager.startMonitoring(for: region)
+    }
     
+    // MARK: Stop monitoring notification upon removal by user
+    func stopMonitoring(geotification: GeoNotification) {
+        
+        for region in locationManager.monitoredRegions {
+            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == geotification.identifier else { continue }
+            locationManager.stopMonitoring(for: circularRegion)
+        }
+    }
+  
+    // MARK: Loading and saving functions
+    func loadAllGeoNotifications() {
+        geoNotifications = []
+        guard let savedItems = UserDefaults.standard.array(forKey: PreferencesKeys.savedItems) else { return }
+        for savedItem in savedItems {
+            guard let geoNotification = NSKeyedUnarchiver.unarchiveObject(with: savedItem as! Data) as? GeoNotification else { continue }
+            add(geoNotification: geoNotification)
+        }
+    }
+    
+    func saveAllGeoNotifications() {
+        var items: [Data] = []
+        for geoNotification in geoNotifications {
+            let item = NSKeyedArchiver.archivedData(withRootObject: geoNotification)
+            items.append(item)
+        }
+        UserDefaults.standard.set(items, forKey: PreferencesKeys.savedItems)
+    }
+    
+    // MARK: Functions that update the model/associated views with geotification changes
+    func add(geoNotification: GeoNotification) {
+        geoNotifications.append(geoNotification)
+        mapView.addAnnotation(geoNotification)
+        addRadiusOverlay(forGeoNotification: geoNotification)
+        updateGeoNotificationsCount()
+    }
+    
+    func remove(geoNotification: GeoNotification) {
+        if let indexInArray = geoNotifications.index(of: geoNotification) {
+            geoNotifications.remove(at: indexInArray)
+        }
+        mapView.removeAnnotation(geoNotification)
+        removeRadiusOverlay(forGeoNotification: geoNotification)
+        updateGeoNotificationsCount()
+    }
+    
+    func updateGeoNotificationsCount() {
+        title = "Local Events (\(geoNotifications.count))"
+        navigationItem.rightBarButtonItem?.isEnabled = (geoNotifications.count < 20)
+    }
+
+    // MARK: Map overlay functions
+    func addRadiusOverlay(forGeoNotification geoNotification: GeoNotification) {
+        mapView?.add(MKCircle(center: geoNotification.coordinate, radius: geoNotification.radius))
+        print("here adding radius")
+    }
+    
+    func removeRadiusOverlay(forGeoNotification geoNotification: GeoNotification) {
+        // Find exactly one overlay which has the same coordinates & radius to remove
+        guard let overlays = mapView?.overlays else { return }
+        for overlay in overlays {
+            guard let circleOverlay = overlay as? MKCircle else { continue }
+            let coord = circleOverlay.coordinate
+            if coord.latitude == geoNotification.coordinate.latitude && coord.longitude == geoNotification.coordinate.longitude && circleOverlay.radius == geoNotification.radius {
+                mapView?.remove(circleOverlay)
+                break
+            }
+        }
+    }
+    
+    // MARK: Other mapview functions
+    @IBAction func zoomToCurrentLocation(sender: AnyObject) {
+        mapView.zoomToUserLocation()
+    }
 }
 
-// Delegates to handle events for the location manager.
-extension ViewController: CLLocationManagerDelegate {
+// MARK: AddGeotificationViewControllerDelegate
+extension MapViewController: CreateEventViewControllerDelegate {
     
-    // Handle incoming location events.
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation = locations.last!
-        print("Location: \(location)")
-        
-        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
-                                              longitude: location.coordinate.longitude,
-                                              zoom: zoomLevel)
-        
-        if mapView.isHidden {
-            mapView.isHidden = false
-            mapView.camera = camera
-        } else {
-            mapView.animate(to: camera)
-        }
-        
+    func createEventViewController(controller: CreateEventViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String) {
+        controller.dismiss(animated: true, completion: nil)
+        // 1: Ensrue that the radius is clamped to the max value of view possible
+        let clampedRadius = min(radius, locationManager.maximumRegionMonitoringDistance)
+        let geoNotification = GeoNotification(coordinate: coordinate, radius: radius, identifier: identifier)
+        add(geoNotification: geoNotification)
+        // 2: Ensure that the newly created geotification is registered with CoreLocation
+        startMonitoring(geotification: geoNotification)
+        saveAllGeoNotifications()
     }
-    
-    // Handle authorization for the location manager.
+}
+
+// MARK: - Location Manager Delegate
+//
+extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .restricted:
-            print("Location access was restricted.")
-        case .denied:
-            print("User denied access to location.")
-            // Display the map using the default location.
-            mapView.isHidden = false
-        case .notDetermined:
-            print("Location status not determined.")
-        case .authorizedAlways: fallthrough
-        case .authorizedWhenInUse:
-            print("Location status is OK.")
-        }
+        mapView.showsUserLocation = (status == .authorizedAlways)
+    }
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
     }
     
-    // Handle location manager errors.
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationManager.stopUpdatingLocation()
-        print("Error: \(error)")
+        print("Location Manager failed with the following error: \(error)")
     }
->>>>>>> Stashed changes:events/ViewController.swift
 }
 
+// MARK: - MapView Delegate
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "myGeotification"
+        if annotation is GeoNotification {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+                let removeButton = UIButton(type: .custom)
+                removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+                removeButton.setImage(UIImage(named: "DeleteGeotification")!, for: .normal)
+                annotationView?.leftCalloutAccessoryView = removeButton
+            } else {
+                annotationView?.annotation = annotation
+            }
+            return annotationView
+        }
+        return nil
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKCircle {
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.lineWidth = 1.0
+            circleRenderer.strokeColor = .purple
+            circleRenderer.fillColor = UIColor.purple.withAlphaComponent(0.4)
+            print("drawing circle")
+            return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        // Delete geotification
+        let geotification = view.annotation as! GeoNotification
+        stopMonitoring(geotification: geotification)
+        remove(geoNotification: geotification)
+        saveAllGeoNotifications()
+    }
+    
+}
+
+
+
+    
+    
+    
+    
 
