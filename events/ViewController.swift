@@ -11,6 +11,10 @@ import GoogleMaps
 
 class ViewController: UIViewController {
     
+    @IBAction func didHitLogOut(_ sender: Any) {
+        FirebaseAuthManager.shared.signOut()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
