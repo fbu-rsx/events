@@ -10,6 +10,14 @@ import UIKit
 
 class EventsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var organizerPic: UIImageView!
+    @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var organizerName: UILabel!
+    @IBOutlet weak var eventDescription: UILabel!
+    
+    var event: Event?
+    // Need to first distinguish Event class properties, can then assign valus to cell's photos and labels (event class not yet defined)
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
