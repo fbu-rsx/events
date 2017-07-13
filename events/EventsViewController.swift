@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import FirebaseDatabaseUI
 
-class EventsViewController: UIViewController {
+class EventsViewController: UIViewController, FUITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()

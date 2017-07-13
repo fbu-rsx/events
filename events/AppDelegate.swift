@@ -49,7 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         if let error = error {
             print(error.localizedDescription)
         } else if let user = user {
-            AppUser.current = AppUser(user: user)
+            let userDict: [String: Any] = ["uid": user.uid,
+                                           "name": user.displayName,
+                                           "email": user.email,
+                                           "photoURL": user.photoURL]
+            AppUser.current = AppUser(dictioanry: userDict)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
             window?.rootViewController = controller
