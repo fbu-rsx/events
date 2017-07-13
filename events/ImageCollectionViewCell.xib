@@ -30,6 +30,9 @@
                 <constraint firstAttribute="trailing" secondItem="QbF-A2-abw" secondAttribute="trailing" id="iqK-Ag-8TT"/>
             </constraints>
             <size key="customSize" width="92" height="92"/>
+            <connections>
+                <outlet property="image" destination="QbF-A2-abw" id="2jz-YO-tLM"/>
+            </connections>
             <point key="canvasLocation" x="46" y="73"/>
         </collectionViewCell>
     </objects>
