@@ -12,7 +12,7 @@ import GoogleMaps
 import Alamofire
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
-
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
@@ -39,6 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             let authViewController = authUI!.authViewController()
             window?.rootViewController = authViewController
         }
+
+        GMSServices.provideAPIKey("AIzaSyAkDhJkDj5D_oyhunTjj4R1pTK_8Nw0M2I")
+        GMSPlacesClient.provideAPIKey("AIzaSyApzaN3MPUEyeDNfAKd0aM9d4piAuO3Xkk")
         return true
     }
     
