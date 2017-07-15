@@ -11,16 +11,15 @@ import Firebase
 
 class FirebaseDatabaseManager {
     
-    static var shared = FirebaseDatabaseManager() //shared instance of manager
+    static var shared:FirebaseDatabaseManager = FirebaseDatabaseManager() //shared instance of manager
     
     var ref = Database.database().reference() // root reference to database
-    var eventRef = self.ref.child("events")
-    var usersRef = self.ref.child("users")
-    
-    private init() {
-        Database.database().isPersistenceEnabled = true
+    var eventRef: DatabaseReference
+    var usersRef: DatabaseReference
         
-        setupConnectionObservers()
+    private init() {
+        eventRef = ref.child("events")
+        usersRef = ref.child("users")
     }
     
     /*
@@ -28,12 +27,14 @@ class FirebaseDatabaseManager {
      */
     func addUser(appUser: AppUser) {
         let newUserID = self.usersRef.childByAutoId().key
-        let properties = ["uid":appUser.uid,
-                          "name": 3,
-                          "email": 3,
-                          "profileURL": 3,
-                          "events": AppUser.getEventsDict()]
-        newUserRef.setValue(properties)
+        let properties: [String: Any?] = ["uid":appUser.uid,
+                          "name": appUser.name,
+                          "email": appUser.email,
+                          "photoURL": appUser.photoURL,
+                          "events": getUserEvents(userid: appUser.uid)]
+        self.usersRef.child(newUserID).updateChildValues(properties)
+        
+//        setupConnectionObservers()
     }
     
     func addEvent(event: Event) {
@@ -45,7 +46,12 @@ class FirebaseDatabaseManager {
      * Functions for deletions from the database
      */
     func deleteUser(appUser: AppUser) {
-        
+        self.ref.child(appUser.uid).removeValue { (error: Error?, ref: DatabaseReference) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            print("successfully removed \(appUser.name)")
+        }
     }
     
     func deleteEvent(event: Event) {
@@ -88,16 +94,37 @@ class FirebaseDatabaseManager {
     }
     
     func getUserEvents(userid: String) -> [String: Bool] {
-        return self.ref.child("users/\(userid)").value(forKey: "events") as? [String: Bool] ?? [:]
+        
+        
+        self.usersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            print("SNAPSHOT STARTED")
+            let value = snapshot.value as? [String: Any]
+            print(value)
+        })
+        
+        
+        self.ref.child("users/\(userid)/username").updateChildValues(["uid" : userid])
+        
+        return [:]
     }
+    
+    func getEventOrganizer(orgID: String) -> [String: Any] {
+        return [:]
+    }
+    
+    
+    
+    /*
+     * Boolean methods
+     */
     
     func userExists(userid: String) -> Bool {
-        return self.usersRef
+        self.usersRef.child(userid).observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot.value)
+        })
+        return self.usersRef.value(forKey: userid) != nil
     }
     
-    func getEventOrganizer(orgID: String) {
-        
-    }
     
     
     

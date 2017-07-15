@@ -33,11 +33,14 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return cell to present associated with user's events 
         // which data to display is dependent on selected index of segmented control
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "")!
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return number of events associated with user in current section
         // number will be dependent on selected index of segmented control
+        return 10
     }
 
     /*

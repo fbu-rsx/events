@@ -54,7 +54,7 @@ class AppUser {
      */
     
     
-    private func getLocation() {
+    private func getLocation() -> [Double] {
         return [0, 0]
     }
 }

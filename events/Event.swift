@@ -19,7 +19,7 @@ class Event {
     var organizerID: String //uid of the organizer
     var organizer: AppUser
     var guestlist: [String: Bool]
-    var photos: [[String: String]]
+    var photos: [String: String]
     
     
     
@@ -46,8 +46,8 @@ class Event {
         self.longitude = location[0]
         self.latitude = location[1]
         self.organizerID = dictionary["organizerID"] as! String
-        self.organizer = AppUser(dictionary: FirebaseDatabaseManager.shared.getEventOrganizer(dictionary))
+        self.organizer = AppUser(dictionary: FirebaseDatabaseManager.shared.getEventOrganizer(orgID: organizerID))
         self.guestlist = dictionary["guestlist"] as? [String: Bool] ?? [:]
-        self.photos = dictionary["photos"] as? [[String: String]] ?? [:]
+        self.photos = dictionary["photos"] as? [String: String] ?? [:]
     }
 }

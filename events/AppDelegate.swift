@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+
         
         let authUI = FUIAuth.defaultAuthUI()
         // You need to adopt a FUIAuthDelegate protocol to receive callback
@@ -75,11 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         if let error = error {
             print(error.localizedDescription)
         } else if let user = user {
-            let userDict: [String: Any] = ["uid": user.uid,
+            let userDict: [String: Any?] = ["uid": user.uid,
                                            "name": user.displayName,
                                            "email": user.email,
                                            "photoURL": user.photoURL]
-            AppUser.current = AppUser(dictioanry: userDict)
+            AppUser.current = AppUser(dictionary: userDict)
+            print("Welcome \(user.displayName!)! 😊")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
             window?.rootViewController = controller
@@ -148,6 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        FirebaseAuthManager.shared.signOut()
+        print("Goodbye!")
     }
 
 }
