@@ -77,17 +77,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         if let error = error {
             print(error.localizedDescription)
         } else if let user = user {
-            let userDict: [String: Any?] = ["uid": user.uid,
-                                           "name": user.displayName,
-                                           "email": user.email,
-                                           "photoURL": user.photoURL]
-            AppUser.current = AppUser(dictionary: userDict)
+            AppUser.current = AppUser(user: user)
             print("Welcome \(user.displayName!)! 😊")
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
             window?.rootViewController = controller
-        } else {
-          print("no user and no error. HELP")
         }
     }
     

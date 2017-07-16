@@ -14,115 +14,115 @@ class FirebaseDatabaseManager {
     static var shared:FirebaseDatabaseManager = FirebaseDatabaseManager() //shared instance of manager
     
     var ref = Database.database().reference() // root reference to database
-    var eventRef: DatabaseReference
-    var usersRef: DatabaseReference
-        
+    
     private init() {
-        eventRef = ref.child("events")
-        usersRef = ref.child("users")
+        self.ref.keepSynced(true)
     }
     
     /*
      * Functions for additions to the database
      */
-    func addUser(appUser: AppUser) {
-        let newUserID = self.usersRef.childByAutoId().key
-        let properties: [String: Any?] = ["uid":appUser.uid,
-                          "name": appUser.name,
-                          "email": appUser.email,
-                          "photoURL": appUser.photoURL,
-                          "events": getUserEvents(userid: appUser.uid)]
-        self.usersRef.child(newUserID).updateChildValues(properties)
+    
+    // Add user only if they do not already exist
+    func addUser(appUser: AppUser, dict: [String: Any]) {
         
-//        setupConnectionObservers()
+        self.ref.child("users/\(appUser.uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            print("addUser snapshot started")
+            if !snapshot.exists() {
+                self.ref.child("users/\(appUser.uid)").updateChildValues(dict)
+                print("new user \(appUser.name) added")
+            }
+        }
+        
+        setupConnectionObservers(userid: appUser.uid)
     }
     
     func addEvent(event: Event) {
-        let eventRef = self.ref.child("events")
+        let update: [String: Any] =
+            ["users/\(event.organizerID)/events/\(event.eventid)": true,
+             "events/\(event.eventid)": event.eventDictionary]
+        self.ref.updateChildValues(update)
     }
-    
     
     /*
      * Functions for deletions from the database
      */
-    func deleteUser(appUser: AppUser) {
-        self.ref.child(appUser.uid).removeValue { (error: Error?, ref: DatabaseReference) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            print("successfully removed \(appUser.name)")
+    func deleteCurrentUser() {
+        let id = AppUser.current.uid
+        var update: [String: Any] = ["users/\(id)": NSNull()]
+        for eventid in AppUser.current.eventsDict.keys {
+            update["events/\(eventid)/guestlist/\(id)"] = NSNull()
         }
+        self.ref.updateChildValues(update)
+        print("successfully removed \(AppUser.current.name)")
     }
     
     func deleteEvent(event: Event) {
-        
+        var update: [String: Any] = ["events/\(event.eventid)": NSNull()]
+        for userid in event.guestlist.keys {
+            update["users/\(userid)/events/\(event.eventid)"] = NSNull()
+        }
+        self.ref.updateChildValues(update)
+        print("successfully removed \(event.eventname)")
     }
     
     
     /*
      * Functions for changes to the database
      */
-    func editUserEvents(userid: String) {
-        
-    }
 
     
     /*
      * Get methods
      */
     // dictionary of eventid's
-    func getEvents(dictionary: [String: Any]) -> [Event] {
+    func getEvents(dictionary: [String: Bool]) -> [Event] {
         var events: [Event] = []
         for eventid in dictionary.keys {
-            let eventDict = self.eventRef.value(forKey: eventid) as! [String: Any]
+            let eventDict = self.ref.child("events").value(forKey: eventid) as! [String: Any]
             events.append(Event(dictionary: eventDict))
         }
         
         return events
     }
     
+    func setUserEvents(user: AppUser) {
+        self.ref.child("users/\(user.uid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.exists() {
+                let result = snapshot.value as! [String: Bool]
+                user.eventsDict = result
+                user.events = self.getEvents(dictionary: result)
+            }
+        }
+    }
+    
+    
     // dictionary of userid's
     func getUsers(dictionary: [String: Any]) -> [AppUser] {
         
         var users: [AppUser] = []
         for userid in dictionary.keys {
-            let userDict = self.usersRef.value(forKey: userid) as! [String: Any]
+            let userDict = self.ref.child("users").value(forKey: userid) as! [String: Any]
             users.append(AppUser(dictionary: userDict))
         }
         
         return users
     }
+
     
-    func getUserEvents(userid: String) -> [String: Bool] {
+    
+    
+    
+    // Setup listeners at endpoints in database
+    func setupListeners(userid: String) {
+        let eventsRef = self.ref.child("users/\(userid)/events")
         
-        
-        self.usersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            print("SNAPSHOT STARTED")
-            let value = snapshot.value as? [String: Any]
-            print(value)
-        })
-        
-        
-        self.ref.child("users/\(userid)/username").updateChildValues(["uid" : userid])
-        
-        return [:]
-    }
-    
-    func getEventOrganizer(orgID: String) -> [String: Any] {
-        return [:]
-    }
-    
-    
-    
-    /*
-     * Boolean methods
-     */
-    
-    func userExists(userid: String) -> Bool {
-        self.usersRef.child(userid).observeSingleEvent(of: .value, with: { (snapshot) in
+        let eventsHandle = eventsRef.observe(.childAdded) { (snapshot: DataSnapshot) in
+            print("events snapshot for user: \(userid)")
+            
+            print(snapshot.key)
             print(snapshot.value)
-        })
-        return self.usersRef.value(forKey: userid) != nil
+        }
     }
     
     
@@ -135,13 +135,13 @@ class FirebaseDatabaseManager {
         
     }
     
-    private func setupConnectionObservers() {
+    private func setupConnectionObservers(userid: String) {
         // since I can connect from multiple devices, we store each connection instance separately
         // any time that connectionsRef's value is null (i.e. has no children) I am offline
-        let myConnectionsRef = Database.database().reference(withPath: "users/\(AppUser.current.uid)/connections")
+        let myConnectionsRef = Database.database().reference(withPath: "users/\(userid)/connections")
         
         // stores the timestamp of my last disconnect (the last time I was seen online)
-        let lastOnlineRef = Database.database().reference(withPath: "users/\(AppUser.current.uid)/lastOnline")
+        let lastOnlineRef = Database.database().reference(withPath: "users/\(userid)/lastOnline")
         
         let connectedRef = Database.database().reference(withPath: ".info/connected")
         
