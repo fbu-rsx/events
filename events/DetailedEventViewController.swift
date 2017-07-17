@@ -29,6 +29,8 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
  
     var event: Event?{
         didSet{
+            centerImage.layer.cornerRadius = 0.5*centerImage.frame.width
+            centerImage.layer.masksToBounds = true
             let longitude = CLLocationDegrees(exactly: (event?.location[0])!)
             let latitude = CLLocationDegrees(exactly: (event?.location[1])!)
             let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
@@ -97,7 +99,6 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         // cell.imageView.image = event?.photos
         return cell
     }
-    
     
 
     /*

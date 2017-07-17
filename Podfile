@@ -14,6 +14,7 @@ target 'events' do
   pod 'Firebase/Auth'
   pod 'FirebaseUI', '~> 4.0'
   pod 'ImagePicker'
+  pod 'AlamofireImage'
 
   target 'eventsTests' do
     inherit! :search_paths
