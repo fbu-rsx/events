@@ -28,7 +28,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Initiates the coordinates
         let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         // Sets the region to the span and coordinates
-        let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(myLocation, 1000, 1000)
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
         mapView.setRegion(region, animated: true)
         
     }
@@ -36,12 +36,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+       
         // Displays user's current location
         self.mapView.showsUserLocation = true
-        // Tracks the user's location
+        // Allows user's location tracking
         self.mapView.setUserTrackingMode(.follow, animated: true)
         
-        
+        // Automatically zooms to the user's location upon VC loading
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
@@ -55,6 +56,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 //        locationManager.startUpdatingLocation()
         
     }
+    
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
