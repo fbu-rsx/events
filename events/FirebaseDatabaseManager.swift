@@ -37,7 +37,7 @@ class FirebaseDatabaseManager {
                 print("new user \(appUser.name) added")
             }
             print(snapshot.value)
-            self.setupConnectionObservers(userid: appUser.uid)
+//            self.setupConnectionObservers(userid: appUser.uid)
             self.setUserEvents(user: appUser)
         }
     }
