@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseAuthUI
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
@@ -35,7 +36,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-       
+        
         // Displays user's current location
         self.mapView.showsUserLocation = true
         // Allows user's location tracking
@@ -46,13 +47,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
         
-//        locationManager.delegate = self
-//        // Sets the desired accuracy to the most precise data possible
-//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-//        // Always request the user for permission to track locations
-//        locationManager.requestWhenInUseAuthorization()
-//        // Calls the locationManager didUpdateLocations function
-//        locationManager.startUpdatingLocation()
+        //        locationManager.delegate = self
+        //        // Sets the desired accuracy to the most precise data possible
+        //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //        // Always request the user for permission to track locations
+        //        locationManager.requestWhenInUseAuthorization()
+        //        // Calls the locationManager didUpdateLocations function
+        //        locationManager.startUpdatingLocation()
         
     }
     

@@ -18,8 +18,8 @@ class AppUser {
     var email: String
     var password: String?
     var photoURLString: String
-    var events: [Event]!
-    var eventsDict: [String: Bool]!
+    var events: [Event] = []
+    var eventsDict: [String: Bool] = [:]
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary["uid"] as! String

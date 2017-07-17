@@ -8,20 +8,24 @@
 
 import Foundation
 import Firebase
+import FirebaseAuthUI
 
 class FirebaseDatabaseManager {
     
     static var shared:FirebaseDatabaseManager = FirebaseDatabaseManager() //shared instance of manager
     
-    var ref = Database.database().reference() // root reference to database
+    var ref: DatabaseReference // root reference to database
     
     private init() {
-        self.ref.keepSynced(true)
+        let db = Database.database()
+        db.isPersistenceEnabled = false
+        self.ref = db.reference()
     }
     
     /*
-     * Functions for additions to the database
+     * User initialization functions
      */
+    
     
     // Add user only if they do not already exist
     func addUser(appUser: AppUser, dict: [String: Any]) {
@@ -32,10 +36,27 @@ class FirebaseDatabaseManager {
                 self.ref.child("users/\(appUser.uid)").updateChildValues(dict)
                 print("new user \(appUser.name) added")
             }
-            self.setupConnectionObservers(userid: appUser.uid)
+            print(snapshot.value)
+//            self.setupConnectionObservers(userid: appUser.uid)
             self.setUserEvents(user: appUser)
         }
     }
+    
+    
+    func setUserEvents(user: AppUser) {
+        self.ref.child("users/\(user.uid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.exists() {
+                let result = snapshot.value as! [String: Bool]
+                user.eventsDict = result
+                user.events = self.getEvents(dictionary: result)
+            }
+        }
+    }
+    
+    /*
+     * Functions for additions to the database
+     */
+    
     
     func addEvent(event: Event) {
         let update: [String: Any] =
@@ -90,16 +111,6 @@ class FirebaseDatabaseManager {
         return events
     }
     
-    func setUserEvents(user: AppUser) {
-        self.ref.child("users/\(user.uid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            if snapshot.exists() {
-                let result = snapshot.value as! [String: Bool]
-                user.eventsDict = result
-                user.events = self.getEvents(dictionary: result)
-            }
-        }
-    }
-    
     
     // dictionary of userid's
     func getUsers(dictionary: [String: Any]) -> [AppUser] {
@@ -139,35 +150,35 @@ class FirebaseDatabaseManager {
         
     }
     
-    private func setupConnectionObservers(userid: String) {
-        // since I can connect from multiple devices, we store each connection instance separately
-        // any time that connectionsRef's value is null (i.e. has no children) I am offline
-        let myConnectionsRef = self.ref.child("users/\(userid)/connections")
-        
-        // stores the timestamp of my last disconnect (the last time I was seen online)
-        let lastOnlineRef = self.ref.child("users/\(userid)/lastOnline")
-        
-        let connectedRef = self.ref.child(".info/connected")
-        
-        connectedRef.observe(.value, with: { snapshot in
-            // only handle connection established (or I've reconnected after a loss of connection)
-            guard let connected = snapshot.value as? Bool, connected else { return }
-            
-            // add this device to my connections list
-            let con = myConnectionsRef.childByAutoId()
-            
-            // when this device disconnects, remove it.
-            con.onDisconnectRemoveValue()
-            
-            // The onDisconnect() call is before the call to set() itself. This is to avoid a race condition
-            // where you set the user's presence to true and the client disconnects before the
-            // onDisconnect() operation takes effect, leaving a ghost user.
-            
-            // this value could contain info about the device or a timestamp instead of just true
-            con.setValue(true)
-            
-            // when I disconnect, update the last time I was seen online
-            lastOnlineRef.onDisconnectSetValue(ServerValue.timestamp())
-        })
-    }
+//    private func setupConnectionObservers(userid: String) {
+//        // since I can connect from multiple devices, we store each connection instance separately
+//        // any time that connectionsRef's value is null (i.e. has no children) I am offline
+//        let myConnectionsRef = self.ref.child("users/\(userid)/connections")
+//        
+//        // stores the timestamp of my last disconnect (the last time I was seen online)
+//        let lastOnlineRef = self.ref.child("users/\(userid)/lastOnline")
+//        
+//        let connectedRef = self.ref.child(".info/connected")
+//        
+//        connectedRef.observe(.value, with: { snapshot in
+//            // only handle connection established (or I've reconnected after a loss of connection)
+//            guard let connected = snapshot.value as? Bool, connected else { return }
+//            
+//            // add this device to my connections list
+//            let con = myConnectionsRef.childByAutoId()
+//            
+//            // when this device disconnects, remove it.
+//            con.onDisconnectRemoveValue()
+//            
+//            // The onDisconnect() call is before the call to set() itself. This is to avoid a race condition
+//            // where you set the user's presence to true and the client disconnects before the
+//            // onDisconnect() operation takes effect, leaving a ghost user.
+//            
+//            // this value could contain info about the device or a timestamp instead of just true
+//            con.setValue(true)
+//            
+//            // when I disconnect, update the last time I was seen online
+//            lastOnlineRef.onDisconnectSetValue(ServerValue.timestamp())
+//        })
+//    }
 }
