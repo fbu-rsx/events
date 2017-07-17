@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -109,6 +109,15 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UU5-5w-Rqk">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-rZ-fpB">
+                                <rect key="frame" x="9" y="72" width="48" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.22648368962202137" green="0.69229854060913709" blue="0.60574916629895803" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button" image="LocationIndicator"/>
+                                <connections>
+                                    <action selector="onZoomtoCurrent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="13D-u5-BM1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -118,10 +127,10 @@
                             <constraint firstItem="UU5-5w-Rqk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="smO-FD-nDb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="hfl-ce-2ab">
-                        <barButtonItem key="leftBarButtonItem" image="CurrentLocation" id="U74-ra-ejg">
+                    <navigationItem key="navigationItem" title="Local Events" id="hfl-ce-2ab">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Uht-Q7-OeZ">
                             <connections>
-                                <action selector="zoomToCurrentLocationWithSender:" destination="BYZ-38-t0r" id="0kM-91-sNH"/>
+                                <action selector="onLogout:" destination="BYZ-38-t0r" id="8Cf-lG-j6m"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="xOr-dB-mLV">
@@ -322,5 +331,7 @@
     <resources>
         <image name="AddPin" width="75" height="75"/>
         <image name="CurrentLocation" width="15" height="15"/>
+        <image name="LocationIndicator" width="150" height="150"/>
     </resources>
+    <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

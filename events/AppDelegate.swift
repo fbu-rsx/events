@@ -17,20 +17,15 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
-    
-    let locationManager = CLLocationManager()
-    
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // MAPS: Sets location manager, enables notifications, clears notifications
-        locationManager.delegate = (self as! CLLocationManagerDelegate)
-        locationManager.requestAlwaysAuthorization()
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-        UIApplication.shared.cancelAllLocalNotifications()
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+
         
         let authUI = FUIAuth.defaultAuthUI()
         // You need to adopt a FUIAuthDelegate protocol to receive callback
@@ -46,41 +41,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
         return true
     }
-    
-    // MAPS
-    func handleEvent(forRegion region: CLRegion!) {
-        // Show an alert if application is active
-        if UIApplication.shared.applicationState == .active {
-//            guard let message = note(fromRegionIdentifier: region.identifier) else { return }
-//            window?.rootViewController?.showAlert(withTitle: nil, message: message)
-            
-        } else {
-            // Otherwise present a local notification
-            let notification = UILocalNotification()
-//            notification.alertBody = note(fromRegionIdentifier: region.identifier)
-            notification.soundName = "Default"
-            UIApplication.shared.presentLocalNotificationNow(notification)
-        }
-    }
-    
-//    func note(fromRegionIdentifier identifier: String) -> String? {
-//        let savedItems = UserDefaults.standard.array(forKey: PreferencesKeys.savedItems) as? [NSData]
-//        let geoNotifications = savedItems?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? GeoNotification }
-//        let index = geoNotifications?.index { $0?.identifier == identifier }
-//        return index != nil ? geoNotifications?[index!]?.note : nil
-//    }
-//    
+
     // FIREBASE
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         if let error = error {
             print(error.localizedDescription)
         } else if let user = user {
             AppUser.current = AppUser(user: user)
+            print("Welcome \(user.displayName!)! 😊")
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
             window?.rootViewController = controller
-        } else {
-          print("no user and no error. HELP")
         }
     }
     
@@ -144,24 +116,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        FirebaseAuthManager.shared.signOut()
+        print("Goodbye!")
     }
 
 }
-
-// MAPS: Extensions
-extension AppDelegate: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-    }
-}
-
-

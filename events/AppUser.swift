@@ -11,28 +11,47 @@ import FirebaseAuth
 
 class AppUser {
     
-    static var current: AppUser?
+    static var current: AppUser!
     
-    var user: User
+    var uid: String
     var name: String
     var email: String
     var password: String?
-    var profileURL: URL?
-//    var location: {
-//        get {
-//            return getLocation()
-//        }
-//    }
+    var photoURLString: String
+    var events: [Event]!
+    var eventsDict: [String: Bool]!
     
-    init(user: User) {
-        self.user = user
-        name = user.displayName!
-        email = user.email!
-        profileURL = user.photoURL
+    init(dictionary: [String: Any]) {
+        self.uid = dictionary["uid"] as! String
+        self.name = dictionary["name"] as! String
+        self.email = dictionary["email"] as! String
+        self.photoURLString = dictionary["photoURLString"] as! String
+        
+        FirebaseDatabaseManager.shared.setUserEvents(user: self)
+    }
+    
+    convenience init(user: User) {
+        let userDict: [String: Any] = ["uid": user.uid,
+                                       "name": user.displayName!,
+                                       "email": user.email!,
+                                       "photoURLString": user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
+        self.init(dictionary: userDict)
+        FirebaseDatabaseManager.shared.setupListeners(userid: user.uid)
+        
+        // Adds user only if the user does not exists
+        FirebaseDatabaseManager.shared.addUser(appUser: self, dict: userDict)
+    }
+    
+    /*
+     * Events related functions
+     */
+    func addEvent(_ event: Event) {
+        FirebaseDatabaseManager.shared.addEvent(event: event)
     }
     
     
-//    private func getLocation() {
-//        return FirebaseDatabaseManager.
-//    }
+    
+    /*
+     * Private functions
+     */
 }
