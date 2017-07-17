@@ -14,8 +14,6 @@ class Event {
     var eventname: String
     var totalcost: Double? //optional because may just be a free event
     var location: [Double]
-    var longitude: Double
-    var latitude: Double
     var organizerID: String //uid of the organizer
     var guestlist: [String: Bool]
     var photos: [String: String]
@@ -43,8 +41,6 @@ class Event {
         self.eventname = dictionary["eventname"] as! String
         self.totalcost = dictionary["totalcost"] as? Double
         self.location = dictionary["location"] as! [Double]
-        self.longitude = location[0]
-        self.latitude = location[1]
         self.organizerID = dictionary["organizerID"] as! String
         self.guestlist = dictionary["guestlist"] as? [String: Bool] ?? [:]
         self.photos = dictionary["photos"] as? [String: String] ?? [:]
