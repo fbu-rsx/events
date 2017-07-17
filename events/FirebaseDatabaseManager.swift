@@ -32,9 +32,9 @@ class FirebaseDatabaseManager {
                 self.ref.child("users/\(appUser.uid)").updateChildValues(dict)
                 print("new user \(appUser.name) added")
             }
+            self.setupConnectionObservers(userid: appUser.uid)
+            self.setUserEvents(user: appUser)
         }
-        
-        setupConnectionObservers(userid: appUser.uid)
     }
     
     func addEvent(event: Event) {
@@ -70,6 +70,10 @@ class FirebaseDatabaseManager {
     /*
      * Functions for changes to the database
      */
+    func logout() {
+        FirebaseAuthManager.shared.signOut()
+        print("Goodbye!")
+    }
 
     
     /*
@@ -138,12 +142,12 @@ class FirebaseDatabaseManager {
     private func setupConnectionObservers(userid: String) {
         // since I can connect from multiple devices, we store each connection instance separately
         // any time that connectionsRef's value is null (i.e. has no children) I am offline
-        let myConnectionsRef = Database.database().reference(withPath: "users/\(userid)/connections")
+        let myConnectionsRef = self.ref.child("users/\(userid)/connections")
         
         // stores the timestamp of my last disconnect (the last time I was seen online)
-        let lastOnlineRef = Database.database().reference(withPath: "users/\(userid)/lastOnline")
+        let lastOnlineRef = self.ref.child("users/\(userid)/lastOnline")
         
-        let connectedRef = Database.database().reference(withPath: ".info/connected")
+        let connectedRef = self.ref.child(".info/connected")
         
         connectedRef.observe(.value, with: { snapshot in
             // only handle connection established (or I've reconnected after a loss of connection)
