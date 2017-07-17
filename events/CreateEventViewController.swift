@@ -19,8 +19,15 @@ class CreateEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mapView.showsUserLocation = true
+        // Tracks the user's location
+        self.mapView.setUserTrackingMode(.follow, animated: true)
         
-        navigationItem.rightBarButtonItems = [addButton, zoomButton]
+        
+        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+        self.mapView.setRegion(region, animated: true)
+        
 
     }
 
@@ -31,7 +38,7 @@ class CreateEventViewController: UIViewController {
     @IBAction func onZoomToCurrentLocation(_ sender: AnyObject) {
 //        mapView.zoomToUserLocation()
         guard let coordinate = mapView.userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 10000, 10000)
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
         mapView.setRegion(region, animated: true)
     }
     override func didReceiveMemoryWarning() {
