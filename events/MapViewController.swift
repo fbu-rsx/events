@@ -66,6 +66,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         FirebaseDatabaseManager.shared.logout()
     }
     
-    
+    @IBAction func testTransition(_ sender: Any) {
+        performSegue(withIdentifier: "test", sender: nil)
+    }
 }
 
