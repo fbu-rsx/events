@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             print("Welcome \(user.displayName!)! 😊")
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
+            let controller = storyboard.instantiateViewController(withIdentifier: "MapViewNavigationController")
             window?.rootViewController = controller
         }
     }
@@ -116,8 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        FirebaseAuthManager.shared.signOut()
-        print("Goodbye!")
     }
 
 }
