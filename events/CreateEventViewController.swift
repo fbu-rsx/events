@@ -9,9 +9,6 @@
 import UIKit
 import MapKit
 
-protocol CreateEventViewControllerDelegate {
-    func createEventViewController(controller: CreateEventViewController, didAddCoordinate coordinate: CLLocationCoordinate2D, radius: Double, identifier: String)
-}
 
 
 class CreateEventViewController: UIViewController {
@@ -19,7 +16,6 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var zoomButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     
-    var delegate: CreateEventViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +27,7 @@ class CreateEventViewController: UIViewController {
     @IBAction func onCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    @IBAction func onAdd(_ sender: AnyObject) {
-        let coordinate = mapView.centerCoordinate
-        // 805 meters = half a mile
-        let radius = 100.00
-        let identifier = NSUUID().uuidString
-        delegate?.createEventViewController(controller: self, didAddCoordinate: coordinate, radius: radius, identifier: identifier)
-    }
-    
+        
     @IBAction func onZoomToCurrentLocation(_ sender: AnyObject) {
 //        mapView.zoomToUserLocation()
         guard let coordinate = mapView.userLocation.location?.coordinate else { return }

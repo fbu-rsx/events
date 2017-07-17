@@ -17,17 +17,10 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
-    
-    let locationManager = CLLocationManager()
-    
+  
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // MAPS: Sets location manager, enables notifications, clears notifications
-        locationManager.delegate = (self as! CLLocationManagerDelegate)
-        locationManager.requestAlwaysAuthorization()
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-        UIApplication.shared.cancelAllLocalNotifications()
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
@@ -46,30 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
         return true
     }
-    
-    // MAPS
-    func handleEvent(forRegion region: CLRegion!) {
-        // Show an alert if application is active
-        if UIApplication.shared.applicationState == .active {
-//            guard let message = note(fromRegionIdentifier: region.identifier) else { return }
-//            window?.rootViewController?.showAlert(withTitle: nil, message: message)
-            
-        } else {
-            // Otherwise present a local notification
-            let notification = UILocalNotification()
-//            notification.alertBody = note(fromRegionIdentifier: region.identifier)
-            notification.soundName = "Default"
-            UIApplication.shared.presentLocalNotificationNow(notification)
-        }
-    }
-    
-//    func note(fromRegionIdentifier identifier: String) -> String? {
-//        let savedItems = UserDefaults.standard.array(forKey: PreferencesKeys.savedItems) as? [NSData]
-//        let geoNotifications = savedItems?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? GeoNotification }
-//        let index = geoNotifications?.index { $0?.identifier == identifier }
-//        return index != nil ? geoNotifications?[index!]?.note : nil
-//    }
-//    
+
     // FIREBASE
     func authUI(_ authUI: FUIAuth, didSignInWith user: User?, error: Error?) {
         if let error = error {
@@ -147,21 +117,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     }
 
 }
-
-// MAPS: Extensions
-extension AppDelegate: CLLocationManagerDelegate {
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-    }
-}
-
-
