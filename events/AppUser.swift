@@ -26,8 +26,6 @@ class AppUser {
         self.name = dictionary["name"] as! String
         self.email = dictionary["email"] as! String
         self.photoURLString = dictionary["photoURLString"] as! String
-        
-        FirebaseDatabaseManager.shared.setUserEvents(user: self)
     }
     
     convenience init(user: User) {
@@ -36,8 +34,7 @@ class AppUser {
                                        "email": user.email!,
                                        "photoURLString": user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
-        FirebaseDatabaseManager.shared.setupListeners(userid: user.uid)
-        
+      
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.addUser(appUser: self, dict: userDict)
     }
