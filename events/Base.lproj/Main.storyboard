@@ -193,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vd-MH-mtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2094" y="649"/>
+            <point key="canvasLocation" x="1273" y="1392"/>
         </scene>
         <!--Detailed Event View Controller-->
         <scene sceneID="q6k-Xp-AYj">
@@ -289,14 +289,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QdK-yG-sXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2881" y="648"/>
+            <point key="canvasLocation" x="2180" y="1391"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ufD-yA-eOh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rH0-r7-7rh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MapViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="rH0-r7-7rh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RA4-yK-Ln0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RA4-yK-Ln0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -314,7 +314,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qDn-bU-qJ8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="i0L-C0-Jai">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="i0L-C0-Jai">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
