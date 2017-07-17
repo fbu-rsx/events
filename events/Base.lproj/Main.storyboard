@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -202,7 +202,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vd-MH-mtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="2153" y="505"/>
         </scene>
         <!--Detailed Event View Controller-->
@@ -299,10 +298,16 @@
                             <constraint firstItem="TGf-2O-o1b" firstAttribute="top" secondItem="hC0-IN-7h7" secondAttribute="bottom" id="zvd-TQ-XWy"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="centerImage" destination="TGN-Vg-yVJ" id="XmU-PD-gfZ"/>
+                        <outlet property="collectionView" destination="BrA-nP-Ltb" id="tdG-Yk-Ogf"/>
+                        <outlet property="mapView" destination="TGf-2O-o1b" id="eNQ-5c-CEt"/>
+                        <outlet property="organizerLabel" destination="5Gt-Ad-HAQ" id="6jK-DE-Qip"/>
+                        <outlet property="tableView" destination="aUB-ci-uX9" id="z65-bT-7jx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QdK-yG-sXp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-
             <point key="canvasLocation" x="3017" y="690"/>
         </scene>
         <!--Navigation Controller-->
@@ -328,7 +333,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qDn-bU-qJ8" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="i0L-C0-Jai">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="i0L-C0-Jai">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
