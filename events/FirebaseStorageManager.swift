@@ -9,18 +9,21 @@
 import Foundation
 import Firebase
 
-class FirebaseStoreageManager {
+class FirebaseStorageManager {
     
     // Get a reference to the storage service using the default Firebase App
     // Create a storage reference from Firebase storage service
-    static let storageRef = Storage.storage().reference()
+    let storageRef = Storage.storage().reference()
+    var imageIDs: [String: [String]] = [:] // [eventID: [picIDs]]
+    static var shared = FirebaseStorageManager()
     
     // When calling this function, will need to convert images/videos to type Data (how to at bottom of page)
     // We can easily allow for metadata to be uploaded as well later one
-    func uploadFile(refLocation: String, data: Data, completion: ()->()){
-        let fileRef = FirebaseStoreageManager.storageRef.child(refLocation)
+    func uploadImage(event: Event, imageID: String, image: UIImage, completion: ()->()){
+        let data = UIImagePNGRepresentation(image) as! NSData
+        let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
         // create task so that we can later implement observers
-        let uploadTask = fileRef.putData(data, metadata: nil) { (metadata, error) in
+        let uploadTask = fileRef.putData(data as Data, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else{
                 print(error?.localizedDescription ?? "default error")
                 return
@@ -29,8 +32,8 @@ class FirebaseStoreageManager {
         }
     }
     
-    func downloadFile(refLocation: String, completion: ()->()){
-        let fileRef = FirebaseStoreageManager.storageRef.child(refLocation)
+    func downloadImage(event: Event, imageID: String, completion: ()->()){
+        let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
         // temporary maxSize
         fileRef.getData(maxSize: 1024*1024) { (data, error) in
             if let error = error {

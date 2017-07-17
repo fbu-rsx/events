@@ -55,6 +55,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         FirebaseAuthManager.shared.signOut()
     }
     
-    
+    @IBAction func testTransition(_ sender: Any) {
+        performSegue(withIdentifier: "test", sender: nil)
+    }
 }
 
