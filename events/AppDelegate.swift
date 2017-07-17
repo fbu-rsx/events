@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             print("Welcome \(user.displayName!)! 😊")
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "MapViewController")
+            let controller = storyboard.instantiateViewController(withIdentifier: "MapViewNavigationController")
             window?.rootViewController = controller
         }
     }

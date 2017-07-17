@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import Firebase
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,6 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         // Sets current location the first element of list of all locations
         let location = locations[0]
         // Initiates the span of the view
@@ -27,23 +28,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         // Initiates the coordinates
         let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         // Sets the region to the span and coordinates
-        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        let region: MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(myLocation, 1000, 1000)
         mapView.setRegion(region, animated: true)
-        //   mapView.showsUserLocation = true
-        
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        // Sets the desired accuracy to the most precise data possible
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        // Always request the user for permission to track locations
-        locationManager.requestWhenInUseAuthorization()
-        //mapView.showsUserLocation = true
-        // Calls the locationManager didUpdateLocations function
-        locationManager.startUpdatingLocation()
+        mapView.delegate = self
+        // Displays user's current location
+        self.mapView.showsUserLocation = true
+        // Tracks the user's location
+        self.mapView.setUserTrackingMode(.follow, animated: true)
+        
+        
+        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+        self.mapView.setRegion(region, animated: true)
+        
+//        locationManager.delegate = self
+//        // Sets the desired accuracy to the most precise data possible
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        // Always request the user for permission to track locations
+//        locationManager.requestWhenInUseAuthorization()
+//        // Calls the locationManager didUpdateLocations function
+//        locationManager.startUpdatingLocation()
+        
     }
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
