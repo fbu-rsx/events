@@ -9,8 +9,6 @@ target 'events' do
   pod 'FirebaseCore'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-  pod 'GoogleMaps'
-  pod 'GooglePlaces'
   pod 'Alamofire', '~> 4.4'
   pod 'OAuthSwift', '~> 1.1.2'
   pod 'Firebase/Auth'
