@@ -170,6 +170,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4F2545661F1D59D00076AE0B /* SignInViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
+			);
+			name = SignInViewControllers;
+			sourceTree = "<group>";
+		};
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,7 +194,6 @@
 			children = (
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
-				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
 				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
 				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */,
@@ -230,6 +237,7 @@
 		4FCB627A1F143DC400BBDC71 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
 				4F87D3781F168F59007D4E94 /* Views */,
 				09A15CC41F15A28700E847CC /* certs */,

@@ -36,19 +36,48 @@ class AppUser {
         self.init(dictionary: userDict)
       
         // Adds user only if the user does not exists
-        FirebaseDatabaseManager.shared.addUser(appUser: self, dict: userDict)
+        FirebaseDatabaseManager.shared.addUser(appUser: self, userDict: userDict)
     }
     
-    /*
+    /**
+     *
      * Events related functions
+     *
      */
-    func addEvent(_ event: Event) {
-        FirebaseDatabaseManager.shared.addEvent(event: event)
+    //adds existing event to user event list
+    func addEventToUser(_ event: Event) {
+        FirebaseDatabaseManager.shared.addEventToUser(event)
+        self.events.append(event)
+        self.eventsDict[event.eventid] = true
     }
     
+    //create event and add to user event list and event database
+    func createEvent(_ eventDict: [String: Any]) {
+        var copy = eventDict
+        copy["eventid"] = FirebaseDatabaseManager.shared.getNewEventID()
+        FirebaseDatabaseManager.shared.createEvent(copy)
+        let event = Event(dictionary: copy)
+        self.events.append(event)
+        self.eventsDict[event.eventid] = true
+    }
     
+    //remove event from user event list
+    func removeUserFromEvent(_ event: Event) {
+        FirebaseDatabaseManager.shared.removeUserFromEvent(event)
+        var index: Int!
+        for i in 0..<self.events.count {
+            if event.eventid == self.events[i].eventid {
+                index = i
+                break
+            }
+        }
+        self.events.remove(at: index)
+        self.eventsDict.removeValue(forKey: event.eventid)
+    }
     
-    /*
-     * Private functions
-     */
+    // delete event and delete from all its users' event lists
+    func deleteEvent(_ event: Event) {
+        FirebaseDatabaseManager.shared.deleteEvent(event)
+        self.removeUserFromEvent(event)
+    }
 }
