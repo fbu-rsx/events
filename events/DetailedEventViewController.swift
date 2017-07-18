@@ -18,7 +18,7 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
-/*    var eventid: String
+/*var eventid: String
  var eventname: String
  var totalcost: Double? //optional because may just be a free event
  var location: [Double]
@@ -36,8 +36,12 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
             let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             mapView.setCenter(location, animated: true)
             //centerImage.image = event?.organizerID
+            let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!)
+            // set orgainzer pic
+            let url = URL(string: user.photoURLString)
+            centerImage.af_setImage(withURL: url!)
             // set organizerlabel as well
-            
+            organizerLabel.text = user.name
         }
     }
     
