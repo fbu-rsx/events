@@ -11,27 +11,13 @@ import MapKit
 import CoreLocation
 import FirebaseAuthUI
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
     // Creates an instance of Core Location class
     let locationManager = CLLocationManager()
-    
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        // Sets current location the first element of list of all locations
-        let location = locations[0]
-        // Initiates the span of the view
-        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-        // Initiates the coordinates
-        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        // Sets the region to the span and coordinates
-        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        mapView.setRegion(region, animated: true)
-        
-    }
+    var geotifications = [Geotification]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,14 +46,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.locationManager.requestAlwaysAuthorization()
         
         // For use in foreground
-        self.locationManager.requestWhenInUseAuthorization()
+//        self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
+            loadAllGeotifications()
         }
         
+//        geotifications = eventsToGeotifications(AppUser.current.events)
     }
     
     
@@ -85,13 +73,63 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     
     
-    func region() -> CLCircularRegion {
+    func region(withGeotification geotification: Geotification) -> CLCircularRegion {
         // 1
-        let region = CLCircularRegion(center: locationManager.location!.coordinate, radius: 100, identifier: "Radius")
+        let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
         // 2
-//        region.notifyOnEntry = (geotification.eventType == .onEntry)
-//        region.notifyOnExit = !region.notifyOnEntry
+        region.notifyOnEntry = (geotification.eventType == .onEntry)
+        region.notifyOnExit = !region.notifyOnEntry
         return region
     }
+    
+    func startMonitoring(geotification: Geotification) {
+        // 1
+        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
+            showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
+            return
+        }
+        // 2
+        if CLLocationManager.authorizationStatus() != .authorizedAlways {
+            showAlert(withTitle:"Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.")
+        }
+        // 3
+        let region = self.region(withGeotification: geotification)
+        // 4
+        locationManager.startMonitoring(for: region)
+    }
+    
+    
+    func stopMonitoring(geotification: Geotification) {
+        for region in locationManager.monitoredRegions {
+            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == geotification.identifier else { continue }
+            locationManager.stopMonitoring(for: circularRegion)
+        }
+    }
+    
+    func loadAllGeotifications() {
+        
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+//        self.mapView.showsUserLocation = (status == .authorizedAlways)
+//    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        // Sets current location the first element of list of all locations
+        let location = locations[0]
+        // Initiates the span of the view
+        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        // Initiates the coordinates
+        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+        // Sets the region to the span and coordinates
+        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+        mapView.setRegion(region, animated: true)
+        
+    }
+
 }
 
