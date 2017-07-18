@@ -26,6 +26,8 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
  var guestlist: [String: Bool]
  var photos: [String: String]
  var eventDictionary: [String: Any]*/
+    
+    var images: [UIImage] = []
  
     var event: Event?{
         didSet{
@@ -42,6 +44,11 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
             centerImage.af_setImage(withURL: url!)
             // set organizerlabel as well
             organizerLabel.text = user.name
+            for imageID in (event?.photos.keys)!{
+                FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+                    self.images.append(image)
+                })
+            }
         }
     }
     
@@ -62,7 +69,6 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         tableView.register(UINib(nibName: "userTableViewCell", bundle: bundle), forCellReuseIdentifier: "userCell")
         
         
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,6 +80,7 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    // required function
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
         
     }
@@ -86,13 +93,14 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         collectionView.reloadData()
     }
     
+    // required function
     func cancelButtonDidPress(_ imagePicker: ImagePickerController){
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
-        
+        // need to customize cell but can't until Event class updated
         return cell
     }
     
@@ -101,12 +109,12 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return (event?.photos.count)!
+        return images.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customImageCell", for: indexPath) as! ImageCollectionViewCell
-        // cell.imageView.image = event?.photos
+        cell.imageView.image = images[indexPath.row]
         return cell
     }
 
