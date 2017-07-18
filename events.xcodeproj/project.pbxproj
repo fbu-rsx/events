@@ -34,6 +34,10 @@
 		4FCB62911F143DC400BBDC71 /* eventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB62901F143DC400BBDC71 /* eventsTests.swift */; };
 		4FCB629C1F143DC400BBDC71 /* eventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */; };
 		4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */; };
+		7C10FC9D1F1D6F2E009EE12F /* CreateEventTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9C1F1D6F2E009EE12F /* CreateEventTitleViewController.swift */; };
+		7C10FCA01F1D74E8009EE12F /* ProgressTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */; };
+		7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */; };
+		7C10FCA61F1D8941009EE12F /* CreateEventGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
 		7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */; };
 		CCB163A1DDBEE3944D6FE0A3 /* Pods_eventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C04120232A3D15602FB929F /* Pods_eventsTests.framework */; };
@@ -93,6 +97,10 @@
 		4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = eventsUITests.swift; sourceTree = "<group>"; };
 		4FCB629D1F143DC400BBDC71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7C10FC9C1F1D6F2E009EE12F /* CreateEventTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateEventTitleViewController.swift; path = ../CreateEventTitleViewController.swift; sourceTree = "<group>"; };
+		7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTrackerViewController.swift; sourceTree = "<group>"; };
+		7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressTrackerViewController.xib; sourceTree = "<group>"; };
+		7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventGuestsViewController.swift; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-events.release.xcconfig"; path = "Pods/Target Support Files/Pods-events/Pods-events.release.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +185,8 @@
 				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
 				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
+				7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */,
+				7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -184,10 +194,10 @@
 		4F87D3791F1696AF007D4E94 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7C10FCA21F1D7E15009EE12F /* CreateEvents */,
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
 				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
-				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
 				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */,
 			);
@@ -263,6 +273,16 @@
 				4FCB629D1F143DC400BBDC71 /* Info.plist */,
 			);
 			path = eventsUITests;
+			sourceTree = "<group>";
+		};
+		7C10FCA21F1D7E15009EE12F /* CreateEvents */ = {
+			isa = PBXGroup;
+			children = (
+				7C10FC9C1F1D6F2E009EE12F /* CreateEventTitleViewController.swift */,
+				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
+				7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */,
+			);
+			name = CreateEvents;
 			sourceTree = "<group>";
 		};
 		D46BB857F2F73624A5871E37 /* Frameworks */ = {
@@ -398,6 +418,7 @@
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
 				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
+				7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,7 +587,9 @@
 				4F010D751F16EE7A00E8EA47 /* CreateEventViewController.swift in Sources */,
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
 				09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */,
+				7C10FC9D1F1D6F2E009EE12F /* CreateEventTitleViewController.swift in Sources */,
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
+				7C10FCA61F1D8941009EE12F /* CreateEventGuestsViewController.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
 				4F010D6D1F16E51800E8EA47 /* SignInViewController.swift in Sources */,
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
@@ -578,6 +601,7 @@
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
 				09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */,
 				4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */,
+				7C10FCA01F1D74E8009EE12F /* ProgressTrackerViewController.swift in Sources */,
 				09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
