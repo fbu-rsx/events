@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Event {
     
@@ -56,5 +57,11 @@ class Event {
     
     func getGuestList() -> [AppUser] {
         return FirebaseDatabaseManager.shared.getUsersFromEventDict(dictionary: self.guestlist)
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        FirebaseDatabaseManager.shared.addImage(eventID: self.eventid) { (id) in
+            FirebaseStorageManager.shared.uploadImage(user: AppUser.current, image: image, imageID: id, eventID: self.eventid)
+        }
     }
 }

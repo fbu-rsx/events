@@ -46,6 +46,8 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     }
     
     let imagePickerController = ImagePickerController()
+    
+    //var invited: [] =
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +60,8 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         let bundle = Bundle(path: "/Users/rhianchavez11/Documents/events/events/Views")
         collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: bundle), forCellWithReuseIdentifier: "customImageCell")
         tableView.register(UINib(nibName: "userTableViewCell", bundle: bundle), forCellReuseIdentifier: "userCell")
+        
+        
         
     }
 
@@ -76,9 +80,10 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
         for image in stride(from: 0, to: images.count, by: 1){
-            FirebaseStorageManager.shared.uploadImage(imageID: String(image), image: images[image], completion: {})
+            event?.uploadImage(images[image])
         }
         imagePickerController.dismiss(animated: true, completion: nil)
+        collectionView.reloadData()
     }
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController){
@@ -87,6 +92,7 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
+        
         return cell
     }
     
@@ -103,7 +109,6 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         // cell.imageView.image = event?.photos
         return cell
     }
-    
 
     /*
     // MARK: - Navigation

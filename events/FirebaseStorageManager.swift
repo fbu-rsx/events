@@ -19,10 +19,10 @@ class FirebaseStorageManager {
     
     // When calling this function, will need to convert images/videos to type Data (how to at bottom of page)
     // We can easily allow for metadata to be uploaded as well later one
-    func uploadImage(/*event: Event, */imageID: String, image: UIImage, completion: ()->()){
-        let data = UIImagePNGRepresentation(image) as! NSData
+    func uploadImage(user: AppUser, image: UIImage, imageID: String, eventID: String){
+        let data = UIImagePNGRepresentation(image)! as NSData
         //let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
-        let fileRef = storageRef.child("testEventID/images/\(imageID)")
+        let fileRef = storageRef.child("\(eventID)/images/\(imageID)")
         // create task so that we can later implement observers
         let uploadTask = fileRef.putData(data as Data, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else{
@@ -33,10 +33,10 @@ class FirebaseStorageManager {
         }
     }
     
-    func downloadImage(event: Event, imageID: String, completion: ()->()){
+    func downloadImage(event: Event, imageID: String, completion: @escaping (_ image: UIImage)->()){
         let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
         // temporary maxSize
-        fileRef.getData(maxSize: 1024*1024) { (data, error) in
+        fileRef.getData(maxSize: 2000*2000) { (data, error) in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -45,6 +45,7 @@ class FirebaseStorageManager {
                 // Assuming that return value of request is a UIImage
                 let image = UIImage(data: data!)
                 // either return image or pass it into completion
+                completion(image!)
             }
         }
         // We can also add observers later on
