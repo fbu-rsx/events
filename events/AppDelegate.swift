@@ -17,6 +17,7 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
+    static var aUI: FUIAuth?
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -25,9 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
-
         
-        let authUI = FUIAuth.defaultAuthUI()
+        AppDelegate.aUI = FUIAuth.defaultAuthUI()
+        let authUI = AppDelegate.aUI
         // You need to adopt a FUIAuthDelegate protocol to receive callback
         authUI?.delegate = self
         let providers: [FUIAuthProvider] = [FUIGoogleAuth()]

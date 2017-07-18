@@ -65,8 +65,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
+        let authViewController = AppDelegate.aUI!.authViewController()
+        self.present(authViewController, animated: true, completion: nil)
     }
     
-
 }
 

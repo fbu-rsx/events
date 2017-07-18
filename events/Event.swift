@@ -21,6 +21,7 @@ class Event {
     var organizerID: String //uid of the organizer
     var guestlist: [String: Bool] // true if guest attended
     var photos: [String: String]
+    var description: String
     
     
     
@@ -48,6 +49,7 @@ class Event {
         self.organizerID = dictionary["organizerID"] as! String
         self.guestlist = dictionary["guestlist"] as? [String: Bool] ?? [:]
         self.photos = dictionary["photos"] as? [String: String] ?? [:]
+        self.description = dictionary["description"] as! String
         self.eventDictionary = dictionary
     }
     
