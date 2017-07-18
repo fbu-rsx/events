@@ -19,9 +19,10 @@ class FirebaseStorageManager {
     
     // When calling this function, will need to convert images/videos to type Data (how to at bottom of page)
     // We can easily allow for metadata to be uploaded as well later one
-    func uploadImage(event: Event, imageID: String, image: UIImage, completion: ()->()){
+    func uploadImage(/*event: Event, */imageID: String, image: UIImage, completion: ()->()){
         let data = UIImagePNGRepresentation(image) as! NSData
-        let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
+        //let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
+        let fileRef = storageRef.child("testEventID/images/\(imageID)")
         // create task so that we can later implement observers
         let uploadTask = fileRef.putData(data as Data, metadata: nil) { (metadata, error) in
             guard let metadata = metadata else{

@@ -15,8 +15,23 @@ class EventsTableViewCell: UITableViewCell {
     @IBOutlet weak var organizerName: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
     
-    var event: Event?
-    // Need to first distinguish Event class properties, can then assign valus to cell's photos and labels (event class not yet defined)
+/*    var eventid: String
+ var eventname: String
+ var totalcost: Double? //optional because may just be a free event
+ var location: [Double]
+ var organizerID: String //uid of the organizer
+ var guestlist: [String: Bool]
+ var photos: [String: String]
+ var eventDictionary: [String: Any]*/
+ 
+    var event: Event?{
+        didSet{
+            // set organizerPic
+            eventTitle.text = event?.eventname
+            // set organizerName
+            // set eeventDescription
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

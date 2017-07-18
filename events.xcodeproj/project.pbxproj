@@ -17,6 +17,8 @@
 		09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */; };
 		09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */; };
 		09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */; };
+		09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */; };
+		09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */; };
 		3AF83A15E164D2366EE880C1 /* Pods_eventsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */; };
 		4F010D6B1F16E3BB00E8EA47 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F010D6A1F16E3BB00E8EA47 /* SignIn.storyboard */; };
 		4F010D6D1F16E51800E8EA47 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */; };
@@ -72,6 +74,8 @@
 		09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedEventViewController.swift; sourceTree = "<group>"; };
 		09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
+		09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = userTableViewCell.xib; sourceTree = "<group>"; };
 		1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E325F93B30E087012B5B727 /* Pods-eventsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventsUITests/Pods-eventsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C04120232A3D15602FB929F /* Pods_eventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +182,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4F2545661F1D59D00076AE0B /* SignInViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
+			);
+			name = SignInViewControllers;
+			sourceTree = "<group>";
+		};
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +199,8 @@
 				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
 				7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */,
 				7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */,
+				09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */,
+				09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -198,6 +212,7 @@
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
 				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
+				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
 				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */,
 			);
@@ -240,6 +255,7 @@
 		4FCB627A1F143DC400BBDC71 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
 				4F87D3781F168F59007D4E94 /* Views */,
 				09A15CC41F15A28700E847CC /* certs */,
@@ -416,6 +432,7 @@
 				4F010D6B1F16E3BB00E8EA47 /* SignIn.storyboard in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
+				09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */,
 				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */,
@@ -599,6 +616,7 @@
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
+				09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */,
 				09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */,
 				4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */,
 				7C10FCA01F1D74E8009EE12F /* ProgressTrackerViewController.swift in Sources */,
