@@ -40,6 +40,7 @@
 		7C10FCA01F1D74E8009EE12F /* ProgressTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */; };
 		7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */; };
 		7C10FCA61F1D8941009EE12F /* CreateEventGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */; };
+		7C10FCA81F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
 		7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */; };
 		CCB163A1DDBEE3944D6FE0A3 /* Pods_eventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C04120232A3D15602FB929F /* Pods_eventsTests.framework */; };
@@ -105,6 +106,7 @@
 		7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTrackerViewController.swift; sourceTree = "<group>"; };
 		7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressTrackerViewController.xib; sourceTree = "<group>"; };
 		7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventGuestsViewController.swift; sourceTree = "<group>"; };
+		7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventMiscellaneousViewController.swift; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-events.release.xcconfig"; path = "Pods/Target Support Files/Pods-events/Pods-events.release.xcconfig"; sourceTree = "<group>"; };
@@ -185,7 +187,6 @@
 		4F2545661F1D59D00076AE0B /* SignInViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
 			);
 			name = SignInViewControllers;
 			sourceTree = "<group>";
@@ -212,7 +213,6 @@
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
 				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
-				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
 				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */,
 			);
@@ -255,6 +255,7 @@
 		4FCB627A1F143DC400BBDC71 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
 				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
 				4F87D3781F168F59007D4E94 /* Views */,
@@ -263,7 +264,6 @@
 				09A15CBA1F15485900E847CC /* OAuthSwift */,
 				4F9887261F144A7B00759564 /* APIManagers */,
 				4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */,
-				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
 				7C4BA22A1F18163B004739EE /* Utilities.swift */,
 				4FCB62821F143DC400BBDC71 /* Assets.xcassets */,
 				4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */,
@@ -297,6 +297,7 @@
 				7C10FC9C1F1D6F2E009EE12F /* CreateEventTitleViewController.swift */,
 				4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */,
 				7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */,
+				7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */,
 			);
 			name = CreateEvents;
 			sourceTree = "<group>";
@@ -598,6 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C10FCA81F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift in Sources */,
 				4F87D37B1F1696E1007D4E94 /* AuthViewController.swift in Sources */,
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,

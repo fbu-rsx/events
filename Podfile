@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'events' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -15,6 +15,7 @@ target 'events' do
   pod 'FirebaseUI', '~> 4.0'
   pod 'ImagePicker'
   pod 'AlamofireImage'
+  pod 'EPContactsPicker'
 
   target 'eventsTests' do
     inherit! :search_paths
