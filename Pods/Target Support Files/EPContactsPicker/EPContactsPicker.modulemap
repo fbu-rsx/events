@@ -1,0 +1,6 @@
+framework module EPContactsPicker {
+  umbrella header "EPContactsPicker-umbrella.h"
+
+  export *
+  module * { export * }
+}
