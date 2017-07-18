@@ -189,6 +189,9 @@
                                 <rect key="frame" x="250" y="589" width="37" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="calendar"/>
+                                <connections>
+                                    <segue destination="Hae-uG-d6M" kind="show" id="BuU-Or-PxO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-rZ-fpB">
                                 <rect key="frame" x="77" y="585" width="51" height="48"/>
@@ -236,7 +239,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Y3-H8c">
-                                <rect key="frame" x="21" y="20" width="333" height="29"/>
+                                <rect key="frame" x="21" y="72" width="333" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="333" id="sN7-18-9lM"/>
                                 </constraints>
@@ -250,15 +253,15 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-6O-xea">
-                                <rect key="frame" x="0.0" y="53" width="375" height="614"/>
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="U3F-Y3-H8c" secondAttribute="bottom" constant="5" id="1q7-bk-Zuy"/>
+                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="U3F-Y3-H8c" secondAttribute="bottom" constant="8" id="1q7-bk-Zuy"/>
                             <constraint firstItem="U3F-Y3-H8c" firstAttribute="centerX" secondItem="Lhf-XP-lMH" secondAttribute="centerX" id="9WE-20-ie4"/>
-                            <constraint firstItem="U3F-Y3-H8c" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" id="eaD-r3-xaC"/>
+                            <constraint firstItem="U3F-Y3-H8c" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" constant="8" id="eaD-r3-xaC"/>
                             <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="mDl-VR-Ewh"/>
                             <constraint firstItem="EKf-qR-McR" firstAttribute="top" secondItem="eeW-6O-xea" secondAttribute="bottom" id="pcD-qQ-rct"/>
                             <constraint firstItem="eeW-6O-xea" firstAttribute="leading" secondItem="Lhf-XP-lMH" secondAttribute="leading" id="sSH-dp-1UI"/>
@@ -484,8 +487,8 @@
         <image name="right-arrow-circular-button" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VI0-Y6-wqd"/>
         <segue reference="DIt-jA-1Wl"/>
+        <segue reference="sV0-t5-Xh3"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

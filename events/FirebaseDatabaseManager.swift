@@ -112,10 +112,7 @@ class FirebaseDatabaseManager {
     
     
     
-    
-    
-    
-    
+
     
     
     /**
@@ -200,9 +197,6 @@ class FirebaseDatabaseManager {
         return self.ref.child("events").childByAutoId().key
     }
 
-    
-    
-    
     
     
     

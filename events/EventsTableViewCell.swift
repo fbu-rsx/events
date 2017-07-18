@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class EventsTableViewCell: UITableViewCell {
 
@@ -15,7 +16,7 @@ class EventsTableViewCell: UITableViewCell {
     @IBOutlet weak var organizerName: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
     
-/*    var eventid: String
+/*var eventid: String
  var eventname: String
  var totalcost: Double? //optional because may just be a free event
  var location: [Double]
@@ -26,10 +27,17 @@ class EventsTableViewCell: UITableViewCell {
  
     var event: Event?{
         didSet{
-            // set organizerPic
+            // make user object
+            let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) 
+            // set orgainzer pic
+            let url = URL(string: user.photoURLString)
+            organizerPic.af_setImage(withURL: url!)
+            // set eventTitle
             eventTitle.text = event?.eventname
             // set organizerName
+            organizerName.text = user.name
             // set eeventDescription
+            eventDescription.text = event?.description
         }
     }
     
@@ -43,5 +51,4 @@ class EventsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

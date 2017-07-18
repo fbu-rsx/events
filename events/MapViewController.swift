@@ -66,6 +66,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
+        let authViewController = AppDelegate.aUI!.authViewController()
+        self.present(authViewController, animated: true, completion: nil)
     }
     
     @IBAction func testTransition(_ sender: Any) {
@@ -130,6 +132,5 @@ extension MapViewController: CLLocationManagerDelegate {
         mapView.setRegion(region, animated: true)
         
     }
-
 }
 
