@@ -55,6 +55,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         //        // Calls the locationManager didUpdateLocations function
         //        locationManager.startUpdatingLocation()
         
+        
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
     }
     
     
@@ -69,6 +82,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     @IBAction func testTransition(_ sender: Any) {
         performSegue(withIdentifier: "test", sender: nil)
+    }
+    
+    
+    func region() -> CLCircularRegion {
+        // 1
+        let region = CLCircularRegion(center: locationManager.location!.coordinate, radius: 100, identifier: "Radius")
+        // 2
+//        region.notifyOnEntry = (geotification.eventType == .onEntry)
+//        region.notifyOnExit = !region.notifyOnEntry
+        return region
     }
 }
 
