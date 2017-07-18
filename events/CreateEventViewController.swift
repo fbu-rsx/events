@@ -19,6 +19,9 @@ class CreateEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Background color
+        self.view.backgroundColor = UIColor(hexString: "#f1c40f")
+        
         self.mapView.showsUserLocation = true
         // Tracks the user's location
         self.mapView.setUserTrackingMode(.follow, animated: true)
@@ -28,9 +31,12 @@ class CreateEventViewController: UIViewController {
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
         
-
     }
 
+    @IBAction func onBack(_ sender: Any) {
+        performSegue(withIdentifier: "CreateEventTitleViewController", sender: nil)
+    }
+    
     @IBAction func onCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -45,5 +51,5 @@ class CreateEventViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
+

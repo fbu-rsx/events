@@ -9,7 +9,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>AlamofireImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>EPContactsPicker-EPContactsPicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>EPContactsPicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -112,12 +127,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1ED7210FC5C9C6ADCEB3CDAD87B99D60</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3380590F973AFAFA30255D504B7DEDAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3BFF9F651824EF6D7159B996DAA71D25</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3EE3961B6FB9A4B3699A0321A4AA4E62</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,17 +172,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8EA695ADF1B8B41A03B6E5DF7F3EE187</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>982387EC65BA1A8222EF1E08CCF18E48</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D4C1AA8B982EE0E2663ECEC9968F1F3</key>
+		<key>9B49654B82B0313D988195D5587273EF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EFE4C70245EE2857D336B8B9FA4E825</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A951C8A1B0569D66458D8A6AA2318BF9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

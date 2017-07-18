@@ -22,52 +22,110 @@ class FirebaseDatabaseManager {
         self.ref = db.reference()
     }
     
-    /*
+    
+    
+    
+    
+    /**
+     *
      * User initialization functions
+     *
      */
     
-    
     // Add user only if they do not already exist
-    func addUser(appUser: AppUser, dict: [String: Any]) {
+    func addUser(appUser: AppUser, userDict: [String: Any]) {
         
         self.ref.child("users/\(appUser.uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             print("addUser snapshot started")
             if !snapshot.exists() {
-                self.ref.child("users/\(appUser.uid)").updateChildValues(dict)
+                self.ref.child("users/\(appUser.uid)").updateChildValues(userDict, withCompletionBlock: { (error: Error?, userRef: DatabaseReference) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        self.setUserEvents(user: appUser)
+                    }
+                })
                 print("new user \(appUser.name) added")
+            } else {
+                print(snapshot)
+                // self.setupConnectionObservers(userid: appUser.uid)
+                self.setUserEvents(user: appUser)
             }
-            print(snapshot.value)
-//            self.setupConnectionObservers(userid: appUser.uid)
-            self.setUserEvents(user: appUser)
         }
     }
     
-    
-    func setUserEvents(user: AppUser) {
+    // asynchronous function that will set events to AppUser.current
+    private func setUserEvents(user: AppUser) {
         self.ref.child("users/\(user.uid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.exists() {
                 let result = snapshot.value as! [String: Bool]
                 user.eventsDict = result
-                user.events = self.getEvents(dictionary: result)
+                user.events = self.getEventsArray(dictionary: result)
             }
         }
     }
     
-    /*
+    
+    
+    
+    
+    /**
+     *
      * Functions for additions to the database
+     *
      */
     
-    
-    func addEvent(event: Event) {
+    // add existing event to user
+    func addEventToUser(_ event: Event) {
         let update: [String: Any] =
-            ["users/\(event.organizerID)/events/\(event.eventid)": true,
-             "events/\(event.eventid)": event.eventDictionary]
+            ["users/\(AppUser.current.uid)/events/\(event.eventid)": true,
+             "events/\(event.eventid)/guestlist/\(AppUser.current.uid)": true]
         self.ref.updateChildValues(update)
     }
     
-    /*
-     * Functions for deletions from the database
+    // create event from dictionary containing everything except eventid
+    func createEvent(_ dict: [String: Any]) {
+        let eventid = dict["eventid"] as! String
+        let update: [String: Any] = ["users/\(AppUser.current.uid)/events/\(eventid)": true,
+                                     "events/\(eventid)": dict]
+        self.ref.updateChildValues(update)
+    }
+    
+    
+    
+    
+    
+    
+    /**
+     *
+     * Listener function:
+     * .childAdded: returns snapshot of child node added
+     * .value: returns entire list of data as a single snapshot, fetches all children
+     *
+     *
      */
+    func addListener(ofType type: DataEventType, at path: String, completion: @escaping (DataSnapshot) -> Void) {
+        self.ref.child(path).observe(type) { (snapshot) in
+            completion(snapshot)
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     *
+     * Functions for deletions from the database
+     *
+     */
+    
+    // deletes the current user
+    // deletes all user events, photos, and deletes the user from all events
     func deleteCurrentUser() {
         let id = AppUser.current.uid
         var update: [String: Any] = ["users/\(id)": NSNull()]
@@ -78,7 +136,16 @@ class FirebaseDatabaseManager {
         print("successfully removed \(AppUser.current.name)")
     }
     
-    func deleteEvent(event: Event) {
+    // remove user from an event
+    func removeUserFromEvent(_ event: Event) {
+        let id = AppUser.current.uid
+        let update: [String: Any] = ["users/\(id)/events/\(event.eventid)": NSNull(),
+                                     "events/\(event.eventid)/guestlist/\(id)": NSNull()]
+        self.ref.updateChildValues(update)
+    }
+    
+    // delete an event from the database
+    func deleteEvent(_ event: Event) {
         var update: [String: Any] = ["events/\(event.eventid)": NSNull()]
         for userid in event.guestlist.keys {
             update["users/\(userid)/events/\(event.eventid)"] = NSNull()
@@ -88,20 +155,18 @@ class FirebaseDatabaseManager {
     }
     
     
-    /*
-     * Functions for changes to the database
-     */
-    func logout() {
-        FirebaseAuthManager.shared.signOut()
-        print("Goodbye!")
-    }
-
     
-    /*
-     * Get methods
+    
+    
+    
+    /**
+     *
+     * Get methods to retrieve info from database
+     *
      */
+    
     // dictionary of eventid's
-    func getEvents(dictionary: [String: Bool]) -> [Event] {
+    func getEventsArray(dictionary: [String: Bool]) -> [Event] {
         var events: [Event] = []
         for eventid in dictionary.keys {
             let eventDict = self.ref.child("events").value(forKey: eventid) as! [String: Any]
@@ -112,9 +177,9 @@ class FirebaseDatabaseManager {
     }
     
     
-    // dictionary of userid's
-    func getUsers(dictionary: [String: Any]) -> [AppUser] {
-        
+    
+    // gets users from an event dictionary, and creates AppUser objects
+    func getUsersFromEventDict(dictionary: [String: Any]) -> [AppUser] {
         var users: [AppUser] = []
         for userid in dictionary.keys {
             let userDict = self.ref.child("users").value(forKey: userid) as! [String: Any]
@@ -123,13 +188,48 @@ class FirebaseDatabaseManager {
         
         return users
     }
+    
+    // get user object from a user id
+    func getSingleUser(id: String) -> AppUser {
+        let dict = self.ref.value(forKeyPath: "users/\(id)") as! [String: Any]
+        return AppUser(dictionary: dict)
+    }
+    
+    // get unique id for a new event
+    func getNewEventID() -> String {
+        return self.ref.child("events").childByAutoId().key
+    }
 
     
     
     
     
+    
+    
+    /**
+     *
+     * Logout the user
+     *
+     */
+    
+    // logout the user and redirect them to the sign in view
+    func logout() {
+        FirebaseAuthManager.shared.signOut()
+        print("Goodbye!")
+    }
+    
+    
+    
+    
+    
+    /**
+     *
+     * Private Functions
+     *
+     */
+    
     // Setup listeners at endpoints in database
-    func setupListeners(userid: String) {
+    private func setupListeners(userid: String) {
         let eventsRef = self.ref.child("users/\(userid)/events")
         
         let eventsHandle = eventsRef.observe(.childAdded) { (snapshot: DataSnapshot) in
@@ -138,16 +238,6 @@ class FirebaseDatabaseManager {
             print(snapshot.key)
             print(snapshot.value)
         }
-    }
-    
-    
-    
-    
-    /*
-     * Private Functions
-     */
-    private func offlineQuery() {
-        
     }
     
     private func setupConnectionObservers(userid: String) {
