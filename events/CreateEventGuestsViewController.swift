@@ -53,7 +53,7 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
             }
         }
         tableView.reloadData()
-        print(selectedContactsPhone.count)
+        CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
         self.navigationController?.popViewController(animated: true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -91,15 +91,11 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMiscellaneous" {
-            // Guest List in Event dictionary will consist of all phone numbers
-            CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
-            let createEventMiscellaneousViewController = segue.destination as! CreateEventMiscellaneousViewController
-            createEventMiscellaneousViewController.ContactsPhone = self.selectedContactsPhone
-        }
-    }
-    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "showMiscellaneous" {
+//            CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
+//        }
+//    }    
     
 }
 
