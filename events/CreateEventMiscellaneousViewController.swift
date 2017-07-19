@@ -9,10 +9,13 @@
 import UIKit
 
 class CreateEventMiscellaneousViewController: UIViewController {
+    
+    var event: [String: Any] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.view.backgroundColor = UIColor(hexString: "#1abc9c")
         // Do any additional setup after loading the view.
     }
 
