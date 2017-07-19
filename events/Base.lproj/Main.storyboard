@@ -614,8 +614,9 @@
         <image name="user" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DIt-jA-1Wl"/>
-        <segue reference="sV0-t5-Xh3"/>
+        <segue reference="3oy-fn-0om"/>
+        <segue reference="LpB-in-uQJ"/>
+        <segue reference="Dv7-0z-uGD"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
