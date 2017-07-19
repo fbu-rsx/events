@@ -18,10 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
     static var aUI: FUIAuth?
+    let locationManager = CLLocationManager() // Add this statement
+
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        locationManager.delegate = self
         
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
@@ -40,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             window?.rootViewController = authViewController
         }
 
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        UIApplication.shared.cancelAllLocalNotifications()
+        
         return true
     }
 
@@ -56,30 +61,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             window?.rootViewController = controller
         }
     }
-    
-//    func authPickerViewController(forAuthUI authUI: FUIAuth) -> FUIAuthPickerViewController {
-//        return CustomAuthPickerViewController(authUI: authUI)
-//    }
-//
-//    func emailEntryViewController(for authUI: FUIAuth) -> FUIEmailEntryViewController {
-//        return CustomEmailEntryViewController(authUI: authUI)
-//    }
-//    
-//    func passwordSignInViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignInViewController {
-//        return CustomPasswordSignInViewController(authUI: authUI, email: email)
-//    }
-//    
-//    func passwordSignUpViewController(for authUI: FUIAuth, email: String) -> FUIPasswordSignUpViewController {
-//        return CustomPasswordSignUpViewController(authUI: authUI, email: email)
-//    }
-//    
-//    func passwordRecoveryViewController(for authUI: FUIAuth, email: String) -> FUIPasswordRecoveryViewController {
-//        return CustomPasswordRecoveryViewController(authUI: authUI, email: email)
-//    }
-//    
-//    func passwordVerificationViewController(for authUI: FUIAuth, email: String, newCredential: AuthCredential) -> FUIPasswordVerificationViewController {
-//        return CustomPasswordVerificationViewController(authUI: authUI, email: email, newCredential: newCredential)
-//    }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
@@ -120,3 +101,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     }
 
 }
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    //        self.mapView.showsUserLocation = (status == .authorizedAlways)
+    //    }
+    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        
+//        // Sets current location the first element of list of all locations
+//        let location = locations[0]
+//        // Initiates the span of the view
+//        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+//        // Initiates the coordinates
+//        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+//        // Sets the region to the span and coordinates
+//        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
+//        mapView.setRegion(region, animated: true)
+//        
+//    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Manager failed with the following error: \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+    }
+    // Helper functions
+    func note(fromRegionIdentifier identifier: String) -> String? {
+        let savedItems = UserDefaults.standard.array(forKey: PreferenceKeys.savedItems) as? [NSData]
+        let events = savedItems?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? Event }
+        let index = events?.index { $0?.eventid == identifier }
+        return index != nil ? events?[index!]?.about : nil
+    }
+    
+    func handleEvent(forRegion region: CLRegion!) {
+        // Show an alert if application is active
+        if UIApplication.shared.applicationState == .active {
+            guard let message = note(fromRegionIdentifier: region.identifier) else { return }
+            window?.rootViewController?.showAlert(withTitle: nil, message: message)
+        } else {
+            // Otherwise present a local notification
+            let notification = UILocalNotification()
+            notification.alertBody = note(fromRegionIdentifier: region.identifier)
+            notification.soundName = "Default"
+            UIApplication.shared.presentLocalNotificationNow(notification)
+        }
+        print("Geofence triggered!")
+    }
+}
+

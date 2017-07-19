@@ -27,14 +27,11 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
  var photos: [String: String]
  var eventDictionary: [String: Any]*/
  
-    var event: Event?{
-        didSet{
+    var event: Event? {
+        didSet {
             centerImage.layer.cornerRadius = 0.5*centerImage.frame.width
             centerImage.layer.masksToBounds = true
-            let longitude = CLLocationDegrees(exactly: (event?.location[0])!)
-            let latitude = CLLocationDegrees(exactly: (event?.location[1])!)
-            let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
-            mapView.setCenter(location, animated: true)
+            mapView.setCenter(event!.coordinate, animated: true)
             //centerImage.image = event?.organizerID
             // set organizerlabel as well
             
