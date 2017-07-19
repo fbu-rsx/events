@@ -24,6 +24,7 @@
 		4F010D6D1F16E51800E8EA47 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */; };
 		4F010D751F16EE7A00E8EA47 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */; };
 		4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */; };
+		4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */; };
 		4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */; };
 		4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */; };
 		4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3741F168EA0007D4E94 /* AppUser.swift */; };
@@ -86,6 +87,7 @@
 		4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocations.gpx; sourceTree = "<group>"; };
+		4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventMaster.swift; sourceTree = "<group>"; };
 		4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		4F87D3741F168EA0007D4E94 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				4F87D3741F168EA0007D4E94 /* AppUser.swift */,
 				4F87D3761F168EB5007D4E94 /* Event.swift */,
 				09A15CC01F1568F300E847CC /* Transaction.swift */,
+				4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
+				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
 				09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */,

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -294,7 +294,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddEvent"/>
                                 <connections>
-                                    <segue destination="4fP-pC-bW5" kind="show" id="ipd-I0-VYX"/>
+                                    <segue destination="4fP-pC-bW5" kind="show" identifier="CreateEventSegue" id="ipd-I0-VYX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCr-vJ-ZYT">
@@ -616,7 +616,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="3oy-fn-0om"/>
         <segue reference="LpB-in-uQJ"/>
-        <segue reference="Dv7-0z-uGD"/>
+        <segue reference="ipd-I0-VYX"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

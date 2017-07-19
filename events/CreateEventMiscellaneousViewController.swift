@@ -8,15 +8,10 @@
 
 import UIKit
 
-protocol CreateEventMiscellaneousViewControllerDelegate {
-    func didCreateNewEvent(_ event: Event)
-}
-
 class CreateEventMiscellaneousViewController: UIViewController {
     
 
     var event: [String: Any] = [:]
-    var delegate: CreateEventMiscellaneousViewControllerDelegate?
 
 
     override func viewDidLoad() {
@@ -38,8 +33,9 @@ class CreateEventMiscellaneousViewController: UIViewController {
      * to go back to the MapViewController
      */
     func createEvent(_ event: Event) {
-        delegate?.didCreateNewEvent(event)
+        CreateEventMaster.shared.delegate?.didCreateNewEvent(event)
         self.dismiss(animated: true, completion: nil)
+        CreateEventMaster.shared = CreateEventMaster()
     }
     
 

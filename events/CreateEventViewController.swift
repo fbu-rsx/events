@@ -16,7 +16,6 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var zoomButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var saveButton: UIButton!
-    var event: [String: Any] = [:]
     
     
     override func viewDidLoad() {
@@ -41,10 +40,6 @@ class CreateEventViewController: UIViewController {
         
         // Hide navigation bar
         navigationController?.setNavigationBarHidden(true, animated: true)
-        
-       
-
-        
     }
 
     @IBAction func onBack(_ sender: Any) {
@@ -68,9 +63,7 @@ class CreateEventViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showGuestList" {
-            self.event["location"] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
-            let createEventGuestsViewController = segue.destination as! CreateEventGuestsViewController
-            createEventGuestsViewController.event = self.event
+            CreateEventMaster.shared.event["location"] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
         }
     }
 
