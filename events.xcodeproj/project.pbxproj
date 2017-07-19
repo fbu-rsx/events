@@ -23,6 +23,7 @@
 		4F010D6B1F16E3BB00E8EA47 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F010D6A1F16E3BB00E8EA47 /* SignIn.storyboard */; };
 		4F010D6D1F16E51800E8EA47 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */; };
 		4F010D751F16EE7A00E8EA47 /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */; };
+		4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */; };
 		4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */; };
 		4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */; };
 		4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3741F168EA0007D4E94 /* AppUser.swift */; };
@@ -84,6 +85,7 @@
 		4F010D6A1F16E3BB00E8EA47 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4F010D741F16EE7A00E8EA47 /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocations.gpx; sourceTree = "<group>"; };
 		4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		4F87D3741F168EA0007D4E94 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				7C4BA22A1F18163B004739EE /* Utilities.swift */,
 				4FCB62821F143DC400BBDC71 /* Assets.xcassets */,
 				4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */,
+				4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */,
 				4FCB62871F143DC400BBDC71 /* Info.plist */,
 				4F010D6A1F16E3BB00E8EA47 /* SignIn.storyboard */,
 			);
@@ -439,6 +442,7 @@
 				09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */,
 				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
+				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
 				7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

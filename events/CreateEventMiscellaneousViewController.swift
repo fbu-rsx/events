@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol CreateEventMiscellaneousViewControllerDelegate {
+    func didCreateNewEvent(_ event: Event)
+}
+
 class CreateEventMiscellaneousViewController: UIViewController {
     
+<<<<<<< HEAD
     var event: [String: Any] = [:]
+=======
+    var delegate: CreateEventMiscellaneousViewControllerDelegate?
+>>>>>>> 33c8322621ad0f949cda2520ed4e521df2c8ba3a
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +30,17 @@ class CreateEventMiscellaneousViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    /**
+     * Call this function once Event object is created
+     * and you are ready to dismis this view controller
+     * to go back to the MapViewController
+     */
+    func createEvent(_ event: Event) {
+        delegate?.didCreateNewEvent(event)
+        self.dismiss(animated: true, completion: nil)
     }
     
 

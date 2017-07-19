@@ -18,7 +18,7 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     
-/*    var eventid: String
+/*var eventid: String
  var eventname: String
  var totalcost: Double? //optional because may just be a free event
  var location: [Double]
@@ -26,22 +26,32 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
  var guestlist: [String: Bool]
  var photos: [String: String]
  var eventDictionary: [String: Any]*/
+    
+    var images: [UIImage] = []
  
-    var event: Event?{
-        didSet{
+    var event: Event? {
+        didSet {
             centerImage.layer.cornerRadius = 0.5*centerImage.frame.width
             centerImage.layer.masksToBounds = true
-            let longitude = CLLocationDegrees(exactly: (event?.location[0])!)
-            let latitude = CLLocationDegrees(exactly: (event?.location[1])!)
-            let location = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
-            mapView.setCenter(location, animated: true)
+            mapView.setCenter(event!.coordinate, animated: true)
             //centerImage.image = event?.organizerID
+            let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!)
+            // set orgainzer pic
+            let url = URL(string: user.photoURLString)
+            centerImage.af_setImage(withURL: url!)
             // set organizerlabel as well
-            
+            organizerLabel.text = user.name
+            for imageID in (event?.photos.keys)!{
+                FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+                    self.images.append(image)
+                })
+            }
         }
     }
     
     let imagePickerController = ImagePickerController()
+    
+    //var invited: [] =
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +65,7 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: bundle), forCellWithReuseIdentifier: "customImageCell")
         tableView.register(UINib(nibName: "userTableViewCell", bundle: bundle), forCellReuseIdentifier: "userCell")
         
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,23 +77,27 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
         present(imagePickerController, animated: true, completion: nil)
     }
 
+    // required function
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
         
     }
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
         for image in stride(from: 0, to: images.count, by: 1){
-            FirebaseStorageManager.shared.uploadImage(imageID: String(image), image: images[image], completion: {})
+            event?.uploadImage(images[image])
         }
         imagePickerController.dismiss(animated: true, completion: nil)
+        collectionView.reloadData()
     }
     
+    // required function
     func cancelButtonDidPress(_ imagePicker: ImagePickerController){
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
+        // need to customize cell but can't until Event class updated
         return cell
     }
     
@@ -91,15 +106,14 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return (event?.photos.count)!
+        return images.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customImageCell", for: indexPath) as! ImageCollectionViewCell
-        // cell.imageView.image = event?.photos
+        cell.imageView.image = images[indexPath.row]
         return cell
     }
-    
 
     /*
     // MARK: - Navigation

@@ -91,7 +91,14 @@ class FirebaseDatabaseManager {
         self.ref.updateChildValues(update)
     }
     
-    
+    // add images to existing event
+    func addImage(eventID: String, completion: (_ id: String)->()){
+        let id = self.ref.child("users/\(AppUser.current.uid)/photos").childByAutoId().key
+        let update: [String: Any] = ["users/\(AppUser.current.uid)/photos/\(id)":true,
+                                     "events/\(eventID)/photos/\(id)":true]
+        self.ref.updateChildValues(update)
+        completion(id)
+    }
     
     
     
@@ -112,10 +119,7 @@ class FirebaseDatabaseManager {
     
     
     
-    
-    
-    
-    
+
     
     
     /**
@@ -200,9 +204,6 @@ class FirebaseDatabaseManager {
         return self.ref.child("events").childByAutoId().key
     }
 
-    
-    
-    
     
     
     
