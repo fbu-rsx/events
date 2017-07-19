@@ -10,12 +10,14 @@ import UIKit
 
 class CreateEventTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
-    @IBOutlet weak var eventTime: UITextField!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var eventTime: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(hexString: "#e74c3c")
-       navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        eventTime.text = datePicker.date.description
     }
     
     override func didReceiveMemoryWarning() {
@@ -23,17 +25,27 @@ class CreateEventTitleViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
- 
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
-            CreateEventMaster.shared.event["eventname"] = eventTitle.text
-            CreateEventMaster.shared.event["time"] = eventTime.text
-        }
-     }
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
+    @IBAction func didSetTitle(_ sender: Any) {
+        CreateEventMaster.shared.event["eventname"] = eventTitle.text
+    }
+    
+    @IBAction func didSetDate(_ sender: Any) {
+        CreateEventMaster.shared.event["time"] = datePicker.date
+        eventTime.text = datePicker.date.description
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //     }
+    
     
 }
 

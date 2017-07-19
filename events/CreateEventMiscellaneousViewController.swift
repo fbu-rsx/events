@@ -9,11 +9,11 @@
 import UIKit
 
 class CreateEventMiscellaneousViewController: UIViewController {
-    var event: [String: Any] = [:]
-    var ContactsPhone: [String] = []
+    let numberOfGuests = (CreateEventMaster.shared.event["guestlist"] as AnyObject).count ?? 0
     //var delegate: CreateEventMiscellaneousViewControllerDelegate?
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
+    @IBOutlet weak var aboutText: UITextField!
 
 
     override func viewDidLoad() {
@@ -23,22 +23,24 @@ class CreateEventMiscellaneousViewController: UIViewController {
         costPerPersonText.layer.borderWidth = 1.0
         costPerPersonText.layer.cornerRadius = 8
         costPerPersonText.layer.borderColor = UIColor.white.cgColor
-        
-        print(ContactsPhone.count)
     }
     
     
     @IBAction func calculateCostPerPerson(_ sender: Any) {
         let totalCost = Double(totalCostText.text!) ?? 0
-        let numberofGuests = ContactsPhone.count
-        let totalAttendees = Double(numberofGuests + 1)
+        let totalAttendees = Double(numberOfGuests + 1)
         let costPerPerson = totalCost / totalAttendees
-        print(totalCost)
-        print(totalAttendees)
-        print(costPerPerson)
         costPerPersonText.text = String(format: "$%.2f", costPerPerson)
     }
 
+    @IBAction func onCreate(_ sender: Any) {
+        CreateEventMaster.shared.event["totalcost"] = totalCostText.text
+        CreateEventMaster.shared.event["about"] = aboutText.text
+        CreateEventMaster.shared.event["organizerID"] = AppUser.current.uid
+        createEvent(Event(dictionary: CreateEventMaster.shared.event))
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
