@@ -15,9 +15,6 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet weak var inviteButton: UIButton!
     var selectedContacts: [EVContactProtocol] = []
     var selectedContactsPhone: [String] = []
-    var event: [String: Any] = [:]
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,9 +94,8 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMiscellaneous" {
             // Guest List in Event dictionary will consist of all phone numbers
-            self.event["guestlist"] = self.selectedContactsPhone
+            CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
             let createEventMiscellaneousViewController = segue.destination as! CreateEventMiscellaneousViewController
-            createEventMiscellaneousViewController.event = self.event
             createEventMiscellaneousViewController.ContactsPhone = self.selectedContactsPhone
         }
     }
