@@ -13,9 +13,7 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inviteButton: UIButton!
-    var selectedContacts: [EVContactProtocol] = []
-    var event: [String: Any] = [:]
-    
+    var selectedContacts: [EVContactProtocol] = []    
     
     override func viewDidLoad() {
         super.viewDidLoad()
