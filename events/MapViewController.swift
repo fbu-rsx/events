@@ -210,10 +210,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         remove(event: event)
         saveAllEvents()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CreateEventSegue" {
+            CreateEventMaster.shared.delegate = self
+        }
+    }
 
 }
 
-extension MapViewController: CreateEventMiscellaneousViewControllerDelegate {
+extension MapViewController: CreateEventMasterDelegate {
     func didCreateNewEvent(_ event: Event) {
         if event.radius > locationManager.maximumRegionMonitoringDistance {
             print("TOO BI OF A RADIUS")

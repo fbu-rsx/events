@@ -8,16 +8,13 @@
 
 import UIKit
 
-protocol CreateEventMiscellaneousViewControllerDelegate {
-    func didCreateNewEvent(_ event: Event)
-}
-
 class CreateEventMiscellaneousViewController: UIViewController {
     var event: [String: Any] = [:]
     var ContactsPhone: [String] = []
-    var delegate: CreateEventMiscellaneousViewControllerDelegate?
+    //var delegate: CreateEventMiscellaneousViewControllerDelegate?
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +51,9 @@ class CreateEventMiscellaneousViewController: UIViewController {
      * to go back to the MapViewController
      */
     func createEvent(_ event: Event) {
-        delegate?.didCreateNewEvent(event)
+        CreateEventMaster.shared.delegate?.didCreateNewEvent(event)
         self.dismiss(animated: true, completion: nil)
+        CreateEventMaster.shared = CreateEventMaster()
     }
     
 

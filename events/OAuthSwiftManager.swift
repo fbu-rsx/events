@@ -8,27 +8,49 @@
 
 import Foundation
 import OAuthSwift
+import UIKit
+import SafariServices
 
-class OAuthSwiftManager {
+// work in progess
+
+/*
+class ViewController: OAuthViewController {
+    // oauth swift object (retain)
+    var oauthswift: OAuthSwift?
     
-    func authorizeWithOath2(){
-        let oauthswift = OAuth2Swift(
-        consumerKey:    "********", // replace with consumerKey
-        consumerSecret: "********", // replace with consumerSecret
-        authorizeUrl:   "https://api.instagram.com/oauth/authorize", // replace with proper url
-        responseType:   "token" // correct?
-        )
-        let handle = oauthswift.authorize(
-            withCallbackURL: URL(string: "oauth-swift://oauth-callback/instagram")!, // replace with proper url
-            scope: "likes+comments", state:"INSTAGRAM", // replace with proper arguments
-            success: { credential, response, parameters in
-                print(credential.oauthToken)
-                // Do your request
-        },
-            failure: { error in
-                print(error.localizedDescription)
-        }
-        )
+    var currentParameters = [String: String]()
+    let formData = Semaphore<FormViewControllerData>()
+    
+    var internalWebViewController: WebViewController = {
+        let controller = WebViewController()
+        controller.view = UIView(frame: UIScreen.main.bounds) // needed if no nib or not loaded from storyboard
+        controller.delegate = self
+        controller.viewDidLoad() // allow WebViewController to use this ViewController as parent to be presented
+        return controller
+    }()
+}
+
+extension ViewController: OAuthWebViewControllerDelegate {
+    
+    func oauthWebViewControllerDidPresent() {
+        
+    }
+    func oauthWebViewControllerDidDismiss() {
+        
     }
     
+    func oauthWebViewControllerWillAppear() {
+        
+    }
+    func oauthWebViewControllerDidAppear() {
+        
+    }
+    func oauthWebViewControllerWillDisappear() {
+        
+    }
+    func oauthWebViewControllerDidDisappear() {
+        // Ensure all listeners are removed if presented web view close
+        oauthswift?.cancel()
+    }
 }
+*/
