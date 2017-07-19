@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDatabaseUI
 
-class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, toDetailProtocol {
 
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
@@ -27,8 +27,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.register(UINib(nibName: "EventsTableViewCell", bundle: bundle), forCellReuseIdentifier: "eventCell")
         
         // populate Event lists for tableView data
-        print(AppUser.current)
-        print(AppUser.current.events)
+        // print(AppUser.current)
+        // print(AppUser.current.events)
         for event in AppUser.current.events{
             if event.organizerID == AppUser.current.uid{
                 myEvents.append(event)
@@ -41,6 +41,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 upcoming.append(event)
             }
         }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +57,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // return cell to present associated with user's events 
         // which data to display is dependent on selected index of segmented control
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
+        cell.delegate = self
         // see which data to display
         if segmentedControl.selectedSegmentIndex == 0{
             cell.event = myEvents[indexPath.row]
@@ -84,10 +86,16 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return past.count
         }
     }
-
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        code
+    
+    func onTapFunction(event: Event) {
+        performSegue(withIdentifier: "toDetail", sender: event)
     }
-    */
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetail"{
+            let destination = segue.destination as! DetailedEventViewController
+            destination.event = sender as? Event
+        }
+    }
+    
 }

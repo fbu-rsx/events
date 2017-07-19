@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import UIKit
 
 class Event: NSObject, NSCoding, MKAnnotation {
     
@@ -80,5 +81,11 @@ class Event: NSObject, NSCoding, MKAnnotation {
     
     func encode(with coder: NSCoder) {
         coder.encode(self.eventDictionary, forKey: "eventDictionary")
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        FirebaseDatabaseManager.shared.addImage(eventID: self.eventid) { (id) in
+            FirebaseStorageManager.shared.uploadImage(user: AppUser.current, image: image, imageID: id, eventID: self.eventid)
+        }
     }
 }

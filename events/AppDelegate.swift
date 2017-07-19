@@ -37,7 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         authUI?.providers = providers
 
         
-        if Auth.auth().currentUser == nil {
+        if let user = Auth.auth().currentUser {
+            AppUser.current = AppUser(user: user)
+        }
+        else{
             let authViewController = authUI!.authViewController()
             window?.rootViewController = authViewController
         }

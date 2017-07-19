@@ -9,12 +9,18 @@
 import UIKit
 import AlamofireImage
 
+protocol toDetailProtocol {
+    func onTapFunction(event: Event)
+}
+
 class EventsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var organizerPic: UIImageView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var organizerName: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
+    
+    var delegate: toDetailProtocol?
     
 /*var eventid: String
  var eventname: String
@@ -50,5 +56,9 @@ class EventsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
+        delegate?.onTapFunction(event: event!)
     }
 }
