@@ -11,7 +11,6 @@ import UIKit
 class CreateEventTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
     @IBOutlet weak var eventTime: UITextField!
-    var event: [String: Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +29,8 @@ class CreateEventTitleViewController: UIViewController {
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMap" {
-            self.event["eventname"] = eventTitle.text
-            self.event["time"] = eventTime.text
-            let createEventViewController = segue.destination as! CreateEventViewController
-            createEventViewController.event = self.event
+            CreateEventMaster.shared.event["eventname"] = eventTitle.text
+            CreateEventMaster.shared.event["time"] = eventTime.text
         }
      }
 

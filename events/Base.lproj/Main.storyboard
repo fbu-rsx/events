@@ -294,7 +294,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddEvent"/>
                                 <connections>
-                                    <segue destination="4fP-pC-bW5" kind="show" id="ipd-I0-VYX"/>
+                                    <segue destination="4fP-pC-bW5" kind="show" identifier="CreateEventSegue" id="ipd-I0-VYX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCr-vJ-ZYT">
