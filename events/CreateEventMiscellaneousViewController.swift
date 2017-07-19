@@ -14,11 +14,10 @@ protocol CreateEventMiscellaneousViewControllerDelegate {
 
 class CreateEventMiscellaneousViewController: UIViewController {
     
-<<<<<<< HEAD
+
     var event: [String: Any] = [:]
-=======
     var delegate: CreateEventMiscellaneousViewControllerDelegate?
->>>>>>> 33c8322621ad0f949cda2520ed4e521df2c8ba3a
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
