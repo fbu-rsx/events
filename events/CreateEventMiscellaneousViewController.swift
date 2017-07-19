@@ -9,16 +9,34 @@
 import UIKit
 
 class CreateEventMiscellaneousViewController: UIViewController {
-    
-
     var event: [String: Any] = [:]
+    var ContactsPhone: [String] = []
+    //var delegate: CreateEventMiscellaneousViewControllerDelegate?
+    @IBOutlet weak var costPerPersonText: UILabel!
+    @IBOutlet weak var totalCostText: UITextField!
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.backgroundColor = UIColor(hexString: "#1abc9c")
-        // Do any additional setup after loading the view.
+        costPerPersonText.layer.borderWidth = 1.0
+        costPerPersonText.layer.cornerRadius = 8
+        costPerPersonText.layer.borderColor = UIColor.white.cgColor
+        
+        print(ContactsPhone.count)
+    }
+    
+    
+    @IBAction func calculateCostPerPerson(_ sender: Any) {
+        let totalCost = Double(totalCostText.text!) ?? 0
+        let numberofGuests = ContactsPhone.count
+        let totalAttendees = Double(numberofGuests + 1)
+        let costPerPerson = totalCost / totalAttendees
+        print(totalCost)
+        print(totalAttendees)
+        print(costPerPerson)
+        costPerPersonText.text = String(format: "$%.2f", costPerPerson)
     }
 
     override func didReceiveMemoryWarning() {

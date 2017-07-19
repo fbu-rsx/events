@@ -13,7 +13,11 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inviteButton: UIButton!
-    var selectedContacts: [EVContactProtocol] = []    
+    var selectedContacts: [EVContactProtocol] = []
+    var selectedContactsPhone: [String] = []
+    var event: [String: Any] = [:]
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +50,13 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
         if let cons = contacts {
             for con in cons {
                 if !(selectedContacts.contains(where: {$0.phone == con.phone})) {
-                    selectedContacts.append(con) }
+                    selectedContacts.append(con)
+                    selectedContactsPhone.append(con.phone!)
+                }
             }
         }
         tableView.reloadData()
+        print(selectedContactsPhone.count)
         self.navigationController?.popViewController(animated: true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -84,17 +91,19 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMiscellaneous" {
-            // self.event["guestlist"] =
-//            let createEventGuestsViewController = segue.destination as! CreateEventGuestsViewController
-//            createEventGuestsViewController.event = self.event
+            // Guest List in Event dictionary will consist of all phone numbers
+            self.event["guestlist"] = self.selectedContactsPhone
+            let createEventMiscellaneousViewController = segue.destination as! CreateEventMiscellaneousViewController
+            createEventMiscellaneousViewController.event = self.event
+            createEventMiscellaneousViewController.ContactsPhone = self.selectedContactsPhone
         }
-     }
- 
+    }
+    
     
 }
 
