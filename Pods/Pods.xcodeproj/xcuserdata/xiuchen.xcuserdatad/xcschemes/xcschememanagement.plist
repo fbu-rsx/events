@@ -19,12 +19,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>EPContactsPicker-EPContactsPicker.xcscheme</key>
+		<key>EVContactsPicker-EVContactsPicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>EPContactsPicker.xcscheme</key>
+		<key>EVContactsPicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -89,6 +89,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Nuke.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>OAuthSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -127,11 +132,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1ED7210FC5C9C6ADCEB3CDAD87B99D60</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>3380590F973AFAFA30255D504B7DEDAC</key>
 		<dict>
 			<key>primary</key>
@@ -142,12 +142,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3EE3961B6FB9A4B3699A0321A4AA4E62</key>
+		<key>44CAD6CE523055ED339E87154473A254</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44CAD6CE523055ED339E87154473A254</key>
+		<key>5237E5168D2BB1C321C7E63A20D6349C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,17 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B49654B82B0313D988195D5587273EF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>9EFE4C70245EE2857D336B8B9FA4E825</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A951C8A1B0569D66458D8A6AA2318BF9</key>
+		<key>A0D8E086767D252AEDF785E103863FF6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -203,6 +198,21 @@
 			<true/>
 		</dict>
 		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C48D1C3922008D2199A6A89F676834C8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CBB63CAB4B50B72D9B7940EFF5344CEC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D64193A881FD4757A48314E368B8DE16</key>
 		<dict>
 			<key>primary</key>
 			<true/>

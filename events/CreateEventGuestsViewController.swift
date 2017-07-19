@@ -7,83 +7,97 @@
 //
 
 import UIKit
-import ContactsUI
+import EVContactsPicker
 
-class CreateEventGuestsViewController: UIViewController, CNContactPickerDelegate {
+class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, EVContactsPickerDelegate {
     
-    var contactStore = CNContactStore()
-
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var inviteButton: UIButton!
+    var selectedContacts: [EVContactProtocol] = []
+    var event: [String: Any] = [:]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(hexString: "#8e44ad")
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        self.askForContactAccess()
-        
-        // Displaying Contacts
-        let contactPicker = CNContactPickerViewController()
-        contactPicker.delegate = self
-        self.present(contactPicker, animated: true, completion: nil)
+        // DISPLAY: Background color
+        self.view.backgroundColor = UIColor(hexString: "#9b59b6")
+        // DISPLAY: Rounded buttons
+        inviteButton.layer.cornerRadius = 5
+        inviteButton.layer.borderWidth = 1
+        inviteButton.layer.borderColor = UIColor.white.cgColor
+        inviteButton.clipsToBounds = true
+        // DISPLAY: Hide navigation controller
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
+    
+    @IBAction func onClickInvite(_ sender: Any) {
+        showPicker()
+    }
+    
+    func showPicker() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        let contactPicker = EVContactsPickerViewController()
+        contactPicker.delegate = self
+        self.navigationController?.pushViewController(contactPicker, animated: true)
+    }
+    
+    func didChooseContacts(_ contacts: [EVContactProtocol]?) {
+        if let cons = contacts {
+            for con in cons {
+                if !(selectedContacts.contains(where: {$0.phone == con.phone})) {
+                    selectedContacts.append(con) }
+            }
+        }
+        tableView.reloadData()
+        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    // TABLEVIEW
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if selectedContacts.isEmpty {
+            return 0
+        } else {
+            return selectedContacts.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GuestListCell", for: indexPath) as! GuestListTableViewCell
+        let guest = selectedContacts[indexPath.row]
+        
+        let firstName = guest.firstName!
+        let lastName = guest.lastName!
+        let fullName = "\(String(describing: firstName)) \(String(describing: lastName))"
+        let phoneNumber = guest.phone
+        
+        cell.guestName.text = fullName
+        cell.guestCell.text = phoneNumber
+        return cell
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // Asking for permission to access user's Contacts book
-    func askForContactAccess() {
-        let authorizationStatus = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
-        
-        switch authorizationStatus {
-        case .denied, .notDetermined:
-            self.contactStore.requestAccess(for: CNEntityType.contacts, completionHandler: { (access, accessError) -> Void in
-                if !access {
-                    if authorizationStatus == CNAuthorizationStatus.denied {
-                        DispatchQueue.main.async(execute: { () -> Void in
-                            let message = "\(accessError!.localizedDescription)\n\nPlease allow the app to access your contacts through the Settings."
-                            let alertController = UIAlertController(title: "Contacts", message: message, preferredStyle: UIAlertControllerStyle.alert)
-                            
-                            let dismissAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (action) -> Void in
-                            }
-                            
-                            alertController.addAction(dismissAction)
-                            
-                            self.present(alertController, animated: true, completion: nil)
-                        })  
-                    }  
-                }  
-            })  
-            break  
-        default:  
-            break  
-        }  
-    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-
-//MARK:- CNContactPickerDelegate Method
-
-func contactPicker(_ picker: CNContactPickerViewController, didSelect contacts: [CNContact]) {
-    contacts.forEach { contact in
-        for number in contact.phoneNumbers {
-            let phoneNumber = number.value
-            print("number is = \(phoneNumber)")
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMiscellaneous" {
+            // self.event["guestlist"] =
+//            let createEventGuestsViewController = segue.destination as! CreateEventGuestsViewController
+//            createEventGuestsViewController.event = self.event
         }
-    }
+     }
+ 
+    
 }
 
-func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
-    print("Cancel Contact Picker")
-}
+

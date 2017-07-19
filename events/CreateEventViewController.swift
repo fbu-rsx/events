@@ -15,12 +15,20 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var zoomButton: UIBarButtonItem!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var saveButton: UIButton!
+    var event: [String: Any] = [:]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Background color
         self.view.backgroundColor = UIColor(hexString: "#f1c40f")
+        // DISPLAY: Rounded buttons
+        saveButton.layer.cornerRadius = 5
+        saveButton.layer.borderWidth = 1
+        saveButton.layer.borderColor = UIColor.white.cgColor
+        saveButton.clipsToBounds = true
         
         self.mapView.showsUserLocation = true
         // Tracks the user's location
@@ -30,6 +38,12 @@ class CreateEventViewController: UIViewController {
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
+        
+        // Hide navigation bar
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+       
+
         
     }
 
@@ -51,5 +65,14 @@ class CreateEventViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showGuestList" {
+            self.event["location"] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
+            let createEventGuestsViewController = segue.destination as! CreateEventGuestsViewController
+            createEventGuestsViewController.event = self.event
+        }
+    }
+
 }
 

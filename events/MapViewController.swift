@@ -11,13 +11,17 @@ import MapKit
 import CoreLocation
 import FirebaseAuthUI
 
+struct PreferenceKeys {
+    static let savedItems = "savedItems"
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
     // Creates an instance of Core Location class
     let locationManager = CLLocationManager()
-    var geotifications = [Geotification]()
+    var events: [Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +53,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //        self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            loadAllGeotifications()
+            loadAllEvents()
         }
-        
-//        geotifications = eventsToGeotifications(AppUser.current.events)
     }
     
     
@@ -75,16 +76,60 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func region(withGeotification geotification: Geotification) -> CLCircularRegion {
+    
+    
+    
+    
+    /**
+     *
+     * Functions for Geofencing
+     *
+     */
+    
+    // MARK: Add an event to the mapView
+    func add(event: Event) {
+        self.events.append(event)
+        mapView.addAnnotation(event)
+        addRadiusOverlay(forEvent: event)
+    }
+    
+    func remove(event: Event) {
+        if let indexInArray = events.index(of: event) {
+            events.remove(at: indexInArray)
+        }
+        mapView.removeAnnotation(event)
+        removeRadiusOverlay(forEvent: event)
+    }
+    
+    // MARK: Map overlay functions
+    func addRadiusOverlay(forEvent event: Event) {
+        mapView.add(MKCircle(center: event.coordinate, radius: event.radius))
+    }
+    
+    func removeRadiusOverlay(forEvent event: Event) {
+        // Find exactly one overlay which has the same coordinates & radius to remove
+        for overlay in mapView.overlays {
+            guard let circleOverlay = overlay as? MKCircle else { continue }
+            let coord = circleOverlay.coordinate
+            if coord.latitude == event.coordinate.latitude && coord.longitude == event.coordinate.longitude && circleOverlay.radius == event.radius {
+                mapView.remove(circleOverlay)
+                break
+            }
+        }
+    }
+
+    func region(withEvent event: Event) -> CLCircularRegion {
         // 1
-        let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
+        let region = CLCircularRegion(center: event.coordinate, radius: event.radius, identifier: event.eventid)
         // 2
-        region.notifyOnEntry = (geotification.eventType == .onEntry)
-        region.notifyOnExit = !region.notifyOnEntry
+        region.notifyOnEntry = true
+        region.notifyOnExit = true
+//        region.notifyOnEntry = (geotification.eventType == .onEntry)
+//        region.notifyOnExit = !region.notifyOnEntry
         return region
     }
     
-    func startMonitoring(geotification: Geotification) {
+    func startMonitoring(event: Event) {
         // 1
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
@@ -92,45 +137,93 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         // 2
         if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            showAlert(withTitle:"Warning", message: "Your geotification is saved but will only be activated once you grant Geotify permission to access the device location.")
+            showAlert(withTitle:"Warning", message: "Your event is saved but will only be activated once you grant us permission to access the device location.")
         }
         // 3
-        let region = self.region(withGeotification: geotification)
+        let region = self.region(withEvent: event)
         // 4
         locationManager.startMonitoring(for: region)
     }
     
     
-    func stopMonitoring(geotification: Geotification) {
+    func stopMonitoring(event: Event) {
         for region in locationManager.monitoredRegions {
-            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == geotification.identifier else { continue }
+            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == event.eventid else { continue }
             locationManager.stopMonitoring(for: circularRegion)
         }
     }
     
-    func loadAllGeotifications() {
-        
+    func loadAllEvents() {
+        self.events = AppUser.current.events
+        for event in self.events {
+            add(event: event)
+        }
     }
+    
+    func saveAllEvents() {
+        var items: [Data] = []
+        for event in self.events {
+            let item = NSKeyedArchiver.archivedData(withRootObject: event)
+            items.append(item)
+        }
+        UserDefaults.standard.set(items, forKey: PreferenceKeys.savedItems)
+    }
+
+    
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "myEvent"
+        if annotation is Event {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+            if annotationView == nil {
+                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+                let removeButton = UIButton(type: .custom)
+                removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+                removeButton.setImage(UIImage(named: "DeleteEvent")!, for: .normal)
+                annotationView?.leftCalloutAccessoryView = removeButton
+            } else {
+                annotationView?.annotation = annotation
+            }
+            return annotationView
+        }
+        return nil
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is MKCircle {
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.lineWidth = 1.0
+            circleRenderer.strokeColor = .purple
+            circleRenderer.fillColor = UIColor.purple.withAlphaComponent(0.4)
+            return circleRenderer
+        }
+        return MKOverlayRenderer(overlay: overlay)
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        // Delete event
+        let event = view.annotation as! Event
+        stopMonitoring(event: event)
+        remove(event: event)
+        saveAllEvents()
+    }
+
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-    
-//    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-//        self.mapView.showsUserLocation = (status == .authorizedAlways)
-//    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        // Sets current location the first element of list of all locations
-        let location = locations[0]
-        // Initiates the span of the view
-        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-        // Initiates the coordinates
-        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        // Sets the region to the span and coordinates
-        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-        mapView.setRegion(region, animated: true)
-        
+extension MapViewController: CreateEventMiscellaneousViewControllerDelegate {
+    func didCreateNewEvent(_ event: Event) {
+        if event.radius > locationManager.maximumRegionMonitoringDistance {
+            print("TOO BI OF A RADIUS")
+            event.radius = locationManager.maximumRegionMonitoringDistance
+        }
+        add(event: event)
+        startMonitoring(event: event)
+        saveAllEvents()
+        FirebaseDatabaseManager.shared.createEvent(event.eventDictionary)
+        print("new event added")
     }
 }
 

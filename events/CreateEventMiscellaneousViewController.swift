@@ -8,17 +8,38 @@
 
 import UIKit
 
+protocol CreateEventMiscellaneousViewControllerDelegate {
+    func didCreateNewEvent(_ event: Event)
+}
+
 class CreateEventMiscellaneousViewController: UIViewController {
+    
+
+    var event: [String: Any] = [:]
+    var delegate: CreateEventMiscellaneousViewControllerDelegate?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.view.backgroundColor = UIColor(hexString: "#1abc9c")
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    /**
+     * Call this function once Event object is created
+     * and you are ready to dismis this view controller
+     * to go back to the MapViewController
+     */
+    func createEvent(_ event: Event) {
+        delegate?.didCreateNewEvent(event)
+        self.dismiss(animated: true, completion: nil)
     }
     
 
