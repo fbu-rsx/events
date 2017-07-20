@@ -15,9 +15,18 @@ struct PreferenceKeys {
     static let savedItems = "savedItems"
 }
 
+protocol HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    
+    // Search Variable Instantiations
+    var resultSearchController: UISearchController? = nil
+    var selectedPin:MKPlacemark? = nil
+    
     
     // Creates an instance of Core Location class
     let locationManager = CLLocationManager()
@@ -32,25 +41,35 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Allows user's location tracking
         self.mapView.setUserTrackingMode(.follow, animated: true)
         
+        // SEARCH
+        // Programmatically instantiating the locationSearchTable TableViewController
+        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable
+        locationSearchTable.mapView = mapView
+        locationSearchTable.handleMapSearchDelegate = self
+        
+        // Programatically embedding the search bar in Navigation Controller
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Search"
+        navigationItem.titleView = resultSearchController?.searchBar
+        // NavBar does not disappear when search results are shown
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        // When search bar is selected, modal overlay has a semi-transparent overlay
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        // Limit the overlap area just to View Controller, not blocking the Navigation bar
+        definesPresentationContext = true
+        
         // Automatically zooms to the user's location upon VC loading
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
         
-        //        locationManager.delegate = self
-        //        // Sets the desired accuracy to the most precise data possible
-        //        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //        // Always request the user for permission to track locations
-        //        locationManager.requestWhenInUseAuthorization()
-        //        // Calls the locationManager didUpdateLocations function
-        //        locationManager.startUpdatingLocation()
-        
         
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
         
-        // For use in foreground
-//        self.locationManager.requestWhenInUseAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -122,15 +141,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-
+    
     func region(withEvent event: Event) -> CLCircularRegion {
         // 1
         let region = CLCircularRegion(center: event.coordinate, radius: event.radius, identifier: event.eventid)
         // 2
         region.notifyOnEntry = true
         region.notifyOnExit = true
-//        region.notifyOnEntry = (geotification.eventType == .onEntry)
-//        region.notifyOnExit = !region.notifyOnEntry
+        //        region.notifyOnEntry = (geotification.eventType == .onEntry)
+        //        region.notifyOnExit = !region.notifyOnEntry
         return region
     }
     
@@ -173,7 +192,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         UserDefaults.standard.set(items, forKey: PreferenceKeys.savedItems)
     }
-
+    
     
     
     
@@ -221,7 +240,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             CreateEventMaster.shared.delegate = self
         }
     }
-
+    
 }
 
 extension MapViewController: CreateEventMasterDelegate {
@@ -238,3 +257,27 @@ extension MapViewController: CreateEventMasterDelegate {
     }
 }
 
+// SEARCH extension
+extension MapViewController: HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark){
+        // cache the pin
+        selectedPin = placemark
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city), \(state)"
+        }
+        
+        // Custom pin view
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
+        annotationView.image = UIImage(named: "placeholder.png")
+        mapView.addAnnotation(annotationView.annotation!)
+        
+        let span = MKCoordinateSpanMake(0.01, 0.01)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        mapView.setRegion(region, animated: true)
+    }
+    
+}

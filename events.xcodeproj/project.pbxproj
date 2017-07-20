@@ -48,6 +48,7 @@
 		7C10FCA81F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */; };
 		7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
+		7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5456301F2020D60027009C /* LocationSearchTable.swift */; };
 		7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */; };
 		CCB163A1DDBEE3944D6FE0A3 /* Pods_eventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C04120232A3D15602FB929F /* Pods_eventsTests.framework */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventMiscellaneousViewController.swift; sourceTree = "<group>"; };
 		7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuestListTableViewCell.swift; path = ../GuestListTableViewCell.swift; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		7C5456301F2020D60027009C /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-events.release.xcconfig"; path = "Pods/Target Support Files/Pods-events/Pods-events.release.xcconfig"; sourceTree = "<group>"; };
 		CB8C73451CEFA2E4231A3210 /* Pods-eventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventsTests/Pods-eventsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C5456301F2020D60027009C /* LocationSearchTable.swift */,
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
@@ -627,6 +630,7 @@
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
 				09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */,
 				7C10FC9D1F1D6F2E009EE12F /* CreateEventTitleViewController.swift in Sources */,
+				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateEventGuestsViewController.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
