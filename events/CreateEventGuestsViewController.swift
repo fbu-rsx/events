@@ -16,8 +16,6 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     var selectedContacts: [EVContactProtocol] = []
     var selectedContactsPhone: [String] = []
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -90,6 +88,21 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     }
     
     
+    @IBAction func didTapNext(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 3
+//        CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "CreateEventMiscellaneousViewController")
+//        self.presentDetail(vc)
+    }
+    
+    @IBAction func didHitBackButton(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 1
+//        self.dismissDetail()
+    }
+
+    
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -97,8 +110,7 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
 //        if segue.identifier == "showMiscellaneous" {
 //            CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
 //        }
-//    }
-    
+//    }    
     
 }
 

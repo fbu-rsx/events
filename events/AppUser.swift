@@ -17,6 +17,7 @@ class AppUser {
     var name: String
     var email: String
     var password: String?
+    var phoneNumber: Int?
     var photoURLString: String
     var events: [Event] = []
     var eventsDict: [String: Bool] = [:]
@@ -25,6 +26,7 @@ class AppUser {
         self.uid = dictionary["uid"] as! String
         self.name = dictionary["name"] as! String
         self.email = dictionary["email"] as! String
+        self.phoneNumber = dictionary["phoneNumber"] as? Int
         self.photoURLString = dictionary["photoURLString"] as! String
     }
     
@@ -32,6 +34,7 @@ class AppUser {
         let userDict: [String: Any] = ["uid": user.uid,
                                        "name": user.displayName!,
                                        "email": user.email!,
+                                       "phoneNumber": user.phoneNumber ?? NSNull(),
                                        "photoURLString": user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
       

@@ -18,11 +18,13 @@ class CreateEventMiscellaneousViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.backgroundColor = UIColor(hexString: "#1abc9c")
         costPerPersonText.layer.borderWidth = 1.0
         costPerPersonText.layer.cornerRadius = 8
         costPerPersonText.layer.borderColor = UIColor.white.cgColor
+        
     }
     
     
@@ -58,6 +60,9 @@ class CreateEventMiscellaneousViewController: UIViewController {
         CreateEventMaster.shared = CreateEventMaster()
     }
     
+    @IBAction func didTapBackButton(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 2
+    }
 
     /*
     // MARK: - Navigation
