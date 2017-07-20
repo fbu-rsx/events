@@ -16,12 +16,9 @@ target 'events' do
   pod 'ImagePicker'
   pod 'AlamofireImage'
   pod "EVContactsPicker"
-<<<<<<< HEAD
   pod 'KeychainAccess'
   pod 'OAuthSwiftAlamofire'
-=======
   pod 'RAMAnimatedTabBarController', "~> 2.0.13"
->>>>>>> 34948809affde7057a9dfe25ccb1c22594478552
 
   target 'eventsTests' do
     inherit! :search_paths
