@@ -114,6 +114,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RAMAnimatedTabBarController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -172,17 +177,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8EBE37B64A6E414A90DB740828262978</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>982387EC65BA1A8222EF1E08CCF18E48</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9EFE4C70245EE2857D336B8B9FA4E825</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A0D8E086767D252AEDF785E103863FF6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -207,7 +212,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CBB63CAB4B50B72D9B7940EFF5344CEC</key>
+		<key>C66C4311378F58933148D6FF81BCA876</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C9580A9BFC057F5E2B57863FFE5C2329</key>
 		<dict>
 			<key>primary</key>
 			<true/>
