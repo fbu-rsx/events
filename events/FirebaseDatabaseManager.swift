@@ -83,7 +83,7 @@ class FirebaseDatabaseManager {
         self.ref.updateChildValues(update)
     }
     
-    // create event from dictionary containing everything except eventid
+    // create event from event dictionary
     func createEvent(_ dict: [String: Any]) {
         let eventid = dict["eventid"] as! String
         let update: [String: Any] = ["users/\(AppUser.current.uid)/events/\(eventid)": true,

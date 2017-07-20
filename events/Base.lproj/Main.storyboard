@@ -771,6 +771,10 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="BoR-nj-OZg" appends="YES" id="E38-SD-xNg"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Xvh-J7-X4v"/>
                     <nil key="simulatedBottomBarMetrics"/>
@@ -781,6 +785,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tat-A2-vzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="BoR-nj-OZg" userLabel="didTapDismiss">
+                    <connections>
+                        <action selector="didTapDismiss:" destination="4fP-pC-bW5" id="MKA-i2-FUo"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="38" y="2246"/>
         </scene>

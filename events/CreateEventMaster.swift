@@ -20,6 +20,7 @@ class CreateEventMaster {
     var delegate: CreateEventMasterDelegate?
     
     init() {
-        self.event = [:]
+        self.event = [EventKey.id.rawValue: FirebaseDatabaseManager.shared.getNewEventID(),
+                      EventKey.organizerID.rawValue: AppUser.current.uid]
     }
 }

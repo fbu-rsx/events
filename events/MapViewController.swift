@@ -77,6 +77,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             loadAllEvents()
         }
         
+        for region in locationManager.monitoredRegions {
+            locationManager.stopMonitoring(for: region)
+        }
+        saveAllEvents()
     }
     
     
@@ -248,7 +252,7 @@ extension MapViewController: CreateEventMasterDelegate {
         add(event: event)
         startMonitoring(event: event)
         saveAllEvents()
-        FirebaseDatabaseManager.shared.createEvent(event.eventDictionary)
+        AppUser.current.createEvent(event.eventDictionary)
         print("new event added")
     }
 }

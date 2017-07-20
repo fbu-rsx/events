@@ -53,7 +53,6 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
             }
         }
         tableView.reloadData()
-        CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
         self.navigationController?.popViewController(animated: true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
@@ -89,28 +88,13 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
     
     
     @IBAction func didTapNext(_ sender: Any) {
+        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = self.selectedContactsPhone
         self.tabBarController?.selectedIndex = 3
-//        CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "CreateEventMiscellaneousViewController")
-//        self.presentDetail(vc)
     }
     
     @IBAction func didHitBackButton(_ sender: Any) {
         self.tabBarController?.selectedIndex = 1
-//        self.dismissDetail()
     }
-
-    
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "showMiscellaneous" {
-//            CreateEventMaster.shared.event["guestlist"] = self.selectedContactsPhone
-//        }
-//    }    
     
 }
 

@@ -202,6 +202,8 @@
 		4F2545661F1D59D00076AE0B /* SignInViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
+				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
 			);
 			name = SignInViewControllers;
 			sourceTree = "<group>";
@@ -228,8 +230,6 @@
 			children = (
 				7C10FCA21F1D7E15009EE12F /* CreateEvents */,
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
-				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
-				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
 				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */,
 				09D42D441F1FCFE900438801 /* MediaViewController.swift */,
