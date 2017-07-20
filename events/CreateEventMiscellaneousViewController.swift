@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateEventMiscellaneousViewController: UIViewController {
-    let numberOfGuests = (CreateEventMaster.shared.event["guestlist"] as AnyObject).count ?? 0
+    let numberOfGuests = (CreateEventMaster.shared.event[EventKey.guestlist.rawValue] as AnyObject).count ?? 0
     //var delegate: CreateEventMiscellaneousViewControllerDelegate?
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
@@ -36,9 +36,9 @@ class CreateEventMiscellaneousViewController: UIViewController {
     }
 
     @IBAction func onCreate(_ sender: Any) {
-        CreateEventMaster.shared.event["totalcost"] = totalCostText.text
-        CreateEventMaster.shared.event["about"] = aboutText.text
-        CreateEventMaster.shared.event["organizerID"] = AppUser.current.uid
+        CreateEventMaster.shared.event[EventKey.cost.rawValue] = totalCostText.text
+        CreateEventMaster.shared.event[EventKey.about.rawValue] = aboutText.text
+        print(CreateEventMaster.shared.event)
         createEvent(Event(dictionary: CreateEventMaster.shared.event))
     }
     

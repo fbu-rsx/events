@@ -57,6 +57,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             locationManager.startUpdatingLocation()
             loadAllEvents()
         }
+        
+        for region in locationManager.monitoredRegions {
+            locationManager.stopMonitoring(for: region)
+        }
+        saveAllEvents()
     }
     
     
@@ -222,13 +227,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 extension MapViewController: CreateEventMasterDelegate {
     func didCreateNewEvent(_ event: Event) {
         if event.radius > locationManager.maximumRegionMonitoringDistance {
-            print("TOO BI OF A RADIUS")
+            print("TOO BIG OF A RADIUS")
             event.radius = locationManager.maximumRegionMonitoringDistance
         }
         add(event: event)
         startMonitoring(event: event)
         saveAllEvents()
-        FirebaseDatabaseManager.shared.createEvent(event.eventDictionary)
+        AppUser.current.createEvent(event.eventDictionary)
         print("new event added")
     }
 }

@@ -47,11 +47,8 @@ class CreateEventViewController: UIViewController {
     }
     
     @IBAction func didTapNext(_ sender: Any) {
+        CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
         self.tabBarController?.selectedIndex = 2
-//        CreateEventMaster.shared.event["location"] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateViewController(withIdentifier: "CreateEventGuestsViewController")
-//        self.presentDetail(vc)
     }
     
     @IBAction func didHitBackButton(_ sender: Any) {

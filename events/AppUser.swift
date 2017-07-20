@@ -9,15 +9,43 @@
 import Foundation
 import FirebaseAuth
 
+enum UserKey: String {
+    case id = "uid"
+    case name = "name"
+    case email = "email"
+    case date = "datetime"
+    case phone = "phoneNumber"
+    case photo = "photoURLString"
+    case events = "events"
+}
+
+/*
+ - "uid":
+    - "uid": "gMrf7HieuJHoH7fsdg"
+    - "name": "Skyler Ruesga"
+    - "email": "sruesga@fb.com"
+    - "phoneNumber": String
+    - "photoURLString": "https://etc.com/kjhdf76vf8"
+    - "lastOnline": "serverValue.timestamp()"
+    - "connections": []
+    - "location": [latitude, longitude]
+    - "events":
+        - "eventid1": true
+        - "eventid2": true
+        - "eventid3": true
+    - "transactions":
+ */
+
+
 class AppUser {
-    
+ 
     static var current: AppUser!
-    
+ 
     var uid: String
     var name: String
     var email: String
     var password: String?
-    var phoneNumber: Int?
+    var phoneNumber: String?
     var photoURLString: String
     var events: [Event] = []
     var eventsDict: [String: Bool] = [:]
@@ -26,7 +54,6 @@ class AppUser {
         self.uid = dictionary["uid"] as! String
         self.name = dictionary["name"] as! String
         self.email = dictionary["email"] as! String
-        self.phoneNumber = dictionary["phoneNumber"] as? Int
         self.photoURLString = dictionary["photoURLString"] as! String
     }
     
@@ -56,10 +83,8 @@ class AppUser {
     
     //create event and add to user event list and event database
     func createEvent(_ eventDict: [String: Any]) {
-        var copy = eventDict
-        copy["eventid"] = FirebaseDatabaseManager.shared.getNewEventID()
-        FirebaseDatabaseManager.shared.createEvent(copy)
-        let event = Event(dictionary: copy)
+        FirebaseDatabaseManager.shared.createEvent(eventDict)
+        let event = Event(dictionary: eventDict)
         self.events.append(event)
         self.eventsDict[event.eventid] = true
     }
