@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
-
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH0-r7-7rh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -17,7 +15,7 @@
         <!--CreateEventViewController-->
         <scene sceneID="Y14-vE-H7f">
             <objects>
-                <viewController storyboardIdentifier="CreateEventViewController" title="CreateEventViewController" id="h1v-m1-jDG" customClass="CreateEventViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEventViewController" title="CreateEventViewController" hidesBottomBarWhenPushed="YES" id="h1v-m1-jDG" customClass="CreateEventViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hhl-NC-GcZ"/>
                         <viewControllerLayoutGuide type="bottom" id="jfJ-D7-lms"/>
@@ -31,7 +29,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="back-arrow-circular-symbol"/>
                                 <connections>
-                                    <segue destination="4fP-pC-bW5" kind="show" id="Dv7-0z-uGD"/>
+                                    <action selector="didHitBackButton:" destination="h1v-m1-jDG" eventType="touchUpInside" id="AUo-Tb-sba"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcq-Gn-Fwz">
@@ -39,7 +37,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="right-arrow-circular-button"/>
                                 <connections>
-                                    <segue destination="MqI-bh-S8z" kind="show" identifier="showGuestList" id="3oy-fn-0om"/>
+                                    <action selector="didTapNext:" destination="h1v-m1-jDG" eventType="touchUpInside" id="EFM-WB-BNA"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="completed" translatesAutoresizingMaskIntoConstraints="NO" id="tQ3-v9-ijK">
@@ -67,7 +65,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39G-Ss-Mba">
-                                            <rect key="frame" x="0.0" y="-148" width="375" height="696"/>
+                                            <rect key="frame" x="0.0" y="-148" width="375" height="671"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </mapView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps-and-flags" translatesAutoresizingMaskIntoConstraints="NO" id="Bmf-zj-B4K">
@@ -78,51 +76,37 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QvI-yg-Wxv">
-                                <rect key="frame" x="98" y="94" width="179" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick a location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbc-3b-IPs">
+                                <rect key="frame" x="90" y="89" width="195" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="26"/>
-                                <state key="normal" title="Save Location">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="31"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru"/>
                     <navigationItem key="navigationItem" title="Create an Event" id="qdH-aF-weZ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="igL-FH-wX1">
-                            <connections>
-                                <action selector="onCancel:" destination="h1v-m1-jDG" id="bQb-ed-4Zc"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="igL-FH-wX1"/>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="uJX-us-7Fh">
-                                <connections>
-                                    <action selector="onAdd:" destination="h1v-m1-jDG" id="DeL-FS-Hxd"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="CurrentLocation" id="6bT-xN-S1t">
-                                <connections>
-                                    <action selector="onZoomToCurrentLocation:" destination="h1v-m1-jDG" id="tRK-N2-4dd"/>
-                                </connections>
-                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="uJX-us-7Fh"/>
+                            <barButtonItem image="CurrentLocation" id="6bT-xN-S1t"/>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="addButton" destination="uJX-us-7Fh" id="Tcf-Ck-no6"/>
                         <outlet property="mapView" destination="39G-Ss-Mba" id="C4L-K5-itV"/>
-                        <outlet property="saveButton" destination="QvI-yg-Wxv" id="1ez-Gt-Tlg"/>
-                        <outlet property="zoomButton" destination="6bT-xN-S1t" id="qjQ-vP-Nq6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cz-6f-agJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1984.8" y="1423.5382308845578"/>
+            <point key="canvasLocation" x="726" y="2246"/>
         </scene>
-        <!--Create Event Guests View Controller-->
+        <!--CreateEventGuestsViewController-->
         <scene sceneID="PnV-Qw-aRG">
             <objects>
-                <viewController id="MqI-bh-S8z" customClass="CreateEventGuestsViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEventGuestsViewController" title="CreateEventGuestsViewController" hidesBottomBarWhenPushed="YES" id="MqI-bh-S8z" customClass="CreateEventGuestsViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FpF-QJ-yl8"/>
                         <viewControllerLayoutGuide type="bottom" id="6cj-uO-azn"/>
@@ -136,7 +120,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="back-arrow-circular-symbol"/>
                                 <connections>
-                                    <segue destination="h1v-m1-jDG" kind="show" id="lbb-9Z-phY"/>
+                                    <action selector="didHitBackButton:" destination="MqI-bh-S8z" eventType="touchUpInside" id="5FU-ep-T1t"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WL-Hv-om8">
@@ -144,7 +128,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="right-arrow-circular-button"/>
                                 <connections>
-                                    <segue destination="TFw-CM-ad2" kind="show" id="yVd-JN-rgC"/>
+                                    <action selector="didTapNext:" destination="MqI-bh-S8z" eventType="touchUpInside" id="w9O-xT-h7q"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="completed" translatesAutoresizingMaskIntoConstraints="NO" id="Hcf-3t-hVc">
@@ -217,7 +201,9 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="1SE-n4-EYM"/>
                     <navigationItem key="navigationItem" id="x4p-FY-dV3"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="inviteButton" destination="PTH-cE-7v4" id="XoF-BM-aAK"/>
                         <outlet property="tableView" destination="Hee-rI-lJJ" id="yHW-Tf-QCX"/>
@@ -225,12 +211,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GD8-vf-nnx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2709.5999999999999" y="1423.5382308845578"/>
+            <point key="canvasLocation" x="1450" y="2246"/>
         </scene>
-        <!--Create Event Miscellaneous View Controller-->
+        <!--CreateEventMiscellaneousViewController-->
         <scene sceneID="Bbs-8L-YHo">
             <objects>
-                <viewController id="TFw-CM-ad2" customClass="CreateEventMiscellaneousViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEventMiscellaneousViewController" title="CreateEventMiscellaneousViewController" hidesBottomBarWhenPushed="YES" id="TFw-CM-ad2" customClass="CreateEventMiscellaneousViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JRx-eb-BmN"/>
                         <viewControllerLayoutGuide type="bottom" id="4Ml-I2-TcW"/>
@@ -244,7 +230,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="back-arrow-circular-symbol"/>
                                 <connections>
-                                    <segue destination="MqI-bh-S8z" kind="show" id="i9L-uZ-kkI"/>
+                                    <action selector="didTapBackButton:" destination="TFw-CM-ad2" eventType="touchUpInside" id="O1r-lk-2GI"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="completed" translatesAutoresizingMaskIntoConstraints="NO" id="EqM-i1-cpD">
@@ -308,6 +294,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Z8x-YS-ScR"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="aboutText" destination="OFo-hX-ibY" id="L2b-m4-uDt"/>
                         <outlet property="costPerPersonText" destination="wYH-c8-Sue" id="eIf-DU-OCk"/>
@@ -316,7 +304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmY-mW-OEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3432.8000000000002" y="1423.5382308845578"/>
+            <point key="canvasLocation" x="2174" y="2246"/>
         </scene>
         <!--MapViewController-->
         <scene sceneID="tne-QT-ifu">
@@ -338,7 +326,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="AddEvent"/>
                                 <connections>
-                                    <segue destination="4fP-pC-bW5" kind="presentation" identifier="CreateEventSegue" id="ipd-I0-VYX"/>
+                                    <segue destination="pNi-rc-m3k" kind="presentation" identifier="CreateEventSegue" id="ipd-I0-VYX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HCr-vJ-ZYT">
@@ -630,7 +618,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MapViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="rH0-r7-7rh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RA4-yK-Ln0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RA4-yK-Ln0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -645,10 +633,10 @@
             </objects>
             <point key="canvasLocation" x="623" y="690"/>
         </scene>
-        <!--Create Event Title View Controller-->
+        <!--Item-->
         <scene sceneID="nTc-IB-847">
             <objects>
-                <viewController storyboardIdentifier="CreateEventTitleViewController" id="4fP-pC-bW5" customClass="CreateEventTitleViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateEventTitleViewController" hidesBottomBarWhenPushed="YES" id="4fP-pC-bW5" customClass="CreateEventTitleViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="egP-Bx-Zn2"/>
                         <viewControllerLayoutGuide type="bottom" id="wze-oF-urp"/>
@@ -662,7 +650,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="close"/>
                                 <connections>
-                                    <segue destination="rH0-r7-7rh" kind="show" id="Pg6-Zw-7BZ"/>
+                                    <action selector="didHitExitButton:" destination="4fP-pC-bW5" eventType="touchUpInside" id="vcu-1t-DMg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5JS-eG-8Q9">
@@ -670,7 +658,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="right-arrow-circular-button"/>
                                 <connections>
-                                    <segue destination="h1v-m1-jDG" kind="show" identifier="showMap" id="LpB-in-uQJ"/>
+                                    <action selector="didTapNext:" destination="4fP-pC-bW5" eventType="touchUpInside" id="9Vq-zL-uHC"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Event Title" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="D8s-3x-Bwp">
@@ -721,6 +709,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="Xvh-J7-X4v"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="datePicker" destination="U5H-vA-1e6" id="sPz-by-NBK"/>
                         <outlet property="eventTime" destination="B58-K4-b5o" id="RaQ-Hq-inK"/>
@@ -728,6 +718,26 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tat-A2-vzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="38" y="2246"/>
+        </scene>
+        <!--Create Event Tab Bar Controller-->
+        <scene sceneID="zgE-N8-Ejn">
+            <objects>
+                <tabBarController storyboardIdentifier="CreateEventTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="pNi-rc-m3k" customClass="CreateEventTabBarController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="fwS-LK-OMZ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="4fP-pC-bW5" kind="relationship" relationship="viewControllers" id="nYt-HK-i4S"/>
+                        <segue destination="h1v-m1-jDG" kind="relationship" relationship="viewControllers" id="Qhn-vs-Tmi"/>
+                        <segue destination="MqI-bh-S8z" kind="relationship" relationship="viewControllers" id="FGM-JR-3aE"/>
+                        <segue destination="TFw-CM-ad2" kind="relationship" relationship="viewControllers" id="8Rs-00-kIt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c7w-L8-gOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1296.8" y="1423.5382308845578"/>
         </scene>
@@ -751,9 +761,7 @@
         <image name="user" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Dv7-0z-uGD"/>
-        <segue reference="LpB-in-uQJ"/>
-        <segue reference="i9L-uZ-kkI"/>
+        <segue reference="zbE-jY-AC2"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

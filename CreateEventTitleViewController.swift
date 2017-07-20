@@ -18,17 +18,12 @@ class CreateEventTitleViewController: UIViewController {
         self.view.backgroundColor = UIColor(hexString: "#e74c3c")
         navigationController?.setNavigationBarHidden(true, animated: true)
         eventTime.text = datePicker.date.description
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
     }
     
     @IBAction func didSetTitle(_ sender: Any) {
@@ -40,13 +35,14 @@ class CreateEventTitleViewController: UIViewController {
         eventTime.text = datePicker.date.description
     }
     
-    // MARK: - Navigation
+    @IBAction func didTapNext(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 1
+    }
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    //     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //     }
-    
-    
+    @IBAction func didHitExitButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+
 }
 
 
@@ -69,4 +65,3 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 }
-

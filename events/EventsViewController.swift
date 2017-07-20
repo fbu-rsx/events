@@ -33,7 +33,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             if event.organizerID == AppUser.current.uid{
                 myEvents.append(event)
             }
-            let comparison = event.time < Date.init()
+            let comparison = event.date < Date.init()
             if comparison == true{
                 past.append(event)
             }

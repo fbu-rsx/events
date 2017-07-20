@@ -17,10 +17,10 @@ class Event: NSObject, NSCoding, MKAnnotation {
 
     //all below are required in the dictionary user to initialize an event
     var eventname: String
-    var totalcost: Double? //optional because may just be a free event
+    var totalcost: Float? //optional because may just be a free event
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
-    var time: Date
+    var date: Date
     var organizerID: String //uid of the organizer
     var guestlist: [String: Bool] // true if guest attended
     var photos: [String: String]
@@ -46,10 +46,16 @@ class Event: NSObject, NSCoding, MKAnnotation {
     init(dictionary: [String: Any]) {
         self.eventid = dictionary["eventid"] as! String
         self.eventname = dictionary["eventname"] as! String
-        self.totalcost = dictionary["totalcost"] as? Double
-        self.time = dictionary["time"] as! Date
+        self.totalcost = dictionary["totalcost"] as? Float
+        let datetime = dictionary["date"] as! String
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        self.date = dateFormatterGet.date(from: datetime)!
+        
         let location = dictionary["location"] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
+        
         self.organizerID = dictionary["organizerID"] as! String
         self.guestlist = dictionary["guestlist"] as? [String: Bool] ?? [:]
         self.photos = dictionary["photos"] as? [String: String] ?? [:]
@@ -61,6 +67,19 @@ class Event: NSObject, NSCoding, MKAnnotation {
     func getGuestList() -> [AppUser] {
         return FirebaseDatabaseManager.shared.getUsersFromEventDict(dictionary: self.guestlist)
     }
+    
+    func getDateStringOnly() -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+        return dateFormatterPrint.string(from: self.date)
+    }
+    
+    func getTimeStringOnly() -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "hh:mm:ss"
+        return dateFormatterPrint.string(from: self.date)
+    }
+    
     
     override func isEqual(_ object: Any?) -> Bool {
         if let event = object as? Event {
