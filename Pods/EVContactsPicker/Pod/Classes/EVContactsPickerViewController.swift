@@ -174,7 +174,7 @@ import ContactsUI
     }
     
     func cancelTapped() {
-        performSegue(withIdentifier: "CreateEventViewController", sender: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func adjustTableViewFrame(_ animated: Bool) -> Void {
