@@ -1105,11 +1105,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+<<<<<<< HEAD
 ## OAuthSwiftAlamofire
 
 The MIT License (MIT)
 
 Copyright (c) 2015 Eric Marchand (phimage)
+=======
+## RAMAnimatedTabBarController
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Ramotion
+>>>>>>> 34948809affde7057a9dfe25ccb1c22594478552
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

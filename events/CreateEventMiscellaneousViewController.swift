@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateEventMiscellaneousViewController: UIViewController {
-    let numberOfGuests = (CreateEventMaster.shared.event["guestlist"] as AnyObject).count ?? 0
+    let numberOfGuests = (CreateEventMaster.shared.event[EventKey.guestlist.rawValue] as AnyObject).count ?? 0
     //var delegate: CreateEventMiscellaneousViewControllerDelegate?
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
@@ -18,11 +18,14 @@ class CreateEventMiscellaneousViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.view.backgroundColor = UIColor(hexString: "#1abc9c")
         costPerPersonText.layer.borderWidth = 1.0
         costPerPersonText.layer.cornerRadius = 8
         costPerPersonText.layer.borderColor = UIColor.white.cgColor
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     
@@ -34,9 +37,9 @@ class CreateEventMiscellaneousViewController: UIViewController {
     }
 
     @IBAction func onCreate(_ sender: Any) {
-        CreateEventMaster.shared.event["totalcost"] = totalCostText.text
-        CreateEventMaster.shared.event["about"] = aboutText.text
-        CreateEventMaster.shared.event["organizerID"] = AppUser.current.uid
+        CreateEventMaster.shared.event[EventKey.cost.rawValue] = totalCostText.text
+        CreateEventMaster.shared.event[EventKey.about.rawValue] = aboutText.text
+        print(CreateEventMaster.shared.event)
         createEvent(Event(dictionary: CreateEventMaster.shared.event))
     }
     
@@ -58,6 +61,9 @@ class CreateEventMiscellaneousViewController: UIViewController {
         CreateEventMaster.shared = CreateEventMaster()
     }
     
+    @IBAction func didTapBackButton(_ sender: Any) {
+        self.tabBarController?.selectedIndex = 2
+    }
 
     /*
     // MARK: - Navigation

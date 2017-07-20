@@ -10,6 +10,20 @@ import Foundation
 import MapKit
 import UIKit
 
+enum EventKey: String {
+    case id = "eventid"
+    case name = "eventname"
+    case cost = "totalcost"
+    case date = "datetime"
+    case location = "location"
+    case radius = "radius"
+    case organizerID = "organizerID"
+    case about = "about"
+    case guestlist = "guestlist"
+    case photos = "photos"
+    case active = "active"
+}
+
 class Event: NSObject, NSCoding, MKAnnotation {
     
     var eventid: String
@@ -17,49 +31,91 @@ class Event: NSObject, NSCoding, MKAnnotation {
 
     //all below are required in the dictionary user to initialize an event
     var eventname: String
-    var totalcost: Double? //optional because may just be a free event
+    var totalcost: Float? //optional because may just be a free event
+    var date: Date
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
-    var time: Date
     var organizerID: String //uid of the organizer
     var guestlist: [String: Bool] // true if guest attended
-    var photos: [String: String]
+    var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     
     
+    //for Mapview anotations
+    var title: String? {
+        return eventname
+    }
+    var subtitle: String? {
+        if about.isEmpty {
+            return "No description."
+        }
+        return about
+    }
+
     
     
     /* Example Dictionary:
     dictionary: {
-        "eventname": "Coachella"
-        "totalcost": 500000.00
-        "location": [longitude, latitude] (Doubles)
-        "organizer": "uid" (String)
-        "guestlist":
-            // true if user checked in /attended
-            "uid1": true
-            "uid1": true
-        "photos":
-     
+     "eventid": String
+     "eventname": "Birthday Party"
+     "datetime": String
+     "totalcost": 1000.00 (Float)
+     "radius": 67.378 (Double)
+     "location": [longitude, latitude] (Doubles)
+     "organizerID": "uid"
+     "about": "Come to my birthday party! We have lots of alcohol and food."
+     "guestlist":
+        // true if the user has attended/checked in
+        "uid1": true
+        "uid2": true
+        "uid3": false
+     "photos":
+        "photo1": true
+        "photo2": true
     }
     */
     init(dictionary: [String: Any]) {
-        self.eventid = dictionary["eventid"] as! String
-        self.eventname = dictionary["eventname"] as! String
-        self.totalcost = dictionary["totalcost"] as? Double
-        self.time = dictionary["time"] as! Date
-        let location = dictionary["location"] as! [Double]
+        self.eventid = dictionary[EventKey.id.rawValue] as! String
+        self.eventname = dictionary[EventKey.name.rawValue] as! String
+        self.totalcost = dictionary[EventKey.cost.rawValue] as? Float
+        let datetime = dictionary[EventKey.date.rawValue] as! String
+        
+        let dateConverter = DateFormatter()
+        dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
+        self.date = dateConverter.date(from: datetime)!
+        
+        let location = dictionary[EventKey.location.rawValue] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
-        self.organizerID = dictionary["organizerID"] as! String
-        self.guestlist = dictionary["guestlist"] as? [String: Bool] ?? [:]
-        self.photos = dictionary["photos"] as? [String: String] ?? [:]
-        self.about = dictionary["about"] as! String
+        
+        self.radius = dictionary[EventKey.radius.rawValue] as? Double ?? 100.0
+        self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
+        self.about = dictionary[EventKey.about.rawValue] as! String
+        self.guestlist = dictionary[EventKey.guestlist.rawValue] as? [String: Bool] ?? [:]
+        self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }
     
     
     func getGuestList() -> [AppUser] {
         return FirebaseDatabaseManager.shared.getUsersFromEventDict(dictionary: self.guestlist)
+    }
+    
+    func getDateStringOnly() -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+        return dateFormatterPrint.string(from: self.date)
+    }
+    
+    func getTimeStringOnly() -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "h:mm a"
+        return dateFormatterPrint.string(from: self.date)
+    }
+    
+    func getDateTimeString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        return dateFormatter.string(from: self.date)
     }
     
     override func isEqual(_ object: Any?) -> Bool {

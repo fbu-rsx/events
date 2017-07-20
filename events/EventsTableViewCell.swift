@@ -22,14 +22,17 @@ class EventsTableViewCell: UITableViewCell {
     
     var delegate: toDetailProtocol?
     
-/*var eventid: String
- var eventname: String
- var totalcost: Double? //optional because may just be a free event
- var location: [Double]
- var organizerID: String //uid of the organizer
- var guestlist: [String: Bool]
- var photos: [String: String]
- var eventDictionary: [String: Any]*/
+    /*
+    var eventname: String
+    var totalcost: Float? //optional because may just be a free event
+    var date: Date
+    var coordinate: CLLocationCoordinate2D
+    var radius: Double = 100
+    var organizerID: String //uid of the organizer
+    var guestlist: [String: Bool] // true if guest attended
+    var photos: [String: String]
+    var about: String //description of event, the description variable as unfortunately taken by Objective C
+     */
  
     var event: Event?{
         didSet{

@@ -17,7 +17,11 @@ class CreateEventTitleViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(hexString: "#e74c3c")
         navigationController?.setNavigationBarHidden(true, animated: true)
-        eventTime.text = datePicker.date.description
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        eventTime.text = formatter.string(from: datePicker.date)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,25 +32,43 @@ class CreateEventTitleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        if let title = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String {
+            eventTitle.text = title
+        }
     }
     
     @IBAction func didSetTitle(_ sender: Any) {
-        CreateEventMaster.shared.event["eventname"] = eventTitle.text
+        CreateEventMaster.shared.event[EventKey.name.rawValue] = eventTitle.text
     }
     
     @IBAction func didSetDate(_ sender: Any) {
-        CreateEventMaster.shared.event["time"] = datePicker.date
-        eventTime.text = datePicker.date.description
+        CreateEventMaster.shared.event[EventKey.date.rawValue] = datePicker.date.description
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        eventTime.text = formatter.string(from: datePicker.date)
     }
     
-    // MARK: - Navigation
+    @IBAction func didTapNext(_ sender: Any) {
+        if valid() {
+            self.tabBarController?.selectedIndex = 1
+        }
+    }
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    //     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //     }
+    @IBAction func didHitExitButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
+    @IBAction func didTapDismiss(_ sender: Any) {
+        self.view.endEditing(true)
+    }
     
+    func valid() -> Bool {
+        let a = CreateEventMaster.shared.event[EventKey.name.rawValue] != nil
+        let b = CreateEventMaster.shared.event[EventKey.date.rawValue] != nil
+        return a && b
+    }
+
 }
 
 
@@ -69,4 +91,3 @@ extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 }
-

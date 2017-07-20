@@ -13,6 +13,8 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import CoreLocation
 import OAuthSwift
+import UserNotifications
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
@@ -46,9 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             window?.rootViewController = authViewController
         }
 
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-        UIApplication.shared.cancelAllLocalNotifications()
-        
+//        application.registerUserNotificationSettings(UNUserNotificationCenter(types: [.sound, .alert, .badge], categories: nil))
+//        UNUserNotificationCenter.removeAllPendingNotificationRequests(self)
+//        
         return true
     }
 
@@ -135,15 +137,17 @@ extension AppDelegate: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
+//        if region is CLCircularRegion {
+//            handleEvent(forRegion: region)
+//        }
+        print("youre in a region of an event")
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
+//        if region is CLCircularRegion {
+//            handleEvent(forRegion: region)
+//        }
+        print("exited event region")
     }
     // Helper functions
     func note(fromRegionIdentifier identifier: String) -> String? {

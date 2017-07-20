@@ -99,9 +99,13 @@ PODS:
   - KeychainAccess (3.0.2)
   - Nuke (4.1.2)
   - OAuthSwift (1.1.2)
+<<<<<<< HEAD
   - OAuthSwiftAlamofire (0.1.0):
     - Alamofire
     - OAuthSwift
+=======
+  - RAMAnimatedTabBarController (2.0.13)
+>>>>>>> 34948809affde7057a9dfe25ccb1c22594478552
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -122,7 +126,11 @@ DEPENDENCIES:
   - ImagePicker
   - KeychainAccess
   - OAuthSwift (~> 1.1.2)
+<<<<<<< HEAD
   - OAuthSwiftAlamofire
+=======
+  - RAMAnimatedTabBarController (~> 2.0.13)
+>>>>>>> 34948809affde7057a9dfe25ccb1c22594478552
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -148,11 +156,19 @@ SPEC CHECKSUMS:
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
+<<<<<<< HEAD
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
+=======
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
+>>>>>>> 34948809affde7057a9dfe25ccb1c22594478552
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
+<<<<<<< HEAD
 PODFILE CHECKSUM: c1d4c1a6acb0d11d57bd361c935217aef56fac0c
+=======
+PODFILE CHECKSUM: 50a7135dcc26e3f4db9dede5eaa9ee910a14f9b4
+>>>>>>> 34948809affde7057a9dfe25ccb1c22594478552
 
 COCOAPODS: 1.2.1
