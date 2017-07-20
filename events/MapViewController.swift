@@ -19,6 +19,10 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
+protocol LoadEventsDelegate {
+    func fetchEvents(completion: @escaping () -> Void)
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -31,6 +35,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // Creates an instance of Core Location class
     let locationManager = CLLocationManager()
     var events: [Event] = []
+    
+    var delegate: LoadEventsDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,17 +76,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
         
-        
+        self.delegate = AppUser.current
+        print(self.delegate)
+        print(CLLocationManager.locationServicesEnabled())
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            loadAllEvents()
+            delegate.fetchEvents() {
+                self.loadAllEvents()
+                print(self.events)
+            }
         }
         
-        for region in locationManager.monitoredRegions {
-            locationManager.stopMonitoring(for: region)
-        }
-        saveAllEvents()
+//        for region in locationManager.monitoredRegions {
+//            locationManager.stopMonitoring(for: region)
+//        }
+//        saveAllEvents()
     }
     
     

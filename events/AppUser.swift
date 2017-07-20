@@ -48,25 +48,25 @@ class AppUser {
     var phoneNumber: String?
     var photoURLString: String
     var events: [Event] = []
-    var eventsDict: [String: Bool] = [:]
+    var eventsKeys: [String: Bool] = [:]
     
     init(dictionary: [String: Any]) {
-        self.uid = dictionary["uid"] as! String
-        self.name = dictionary["name"] as! String
-        self.email = dictionary["email"] as! String
-        self.photoURLString = dictionary["photoURLString"] as! String
+        self.uid = dictionary[UserKey.id.rawValue] as! String
+        self.name = dictionary[UserKey.name.rawValue] as! String
+        self.email = dictionary[UserKey.email.rawValue] as! String
+        self.photoURLString = dictionary[UserKey.photo.rawValue] as! String
     }
     
     convenience init(user: User) {
-        let userDict: [String: Any] = ["uid": user.uid,
-                                       "name": user.displayName!,
-                                       "email": user.email!,
-                                       "phoneNumber": user.phoneNumber ?? NSNull(),
-                                       "photoURLString": user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
+        let userDict: [String: Any] = [UserKey.id.rawValue: user.uid,
+                                       UserKey.name.rawValue: user.displayName!,
+                                       UserKey.email.rawValue: user.email!,
+                                       UserKey.phone.rawValue: user.phoneNumber ?? NSNull(),
+                                       UserKey.photo.rawValue: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
       
         // Adds user only if the user does not exists
-        FirebaseDatabaseManager.shared.addUser(appUser: self, userDict: userDict)
+        FirebaseDatabaseManager.shared.possiblyAddUser(userDict: userDict)
     }
     
     /**
@@ -78,7 +78,7 @@ class AppUser {
     func addEventToUser(_ event: Event) {
         FirebaseDatabaseManager.shared.addEventToUser(event)
         self.events.append(event)
-        self.eventsDict[event.eventid] = true
+        self.eventsKeys[event.eventid] = true
     }
     
     //create event and add to user event list and event database
@@ -86,7 +86,7 @@ class AppUser {
         FirebaseDatabaseManager.shared.createEvent(eventDict)
         let event = Event(dictionary: eventDict)
         self.events.append(event)
-        self.eventsDict[event.eventid] = true
+        self.eventsKeys[event.eventid] = true
     }
     
     //remove event from user event list
@@ -100,7 +100,7 @@ class AppUser {
             }
         }
         self.events.remove(at: index)
-        self.eventsDict.removeValue(forKey: event.eventid)
+        self.eventsKeys.removeValue(forKey: event.eventid)
     }
     
     // delete event and delete from all its users' event lists
@@ -109,3 +109,18 @@ class AppUser {
         self.removeUserFromEvent(event)
     }
 }
+
+extension AppUser: LoadEventsDelegate {
+    func fetchEvents(completion: @escaping () -> Void) {
+        FirebaseDatabaseManager.shared.fetchUserEvents(userid: self.uid) { (keys: [String: Bool], events: [String: Any]) in
+            self.eventsKeys = keys
+            for id in events.keys {
+                let dict = events[id] as! [String: Any]
+                self.events.append(Event(dictionary: dict))
+            }
+            print(self.events)
+            completion()
+        }
+    }
+}
+

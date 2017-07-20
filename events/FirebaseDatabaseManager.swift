@@ -33,38 +33,46 @@ class FirebaseDatabaseManager {
      */
     
     // Add user only if they do not already exist
-    func addUser(appUser: AppUser, userDict: [String: Any]) {
-        
-        self.ref.child("users/\(appUser.uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+    func possiblyAddUser(userDict: [String: Any]) {
+        let uid = userDict[UserKey.id.rawValue] as! String
+        let name = userDict[UserKey.name.rawValue] as! String
+        self.ref.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             print("addUser snapshot started")
             if !snapshot.exists() {
-                self.ref.child("users/\(appUser.uid)").updateChildValues(userDict, withCompletionBlock: { (error: Error?, userRef: DatabaseReference) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        self.setUserEvents(user: appUser)
-                    }
-                })
-                print("new user \(appUser.name) added")
+                self.ref.child("users/\(uid)").updateChildValues(userDict)
+                print("new user \(name) added")
             } else {
                 print(snapshot)
                 // self.setupConnectionObservers(userid: appUser.uid)
-                self.setUserEvents(user: appUser)
             }
         }
     }
     
-    // asynchronous function that will set events to AppUser.current
-    private func setUserEvents(user: AppUser) {
-        self.ref.child("users/\(user.uid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+    // completion function provides dictionary of events
+    func fetchUserEvents(userid: String, completion: @escaping ([String: Bool], [String: Any]) -> Void) {
+        self.ref.child("users/\(userid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.exists() {
                 let result = snapshot.value as! [String: Bool]
-                user.eventsDict = result
-                user.events = self.getEventsArray(dictionary: result)
+                FirebaseDatabaseManager.shared.fetchEventsForEventIDs(dictionary: result, completion: { (keys: [String: Bool], events: [String: Any]) in
+                    completion(keys, events)
+                })
             }
         }
     }
     
+    // dictionary of eventid's
+    func fetchEventsForEventIDs(dictionary: [String: Bool], completion: @escaping ([String: Bool], [String: Any]) -> Void) {
+        self.ref.child("events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.exists() {
+                var eventsDict: [String: Any] = [:]
+                for eventid in dictionary.keys {
+                    let eventDict = snapshot.value(forKey: eventid) as! [String: Any]
+                    eventsDict[eventid] = eventDict
+                }
+                completion(dictionary, eventsDict)
+            }
+        }
+    }
     
     
     
@@ -133,7 +141,7 @@ class FirebaseDatabaseManager {
     func deleteCurrentUser() {
         let id = AppUser.current.uid
         var update: [String: Any] = ["users/\(id)": NSNull()]
-        for eventid in AppUser.current.eventsDict.keys {
+        for eventid in AppUser.current.eventsKeys.keys {
             update["events/\(eventid)/guestlist/\(id)"] = NSNull()
         }
         self.ref.updateChildValues(update)
@@ -168,19 +176,6 @@ class FirebaseDatabaseManager {
      * Get methods to retrieve info from database
      *
      */
-    
-    // dictionary of eventid's
-    func getEventsArray(dictionary: [String: Bool]) -> [Event] {
-        var events: [Event] = []
-        for eventid in dictionary.keys {
-            let eventDict = self.ref.child("events").value(forKey: eventid) as! [String: Any]
-            events.append(Event(dictionary: eventDict))
-        }
-        
-        return events
-    }
-    
-    
     
     // gets users from an event dictionary, and creates AppUser objects
     func getUsersFromEventDict(dictionary: [String: Any]) -> [AppUser] {
