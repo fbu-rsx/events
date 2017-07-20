@@ -10,6 +10,7 @@ PODS:
   - Bolts/Tasks (1.8.4)
   - EVContactsPicker (0.5.12):
     - Nuke (~> 4.1.2)
+  - Fabric (1.6.12)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -107,13 +108,13 @@ PODS:
   - OAuthSwiftAlamofire (0.1.0):
     - Alamofire
     - OAuthSwift
-  - RAMAnimatedTabBarController (2.0.13)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
-  - TwitterCore (3.0.0)
-  - TwitterKit (2.8.1):
-    - TwitterCore (>= 2.8)
+  - TwitterCore (2.7.0):
+    - Fabric
+  - TwitterKit (2.7.0):
+    - TwitterCore (= 2.7.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
@@ -128,13 +129,14 @@ DEPENDENCIES:
   - KeychainAccess
   - OAuthSwift (~> 1.1.2)
   - OAuthSwiftAlamofire
-  - RAMAnimatedTabBarController (~> 2.0.13)
+  - TwitterKit (= 2.7)
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   EVContactsPicker: fd6dec1abe3cfb20c7e9f11946d5d581062de2e5
+  Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
@@ -155,11 +157,10 @@ SPEC CHECKSUMS:
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
-  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
-  TwitterCore: 8ce250be1eb34633a0e6acc89520d4165ec52c10
-  TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
+  TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
+  TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: 8babe41a29d7d5d1e89665f303b1fc3fd89db7eb
+PODFILE CHECKSUM: 1d4a1207829691c886f8ab102ba58aa181ac705a
 
 COCOAPODS: 1.2.1

@@ -57,20 +57,19 @@ class FirebaseDatabaseManager {
                     completion(keys, events)
                 })
             }
+            print("user has no events to get!")
         }
     }
     
     // dictionary of eventid's
     func fetchEventsForEventIDs(dictionary: [String: Bool], completion: @escaping ([String: Bool], [String: Any]) -> Void) {
         self.ref.child("events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            if snapshot.exists() {
-                var eventsDict: [String: Any] = [:]
-                for eventid in dictionary.keys {
-                    let eventDict = snapshot.value(forKey: eventid) as! [String: Any]
-                    eventsDict[eventid] = eventDict
-                }
-                completion(dictionary, eventsDict)
+            var eventsDict: [String: Any] = [:]
+            for eventid in dictionary.keys {
+                let eventDict = snapshot.value(forKey: eventid) as! [String: Any]
+                eventsDict[eventid] = eventDict
             }
+            completion(dictionary, eventsDict)
         }
     }
     
