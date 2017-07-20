@@ -16,6 +16,8 @@ target 'events' do
   pod 'ImagePicker'
   pod 'AlamofireImage'
   pod "EVContactsPicker"
+  pod 'KeychainAccess'
+  pod 'OAuthSwiftAlamofire'
   pod 'RAMAnimatedTabBarController', "~> 2.0.13"
 
   target 'eventsTests' do

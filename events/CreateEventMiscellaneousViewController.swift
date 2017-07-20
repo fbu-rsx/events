@@ -25,6 +25,7 @@ class CreateEventMiscellaneousViewController: UIViewController {
         costPerPersonText.layer.cornerRadius = 8
         costPerPersonText.layer.borderColor = UIColor.white.cgColor
         
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     
