@@ -16,6 +16,8 @@ target 'events' do
   pod 'ImagePicker'
   pod 'AlamofireImage'
   pod "EVContactsPicker"
+  pod 'KeychainAccess'
+  pod 'OAuthSwiftAlamofire'
 
   target 'eventsTests' do
     inherit! :search_paths

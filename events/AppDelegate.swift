@@ -12,6 +12,7 @@ import Alamofire
 import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import CoreLocation
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
@@ -66,18 +67,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        // Firebase OAuth Management
         let sourceApplication = options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String?
         if FUIAuth.defaultAuthUI()?.handleOpen(url, sourceApplication: sourceApplication) ?? false {
             return true
         }
-        // other URL handling goes here.
         
-        // Spotify OAuth management
-        /*
-        if (url.host == "oauth-callback") {
+        // Spotify OAuth Management
+        if (url.host == "events://") {
             OAuthSwift.handle(url: url)
+            return true
         }
-        */
+        
         return false
     }
 

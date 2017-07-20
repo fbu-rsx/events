@@ -96,8 +96,12 @@ PODS:
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
   - ImagePicker (2.0.0)
+  - KeychainAccess (3.0.2)
   - Nuke (4.1.2)
   - OAuthSwift (1.1.2)
+  - OAuthSwiftAlamofire (0.1.0):
+    - Alamofire
+    - OAuthSwift
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
@@ -116,7 +120,9 @@ DEPENDENCIES:
   - FirebaseCore
   - FirebaseUI (~> 4.0)
   - ImagePicker
+  - KeychainAccess
   - OAuthSwift (~> 1.1.2)
+  - OAuthSwiftAlamofire
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -139,12 +145,14 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   ImagePicker: 81175d36c2852cb543cb4f5d6c19e28f3e8d90eb
+  KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
+  OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: c5dc7fa13681f57a608b32baa5f8821ef75c9c57
+PODFILE CHECKSUM: c1d4c1a6acb0d11d57bd361c935217aef56fac0c
 
 COCOAPODS: 1.2.1

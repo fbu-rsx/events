@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import FirebaseAuthUI
+import OAuthSwift
 
 struct PreferenceKeys {
     static let savedItems = "savedItems"
@@ -59,6 +60,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
@@ -71,14 +73,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.present(authViewController, animated: true, completion: nil)
     }
     
-    @IBAction func testTransition(_ sender: Any) {
-        performSegue(withIdentifier: "test", sender: nil)
-    }
-    
-    
-    
-    
-    
+
     
     /**
      *
