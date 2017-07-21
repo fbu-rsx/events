@@ -12,6 +12,7 @@ import MapKit
 
 
 class CreateLocationViewController: UIViewController {
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
