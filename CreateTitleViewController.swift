@@ -7,34 +7,65 @@
 //
 
 import UIKit
+import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var eventTime: UILabel!
+    @IBOutlet weak var logoView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(hexString: "#e74c3c")
-        navigationController?.setNavigationBarHidden(true, animated: true)
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, h:mm a"
-        eventTime.text = formatter.string(from: datePicker.date)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.eventTitle.textColor = UIColor(hexString: "#4CB6BE")
+        eventTitle.setBottomBorder()
+        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
+        
+        //        let formatter = DateFormatter()
+        //        formatter.dateFormat = "MMM d, h:mm a"
+        //        eventTime.text = formatter.string(from: datePicker.date)\
         
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // Bounce up-and-down animation for photo
+    func mapAnimation () {
+            UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
+                self.logoView.frame.origin.y -= 10
+            })
+        self.logoView.frame.origin.y += 10
+        }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        mapAnimation()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.logoView.layer.removeAllAnimations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if let title = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String {
             eventTitle.text = title
+        }
+    }
+    
+    @IBAction func onSelectTime(_ sender: Any) {
+        dateTimePicker()
+    }
+    
+    // DateTimePicker Pod
+    func dateTimePicker () {
+        let picker = DateTimePicker.show()
+        picker.highlightColor = UIColor(red: 255.0/255.0, green: 138.0/255.0, blue: 138.0/255.0, alpha: 1)
+        picker.isDatePickerOnly = false // to hide time and show only date picker
+        picker.is12HourFormat = true
+        picker.completionHandler = { date in
+            // do something after tapping done
         }
     }
     
@@ -44,10 +75,10 @@ class CreateTitleViewController: UIViewController {
     
     @IBAction func didSetDate(_ sender: Any) {
         CreateEventMaster.shared.event[EventKey.date.rawValue] = datePicker.date.description
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, h:mm a"
-        eventTime.text = formatter.string(from: datePicker.date)
+        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MMM d, h:mm a"
+//        eventTime.text = formatter.string(from: datePicker.date)
     }
     
     @IBAction func didTapNext(_ sender: Any) {
@@ -69,10 +100,10 @@ class CreateTitleViewController: UIViewController {
         let b = CreateEventMaster.shared.event[EventKey.date.rawValue] != nil
         return a && b
     }
-
+    
 }
 
-
+// Enable the use of hex codes
 extension UIColor {
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -90,5 +121,18 @@ extension UIColor {
             (a, r, g, b) = (255, 0, 0, 0)
         }
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+    }
+}
+
+// Enable a line under text field
+extension UITextField {
+    func setBottomBorder() {
+        self.borderStyle = .none
+        self.layer.backgroundColor = UIColor.white.cgColor
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
+        self.layer.shadowOpacity = 0.8
+        self.layer.shadowRadius = 0.0
     }
 }

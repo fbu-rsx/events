@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 
 
-
 class CreateLocationViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -25,7 +24,6 @@ class CreateLocationViewController: UIViewController {
         // Tracks the user's location
         self.mapView.setUserTrackingMode(.follow, animated: true)
         
-        
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
@@ -34,7 +32,8 @@ class CreateLocationViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.tabBarController?.tabBar.isHidden = false
     }
-
+    
+    
 //        
 //    @IBAction func onZoomToCurrentLocation(_ sender: AnyObject) {
 ////        mapView.zoomToUserLocation()

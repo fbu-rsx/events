@@ -22,6 +22,7 @@ target 'events' do
   pod 'OAuthSwiftAlamofire'
   pod 'RAMAnimatedTabBarController', "~> 2.0.13"
   pod 'TwitterKit', '2.7'
+  pod 'DateTimePicker'
 
   target 'eventsTests' do
     inherit! :search_paths
