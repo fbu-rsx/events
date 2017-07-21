@@ -16,7 +16,7 @@ target 'events' do
   pod 'ImagePicker'
   pod 'AlamofireImage'
   pod "EVContactsPicker"
-  pod 'RAMAnimatedTabBarController', "~> 2.0.13"
+  pod "SimpleTab"
 
   target 'eventsTests' do
     inherit! :search_paths

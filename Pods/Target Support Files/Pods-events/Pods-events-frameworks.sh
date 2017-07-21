@@ -101,8 +101,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/ImagePicker/ImagePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Nuke/Nuke.framework"
   install_framework "$BUILT_PRODUCTS_DIR/OAuthSwift/OAuthSwift.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SimpleTab/SimpleTab.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
@@ -117,8 +117,8 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/ImagePicker/ImagePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Nuke/Nuke.framework"
   install_framework "$BUILT_PRODUCTS_DIR/OAuthSwift/OAuthSwift.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SimpleTab/SimpleTab.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

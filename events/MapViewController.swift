@@ -99,11 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         performSegue(withIdentifier: "test", sender: nil)
     }
     
-    
-    
-    
-    
-    
+
     /**
      *
      * Functions for Geofencing
@@ -259,7 +255,25 @@ extension MapViewController: CreateEventMasterDelegate {
 
 // SEARCH extension
 extension MapViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark){
+//    func mapView(mapView: MKMapView!,
+//                 viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+//        if (annotation is MKUserLocation) { return nil }
+//        
+//        let reuseID = "chest"
+//        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+//        
+//        if v != nil {
+//            v?.annotation = annotation
+//        } else {
+//            v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+//            
+//            v?.image = UIImage(named:"placeholder")
+//        }
+//        print("here")
+//        return v
+//    }
+    
+    func dropPinZoomIn(placemark:MKPlacemark) {
         // cache the pin
         selectedPin = placemark
         let annotation = MKPointAnnotation()
@@ -269,7 +283,6 @@ extension MapViewController: HandleMapSearch {
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city), \(state)"
         }
-        
         // Custom pin view
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
         annotationView.image = UIImage(named: "placeholder.png")
@@ -279,5 +292,6 @@ extension MapViewController: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
+    
     
 }

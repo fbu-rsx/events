@@ -98,10 +98,10 @@ PODS:
   - ImagePicker (2.0.0)
   - Nuke (4.1.2)
   - OAuthSwift (1.1.2)
-  - RAMAnimatedTabBarController (2.0.13)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - SimpleTab (0.2.1)
   - TwitterCore (2.8.0):
     - Fabric
   - TwitterKit (2.8.1):
@@ -118,7 +118,7 @@ DEPENDENCIES:
   - FirebaseUI (~> 4.0)
   - ImagePicker
   - OAuthSwift (~> 1.1.2)
-  - RAMAnimatedTabBarController (~> 2.0.13)
+  - SimpleTab
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -143,11 +143,11 @@ SPEC CHECKSUMS:
   ImagePicker: 81175d36c2852cb543cb4f5d6c19e28f3e8d90eb
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
-  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SimpleTab: d24e026736c30951ce60d194268042a6afedaf4c
   TwitterCore: e959987be23c767004d29eb7fab8d85d8585a2e5
   TwitterKit: 3b6044a7320340326a4098f3e37aa1dbaeb94942
 
-PODFILE CHECKSUM: 50a7135dcc26e3f4db9dede5eaa9ee910a14f9b4
+PODFILE CHECKSUM: f6384f0cfef897045828445ff88e9f6ba0ca8a9b
 
 COCOAPODS: 1.2.1

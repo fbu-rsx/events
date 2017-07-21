@@ -13,16 +13,23 @@ import FirebaseAuthUI
 import FirebaseGoogleAuthUI
 import CoreLocation
 import UserNotifications
+import SimpleTab
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
     var window: UIWindow?
     static var aUI: FUIAuth?
-    let locationManager = CLLocationManager() // Add this statement
+    let locationManager = CLLocationManager()
+    // Instantiate TabBarController
+    var simpleTBC: SimpleTabBarController?
 
   
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        // Calls function to instantiate tab bar controller
+        setupSimpleTab()
+        
         // Override point for customization after application launch.
         locationManager.delegate = self
         
@@ -50,6 +57,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 //        UNUserNotificationCenter.removeAllPendingNotificationRequests(self)
 //        
         return true
+    }
+    
+    func setupSimpleTab() {
+        // Sets rootViewController as a SimpleTabBarController
+        simpleTBC = self.window!.rootViewController as? SimpleTabBarController
+        
+        //# Set the View Transition to Crossfade
+        simpleTBC?.viewTransition = CrossFadeViewTransition()
+        
+        //# Set Tab Bar Style to Elegant tabbar style
+        //let style:SimpleTabBarStyle = PopTabBarStyle(tabBar: simpleTBC!.tabBar)
+        let style:SimpleTabBarStyle = ElegantTabBarStyle(tabBar: simpleTBC!.tabBar)
+        
+        //# Set Tab Title attributes for selected and unselected (normal) states.
+        style.setTitleTextAttributes(attributes: [NSFontAttributeName as NSObject : UIFont.systemFont(ofSize: 14),  NSForegroundColorAttributeName as NSObject: UIColor.lightGray], forState: .normal)
+        style.setTitleTextAttributes(attributes: [NSFontAttributeName as NSObject : UIFont.systemFont(ofSize: 14),NSForegroundColorAttributeName as NSObject: colorWithHexString("4CB6BE")], forState: .selected)
+        
+        //Set Tab Icon colors for selected and unselected (normal) states.
+        style.setIconColor(color: UIColor.lightGray, forState: UIControlState.normal)
+        style.setIconColor(color: colorWithHexString("4CB6BE"), forState: UIControlState.selected)
+        
+        // Set Tab Icons
+        simpleTBC?.tabBar.items?[0].image = UIImage(named: "fireworks.png")?.withRenderingMode(.alwaysOriginal)
+        simpleTBC?.tabBar.items?[1].image = UIImage(named: "map.png")?.withRenderingMode(.alwaysOriginal)
+        simpleTBC?.tabBar.items?[2].image = UIImage(named: "monthly-calendar.png")?.withRenderingMode(.alwaysOriginal)
+
+        // Let the tab bar control know of the style
+        simpleTBC?.tabBarStyle = style
+    }
+    
+    
+    func colorWithHexString (_ hexStr:String) -> UIColor {
+        let hex = hexStr.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt32()
+        Scanner(string: hex).scanHexInt32(&int)
+        let a, r, g, b: UInt32
+        switch hex.characters.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            return .clear
+        }
+        return UIColor(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
+        
     }
 
     // FIREBASE
