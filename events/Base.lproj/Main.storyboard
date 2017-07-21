@@ -429,38 +429,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Y3-H8c">
-                                <rect key="frame" x="21" y="28" width="333" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="333" id="sN7-18-9lM"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="My Events"/>
-                                    <segment title="Upcoming"/>
-                                    <segment title="Past"/>
-                                </segments>
-                                <connections>
-                                    <action selector="changedSegment:" destination="Hae-uG-d6M" eventType="valueChanged" id="6Wt-S5-YlT"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-6O-xea">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="U3F-Y3-H8c" secondAttribute="bottom" constant="8" id="1q7-bk-Zuy"/>
-                            <constraint firstItem="U3F-Y3-H8c" firstAttribute="centerX" secondItem="Lhf-XP-lMH" secondAttribute="centerX" id="9WE-20-ie4"/>
-                            <constraint firstItem="U3F-Y3-H8c" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" constant="8" id="eaD-r3-xaC"/>
-                            <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="mDl-VR-Ewh"/>
-                            <constraint firstItem="EKf-qR-McR" firstAttribute="top" secondItem="eeW-6O-xea" secondAttribute="bottom" id="pcD-qQ-rct"/>
-                            <constraint firstItem="eeW-6O-xea" firstAttribute="leading" secondItem="Lhf-XP-lMH" secondAttribute="leading" id="sSH-dp-1UI"/>
+                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" id="0wY-K3-aGz"/>
+                            <constraint firstItem="eeW-6O-xea" firstAttribute="leading" secondItem="Lhf-XP-lMH" secondAttribute="leading" id="E9g-Bi-OPo"/>
+                            <constraint firstItem="EKf-qR-McR" firstAttribute="top" secondItem="eeW-6O-xea" secondAttribute="bottom" id="HGb-Gt-M97"/>
+                            <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="izd-Vh-12E"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Events" selectedImage="icon-checkbox-unselected-25x25.png" id="FkV-xV-Dt9" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <connections>
-                        <outlet property="segmentedControl" destination="U3F-Y3-H8c" id="9cH-0t-a73"/>
                         <outlet property="tableView" destination="eeW-6O-xea" id="TQA-eK-cFz"/>
                         <segue destination="sDy-vT-vDK" kind="show" identifier="showDetail" id="S3W-M4-Gqk"/>
                     </connections>

@@ -8,19 +8,15 @@
 
 import UIKit
 import AlamofireImage
+import FoldingCell
 
-protocol toDetailProtocol {
-    func onTapFunction(event: Event)
-}
-
-class EventsTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var organizerPic: UIImageView!
-    @IBOutlet weak var eventTitle: UILabel!
-    @IBOutlet weak var organizerName: UILabel!
-    @IBOutlet weak var eventDescription: UILabel!
+class EventsTableViewCell: FoldingCell {
     
-    var delegate: toDetailProtocol?
+    
+    @IBOutlet weak var view1topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var view1: RotatedView!
+    @IBOutlet weak var view2: RotatedView!
+    @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
     
     /*
     var eventname: String
@@ -40,28 +36,34 @@ class EventsTableViewCell: UITableViewCell {
             let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) 
             // set orgainzer pic
             let url = URL(string: user.photoURLString)
-            organizerPic.af_setImage(withURL: url!)
-            // set eventTitle
-            eventTitle.text = event?.eventname
-            // set organizerName
-            organizerName.text = user.name
-            // set eeventDescription
-            eventDescription.text = event?.description
+            
         }
     }
     
     override func awakeFromNib() {
-        super.awakeFromNib()
         // Initialization code
+        foregroundView = view1
+        foregroundViewTop = view1topConstraint
+        containerView = view2
+        containerViewTop = view2topConstraint
+        itemCount = 3
+        foregroundView.layer.cornerRadius = 10
+        foregroundView.layer.masksToBounds = true
+        super.awakeFromNib()
     }
+    
+    override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
+        
+        // durations count equal it itemCount
+        let durations = [0.33, 0.26, 0.26] // timing animation for each view
+        return durations[itemIndex]
+    }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    
-    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
-        delegate?.onTapFunction(event: event!)
-    }
+
 }

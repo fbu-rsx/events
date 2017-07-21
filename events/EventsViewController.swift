@@ -8,40 +8,33 @@
 
 import UIKit
 import FirebaseDatabaseUI
+import FoldingCell
 
-class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, toDetailProtocol {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     
-    var myEvents: [Event] = []
-    var upcoming: [Event] = []
-    var past: [Event] = []
+    let kCloseCellHeight: CGFloat = 144
+    let kOpenCellHeight: CGFloat = 316
+    var events: [Event] = []
+    var cellHeights: [CGFloat] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.delegate = self
+        tableView.dataSource = self
+        //let bundle = Bundle(path: "/Users/rhianchavez11/Documents/events/events/Views")
+        tableView.register(UINib(nibName: "EventsTableViewCell", bundle: nil), forCellReuseIdentifier: "eventCell")
+        events = AppUser.current.events
+        tableView.separatorStyle = .none
+        //cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
+        cellHeights = (0..<6).map { _ in C.CellHeight.close }
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.frame.size.width = view.frame.size.width
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        tableView.delegate = self
-        tableView.dataSource = self
-        let bundle = Bundle(path: "/Users/rhianchavez11/Documents/events/events/Views")
-        tableView.register(UINib(nibName: "EventsTableViewCell", bundle: bundle), forCellReuseIdentifier: "eventCell")
-        
-        // populate Event lists for tableView data
-        // print(AppUser.current)
-        // print(AppUser.current.events)
-        for event in AppUser.current.events{
-            if event.organizerID == AppUser.current.uid{
-                myEvents.append(event)
-            }
-            let comparison = event.date < Date.init()
-            if comparison == true{
-                past.append(event)
-            }
-            else{
-                upcoming.append(event)
-            }
-        }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,53 +42,79 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func changedSegment(_ sender: UISegmentedControl) {
-        tableView.reloadData()
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return cell to present associated with user's events 
         // which data to display is dependent on selected index of segmented control
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
-        cell.delegate = self
         // see which data to display
-        if segmentedControl.selectedSegmentIndex == 0{
-            cell.event = myEvents[indexPath.row]
-            return cell
-        }
-        else if segmentedControl.selectedSegmentIndex == 1{
-            cell.event = upcoming[indexPath.row]
-            return cell
-        }
-        else{
-            cell.event = past[indexPath.row]
-            return cell
-        }
+        //print(cell)
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // return number of events associated with user in current section
         // number will be dependent on selected index of segmented control
-        if segmentedControl.selectedSegmentIndex == 0{
-            return myEvents.count
-        }
-        else if segmentedControl.selectedSegmentIndex == 1{
-            return upcoming.count
-        }
-        else{
-            return past.count
+        //return events.count
+        return 5
+    }
+    
+    fileprivate struct C {
+        struct CellHeight {
+            static let close: CGFloat = 144 // equal or greater foregroundView height
+            static let open: CGFloat = 316 // equal or greater containerView height
         }
     }
     
-    func onTapFunction(event: Event) {
-        performSegue(withIdentifier: "toDetail", sender: event)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[indexPath.row]
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath)
+            else {
+            return
+        }
+        
+        var duration = 0.0
+        if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
+            cellHeights[indexPath.row] = kOpenCellHeight
+            //cell.selectedAnimation(true, animated: true, completion: nil)
+            cell.unfold(true, animated: true, completion: nil)
+            duration = 0.5
+        } else {// close cell
+            cellHeights[indexPath.row] = kCloseCellHeight
+            //cell.selectedAnimation(false, animated: true, completion: nil)
+            cell.unfold(false, animated: true, completion: nil)
+            duration = 1.1
+        }
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        }, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if case let cell as FoldingCell = cell {
+            cell.backgroundColor = .clear
+            if cellHeights[indexPath.row] == C.CellHeight.close {
+                //cell.selectedAnimation(false, animated: false, completion:nil)
+                cell.unfold(false, animated: false, completion: nil)
+            } else {
+                //cell.selectedAnimation(true, animated: false, completion: nil)
+                cell.unfold(true, animated: false, completion: nil)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetail"{
             let destination = segue.destination as! DetailedEventViewController
             destination.event = sender as? Event
         }
     }
+    
+
     
 }
