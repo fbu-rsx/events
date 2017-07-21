@@ -20,6 +20,10 @@ protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
+protocol LoadEventsDelegate {
+    func fetchEvents(completion: @escaping () -> Void)
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
@@ -32,6 +36,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // Creates an instance of Core Location class
     let locationManager = CLLocationManager()
     var events: [Event] = []
+    
+    var delegate: LoadEventsDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,17 +77,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
         
-        
+        self.delegate = AppUser.current
+        print(self.delegate)
+        print(CLLocationManager.locationServicesEnabled())
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            loadAllEvents()
+            delegate.fetchEvents() {
+                self.loadAllEvents()
+                print(self.events)
+            }
         }
         
-        for region in locationManager.monitoredRegions {
-            locationManager.stopMonitoring(for: region)
-        }
-        saveAllEvents()
+//        for region in locationManager.monitoredRegions {
+//            locationManager.stopMonitoring(for: region)
+//        }
+//        saveAllEvents()
     }
     
 
@@ -98,6 +109,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 
+    @IBAction func testTransition(_ sender: Any) {
+        performSegue(withIdentifier: "test", sender: nil)
+    }
     
     /**
      *
@@ -254,7 +268,25 @@ extension MapViewController: CreateEventMasterDelegate {
 
 // SEARCH extension
 extension MapViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark){
+//    func mapView(mapView: MKMapView!,
+//                 viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+//        if (annotation is MKUserLocation) { return nil }
+//        
+//        let reuseID = "chest"
+//        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
+//        
+//        if v != nil {
+//            v?.annotation = annotation
+//        } else {
+//            v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+//            
+//            v?.image = UIImage(named:"placeholder")
+//        }
+//        print("here")
+//        return v
+//    }
+    
+    func dropPinZoomIn(placemark:MKPlacemark) {
         // cache the pin
         selectedPin = placemark
         let annotation = MKPointAnnotation()
@@ -264,7 +296,6 @@ extension MapViewController: HandleMapSearch {
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city), \(state)"
         }
-        
         // Custom pin view
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
         annotationView.image = UIImage(named: "placeholder.png")
@@ -274,5 +305,6 @@ extension MapViewController: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
+    
     
 }

@@ -42,8 +42,6 @@
 		4FCB629C1F143DC400BBDC71 /* eventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */; };
 		4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */; };
 		7C10FC9D1F1D6F2E009EE12F /* CreateEventTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9C1F1D6F2E009EE12F /* CreateEventTitleViewController.swift */; };
-		7C10FCA01F1D74E8009EE12F /* ProgressTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */; };
-		7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */; };
 		7C10FCA61F1D8941009EE12F /* CreateEventGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */; };
 		7C10FCA81F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */; };
 		7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */; };
@@ -115,8 +113,6 @@
 		4FCB629D1F143DC400BBDC71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7C10FC9C1F1D6F2E009EE12F /* CreateEventTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateEventTitleViewController.swift; path = ../CreateEventTitleViewController.swift; sourceTree = "<group>"; };
-		7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressTrackerViewController.swift; sourceTree = "<group>"; };
-		7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressTrackerViewController.xib; sourceTree = "<group>"; };
 		7C10FCA51F1D8941009EE12F /* CreateEventGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventGuestsViewController.swift; sourceTree = "<group>"; };
 		7C10FCA71F1DD4BB009EE12F /* CreateEventMiscellaneousViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventMiscellaneousViewController.swift; sourceTree = "<group>"; };
 		7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuestListTableViewCell.swift; path = ../GuestListTableViewCell.swift; sourceTree = "<group>"; };
@@ -217,8 +213,6 @@
 				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
 				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
-				7C10FC9E1F1D74E8009EE12F /* ProgressTrackerViewController.swift */,
-				7C10FC9F1F1D74E8009EE12F /* ProgressTrackerViewController.xib */,
 				09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */,
 				09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */,
 			);
@@ -457,7 +451,6 @@
 				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
-				7C10FCA11F1D74E8009EE12F /* ProgressTrackerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -647,7 +640,6 @@
 				09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */,
 				09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */,
 				4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */,
-				7C10FCA01F1D74E8009EE12F /* ProgressTrackerViewController.swift in Sources */,
 				09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */,
 				09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */,
 			);
