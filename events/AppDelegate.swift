@@ -67,8 +67,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
         simpleTBC?.viewTransition = CrossFadeViewTransition()
         
         //# Set Tab Bar Style to Elegant tabbar style
-        //let style:SimpleTabBarStyle = PopTabBarStyle(tabBar: simpleTBC!.tabBar)
-        let style:SimpleTabBarStyle = ElegantTabBarStyle(tabBar: simpleTBC!.tabBar)
+        //let style: SimpleTabBarStyle = PopTabBarStyle(tabBar: simpleTBC!.tabBar)
+        let style: SimpleTabBarStyle = ElegantTabBarStyle(tabBar: simpleTBC!.tabBar)
         
         //# Set Tab Title attributes for selected and unselected (normal) states.
         style.setTitleTextAttributes(attributes: [NSFontAttributeName as NSObject : UIFont.systemFont(ofSize: 14),  NSForegroundColorAttributeName as NSObject: UIColor.lightGray], forState: .normal)
@@ -193,7 +193,7 @@ extension AppDelegate: CLLocationManagerDelegate {
 //        if region is CLCircularRegion {
 //            handleEvent(forRegion: region)
 //        }
-        print("youre in a region of an event")
+        print("you're in a region of an event")
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
