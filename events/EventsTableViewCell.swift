@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-protocol toDetailProtocol {
+protocol toDetailProtocol: class {
     func onTapFunction(event: Event)
 }
 
@@ -20,7 +20,7 @@ class EventsTableViewCell: UITableViewCell {
     @IBOutlet weak var organizerName: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
     
-    var delegate: toDetailProtocol?
+    weak var delegate: toDetailProtocol?
     
     /*
     var eventname: String
