@@ -21,6 +21,7 @@ target 'events' do
   pod 'KeychainAccess'
   pod 'OAuthSwiftAlamofire'
   pod 'TwitterKit', '2.7'
+  pod 'DateTimePicker'
 
   target 'eventsTests' do
     inherit! :search_paths

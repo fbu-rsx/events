@@ -10,7 +10,6 @@ import UIKit
 import MapKit
 
 
-
 class CreateEventViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
@@ -24,7 +23,6 @@ class CreateEventViewController: UIViewController {
         // Tracks the user's location
         self.mapView.setUserTrackingMode(.follow, animated: true)
         
-        
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
@@ -32,7 +30,8 @@ class CreateEventViewController: UIViewController {
         // Hide navigation bar
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
-
+    
+    
 //        
 //    @IBAction func onZoomToCurrentLocation(_ sender: AnyObject) {
 ////        mapView.zoomToUserLocation()
