@@ -68,18 +68,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Limit the overlap area just to View Controller, not blocking the Navigation bar
         definesPresentationContext = true
         
-        // Automatically zooms to the user's location upon VC loading
-        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-        self.mapView.setRegion(region, animated: true)
-        
-        
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
         
         self.delegate = AppUser.current
-        print(self.delegate)
-        print(CLLocationManager.locationServicesEnabled())
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
@@ -90,9 +82,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
 //        for region in locationManager.monitoredRegions {
-//            locationManager.stopMonitoring(for: region)
+//            guard let circularRegion = region as? CLCircularRegion else { continue }
+//
+//            locationManager.stopMonitoring(for: circularRegion)
 //        }
 //        saveAllEvents()
+        
+        // Automatically zooms to the user's location upon VC loading
+        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+        self.mapView.setRegion(region, animated: true)
+
     }
     
 
@@ -187,8 +187,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func loadAllEvents() {
-        self.events = AppUser.current.events
-        for event in self.events {
+        for event in AppUser.current.events {
             add(event: event)
         }
     }

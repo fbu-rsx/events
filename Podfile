@@ -20,6 +20,7 @@ target 'events' do
   pod "SimpleTab"
   pod 'KeychainAccess'
   pod 'OAuthSwiftAlamofire'
+  pod 'RAMAnimatedTabBarController', "~> 2.0.13"
   pod 'TwitterKit', '2.7'
   pod 'DateTimePicker'
 

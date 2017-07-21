@@ -65,11 +65,13 @@ class FirebaseDatabaseManager {
     func fetchEventsForEventIDs(dictionary: [String: Bool], completion: @escaping ([String: Bool], [String: Any]) -> Void) {
         self.ref.child("events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             var eventsDict: [String: Any] = [:]
-            for eventid in dictionary.keys {
-                let eventDict = snapshot.value(forKey: eventid) as! [String: Any]
-                eventsDict[eventid] = eventDict
+            if snapshot.exists() {
+                for eventid in dictionary.keys {
+                    let eventDict = snapshot.childSnapshot(forPath: eventid).value as! [String: Any]
+                    eventsDict[eventid] = eventDict
+                }
             }
-            completion(dictionary, eventsDict)
+            completion(dictionary, eventsDict) //sent to AppUser.current.fetchevents
         }
     }
     

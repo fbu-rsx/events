@@ -10,7 +10,12 @@ import UIKit
 import MapKit
 
 
+<<<<<<< HEAD:events/CreateEventViewController.swift
 class CreateEventViewController: UIViewController {
+=======
+
+class CreateLocationViewController: UIViewController {
+>>>>>>> eb508f94d58ae5e59c242e4aa791da4e39205dc2:events/CreateLocationViewController.swift
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -29,6 +34,7 @@ class CreateEventViewController: UIViewController {
         
         // Hide navigation bar
         navigationController?.setNavigationBarHidden(true, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     
