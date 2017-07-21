@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -362,7 +362,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UU5-5w-Rqk">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-rZ-fpB">
                                 <rect key="frame" x="12" y="72" width="51" height="48"/>
@@ -650,7 +650,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MapViewNavigation" automaticallyAdjustsScrollViewInsets="NO" id="rH0-r7-7rh" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RA4-yK-Ln0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RA4-yK-Ln0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -665,7 +665,7 @@
             </objects>
             <point key="canvasLocation" x="38" y="690"/>
         </scene>
-        <!--Create-->
+        <!--CreateTitleViewController-->
         <scene sceneID="nTc-IB-847">
             <objects>
                 <viewController storyboardIdentifier="CreateTitleViewController" title="CreateTitleViewController" hidesBottomBarWhenPushed="YES" id="4fP-pC-bW5" customClass="CreateTitleViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
@@ -754,7 +754,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7w-L8-gOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1296.8" y="1423.5382308845578"/>
+            <point key="canvasLocation" x="2193" y="1476"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="wqX-Ig-1Lo">
@@ -784,7 +784,7 @@
             </objects>
             <point key="canvasLocation" x="599" y="7"/>
         </scene>
-        <!--Item-->
+        <!--CreateGuestsNavController-->
         <scene sceneID="cmV-qh-ELk">
             <objects>
                 <navigationController storyboardIdentifier="CreateGuestsNavController" title="CreateGuestsNavController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsWhenKeyboardAppears="YES" id="PuS-zf-HUJ" sceneMemberID="viewController">
@@ -831,7 +831,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" selectedImage="CurrentLocation" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -853,14 +853,14 @@
         <image name="completed" width="64" height="64"/>
         <image name="cost" width="64" height="64"/>
         <image name="fireworks" width="32" height="32"/>
-        <image name="guests" width="64" height="64"/>
         <image name="icon-checkbox-unselected-25x25.png" width="25" height="25"/>
         <image name="maps-and-flags" width="64" height="64"/>
         <image name="user" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="twx-ki-JeW"/>
+        <segue reference="MAt-I2-rRK"/>
         <segue reference="c7v-O3-MXL"/>
+        <segue reference="nYt-HK-i4S"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
