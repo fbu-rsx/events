@@ -1,3 +1,4 @@
+
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
 
@@ -17,6 +18,9 @@ target 'events' do
   pod 'AlamofireImage'
   pod "EVContactsPicker"
   pod "SimpleTab"
+  pod 'KeychainAccess'
+  pod 'OAuthSwiftAlamofire'
+  pod 'TwitterKit', '2.7'
 
   target 'eventsTests' do
     inherit! :search_paths

@@ -89,12 +89,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>KeychainAccess.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Nuke.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>OAuthSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OAuthSwiftAlamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -137,17 +147,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>29FC39268D8166B45E189A3298FB0382</key>
+		<key>1AA4831F832BE9F47D520CD51E80892B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>289DD0C6643C906F884FC95992A5EDAE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3380590F973AFAFA30255D504B7DEDAC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>36747A73BEFD7D62AD5CC49BDAB290D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,6 +182,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6144000A851C15C849A4BD8C2DAB6040</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>681BE6E3D02A43F9BA63777AC435C8FD</key>
 		<dict>
 			<key>primary</key>
@@ -187,6 +202,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>8905DB6521F8FDC34752B69DEE3FDEB7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>982387EC65BA1A8222EF1E08CCF18E48</key>
 		<dict>
 			<key>primary</key>
@@ -198,6 +218,11 @@
 			<true/>
 		</dict>
 		<key>B1C4AAFAF49036C7007633DAA3C806AD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3B21DEFCB5C9D9606A65F9C13ADB1CE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -223,11 +248,6 @@
 			<true/>
 		</dict>
 		<key>D9A6EDB6F67940B165316C4CB54DC7B5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E9573D8CC06D6E29F9A0CD377049FE13</key>
 		<dict>
 			<key>primary</key>
 			<true/>

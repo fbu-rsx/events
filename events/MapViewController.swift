@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import FirebaseAuthUI
+import OAuthSwift
 
 struct PreferenceKeys {
     static let savedItems = "savedItems"
@@ -17,6 +18,10 @@ struct PreferenceKeys {
 
 protocol HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark)
+}
+
+protocol LoadEventsDelegate {
+    func fetchEvents(completion: @escaping () -> Void)
 }
 
 class MapViewController: UIViewController, MKMapViewDelegate {
@@ -31,6 +36,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // Creates an instance of Core Location class
     let locationManager = CLLocationManager()
     var events: [Event] = []
+    
+    var delegate: LoadEventsDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,19 +77,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Ask for Authorisation from the User.
         self.locationManager.requestAlwaysAuthorization()
         
-        
+        self.delegate = AppUser.current
+        print(self.delegate)
+        print(CLLocationManager.locationServicesEnabled())
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            loadAllEvents()
+            delegate.fetchEvents() {
+                self.loadAllEvents()
+                print(self.events)
+            }
         }
         
-        for region in locationManager.monitoredRegions {
-            locationManager.stopMonitoring(for: region)
-        }
-        saveAllEvents()
+//        for region in locationManager.monitoredRegions {
+//            locationManager.stopMonitoring(for: region)
+//        }
+//        saveAllEvents()
     }
     
+
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
@@ -95,11 +108,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.present(authViewController, animated: true, completion: nil)
     }
     
+
     @IBAction func testTransition(_ sender: Any) {
         performSegue(withIdentifier: "test", sender: nil)
     }
     
-
     /**
      *
      * Functions for Geofencing
