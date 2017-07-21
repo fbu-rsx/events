@@ -8,6 +8,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DateTimePicker (1.1.2)
   - EVContactsPicker (0.5.12):
     - Nuke (~> 4.1.2)
   - Fabric (1.6.12)
@@ -122,6 +123,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - AlamofireImage
+  - DateTimePicker
   - EVContactsPicker
   - Firebase/Auth
   - Firebase/Database
@@ -141,6 +143,7 @@ SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DateTimePicker: 518bffa5438ef83a7a687cc4d5e187e5c12012b8
   EVContactsPicker: fd6dec1abe3cfb20c7e9f11946d5d581062de2e5
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
@@ -170,6 +173,6 @@ SPEC CHECKSUMS:
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: 07eed8e23ed2051ab6bdb28abd12d13186b8e241
+PODFILE CHECKSUM: 2a355c29be6901eb33f0cb48ecbe31fb68edef47
 
 COCOAPODS: 1.2.1

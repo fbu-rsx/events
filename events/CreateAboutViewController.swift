@@ -8,9 +8,9 @@
 
 import UIKit
 
-class CreateEventMiscellaneousViewController: UIViewController {
+class CreateAboutViewController: UIViewController {
     let numberOfGuests = (CreateEventMaster.shared.event[EventKey.guestlist.rawValue] as AnyObject).count ?? 0
-    //var delegate: CreateEventMiscellaneousViewControllerDelegate?
+    //weak var delegate: CreateEventMiscellaneousViewControllerDelegate?
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
     @IBOutlet weak var aboutText: UITextField!
@@ -25,7 +25,7 @@ class CreateEventMiscellaneousViewController: UIViewController {
         costPerPersonText.layer.cornerRadius = 8
         costPerPersonText.layer.borderColor = UIColor.white.cgColor
         
-        self.tabBarController?.tabBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     

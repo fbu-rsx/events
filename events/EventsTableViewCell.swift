@@ -10,6 +10,7 @@ import UIKit
 import AlamofireImage
 import FoldingCell
 
+<<<<<<< HEAD
 class EventsTableViewCell: FoldingCell {
     
     
@@ -17,6 +18,20 @@ class EventsTableViewCell: FoldingCell {
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
     @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
+=======
+protocol toDetailProtocol: class {
+    func onTapFunction(event: Event)
+}
+
+class EventsTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var organizerPic: UIImageView!
+    @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var organizerName: UILabel!
+    @IBOutlet weak var eventDescription: UILabel!
+    
+    weak var delegate: toDetailProtocol?
+>>>>>>> 9784af8529ca19cd0a5b304510df00845c65ae59
     
     /*
     var eventname: String
