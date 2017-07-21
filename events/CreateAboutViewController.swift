@@ -10,7 +10,7 @@ import UIKit
 
 class CreateAboutViewController: UIViewController {
     let numberOfGuests = (CreateEventMaster.shared.event[EventKey.guestlist.rawValue] as AnyObject).count ?? 0
-    //var delegate: CreateEventMiscellaneousViewControllerDelegate?
+    //weak var delegate: CreateEventMiscellaneousViewControllerDelegate?
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
     @IBOutlet weak var aboutText: UITextField!

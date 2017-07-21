@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CreateEventMasterDelegate {
+protocol CreateEventMasterDelegate: class {
     func didCreateNewEvent(_ event: Event)
 }
 
@@ -17,7 +17,7 @@ class CreateEventMaster {
     static var shared = CreateEventMaster()
     
     var event: [String: Any]
-    var delegate: CreateEventMasterDelegate?
+    weak var delegate: CreateEventMasterDelegate?
     
     init() {
         self.event = [EventKey.id.rawValue: FirebaseDatabaseManager.shared.getNewEventID(),

@@ -16,11 +16,11 @@ struct PreferenceKeys {
     static let savedItems = "savedItems"
 }
 
-protocol HandleMapSearch {
+protocol HandleMapSearch: class {
     func dropPinZoomIn(placemark:MKPlacemark)
 }
 
-protocol LoadEventsDelegate {
+protocol LoadEventsDelegate: class {
     func fetchEvents(completion: @escaping () -> Void)
 }
 
