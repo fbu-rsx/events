@@ -645,26 +645,6 @@
             </objects>
             <point key="canvasLocation" x="4108" y="690"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ufD-yA-eOh">
-            <objects>
-                <navigationController storyboardIdentifier="MapViewNavigation" automaticallyAdjustsScrollViewInsets="NO" id="rH0-r7-7rh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="RA4-yK-Ln0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.26573117206806551" green="0.82715339466091375" blue="0.7258820776981717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="7Cl-Jt-3e0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OK8-Z8-sUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="38" y="690"/>
-        </scene>
         <!--CreateTitleViewController-->
         <scene sceneID="nTc-IB-847">
             <objects>
@@ -796,7 +776,6 @@
                         <segue destination="tDq-Np-jW4" kind="relationship" relationship="viewControllers" id="iz2-fA-JWy"/>
                         <segue destination="5vP-o7-9Jm" kind="relationship" relationship="viewControllers" id="bGt-z2-DJA"/>
                         <segue destination="Hae-uG-d6M" kind="relationship" relationship="viewControllers" id="vSl-oG-iUT"/>
-                        <segue destination="4fP-pC-bW5" kind="relationship" relationship="viewControllers" id="twx-ki-JeW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULM-FI-av1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -837,7 +816,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="c7v-O3-MXL"/>
-        <segue reference="MAt-I2-rRK"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
