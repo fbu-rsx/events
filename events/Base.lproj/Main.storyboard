@@ -645,29 +645,6 @@
             </objects>
             <point key="canvasLocation" x="4108" y="690"/>
         </scene>
-<<<<<<< HEAD
-        <!--Navigation Controller-->
-        <scene sceneID="ufD-yA-eOh">
-            <objects>
-                <navigationController storyboardIdentifier="MapViewNavigation" automaticallyAdjustsScrollViewInsets="NO" id="rH0-r7-7rh" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RA4-yK-Ln0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.26573117206806551" green="0.82715339466091375" blue="0.7258820776981717" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="7Cl-Jt-3e0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OK8-Z8-sUM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="38" y="690"/>
-        </scene>
-=======
->>>>>>> 818b5a31b27dd5915501d63c0f46d21b22829c06
         <!--CreateTitleViewController-->
         <scene sceneID="nTc-IB-847">
             <objects>
