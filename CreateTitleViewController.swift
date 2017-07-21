@@ -22,13 +22,11 @@ class CreateTitleViewController: UIViewController {
         eventTitle.setBottomBorder()
         self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
         
-<<<<<<< HEAD:CreateEventTitleViewController.swift
         //        let formatter = DateFormatter()
         //        formatter.dateFormat = "MMM d, h:mm a"
-        //        eventTime.text = formatter.string(from: datePicker.date)
-=======
+        //        eventTime.text = formatter.string(from: datePicker.date)\
+        
         self.tabBarController?.tabBar.isHidden = false
->>>>>>> eb508f94d58ae5e59c242e4aa791da4e39205dc2:CreateTitleViewController.swift
     }
     
     // Bounce up-and-down animation for photo

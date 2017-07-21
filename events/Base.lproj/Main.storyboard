@@ -645,6 +645,7 @@
             </objects>
             <point key="canvasLocation" x="4108" y="690"/>
         </scene>
+<<<<<<< HEAD
         <!--Navigation Controller-->
         <scene sceneID="ufD-yA-eOh">
             <objects>
@@ -665,6 +666,8 @@
             </objects>
             <point key="canvasLocation" x="38" y="690"/>
         </scene>
+=======
+>>>>>>> 818b5a31b27dd5915501d63c0f46d21b22829c06
         <!--CreateTitleViewController-->
         <scene sceneID="nTc-IB-847">
             <objects>
@@ -734,28 +737,6 @@
             </objects>
             <point key="canvasLocation" x="37.600000000000001" y="2245.7271364317844"/>
         </scene>
-        <!--Item-->
-        <scene sceneID="zgE-N8-Ejn">
-            <objects>
-                <tabBarController storyboardIdentifier="CreateEventTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="pNi-rc-m3k" customClass="CreateEventTabBarController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mOL-Vg-fIs"/>
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="fwS-LK-OMZ">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="4fP-pC-bW5" kind="relationship" relationship="viewControllers" id="nYt-HK-i4S"/>
-                        <segue destination="h1v-m1-jDG" kind="relationship" relationship="viewControllers" id="Qhn-vs-Tmi"/>
-                        <segue destination="PuS-zf-HUJ" kind="relationship" relationship="viewControllers" id="FGM-JR-3aE"/>
-                        <segue destination="TFw-CM-ad2" kind="relationship" relationship="viewControllers" id="8Rs-00-kIt"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c7w-L8-gOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2193" y="1476"/>
-        </scene>
         <!--Table View Controller-->
         <scene sceneID="wqX-Ig-1Lo">
             <objects>
@@ -790,7 +771,7 @@
                 <navigationController storyboardIdentifier="CreateGuestsNavController" title="CreateGuestsNavController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsWhenKeyboardAppears="YES" id="PuS-zf-HUJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1SE-n4-EYM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgd-Fb-spC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hgd-Fb-spC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -818,7 +799,6 @@
                         <segue destination="tDq-Np-jW4" kind="relationship" relationship="viewControllers" id="iz2-fA-JWy"/>
                         <segue destination="5vP-o7-9Jm" kind="relationship" relationship="viewControllers" id="bGt-z2-DJA"/>
                         <segue destination="Hae-uG-d6M" kind="relationship" relationship="viewControllers" id="vSl-oG-iUT"/>
-                        <segue destination="4fP-pC-bW5" kind="relationship" relationship="viewControllers" id="twx-ki-JeW"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULM-FI-av1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -858,7 +838,6 @@
         <image name="user" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="MAt-I2-rRK"/>
         <segue reference="c7v-O3-MXL"/>
         <segue reference="nYt-HK-i4S"/>
     </inferredMetricsTieBreakers>
