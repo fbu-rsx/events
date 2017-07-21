@@ -17,8 +17,10 @@ target 'events' do
   pod 'ImagePicker'
   pod 'AlamofireImage'
   pod "EVContactsPicker"
+  pod "SimpleTab"
   pod 'KeychainAccess'
   pod 'OAuthSwiftAlamofire'
+  pod 'RAMAnimatedTabBarController', "~> 2.0.13"
   pod 'TwitterKit', '2.7'
 
   target 'eventsTests' do

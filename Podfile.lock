@@ -108,9 +108,11 @@ PODS:
   - OAuthSwiftAlamofire (0.1.0):
     - Alamofire
     - OAuthSwift
+  - RAMAnimatedTabBarController (2.0.13)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - SimpleTab (0.2.1)
   - TwitterCore (2.7.0):
     - Fabric
   - TwitterKit (2.7.0):
@@ -129,6 +131,8 @@ DEPENDENCIES:
   - KeychainAccess
   - OAuthSwift (~> 1.1.2)
   - OAuthSwiftAlamofire
+  - RAMAnimatedTabBarController (~> 2.0.13)
+  - SimpleTab
   - TwitterKit (= 2.7)
 
 SPEC CHECKSUMS:
@@ -157,10 +161,12 @@ SPEC CHECKSUMS:
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SimpleTab: d24e026736c30951ce60d194268042a6afedaf4c
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: 1d4a1207829691c886f8ab102ba58aa181ac705a
+PODFILE CHECKSUM: c2f4afdb186d8f566704a6c5ba242656ba092af2
 
 COCOAPODS: 1.2.1
