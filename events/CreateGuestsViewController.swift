@@ -9,7 +9,7 @@
 import UIKit
 import EVContactsPicker
 
-class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, EVContactsPickerDelegate {
+class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, EVContactsPickerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var inviteButton: UIButton!
@@ -29,6 +29,13 @@ class CreateEventGuestsViewController: UIViewController, UITableViewDataSource, 
         inviteButton.layer.borderColor = UIColor.white.cgColor
         inviteButton.clipsToBounds = true
         // DISPLAY: Hide navigation controller
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     

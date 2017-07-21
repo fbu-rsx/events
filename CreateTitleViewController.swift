@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateEventTitleViewController: UIViewController {
+class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var eventTime: UILabel!
@@ -22,6 +22,7 @@ class CreateEventTitleViewController: UIViewController {
         formatter.dateFormat = "MMM d, h:mm a"
         eventTime.text = formatter.string(from: datePicker.date)
         
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {
