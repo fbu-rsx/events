@@ -14,16 +14,31 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
     @IBOutlet weak var aboutText: UITextField!
-
-
+    @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var eventTimeLabel: UILabel!
+    @IBOutlet weak var sendInvitesButton: UIButton!
+    @IBOutlet weak var perPersonText: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.setNavigationBarHidden(true, animated: true)
-        self.view.backgroundColor = UIColor(hexString: "#1abc9c")
-        costPerPersonText.layer.borderWidth = 1.0
-        costPerPersonText.layer.cornerRadius = 8
-        costPerPersonText.layer.borderColor = UIColor.white.cgColor
+        eventTitleLabel.textColor = UIColor(hexString: "#4CB6BE")
+        eventTimeLabel.textColor = UIColor(hexString: "#484848")
+        
+        totalCostText.textColor = UIColor(hexString: "#4CB6BE")
+        totalCostText.setBottomBorder()
+        costPerPersonText.textColor = UIColor(hexString: "#4CB6BE")
+        perPersonText.textColor = UIColor(hexString: "#484848")
+        aboutText.textColor = UIColor(hexString: "#4CB6BE")
+        aboutText.setBottomBorder()
+        sendInvitesButton.layer.cornerRadius = 5
+        sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        
+        
+        //        costPerPersonText.layer.borderWidth = 1.0
+        //        costPerPersonText.layer.cornerRadius = 8
+        //        costPerPersonText.layer.borderColor = UIColor.white.cgColor
         
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -35,7 +50,7 @@ class CreateAboutViewController: UIViewController {
         let costPerPerson = totalCost / totalAttendees
         costPerPersonText.text = String(format: "$%.2f", costPerPerson)
     }
-
+    
     @IBAction func onCreate(_ sender: Any) {
         CreateEventMaster.shared.event[EventKey.cost.rawValue] = totalCostText.text
         CreateEventMaster.shared.event[EventKey.about.rawValue] = aboutText.text
@@ -64,15 +79,15 @@ class CreateAboutViewController: UIViewController {
     @IBAction func didTapBackButton(_ sender: Any) {
         self.tabBarController?.selectedIndex = 2
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

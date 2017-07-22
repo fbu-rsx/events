@@ -23,6 +23,7 @@ target 'events' do
   pod 'RAMAnimatedTabBarController', "~> 2.0.13"
   pod 'TwitterKit', '2.7'
   pod 'DateTimePicker'
+  pod 'FaveButton', '~> 2.0.3'
 
   target 'eventsTests' do
     inherit! :search_paths

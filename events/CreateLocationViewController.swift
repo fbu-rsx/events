@@ -9,21 +9,17 @@
 import UIKit
 import MapKit
 
-
 class CreateLocationViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+ 
+    @IBOutlet weak var zoomToCurrentLocation: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Background color
-        self.view.backgroundColor = UIColor(hexString: "#f1c40f")
-        
         self.mapView.showsUserLocation = true
         // Tracks the user's location
         self.mapView.setUserTrackingMode(.follow, animated: true)
-        
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
@@ -34,13 +30,20 @@ class CreateLocationViewController: UIViewController {
     }
     
     
-//        
-//    @IBAction func onZoomToCurrentLocation(_ sender: AnyObject) {
-////        mapView.zoomToUserLocation()
-//        guard let coordinate = mapView.userLocation.location?.coordinate else { return }
-//        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
-//        mapView.setRegion(region, animated: true)
-//    }
+    @IBAction func loadNextPage(_ sender: Any) {
+        let parentViewController = self.parent as! CreateEventPageController
+        parentViewController.setViewControllers([parentViewController.orderedViewControllers[2]],
+                                                direction: .forward,
+                                                animated: true,
+                                                completion: nil)
+    }
+
+
+    @IBAction func onZoomToCurrentLocation(_ sender: Any) {
+        guard let coordinate = mapView.userLocation.location?.coordinate else { return }
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
+        mapView.setRegion(region, animated: true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -12,6 +12,7 @@ PODS:
   - EVContactsPicker (0.5.12):
     - Nuke (~> 4.1.2)
   - Fabric (1.6.12)
+  - FaveButton (2.0.3)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -118,6 +119,7 @@ DEPENDENCIES:
   - AlamofireImage
   - DateTimePicker
   - EVContactsPicker
+  - FaveButton (~> 2.0.3)
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
@@ -138,6 +140,7 @@ SPEC CHECKSUMS:
   DateTimePicker: 518bffa5438ef83a7a687cc4d5e187e5c12012b8
   EVContactsPicker: fd6dec1abe3cfb20c7e9f11946d5d581062de2e5
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
+  FaveButton: cfcbc5e73da159c4f916613da5687357b5bb4783
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
@@ -163,6 +166,6 @@ SPEC CHECKSUMS:
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: dc43601a365e8aace8055e10a72601ead7d2f768
+PODFILE CHECKSUM: 360948c33cdf64d911fb68396867d109ea143127
 
 COCOAPODS: 1.2.1
