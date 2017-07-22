@@ -11,12 +11,31 @@ import Firebase
 import GoogleSignIn
 
 class SignInViewController: UIViewController {
-
+    
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var logoView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
+        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
     }
+    
+    // Bounce up-and-down animation for photo
+    func mapAnimation () {
+        UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
+            self.logoView.frame.origin.y -= 10
+        })
+        self.logoView.frame.origin.y += 10
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        mapAnimation()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -55,9 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
             window?.rootViewController = authViewController
         }
 
-//        application.registerUserNotificationSettings(UNUserNotificationCenter(types: [.sound, .alert, .badge], categories: nil))
-//        UNUserNotificationCenter.removeAllPendingNotificationRequests(self)
-//        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+        UIApplication.shared.cancelAllLocalNotifications()
+        
         return true
     }
     
