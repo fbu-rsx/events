@@ -11,7 +11,7 @@ import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
-    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var logoImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,6 @@ class CreateTitleViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.eventTitle.textColor = UIColor(hexString: "#4CB6BE")
         eventTitle.setBottomBorder()
-        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
         
         //        let formatter = DateFormatter()
         //        formatter.dateFormat = "MMM d, h:mm a"
@@ -31,9 +30,9 @@ class CreateTitleViewController: UIViewController {
     // Bounce up-and-down animation for photo
     func mapAnimation () {
             UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
-                self.logoView.frame.origin.y -= 10
+                self.logoImage.frame.origin.y -= 10
             })
-        self.logoView.frame.origin.y += 10
+        self.logoImage.frame.origin.y += 10
         }
     
     
@@ -43,7 +42,7 @@ class CreateTitleViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.logoView.layer.removeAllAnimations()
+        self.logoImage.layer.removeAllAnimations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
