@@ -76,17 +76,27 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return
         }
         
+        for heightnum in 0..<cellHeights.count{
+            if cellHeights[heightnum] == kOpenCellHeight{
+                if heightnum != indexPath.row {
+                    return
+                }
+            }
+        }
+        
         var duration = 0.0
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
             //cell.selectedAnimation(true, animated: true, completion: nil)
             cell.unfold(true, animated: true, completion: nil)
             duration = 0.5
+            tableView.isScrollEnabled = false
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
             //cell.selectedAnimation(false, animated: true, completion: nil)
             cell.unfold(false, animated: true, completion: nil)
             duration = 1.1
+            tableView.isScrollEnabled = true
         }
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
