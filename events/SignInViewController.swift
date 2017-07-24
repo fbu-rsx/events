@@ -20,8 +20,6 @@ class SignInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
         signInButton.colorScheme = .light
         signInButton.style = .wide
@@ -42,7 +40,6 @@ class SignInViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         self.logoImage.layer.removeAllAnimations()
     }
 

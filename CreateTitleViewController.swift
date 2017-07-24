@@ -39,15 +39,15 @@ class CreateTitleViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, h:mm a"
         self.eventTime.text = dateFormatter.string(from: date)
+      
     }
     
     // Bounce up-and-down animation for photo
-    func mapAnimation () {
-        
+    func mapAnimation() {
         UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
-            self.logoView.frame.origin.y -= 10
+            self.logoImage.frame.origin.y -= 10
         })
-        self.logoView.frame.origin.y += 10
+        self.logoImage.frame.origin.y += 10
     }
     
     override func viewDidAppear(_ animated: Bool) {

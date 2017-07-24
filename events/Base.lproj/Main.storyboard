@@ -116,18 +116,18 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gB7-wU-K4z" id="BA6-TO-QaZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kw2-sL-pEH">
-                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="15" y="4" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ljt-8o-2CA">
-                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="15" y="25" width="44" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -168,7 +168,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9jb-GC-5i8" id="Hhk-Hy-X6t">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(202) 232-6509" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXU-JH-MIM">
@@ -500,7 +500,7 @@
                                 <cells/>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organizer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gt-Ad-HAQ">
-                                <rect key="frame" x="16" y="158" width="74" height="20.5"/>
+                                <rect key="frame" x="16" y="158" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -513,7 +513,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invited:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfK-xz-bPA">
-                                <rect key="frame" x="16" y="367" width="46.5" height="17"/>
+                                <rect key="frame" x="16" y="367" width="47" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -523,7 +523,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5d-R2-4mj">
-                                <rect key="frame" x="309" y="153.5" width="50" height="30"/>
+                                <rect key="frame" x="309" y="154" width="50" height="30"/>
                                 <state key="normal" title="Upload"/>
                                 <connections>
                                     <action selector="upload:" destination="sDy-vT-vDK" eventType="touchUpInside" id="r7y-Cq-V5C"/>
@@ -685,6 +685,12 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0lb-zK-Bbz">
                                 <rect key="frame" x="16" y="73" width="343" height="276"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="imageView:Jtt-eB-XML:image" translatesAutoresizingMaskIntoConstraints="NO" id="Jtt-eB-XML">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="284"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create an Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yV-ff-kv9">
@@ -713,10 +719,6 @@
                                     <action selector="onSelectTime:" destination="4fP-pC-bW5" eventType="touchUpInside" id="q7O-AG-Lei"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mapLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Jtt-eB-XML">
-                                <rect key="frame" x="16" y="73" width="343" height="284"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -730,6 +732,7 @@
                         <outlet property="currentTimeText" destination="Dw6-72-6OB" id="0gh-HT-UDb"/>
                         <outlet property="eventTime" destination="Dw6-72-6OB" id="Yam-6N-tm3"/>
                         <outlet property="eventTitle" destination="D8s-3x-Bwp" id="KHy-1w-a9y"/>
+                        <outlet property="logoImage" destination="Jtt-eB-XML" id="vG6-Th-GtU"/>
                         <outlet property="logoView" destination="0lb-zK-Bbz" id="o7c-zm-DFU"/>
                         <outlet property="selectTimeButton" destination="fQL-6J-raL" id="nuN-kb-vFE"/>
                     </connections>
@@ -756,7 +759,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ng5-Ag-17X" id="6hu-No-xPP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -777,7 +780,7 @@
                 <navigationController storyboardIdentifier="CreateGuestsNavController" title="CreateGuestsNavController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsWhenKeyboardAppears="YES" id="PuS-zf-HUJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1SE-n4-EYM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgd-Fb-spC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hgd-Fb-spC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -822,7 +825,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -844,7 +847,21 @@
         <image name="envelope" width="64" height="64"/>
         <image name="fireworks" width="32" height="32"/>
         <image name="icon-checkbox-unselected-25x25.png" width="25" height="25"/>
-        <image name="mapLogo" width="16" height="16"/>
+        <image name="imageView:Jtt-eB-XML:image" width="16" height="16">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGODlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKwHCBEW
+GxwiIyksMjVVJG51bGzUCQoLDA0ODxBWJGNsYXNzXE5TSW1hZ2VGbGFnc1ZOU1JlcHNXTlNDb2xvcoAL
+EgTAAACAAoAJ0hIJExVaTlMub2JqZWN0c6EUgAOACNISCRcVohgZgASABYAIEAXTHQkeHyAhV05TLmJh
+c2VbTlMucmVsYXRpdmWAAIAHgAZfEHxmaWxlOi8vL0FwcGxpY2F0aW9ucy9YY29kZV84LjMuMl9mYi5h
+cHAvQ29udGVudHMvUGx1Z0lucy9JREVJbnRlcmZhY2VCdWlsZGVyS2l0LmZyYW1ld29yay9SZXNvdXJj
+ZXMvSUJNaXNzaW5nSW1hZ2VHbHlwaC50aWZm0iQlJidaJGNsYXNzbmFtZVgkY2xhc3Nlc1VOU1VSTKIm
+KFhOU09iamVjdNIkJSorV05TQXJyYXmiKijTLS4JLzAxV05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQ
+A4AK0iQlMzRXTlNDb2xvcqIzKNIkJTY3V05TSW1hZ2WiNihfEA9OU0tleWVkQXJjaGl2ZXLROjtUcm9v
+dIABAAgAEQAaACMALQAyADcARABKAFMAWgBnAG4AdgB4AH0AfwCBAIYAkQCTAJUAlwCcAJ8AoQCjAKUA
+pwCuALYAwgDEAMYAyAFHAUwBVwFgAWYBaQFyAXcBfwGCAYkBkQGeAaMBpQGnAawBtAG3AbwBxAHHAdkB
+3AHhAAAAAAAAAgEAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAeM
+</mutableData>
+        </image>
         <image name="maps-and-flags" width="64" height="64"/>
         <image name="piggybank" width="64" height="64"/>
         <image name="right-arrow" width="32" height="32"/>
