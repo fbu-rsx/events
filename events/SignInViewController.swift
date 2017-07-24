@@ -16,6 +16,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var logoImage: UIImageView!
     @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var emailButton: UIButton!
 
     
     override func viewDidLoad() {
@@ -51,6 +52,10 @@ class SignInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func tappedEmailButton(_ sender: Any) {
+    }
+    
     
 
     /*
