@@ -370,7 +370,7 @@
                             <constraint firstItem="2Ay-bc-ZLe" firstAttribute="top" secondItem="2eU-1V-Rna" secondAttribute="bottom" id="zok-2e-NM1"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Create" image="fireworks" id="9NM-59-ZPe" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <tabBarItem key="tabBarItem" title="Create" selectedImage="fireworks" id="9NM-59-ZPe" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <connections>
                         <outlet property="containerView" destination="2eU-1V-Rna" id="hmR-bh-zox"/>
                         <outlet property="pageControl" destination="wJJ-Ce-4Wb" id="HVY-1n-agP"/>
@@ -444,38 +444,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="U3F-Y3-H8c">
-                                <rect key="frame" x="21" y="28" width="333" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="333" id="sN7-18-9lM"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="My Events"/>
-                                    <segment title="Upcoming"/>
-                                    <segment title="Past"/>
-                                </segments>
-                                <connections>
-                                    <action selector="changedSegment:" destination="Hae-uG-d6M" eventType="valueChanged" id="6Wt-S5-YlT"/>
-                                </connections>
-                            </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-6O-xea">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="U3F-Y3-H8c" secondAttribute="bottom" constant="8" id="1q7-bk-Zuy"/>
-                            <constraint firstItem="U3F-Y3-H8c" firstAttribute="centerX" secondItem="Lhf-XP-lMH" secondAttribute="centerX" id="9WE-20-ie4"/>
-                            <constraint firstItem="U3F-Y3-H8c" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" constant="8" id="eaD-r3-xaC"/>
-                            <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="mDl-VR-Ewh"/>
-                            <constraint firstItem="EKf-qR-McR" firstAttribute="top" secondItem="eeW-6O-xea" secondAttribute="bottom" id="pcD-qQ-rct"/>
-                            <constraint firstItem="eeW-6O-xea" firstAttribute="leading" secondItem="Lhf-XP-lMH" secondAttribute="leading" id="sSH-dp-1UI"/>
+                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" id="0wY-K3-aGz"/>
+                            <constraint firstItem="eeW-6O-xea" firstAttribute="leading" secondItem="Lhf-XP-lMH" secondAttribute="leading" id="E9g-Bi-OPo"/>
+                            <constraint firstItem="EKf-qR-McR" firstAttribute="top" secondItem="eeW-6O-xea" secondAttribute="bottom" id="HGb-Gt-M97"/>
+                            <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="izd-Vh-12E"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Events" selectedImage="icon-checkbox-unselected-25x25.png" id="FkV-xV-Dt9" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <connections>
-                        <outlet property="segmentedControl" destination="U3F-Y3-H8c" id="9cH-0t-a73"/>
                         <outlet property="tableView" destination="eeW-6O-xea" id="TQA-eK-cFz"/>
                         <segue destination="sDy-vT-vDK" kind="show" identifier="showDetail" id="S3W-M4-Gqk"/>
                     </connections>
@@ -730,6 +713,10 @@
                                     <action selector="onSelectTime:" destination="4fP-pC-bW5" eventType="touchUpInside" id="q7O-AG-Lei"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="mapLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Jtt-eB-XML">
+                                <rect key="frame" x="16" y="73" width="343" height="284"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -790,7 +777,7 @@
                 <navigationController storyboardIdentifier="CreateGuestsNavController" title="CreateGuestsNavController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsWhenKeyboardAppears="YES" id="PuS-zf-HUJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1SE-n4-EYM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hgd-Fb-spC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgd-Fb-spC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -808,10 +795,10 @@
             </objects>
             <point key="canvasLocation" x="1448.8" y="2245.7271364317844"/>
         </scene>
-        <!--Simple Tab Bar Controller-->
+        <!--MasterTabBarController-->
         <scene sceneID="Ysk-VG-eLI">
             <objects>
-                <tabBarController storyboardIdentifier="MapViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="rH5-Xk-wSQ" customClass="SimpleTabBarController" customModule="SimpleTab" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MasterTabBarController" title="MasterTabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rH5-Xk-wSQ" customClass="MasterTabBarController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="HJy-Hj-09D"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="k7T-E5-rg8" customClass="SimpleTabBar" customModule="SimpleTab">
@@ -833,9 +820,9 @@
         <scene sceneID="ddD-Mu-M3Z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" selectedImage="CurrentLocation" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -857,6 +844,7 @@
         <image name="envelope" width="64" height="64"/>
         <image name="fireworks" width="32" height="32"/>
         <image name="icon-checkbox-unselected-25x25.png" width="25" height="25"/>
+        <image name="mapLogo" width="16" height="16"/>
         <image name="maps-and-flags" width="64" height="64"/>
         <image name="piggybank" width="64" height="64"/>
         <image name="right-arrow" width="32" height="32"/>
