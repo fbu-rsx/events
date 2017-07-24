@@ -11,8 +11,7 @@ import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var logoImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +19,6 @@ class CreateTitleViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.eventTitle.textColor = UIColor(hexString: "#4CB6BE")
         eventTitle.setBottomBorder()
-        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
         
         //        let formatter = DateFormatter()
         //        formatter.dateFormat = "MMM d, h:mm a"
@@ -32,9 +30,9 @@ class CreateTitleViewController: UIViewController {
     // Bounce up-and-down animation for photo
     func mapAnimation () {
             UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
-                self.logoView.frame.origin.y -= 10
+                self.logoImage.frame.origin.y -= 10
             })
-        self.logoView.frame.origin.y += 10
+        self.logoImage.frame.origin.y += 10
         }
     
     
@@ -44,7 +42,7 @@ class CreateTitleViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.logoView.layer.removeAllAnimations()
+        self.logoImage.layer.removeAllAnimations()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,31 +62,16 @@ class CreateTitleViewController: UIViewController {
         picker.highlightColor = UIColor(red: 255.0/255.0, green: 138.0/255.0, blue: 138.0/255.0, alpha: 1)
         picker.isDatePickerOnly = false // to hide time and show only date picker
         picker.is12HourFormat = true
+        picker.dateFormat = "MMM d, YYYY H:mm a"
         picker.completionHandler = { date in
             // do something after tapping done
+            
+            CreateEventMaster.shared.event[EventKey.date.rawValue] = date.description
         }
     }
     
     @IBAction func didSetTitle(_ sender: Any) {
         CreateEventMaster.shared.event[EventKey.name.rawValue] = eventTitle.text
-    }
-    
-    @IBAction func didSetDate(_ sender: Any) {
-        CreateEventMaster.shared.event[EventKey.date.rawValue] = datePicker.date.description
-        
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MMM d, h:mm a"
-//        eventTime.text = formatter.string(from: datePicker.date)
-    }
-    
-    @IBAction func didTapNext(_ sender: Any) {
-        if valid() {
-            self.tabBarController?.selectedIndex = 1
-        }
-    }
-    
-    @IBAction func didHitExitButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func didTapDismiss(_ sender: Any) {

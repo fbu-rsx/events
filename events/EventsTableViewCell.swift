@@ -18,6 +18,7 @@ class EventsTableViewCell: FoldingCell {
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
     @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
+
     
     @IBOutlet weak var closedProfileImageView: UIImageView!
     @IBOutlet weak var closedEventTitle: UILabel!
