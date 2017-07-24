@@ -27,10 +27,6 @@ class CreateTitleViewController: UIViewController {
         selectTimeButton.layer.cornerRadius = 5
         selectTimeButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         
-        //        let formatter = DateFormatter()
-        //        formatter.dateFormat = "MMM d, h:mm a"
-        //        eventTime.text = formatter.string(from: datePicker.date)\
-        
         self.tabBarController?.tabBar.isHidden = false
         
         let date = Date()
@@ -76,7 +72,6 @@ class CreateTitleViewController: UIViewController {
     
     @IBAction func onSelectTime(_ sender: Any) {
         dateTimePicker()
-        
     }
     
     // DateTimePicker Pod
