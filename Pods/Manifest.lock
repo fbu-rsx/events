@@ -12,20 +12,21 @@ PODS:
   - EVContactsPicker (0.5.12):
     - Nuke (~> 4.1.2)
   - Fabric (1.6.12)
+  - FaveButton (2.0.3)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
     - FBSDKCoreKit
-  - Firebase/Auth (4.0.4):
+  - Firebase/Auth (4.0.3):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
-  - Firebase/Core (4.0.4):
+  - Firebase/Core (4.0.3):
     - FirebaseAnalytics (= 4.0.2)
-    - FirebaseCore (= 4.0.4)
-  - Firebase/Database (4.0.4):
+    - FirebaseCore (= 4.0.3)
+  - Firebase/Database (4.0.3):
     - Firebase/Core
     - FirebaseDatabase (= 4.0.0)
-  - Firebase/Storage (4.0.4):
+  - Firebase/Storage (4.0.3):
     - Firebase/Core
     - FirebaseStorage (= 2.0.0)
   - FirebaseAnalytics (4.0.2):
@@ -36,9 +37,8 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.4):
+  - FirebaseCore (4.0.3):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-    - nanopb (~> 0.3)
   - FirebaseDatabase (4.0.0):
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
@@ -100,11 +100,6 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.11)
   - ImagePicker (2.1.1)
   - KeychainAccess (3.0.2)
-  - nanopb (0.3.8):
-    - nanopb/decode (= 0.3.8)
-    - nanopb/encode (= 0.3.8)
-  - nanopb/decode (0.3.8)
-  - nanopb/encode (0.3.8)
   - Nuke (4.1.2)
   - OAuthSwift (1.1.2)
   - OAuthSwiftAlamofire (0.1.0):
@@ -125,6 +120,7 @@ DEPENDENCIES:
   - AlamofireImage
   - DateTimePicker
   - EVContactsPicker
+  - FaveButton (~> 2.0.3)
   - Firebase/Auth
   - Firebase/Database
   - Firebase/Storage
@@ -146,12 +142,13 @@ SPEC CHECKSUMS:
   DateTimePicker: 518bffa5438ef83a7a687cc4d5e187e5c12012b8
   EVContactsPicker: fd6dec1abe3cfb20c7e9f11946d5d581062de2e5
   Fabric: f050464eac45a2ce5a8e6e6a07e977c0df32fe28
+  FaveButton: cfcbc5e73da159c4f916613da5687357b5bb4783
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
-  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
+  Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
-  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
+  FirebaseCore: c709067051de07bdaffdc4e735cd7299a23c463a
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
@@ -163,7 +160,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
-  nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
@@ -173,6 +169,6 @@ SPEC CHECKSUMS:
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: 2a355c29be6901eb33f0cb48ecbe31fb68edef47
+PODFILE CHECKSUM: 73d82c2b41a887c653f926aebdfc5d6446c7ec6a
 
 COCOAPODS: 1.2.1

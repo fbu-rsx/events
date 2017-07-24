@@ -11,30 +11,44 @@ import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
+    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var eventTime: UILabel!
+    @IBOutlet weak var createAnEventText: UILabel!
+    @IBOutlet weak var currentTimeText: UILabel!
+    @IBOutlet weak var selectTimeButton: UIButton!
     @IBOutlet weak var logoImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         self.eventTitle.textColor = UIColor(hexString: "#4CB6BE")
         eventTitle.setBottomBorder()
+        self.createAnEventText.textColor = UIColor(hexString: "#484848")
+        self.currentTimeText.textColor = UIColor(hexString: "#484848")
+        selectTimeButton.layer.cornerRadius = 5
+        selectTimeButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
         
         //        let formatter = DateFormatter()
         //        formatter.dateFormat = "MMM d, h:mm a"
         //        eventTime.text = formatter.string(from: datePicker.date)\
         
         self.tabBarController?.tabBar.isHidden = false
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        self.eventTime.text = dateFormatter.string(from: date)
     }
     
     // Bounce up-and-down animation for photo
     func mapAnimation () {
-            UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
-                self.logoImage.frame.origin.y -= 10
-            })
-        self.logoImage.frame.origin.y += 10
-        }
-    
+        
+        UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
+            self.logoView.frame.origin.y -= 10
+        })
+        self.logoView.frame.origin.y += 10
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         mapAnimation()
@@ -50,20 +64,37 @@ class CreateTitleViewController: UIViewController {
         if let title = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String {
             eventTitle.text = title
         }
+        
+        if let selected = CreateEventMaster.shared.event[EventKey.date.rawValue]  {
+            let dateConverter = DateFormatter()
+            dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
+            let date = dateConverter.date(from: selected as! String)!
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            self.eventTime.text = dateFormatter.string(from: date)
+        }
     }
     
     @IBAction func onSelectTime(_ sender: Any) {
         dateTimePicker()
+        
     }
     
     // DateTimePicker Pod
     func dateTimePicker () {
         let picker = DateTimePicker.show()
-        picker.highlightColor = UIColor(red: 255.0/255.0, green: 138.0/255.0, blue: 138.0/255.0, alpha: 1)
-        picker.isDatePickerOnly = false // to hide time and show only date picker
+        picker.highlightColor = UIColor(hexString: "#FEB2A4")
+        picker.isDatePickerOnly = false
+        picker.selectedDate = Date()
+        picker.dateFormat = "MMM d, h:mm a"
         picker.is12HourFormat = true
         picker.dateFormat = "MMM d, YYYY H:mm a"
         picker.completionHandler = { date in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            self.eventTime.text = dateFormatter.string(from: picker.selectedDate)
+            CreateEventMaster.shared.event[EventKey.date.rawValue] = self.eventTime.text
             // do something after tapping done
             
             CreateEventMaster.shared.event[EventKey.date.rawValue] = date.description
@@ -107,7 +138,7 @@ extension UIColor {
     }
 }
 
-// Enable a line under text field
+// Shows a line under text field
 extension UITextField {
     func setBottomBorder() {
         self.borderStyle = .none
