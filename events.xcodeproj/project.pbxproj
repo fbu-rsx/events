@@ -44,6 +44,9 @@
 		4FCB629C1F143DC400BBDC71 /* eventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */; };
 		4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */; };
 		4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */; };
+		4FE3AF731F266D8D0055FD90 /* EmailSignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3AF721F266D8D0055FD90 /* EmailSignInViewController.swift */; };
+		4FE3AF751F266D9F0055FD90 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3AF741F266D9F0055FD90 /* CreateAccountViewController.swift */; };
+		4FE3AF771F266DB90055FD90 /* PhoneNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3AF761F266DB90055FD90 /* PhoneNumberViewController.swift */; };
 		7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */; };
 		7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */; };
 		7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */; };
@@ -118,6 +121,9 @@
 		4FCB629D1F143DC400BBDC71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterTabBarController.swift; sourceTree = "<group>"; };
+		4FE3AF721F266D8D0055FD90 /* EmailSignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailSignInViewController.swift; sourceTree = "<group>"; };
+		4FE3AF741F266D9F0055FD90 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		4FE3AF761F266DB90055FD90 /* PhoneNumberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneNumberViewController.swift; sourceTree = "<group>"; };
 		7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateTitleViewController.swift; path = ../CreateTitleViewController.swift; sourceTree = "<group>"; };
 		7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGuestsViewController.swift; sourceTree = "<group>"; };
 		7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAboutViewController.swift; sourceTree = "<group>"; };
@@ -207,6 +213,9 @@
 				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
 				4F010D6C1F16E51800E8EA47 /* SignInViewController.swift */,
 				4F69AB3A1F22DCF60098B191 /* SignInNavController.swift */,
+				4FE3AF721F266D8D0055FD90 /* EmailSignInViewController.swift */,
+				4FE3AF741F266D9F0055FD90 /* CreateAccountViewController.swift */,
+				4FE3AF761F266DB90055FD90 /* PhoneNumberViewController.swift */,
 			);
 			name = SignInViewControllers;
 			sourceTree = "<group>";
@@ -645,6 +654,7 @@
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
+				4FE3AF731F266D8D0055FD90 /* EmailSignInViewController.swift in Sources */,
 				4F010D6D1F16E51800E8EA47 /* SignInViewController.swift in Sources */,
 				4F69AB3B1F22DCF60098B191 /* SignInNavController.swift in Sources */,
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
@@ -653,6 +663,7 @@
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
+				4FE3AF751F266D9F0055FD90 /* CreateAccountViewController.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
 				4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
@@ -660,6 +671,7 @@
 				09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */,
 				09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */,
 				4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */,
+				4FE3AF771F266DB90055FD90 /* PhoneNumberViewController.swift in Sources */,
 				09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */,
 				09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */,
 			);

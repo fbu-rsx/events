@@ -11,7 +11,6 @@ import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
-    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var createAnEventText: UILabel!
     @IBOutlet weak var currentTimeText: UILabel!
@@ -27,7 +26,6 @@ class CreateTitleViewController: UIViewController {
         self.currentTimeText.textColor = UIColor(hexString: "#484848")
         selectTimeButton.layer.cornerRadius = 5
         selectTimeButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
         
         //        let formatter = DateFormatter()
         //        formatter.dateFormat = "MMM d, h:mm a"
