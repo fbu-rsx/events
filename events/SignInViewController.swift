@@ -15,11 +15,15 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var signInButton: GIDSignInButton!
+    @IBOutlet weak var emailButton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
+        signInButton.colorScheme = .light
+        signInButton.style = .wide
     }
     
     // Bounce up-and-down animation for photo
@@ -37,7 +41,6 @@ class SignInViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         self.logoImage.layer.removeAllAnimations()
     }
 
@@ -46,6 +49,10 @@ class SignInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func tappedEmailButton(_ sender: Any) {
+    }
+    
     
 
     /*

@@ -21,21 +21,19 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         tableView.delegate = self
         tableView.dataSource = self
         
-        // DISPLAY: Background color
-        self.view.backgroundColor = UIColor(hexString: "#9b59b6")
         // DISPLAY: Rounded buttons
         inviteButton.layer.cornerRadius = 5
         inviteButton.layer.borderWidth = 1
         inviteButton.layer.borderColor = UIColor.white.cgColor
+        inviteButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         inviteButton.clipsToBounds = true
         // DISPLAY: Hide navigation controller
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        self.tabBarController?.tabBar.isHidden = false
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+//        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
     

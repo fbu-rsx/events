@@ -9,17 +9,19 @@
 import UIKit
 
 class EventContainerViewController: UIViewController {
-
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.tabBarController?.tabBar.isHidden = false
+        self.pageControl.currentPageIndicatorTintColor = UIColor(hexString: "4CB6BE")
+        self.pageControl.pageIndicatorTintColor = UIColor(hexString: "F2F2F2")
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,12 +37,12 @@ class EventContainerViewController: UIViewController {
 extension EventContainerViewController: CreateEventPageControllerDelegate {
     
     func eventPageController(_ eventPageController: CreateEventPageController,
-                                    didUpdatePageCount count: Int) {
+                             didUpdatePageCount count: Int) {
         pageControl.numberOfPages = count
     }
     
     func eventPageController(_ eventPageController: CreateEventPageController,
-                                    didUpdatePageIndex index: Int) {
+                             didUpdatePageIndex index: Int) {
         pageControl.currentPage = index
     }
     

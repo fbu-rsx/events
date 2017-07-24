@@ -24,6 +24,7 @@ target 'events' do
   pod 'TwitterKit', '2.7'
   pod 'FoldingCell', '~> 2.1.3'
   pod 'DateTimePicker'
+  pod 'FaveButton', '~> 2.0.3'
 
   target 'eventsTests' do
     inherit! :search_paths

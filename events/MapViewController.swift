@@ -9,8 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
-import FirebaseAuthUI
 import OAuthSwift
+import GoogleSignIn
 
 struct PreferenceKeys {
     static let savedItems = "savedItems"
@@ -41,7 +41,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
+        
         
         // Displays user's current location
         self.mapView.showsUserLocation = true
@@ -68,7 +70,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Limit the overlap area just to View Controller, not blocking the Navigation bar
         definesPresentationContext = true
         
-        // Ask for Authorisation from the User.
+        // Ask for Authorization from the User
         self.locationManager.requestAlwaysAuthorization()
         
         self.delegate = AppUser.current
@@ -104,8 +106,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
-        let authViewController = AppDelegate.aUI!.authViewController()
-        self.present(authViewController, animated: true, completion: nil)
+        GIDSignIn.sharedInstance().signOut()
+        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+        let signInVC = storyboard.instantiateInitialViewController()!
+        self.present(signInVC, animated: true, completion: nil)
     }
     
 
@@ -267,24 +271,6 @@ extension MapViewController: CreateEventMasterDelegate {
 
 // SEARCH extension
 extension MapViewController: HandleMapSearch {
-//    func mapView(mapView: MKMapView!,
-//                 viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-//        if (annotation is MKUserLocation) { return nil }
-//        
-//        let reuseID = "chest"
-//        var v = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
-//        
-//        if v != nil {
-//            v?.annotation = annotation
-//        } else {
-//            v = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-//            
-//            v?.image = UIImage(named:"placeholder")
-//        }
-//        print("here")
-//        return v
-//    }
-    
     func dropPinZoomIn(placemark:MKPlacemark) {
         // cache the pin
         selectedPin = placemark
@@ -304,6 +290,4 @@ extension MapViewController: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         mapView.setRegion(region, animated: true)
     }
-    
-    
 }
