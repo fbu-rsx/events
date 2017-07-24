@@ -9,8 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
-import FirebaseAuthUI
 import OAuthSwift
+import GoogleSignIn
 
 struct PreferenceKeys {
     static let savedItems = "savedItems"
@@ -41,7 +41,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         mapView.delegate = self
+        
         
         // Displays user's current location
         self.mapView.showsUserLocation = true
@@ -104,8 +106,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
-        let authViewController = AppDelegate.aUI!.authViewController()
-        self.present(authViewController, animated: true, completion: nil)
+        GIDSignIn.sharedInstance().signOut()
+        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
+        let signInVC = storyboard.instantiateInitialViewController()!
+        self.present(signInVC, animated: true, completion: nil)
     }
     
 

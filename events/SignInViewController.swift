@@ -15,11 +15,16 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var signInButton: GIDSignInButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
+        signInButton.colorScheme = .light
+        signInButton.style = .wide
     }
     
     // Bounce up-and-down animation for photo

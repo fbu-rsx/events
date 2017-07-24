@@ -339,7 +339,7 @@
                             <constraint firstItem="2Ay-bc-ZLe" firstAttribute="top" secondItem="2eU-1V-Rna" secondAttribute="bottom" id="zok-2e-NM1"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Create" image="fireworks" id="9NM-59-ZPe" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <tabBarItem key="tabBarItem" title="Create" selectedImage="fireworks" id="9NM-59-ZPe" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <connections>
                         <outlet property="containerView" destination="2eU-1V-Rna" id="hmR-bh-zox"/>
                         <outlet property="pageControl" destination="wJJ-Ce-4Wb" id="HVY-1n-agP"/>
@@ -730,7 +730,7 @@
                 <navigationController storyboardIdentifier="CreateGuestsNavController" title="CreateGuestsNavController" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsWhenKeyboardAppears="YES" id="PuS-zf-HUJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="1SE-n4-EYM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="hgd-Fb-spC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hgd-Fb-spC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -743,10 +743,10 @@
             </objects>
             <point key="canvasLocation" x="1448.8" y="2245.7271364317844"/>
         </scene>
-        <!--Simple Tab Bar Controller-->
+        <!--MasterTabBarController-->
         <scene sceneID="Ysk-VG-eLI">
             <objects>
-                <tabBarController storyboardIdentifier="MapViewNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="rH5-Xk-wSQ" customClass="SimpleTabBarController" customModule="SimpleTab" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MasterTabBarController" title="MasterTabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rH5-Xk-wSQ" customClass="MasterTabBarController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="HJy-Hj-09D"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="k7T-E5-rg8" customClass="SimpleTabBar" customModule="SimpleTab">
@@ -768,9 +768,9 @@
         <scene sceneID="ddD-Mu-M3Z">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" selectedImage="CurrentLocation" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
