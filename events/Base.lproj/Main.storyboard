@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -685,7 +685,6 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0lb-zK-Bbz">
                                 <rect key="frame" x="16" y="73" width="343" height="276"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create an Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3yV-ff-kv9">
                                 <rect key="frame" x="67" y="30" width="240" height="43"/>
@@ -730,7 +729,7 @@
                         <outlet property="currentTimeText" destination="Dw6-72-6OB" id="0gh-HT-UDb"/>
                         <outlet property="eventTime" destination="Dw6-72-6OB" id="Yam-6N-tm3"/>
                         <outlet property="eventTitle" destination="D8s-3x-Bwp" id="KHy-1w-a9y"/>
-                        <outlet property="logoView" destination="0lb-zK-Bbz" id="o7c-zm-DFU"/>
+                        <outlet property="logoImage" destination="Jtt-eB-XML" id="M8I-S1-8rM"/>
                         <outlet property="selectTimeButton" destination="fQL-6J-raL" id="nuN-kb-vFE"/>
                     </connections>
                 </viewController>

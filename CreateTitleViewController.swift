@@ -11,7 +11,6 @@ import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
     @IBOutlet weak var eventTitle: UITextField!
-    @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var createAnEventText: UILabel!
     @IBOutlet weak var currentTimeText: UILabel!
@@ -27,7 +26,6 @@ class CreateTitleViewController: UIViewController {
         self.currentTimeText.textColor = UIColor(hexString: "#484848")
         selectTimeButton.layer.cornerRadius = 5
         selectTimeButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        self.logoView.backgroundColor = UIColor(patternImage: UIImage(named: "mapLogo")!)
         
         //        let formatter = DateFormatter()
         //        formatter.dateFormat = "MMM d, h:mm a"
@@ -45,9 +43,9 @@ class CreateTitleViewController: UIViewController {
     func mapAnimation () {
         
         UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
-            self.logoView.frame.origin.y -= 10
+            self.logoImage.frame.origin.y -= 10
         })
-        self.logoView.frame.origin.y += 10
+        self.logoImage.frame.origin.y += 10
     }
     
     override func viewDidAppear(_ animated: Bool) {
