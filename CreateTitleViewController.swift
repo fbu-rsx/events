@@ -87,6 +87,7 @@ class CreateTitleViewController: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM d, h:mm a"
             self.eventTime.text = dateFormatter.string(from: picker.selectedDate)
+            CreateEventMaster.shared.event[EventKey.date.rawValue] = self.eventTime.text
         }
     }
     
@@ -135,7 +136,7 @@ extension UIColor {
     }
 }
 
-// Enable a line under text field
+// Shows a line under text field
 extension UITextField {
     func setBottomBorder() {
         self.borderStyle = .none

@@ -23,23 +23,29 @@ class CreateAboutViewController: UIViewController {
         super.viewDidLoad()
         
         navigationController?.setNavigationBarHidden(true, animated: true)
-        eventTitleLabel.textColor = UIColor(hexString: "#4CB6BE")
-        eventTimeLabel.textColor = UIColor(hexString: "#484848")
         
+        // Event Title Label
+        eventTitleLabel.textColor = UIColor(hexString: "#4CB6BE")
+        if CreateEventMaster.shared.event[EventKey.name.rawValue] == nil {
+            eventTitleLabel.text = "No Event Title"
+        }
+        eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String
+        // Event Time Label
+        eventTimeLabel.textColor = UIColor(hexString: "#484848")
+        eventTimeLabel.text = CreateEventMaster.shared.event[EventKey.date.rawValue] as? String
+        // Total Cost Text Field
         totalCostText.textColor = UIColor(hexString: "#4CB6BE")
         totalCostText.setBottomBorder()
+        // Cost Per Person Label
         costPerPersonText.textColor = UIColor(hexString: "#4CB6BE")
         perPersonText.textColor = UIColor(hexString: "#484848")
+        // Notes about Event Text Field
         aboutText.textColor = UIColor(hexString: "#4CB6BE")
         aboutText.setBottomBorder()
+        // Send Invites Button
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        
-        
-        //        costPerPersonText.layer.borderWidth = 1.0
-        //        costPerPersonText.layer.cornerRadius = 8
-        //        costPerPersonText.layer.borderColor = UIColor.white.cgColor
-        
+        // Hide tab bar controller
         self.tabBarController?.tabBar.isHidden = false
     }
     
