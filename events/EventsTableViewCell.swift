@@ -73,6 +73,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     override func awakeFromNib() {
         // Initialization code
+        backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         foregroundView = view1
         foregroundViewTop = view1topConstraint
         containerView = view2
@@ -131,7 +132,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         self.pageView.currentPage = 0
         self.pageView.tintColor = UIColor.red
         self.pageView.pageIndicatorTintColor = UIColor.black
-        self.pageView.currentPageIndicatorTintColor = UIColor.green
+        self.pageView.currentPageIndicatorTintColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         self.view2.addSubview(pageView)
     }
     
