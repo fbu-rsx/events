@@ -29,9 +29,10 @@ class OAuthSwiftManager: SessionManager {
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
 
-        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
+        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "random", success: { (credential, response, parameters) in
             self.save(credential: credential)
         }) { (error) in
+            print("Error was hahteklra;sldfjka;sdlfjk")
             failure(error)
         }
         

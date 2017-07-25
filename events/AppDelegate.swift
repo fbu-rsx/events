@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
         UIApplication.shared.cancelAllLocalNotifications()
-        
+        //OAuthSwiftManager.shared.logout()
         return true
     }
     
