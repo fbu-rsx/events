@@ -2,30 +2,31 @@
 //  SignInViewController.swift
 //  events
 //
-//  Created by Skyler Ruesga on 7/12/17.
+//  Created by Skyler Ruesga on 7/24/17.
 //  Copyright © 2017 fbu-rsx. All rights reserved.
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
+import FBSDKLoginKit
+
+protocol SignInDelegate: FBSDKLoginButtonDelegate {
+}
 
 class SignInViewController: UIViewController {
-    
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var logoImage: UIImageView!
-    @IBOutlet weak var signInButton: GIDSignInButton!
-    @IBOutlet weak var emailButton: UIButton!
-
+    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
+    
+    
+    var signInDelegate: SignInDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fbLoginButton.delegate = signInDelegate
         
         self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
-        signInButton.colorScheme = .light
-        signInButton.style = .wide
     }
     
     // Bounce up-and-down animation for photo
@@ -36,7 +37,6 @@ class SignInViewController: UIViewController {
         self.logoImage.frame.origin.y += 10
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         mapAnimation()
     }
@@ -46,26 +46,9 @@ class SignInViewController: UIViewController {
         
         self.logoImage.layer.removeAllAnimations()
     }
-
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func tappedEmailButton(_ sender: Any) {
-    }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
