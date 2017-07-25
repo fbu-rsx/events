@@ -8,11 +8,12 @@
 
 import UIKit
 import Firebase
-import GoogleSignIn
 import Alamofire
 import CoreLocation
 import OAuthSwift
 import UserNotifications
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 
 @UIApplicationMain
@@ -30,14 +31,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         
         if let user = Auth.auth().currentUser {
             AppUser.current = AppUser(user: user)
         } else {
-            let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-            window?.rootViewController = storyboard.instantiateInitialViewController()
+            let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
+            loginController.signInDelegate = self
+            window?.rootViewController = loginController
         }
 
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
@@ -54,9 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
         
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
+        let handled = FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        
+        return handled
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
@@ -83,35 +85,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-extension AppDelegate: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
+extension AppDelegate: SignInDelegate {
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error?) {
+        
+        if FBSDKAccessToken.current() != nil {
+            loginButton.isHidden = true
+        } else {
+            loginButton.isHidden = false
+        }
+        
         if let error = error {
             print(error.localizedDescription)
             return
         }
+        if result.isCancelled {
+            return
+        }
         
-        guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
+        let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        
         Auth.auth().signIn(with: credential) { (user: User?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
                 return
-            } else if let user = user {
-                AppUser.current = AppUser(user: user)
-                print("Welcome \(user.displayName!)! 😊")
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                self.window?.rootViewController = storyboard.instantiateInitialViewController()!
             }
+            AppUser.current = AppUser(user: user!)
+            print("Welcome \(user!.displayName!)! 😊")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.window?.rootViewController = storyboard.instantiateInitialViewController()!
         }
     }
     
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        // Perform any operations when the user disconnects from app here.
-        // ...
-        print("user disconnected")
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
+        loginController.signInDelegate = self
+        self.window?.rootViewController = loginController
     }
+
 }
 
 extension AppDelegate: CLLocationManagerDelegate {

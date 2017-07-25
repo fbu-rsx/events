@@ -36,7 +36,7 @@ class CreateEventPageController: UIPageViewController {
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [self.newViewController("CreateTitleViewController"),
-                self.newViewController("CreateLocationViewController"),
+                self.newViewController("CreateLocationNavController"),
                 self.newViewController("CreateGuestsNavController"),
                 self.newViewController("CreateAboutViewController")]
     }()

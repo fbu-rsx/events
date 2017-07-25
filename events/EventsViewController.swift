@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseDatabaseUI
 import FoldingCell
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {

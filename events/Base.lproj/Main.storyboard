@@ -5,8 +5,9 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,63 +23,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FB6-ug-SCQ">
-                                <rect key="frame" x="0.0" y="87" width="375" height="581"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vrg-ot-aAj">
+                                <rect key="frame" x="0.0" y="46" width="375" height="465"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="KKt-I5-a9s">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="668"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsScale="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39G-Ss-Mba">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </mapView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps-and-flags" translatesAutoresizingMaskIntoConstraints="NO" id="Bmf-zj-B4K">
-                                            <rect key="frame" x="170" y="255" width="35" height="38"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZP8-4b-Nkb">
-                                <rect key="frame" x="68" y="31" width="239" height="41"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUh-xz-xOC">
+                                <rect key="frame" x="57" y="527" width="283" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="31"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkj-li-7Fn">
-                                <rect key="frame" x="26" y="40" width="23" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="send"/>
+                                <state key="normal" title="set location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="onZoomToCurrentLocation:" destination="h1v-m1-jDG" eventType="touchUpInside" id="ewb-4E-Rgt"/>
+                                    <action selector="onSelected:" destination="h1v-m1-jDG" eventType="touchUpInside" id="j9L-iB-faY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LF-dv-aLf">
-                                <rect key="frame" x="328" y="40" width="27" height="27"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAj-gT-oub">
+                                <rect key="frame" x="16" y="64" width="37" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="right-arrow"/>
+                                <state key="normal" image="LocationIndicator"/>
                                 <connections>
-                                    <action selector="loadNextPage:" destination="h1v-m1-jDG" eventType="touchUpInside" id="5lu-wX-YAG"/>
+                                    <action selector="onZoomToCurrentLocation:" destination="h1v-m1-jDG" eventType="touchUpInside" id="KY4-t7-3LE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
-                    <navigationItem key="navigationItem" title="Create an Event" id="qdH-aF-weZ">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="igL-FH-wX1"/>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="uJX-us-7Fh"/>
-                            <barButtonItem image="CurrentLocation" id="6bT-xN-S1t"/>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Create an Event" id="qdH-aF-weZ"/>
                     <connections>
-                        <outlet property="mapView" destination="39G-Ss-Mba" id="C4L-K5-itV"/>
-                        <outlet property="zoomToCurrentLocation" destination="xkj-li-7Fn" id="txf-Hy-g3S"/>
+                        <outlet property="mapView" destination="Vrg-ot-aAj" id="goj-2y-o1v"/>
+                        <outlet property="selectLocationButton" destination="gUh-xz-xOC" id="r6s-HC-y5S"/>
+                        <outlet property="zoomToCurrentLocation" destination="yAj-gT-oub" id="tiM-cD-RgV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2cz-6f-agJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,7 +75,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="725.60000000000002" y="2245.7271364317844"/>
+            <point key="canvasLocation" x="1424.8" y="2245.7271364317844"/>
         </scene>
         <!--Location Search Table-->
         <scene sceneID="r9e-Tf-Dm9">
@@ -218,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GD8-vf-nnx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2120.8000000000002" y="2245.7271364317844"/>
+            <point key="canvasLocation" x="3060" y="2245.7271364317844"/>
         </scene>
         <!--CreateAboutViewController-->
         <scene sceneID="Bbs-8L-YHo">
@@ -232,12 +208,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="enter total cost" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-tE-igi">
-                                <rect key="frame" x="101" y="261" width="258" height="53"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="total cost" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-tE-igi">
+                                <rect key="frame" x="123" y="265" width="245" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.17893835620000001" colorSpace="calibratedWhite"/>
                                 <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="34"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <connections>
                                     <action selector="calculateCostPerPerson:" destination="TFw-CM-ad2" eventType="editingChanged" id="2hY-Iq-JZa"/>
@@ -258,7 +234,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ltC-pi-qIr">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltC-pi-qIr">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="162"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
@@ -275,14 +251,14 @@
                                 <rect key="frame" x="10" y="170" width="77" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Morning Sunrise Hike" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-yU-7LG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Picnic in San Fran" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-yU-7LG">
                                 <rect key="frame" x="101" y="175" width="255" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="26"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="26"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jul 21, 5:30 AM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9B-ez-dwe">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jul 21, 5:30 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9B-ez-dwe">
                                 <rect key="frame" x="101" y="217" width="255" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
@@ -301,23 +277,34 @@
                                 <rect key="frame" x="10" y="419" width="77" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/ per person" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-pX-F5Y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="per person" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-pX-F5Y">
                                 <rect key="frame" x="216" y="363" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.28000000000000003" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="23"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46H-jp-cap">
+                                <rect key="frame" x="95" y="265" width="24" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="34"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps-and-flags" translatesAutoresizingMaskIntoConstraints="NO" id="S2A-YS-rH0">
+                                <rect key="frame" x="170" y="47" width="35" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Z8x-YS-ScR"/>
                     <connections>
                         <outlet property="aboutText" destination="OFo-hX-ibY" id="L2b-m4-uDt"/>
                         <outlet property="costPerPersonText" destination="wYH-c8-Sue" id="eIf-DU-OCk"/>
+                        <outlet property="dollarSignLabel" destination="46H-jp-cap" id="xCR-QE-QTq"/>
                         <outlet property="eventTimeLabel" destination="g9B-ez-dwe" id="aiK-1h-rDa"/>
                         <outlet property="eventTitleLabel" destination="EVN-yU-7LG" id="bwq-yZ-I0r"/>
+                        <outlet property="mapView" destination="ltC-pi-qIr" id="Pm3-Oz-5bl"/>
                         <outlet property="perPersonText" destination="gjZ-pX-F5Y" id="0pI-cJ-3m9"/>
                         <outlet property="sendInvitesButton" destination="w4e-2h-fum" id="y8B-Py-Qum"/>
                         <outlet property="totalCostText" destination="Un7-tE-igi" id="HFy-Dh-bBE"/>
@@ -325,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmY-mW-OEm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2797.5999999999999" y="2245.7271364317844"/>
+            <point key="canvasLocation" x="3736.8000000000002" y="2245.7271364317844"/>
         </scene>
         <!--CreateEventPageControllerViewController-->
         <scene sceneID="Gxh-W5-uzv">
@@ -430,7 +417,7 @@
             </objects>
             <point key="canvasLocation" x="2054" y="690"/>
         </scene>
-        <!--Events-->
+        <!--Events View Controller-->
         <scene sceneID="trz-7g-MRB">
             <objects>
                 <viewController id="Hae-uG-d6M" customClass="EventsViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
@@ -455,7 +442,7 @@
                             <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="izd-Vh-12E"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Events" selectedImage="icon-checkbox-unselected-25x25.png" id="FkV-xV-Dt9" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <tabBarItem key="tabBarItem" title="" id="FkV-xV-Dt9" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <connections>
                         <outlet property="tableView" destination="eeW-6O-xea" id="TQA-eK-cFz"/>
                     </connections>
@@ -593,7 +580,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XI6-zs-KjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1448.8" y="2245.7271364317844"/>
+            <point key="canvasLocation" x="2388" y="2245.7271364317844"/>
         </scene>
         <!--MasterTabBarController-->
         <scene sceneID="Ysk-VG-eLI">
@@ -635,20 +622,35 @@
             </objects>
             <point key="canvasLocation" x="1297" y="690"/>
         </scene>
+        <!--CreateLocationNavController-->
+        <scene sceneID="j5E-h3-f1j">
+            <objects>
+                <navigationController storyboardIdentifier="CreateLocationNavController" title="CreateLocationNavController" automaticallyAdjustsScrollViewInsets="NO" id="chc-gD-98Z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s1M-MY-l19">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h1v-m1-jDG" kind="relationship" relationship="rootViewController" id="xld-gl-fod"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7h-lu-Z8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="725.60000000000002" y="2245.7271364317844"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="CurrentLocation" width="15" height="15"/>
         <image name="LocationIndicator" width="150" height="150"/>
         <image name="avatar" width="64" height="64"/>
         <image name="calendar" width="64" height="64"/>
         <image name="envelope" width="64" height="64"/>
         <image name="fireworks" width="32" height="32"/>
-        <image name="icon-checkbox-unselected-25x25.png" width="25" height="25"/>
         <image name="mapLogo" width="16" height="16"/>
         <image name="maps-and-flags" width="64" height="64"/>
         <image name="piggybank" width="64" height="64"/>
-        <image name="right-arrow" width="32" height="32"/>
-        <image name="send" width="32" height="32"/>
         <image name="user" width="64" height="64"/>
     </resources>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
