@@ -29,7 +29,7 @@ class OAuthSwiftManager: SessionManager {
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
 
-        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "random", success: { (credential, response, parameters) in
+        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
             self.save(credential: credential)
         }) { (error) in
             print("Error was hahteklra;sldfjka;sdlfjk")
@@ -99,6 +99,10 @@ class OAuthSwiftManager: SessionManager {
             print("error: \(error)")
         }
     }
+    
+    // functions to interact with spotify web client
+    
+    
 }
 
 enum JSONError: Error {
