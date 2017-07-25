@@ -21,6 +21,12 @@
 		09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */; };
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
+		09F788491F2668A700A311F0 /* detailView0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788481F2668A700A311F0 /* detailView0.xib */; };
+		09F7884B1F26694A00A311F0 /* detailView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F7884A1F26694A00A311F0 /* detailView0.swift */; };
+		09F7884D1F26781400A311F0 /* detailView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F7884C1F26781400A311F0 /* detailView1.xib */; };
+		09F7884F1F26783100A311F0 /* detailView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F7884E1F26783100A311F0 /* detailView1.swift */; };
+		09F788511F269EE800A311F0 /* detailView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788501F269EE800A311F0 /* detailView2.xib */; };
+		09F788531F269F0900A311F0 /* detailView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F788521F269F0900A311F0 /* detailView2.swift */; };
 		3AF83A15E164D2366EE880C1 /* Pods_eventsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */; };
 		4F010D751F16EE7A00E8EA47 /* CreateLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D741F16EE7A00E8EA47 /* CreateLocationViewController.swift */; };
 		4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */; };
@@ -86,6 +92,12 @@
 		09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = userTableViewCell.xib; sourceTree = "<group>"; };
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
+		09F788481F2668A700A311F0 /* detailView0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = detailView0.xib; path = events/detailView0.xib; sourceTree = SOURCE_ROOT; };
+		09F7884A1F26694A00A311F0 /* detailView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailView0.swift; sourceTree = "<group>"; };
+		09F7884C1F26781400A311F0 /* detailView1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailView1.xib; sourceTree = "<group>"; };
+		09F7884E1F26783100A311F0 /* detailView1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailView1.swift; sourceTree = "<group>"; };
+		09F788501F269EE800A311F0 /* detailView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailView2.xib; sourceTree = "<group>"; };
+		09F788521F269F0900A311F0 /* detailView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailView2.swift; sourceTree = "<group>"; };
 		1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_events.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E325F93B30E087012B5B727 /* Pods-eventsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eventsUITests/Pods-eventsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C04120232A3D15602FB929F /* Pods_eventsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,6 +287,9 @@
 				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
 				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
 				4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */,
+				09F788481F2668A700A311F0 /* detailView0.xib */,
+				09F7884C1F26781400A311F0 /* detailView1.xib */,
+				09F788501F269EE800A311F0 /* detailView2.xib */,
 				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
 				4F87D3781F168F59007D4E94 /* Views */,
@@ -288,9 +303,12 @@
 				4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */,
 				4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */,
 				4FCB62871F143DC400BBDC71 /* Info.plist */,
+				09F7884A1F26694A00A311F0 /* detailView0.swift */,
+				09F7884E1F26783100A311F0 /* detailView1.swift */,
+				09F788521F269F0900A311F0 /* detailView2.swift */,
 			);
 			path = events;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		4FCB628F1F143DC400BBDC71 /* eventsTests */ = {
 			isa = PBXGroup;
@@ -410,6 +428,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = S5MHKF47DJ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -464,7 +483,10 @@
 				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
+				09F788511F269EE800A311F0 /* detailView2.xib in Resources */,
+				09F7884D1F26781400A311F0 /* detailView1.xib in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
+				09F788491F2668A700A311F0 /* detailView0.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,11 +660,13 @@
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
 				09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */,
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
+				09F7884F1F26783100A311F0 /* detailView1.swift in Sources */,
 				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
+				09F788531F269F0900A311F0 /* detailView2.swift in Sources */,
 				09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */,
 				4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */,
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
@@ -657,6 +681,7 @@
 				4FFC02F91F26AF1D00B55206 /* SignInViewController.swift in Sources */,
 				4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */,
 				09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */,
+				09F7884B1F26694A00A311F0 /* detailView0.swift in Sources */,
 				09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -809,8 +834,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -826,9 +852,10 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

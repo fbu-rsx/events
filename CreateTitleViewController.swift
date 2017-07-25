@@ -27,21 +27,17 @@ class CreateTitleViewController: UIViewController {
         selectTimeButton.layer.cornerRadius = 5
         selectTimeButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         
-        //        let formatter = DateFormatter()
-        //        formatter.dateFormat = "MMM d, h:mm a"
-        //        eventTime.text = formatter.string(from: datePicker.date)\
-        
         self.tabBarController?.tabBar.isHidden = false
         
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, h:mm a"
         self.eventTime.text = dateFormatter.string(from: date)
+      
     }
     
     // Bounce up-and-down animation for photo
-    func mapAnimation () {
-        
+    func mapAnimation() {
         UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
             self.logoImage.frame.origin.y -= 10
         })
@@ -76,7 +72,6 @@ class CreateTitleViewController: UIViewController {
     
     @IBAction func onSelectTime(_ sender: Any) {
         dateTimePicker()
-        
     }
     
     // DateTimePicker Pod

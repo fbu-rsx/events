@@ -43,7 +43,6 @@ class SignInViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         self.logoImage.layer.removeAllAnimations()
     }
     

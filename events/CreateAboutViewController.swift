@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import MapKit
 
 class CreateAboutViewController: UIViewController {
-    let numberOfGuests = (CreateEventMaster.shared.event[EventKey.guestlist.rawValue] as AnyObject).count ?? 0
-    //weak var delegate: CreateEventMiscellaneousViewControllerDelegate?
+    var numberOfGuests = 0
+    //let coordinate = CreateEventMaster.shared.event[EventKey.coordinate.rawValue] as! CLLocationCoordinate2D
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
     @IBOutlet weak var aboutText: UITextField!
@@ -18,22 +19,23 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var sendInvitesButton: UIButton!
     @IBOutlet weak var perPersonText: UILabel!
+    @IBOutlet weak var dollarSignLabel: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.setNavigationBarHidden(true, animated: true)
         
         // Event Title Label
-        eventTitleLabel.textColor = UIColor(hexString: "#4CB6BE")
+        eventTitleLabel.textColor = UIColor(hexString: "#FEB2A4")
         if CreateEventMaster.shared.event[EventKey.name.rawValue] == nil {
             eventTitleLabel.text = "No Event Title"
         }
         eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String
         // Event Time Label
         eventTimeLabel.textColor = UIColor(hexString: "#484848")
-        eventTimeLabel.text = CreateEventMaster.shared.event[EventKey.date.rawValue] as? String
         // Total Cost Text Field
+        dollarSignLabel.textColor = UIColor(hexString: "#4CB6BE")
         totalCostText.textColor = UIColor(hexString: "#4CB6BE")
         totalCostText.setBottomBorder()
         // Cost Per Person Label
@@ -49,6 +51,30 @@ class CreateAboutViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (CreateEventMaster.shared.event[EventKey.guestlist.rawValue]) == nil {
+            numberOfGuests = 0
+        } else {
+            numberOfGuests = (CreateEventMaster.shared.event[EventKey.guestlist.rawValue]! as AnyObject).count
+        }
+        
+        if let selected = CreateEventMaster.shared.event[EventKey.date.rawValue] as? String {
+            let dateConverter = DateFormatter()
+            dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
+            let date = dateConverter.date(from: selected as! String)!
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            eventTimeLabel.text = dateFormatter.string(from: date)
+        }
+        
+        // Show mapView with selected location
+        
+        guard let coordinate = CreateEventMaster.shared.event[EventKey.coordinate.rawValue] as? CLLocationCoordinate2D else { return }
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
+        mapView.setRegion(region, animated: true)
+        
+    }
     
     @IBAction func calculateCostPerPerson(_ sender: Any) {
         let totalCost = Double(totalCostText.text!) ?? 0

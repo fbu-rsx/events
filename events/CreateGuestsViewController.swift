@@ -35,6 +35,7 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
+        
     }
     
     @IBAction func onClickInvite(_ sender: Any) {
@@ -60,6 +61,8 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         tableView.reloadData()
         self.navigationController?.popViewController(animated: true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = self.selectedContactsPhone
+        print((CreateEventMaster.shared.event[EventKey.guestlist.rawValue]! as AnyObject).count )
     }
     
     

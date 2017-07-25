@@ -16,6 +16,7 @@ enum EventKey: String {
     case cost = "totalcost"
     case date = "datetime"
     case location = "location"
+    case coordinate = "coordinate"
     case radius = "radius"
     case organizerID = "organizerID"
     case about = "about"
