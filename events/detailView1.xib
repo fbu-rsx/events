@@ -16,8 +16,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Nbc-sO-eQa">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="384"/>
+                    <rect key="frame" x="0.0" y="48" width="320" height="336"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="336" id="ewR-II-hWh"/>
+                    </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bfq-SD-jXj">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -25,12 +28,24 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAZ-Fe-1NS">
+                    <rect key="frame" x="256" y="10" width="50" height="30"/>
+                    <state key="normal" title="Upload"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Media" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhz-3A-2iU">
+                    <rect key="frame" x="26" y="12" width="109" height="23"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Nbc-sO-eQa" secondAttribute="bottom" id="DFs-2u-BOM"/>
-                <constraint firstItem="Nbc-sO-eQa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QcP-LB-490"/>
+                <constraint firstAttribute="trailing" secondItem="RAZ-Fe-1NS" secondAttribute="trailing" constant="14" id="Pn1-jt-ZcJ"/>
                 <constraint firstAttribute="trailing" secondItem="Nbc-sO-eQa" secondAttribute="trailing" id="fJe-UT-OOa"/>
+                <constraint firstItem="Nbc-sO-eQa" firstAttribute="top" secondItem="RAZ-Fe-1NS" secondAttribute="bottom" constant="8" symbolic="YES" id="jqq-eN-gC6"/>
                 <constraint firstItem="Nbc-sO-eQa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jrc-uk-iMB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -41,7 +56,7 @@
                 <outlet property="collectionView" destination="Nbc-sO-eQa" id="pFy-sl-b9Y"/>
                 <outlet property="collectionViewCell" destination="TFm-xd-igx" id="J5V-U0-Yhx"/>
             </connections>
-            <point key="canvasLocation" x="37.5" y="5"/>
+            <point key="canvasLocation" x="37" y="5"/>
         </view>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TFm-xd-igx">
             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>

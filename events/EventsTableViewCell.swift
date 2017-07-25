@@ -114,6 +114,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         }
         self.scrollView.isPagingEnabled = true
         self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 3, height: self.scrollView.frame.size.height)
+        print(self.scrollView.frame.width)
         pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
         // finally awake nibconfigurePageControl()
         super.awakeFromNib()
