@@ -113,6 +113,7 @@ extension AppDelegate: SignInDelegate {
                 print(error.localizedDescription)
             } else if let result = result as? [String: Any] {
                 print("starting friends list")
+                print(result.count)
                 print(result)
                 let arr = result["data"] as! NSArray
                 for x in arr {
