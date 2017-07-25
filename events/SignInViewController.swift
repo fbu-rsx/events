@@ -25,6 +25,7 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
         
         fbLoginButton.delegate = signInDelegate
+        fbLoginButton.readPermissions = ["public_profile", "user_friends"]
         
         self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
     }
