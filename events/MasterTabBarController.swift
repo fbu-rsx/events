@@ -45,6 +45,7 @@ class MasterTabBarController: SimpleTabBarController {
         self.tabBar.items?[0].image = UIImage(named: "fireworks")?.withRenderingMode(.alwaysOriginal)
         self.tabBar.items?[1].image = UIImage(named: "map")?.withRenderingMode(.alwaysOriginal)
         self.tabBar.items?[2].image = UIImage(named: "monthly-calendar")?.withRenderingMode(.alwaysOriginal)
+        self.tabBar.items?[3].image = UIImage(named: "user1")?.withRenderingMode(.alwaysOriginal)
         
         // Let the tab bar control know of the style
         self.tabBarStyle = style

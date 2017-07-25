@@ -101,14 +101,36 @@ extension AppDelegate: SignInDelegate {
         if result.isCancelled {
             return
         }
-        
+
+        print(FBSDKAccessToken.current().userID)
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        let params = ["fields": "id, first_name, last_name, name, email, picture"]
+        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: params)
+        
+        let connection = FBSDKGraphRequestConnection()
+        connection.add(request) { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let result = result as? [String: Any] {
+                print("starting friends list")
+                let arr = result["data"] as! NSArray
+                for x in arr {
+                    print(x)
+                }
+                print("ending friends list")
+            }
+        }
+        connection.start()
+        
+        
+        
         
         Auth.auth().signIn(with: credential) { (user: User?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
+            print(user?.uid)
             AppUser.current = AppUser(user: user!)
             print("Welcome \(user!.displayName!)! 😊")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
