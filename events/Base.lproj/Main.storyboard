@@ -325,6 +325,26 @@
             </objects>
             <point key="canvasLocation" x="1100" y="1454"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="1kY-Yl-wBB">
+            <objects>
+                <viewController id="ith-Y4-qbF" customClass="ProfileViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YQl-Jp-4ti"/>
+                        <viewControllerLayoutGuide type="bottom" id="ha7-bJ-QEC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NHv-1p-9tX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="f0n-il-0vH" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
+                    <navigationItem key="navigationItem" id="JW3-Pt-JOV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pzr-oX-uJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2745" y="1454"/>
+        </scene>
         <!--EventContainerViewController-->
         <scene sceneID="fko-yJ-vgG">
             <objects>
@@ -598,6 +618,7 @@
                         <segue destination="tDq-Np-jW4" kind="relationship" relationship="viewControllers" id="iz2-fA-JWy"/>
                         <segue destination="5vP-o7-9Jm" kind="relationship" relationship="viewControllers" id="bGt-z2-DJA"/>
                         <segue destination="Hae-uG-d6M" kind="relationship" relationship="viewControllers" id="vSl-oG-iUT"/>
+                        <segue destination="ith-Y4-qbF" kind="relationship" relationship="viewControllers" id="tJy-zx-dAl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULM-FI-av1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -642,6 +663,24 @@
             </objects>
             <point key="canvasLocation" x="725.60000000000002" y="2245.7271364317844"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jzc-mt-zTm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QuK-w5-ppq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="paq-qY-LrY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ith-Y4-qbF" kind="relationship" relationship="rootViewController" id="mxf-6r-33m"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yzL-HH-pCE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2054" y="1454"/>
+        </scene>
     </scenes>
     <resources>
         <image name="LocationIndicator" width="150" height="150"/>
@@ -654,5 +693,8 @@
         <image name="piggybank" width="64" height="64"/>
         <image name="user" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="tJy-zx-dAl"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22648368960000001" green="0.69229854059999996" blue="0.60574916629999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
