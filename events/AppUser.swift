@@ -12,9 +12,7 @@ import FirebaseAuth
 enum UserKey: String {
     case id = "uid"
     case name = "name"
-    case email = "email"
     case date = "datetime"
-    case phone = "phoneNumber"
     case photo = "photoURLString"
     case events = "events"
 }
@@ -23,8 +21,6 @@ enum UserKey: String {
  - "uid":
     - "uid": "gMrf7HieuJHoH7fsdg"
     - "name": "Skyler Ruesga"
-    - "email": "sruesga@fb.com"
-    - "phoneNumber": String
     - "photoURLString": "https://etc.com/kjhdf76vf8"
     - "lastOnline": "serverValue.timestamp()"
     - "connections": []
@@ -43,9 +39,6 @@ class AppUser {
  
     var uid: String
     var name: String
-    var email: String
-    var password: String?
-    var phoneNumber: String?
     var photoURLString: String
     var events: [Event] = []
     var eventsKeys: [String: Bool] = [:]
@@ -53,15 +46,12 @@ class AppUser {
     init(dictionary: [String: Any]) {
         self.uid = dictionary[UserKey.id.rawValue] as! String
         self.name = dictionary[UserKey.name.rawValue] as! String
-        self.email = dictionary[UserKey.email.rawValue] as! String
         self.photoURLString = dictionary[UserKey.photo.rawValue] as! String
     }
     
     convenience init(user: User) {
         let userDict: [String: Any] = [UserKey.id.rawValue: user.uid,
                                        UserKey.name.rawValue: user.displayName!,
-                                       UserKey.email.rawValue: user.email!,
-                                       UserKey.phone.rawValue: user.phoneNumber ?? NSNull(),
                                        UserKey.photo.rawValue: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
       

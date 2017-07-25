@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import OAuthSwift
-import GoogleSignIn
+import FBSDKLoginKit
 
 struct PreferenceKeys {
     static let savedItems = "savedItems"
@@ -106,10 +106,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
-        GIDSignIn.sharedInstance().signOut()
-        let storyboard = UIStoryboard(name: "SignIn", bundle: nil)
-        let signInVC = storyboard.instantiateInitialViewController()!
-        self.present(signInVC, animated: true, completion: nil)
+        FBSDKLoginManager().logOut()
+        let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
+        loginController.signInDelegate = UIApplication.shared.delegate! as! AppDelegate
+        self.present(loginController, animated: true, completion: nil)
     }
     
 
