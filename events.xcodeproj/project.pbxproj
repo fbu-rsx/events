@@ -37,7 +37,6 @@
 		4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */; };
 		4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3741F168EA0007D4E94 /* AppUser.swift */; };
 		4F87D3771F168EB5007D4E94 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3761F168EB5007D4E94 /* Event.swift */; };
-		4F87D37B1F1696E1007D4E94 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */; };
 		4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */; };
 		4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */; };
 		4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627D1F143DC400BBDC71 /* MapViewController.swift */; };
@@ -49,6 +48,7 @@
 		4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */; };
 		4FFC02F91F26AF1D00B55206 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC02F71F26AF1D00B55206 /* SignInViewController.swift */; };
 		4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */; };
+		4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC02FB1F27BDCC00B55206 /* FacebookAPIManager.swift */; };
 		7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */; };
 		7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */; };
 		7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */; };
@@ -112,7 +112,6 @@
 		4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		4F87D3741F168EA0007D4E94 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		4F87D3761F168EB5007D4E94 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
 		4FCB62781F143DC400BBDC71 /* events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = events.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterTabBarController.swift; sourceTree = "<group>"; };
 		4FFC02F71F26AF1D00B55206 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		4FFC02FB1F27BDCC00B55206 /* FacebookAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAPIManager.swift; sourceTree = "<group>"; };
 		7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateTitleViewController.swift; path = ../CreateTitleViewController.swift; sourceTree = "<group>"; };
 		7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGuestsViewController.swift; sourceTree = "<group>"; };
 		7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAboutViewController.swift; sourceTree = "<group>"; };
@@ -218,7 +218,6 @@
 		4F2545661F1D59D00076AE0B /* SignInViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				4F87D37A1F1696E1007D4E94 /* AuthViewController.swift */,
 				4FFC02F71F26AF1D00B55206 /* SignInViewController.swift */,
 			);
 			name = SignInViewControllers;
@@ -261,6 +260,7 @@
 				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
 				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
 				4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */,
+				4FFC02FB1F27BDCC00B55206 /* FacebookAPIManager.swift */,
 			);
 			name = APIManagers;
 			sourceTree = "<group>";
@@ -656,7 +656,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */,
-				4F87D37B1F1696E1007D4E94 /* AuthViewController.swift in Sources */,
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
 				7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */,
@@ -671,6 +670,7 @@
 				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
+				4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
 				09F788531F269F0900A311F0 /* detailView2.swift in Sources */,
