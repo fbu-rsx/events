@@ -64,7 +64,7 @@ class CreateEventPageController: UIPageViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.enableSwipe(_:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.disableSwipe(_:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.refresh), name: NSNotification.Name(rawValue: "refresh"), object: nil)
     }
     
     func disableSwipe(_ notification: NSNotification){
@@ -73,6 +73,15 @@ class CreateEventPageController: UIPageViewController {
     
     func enableSwipe(_ notification: NSNotification){
         self.dataSource = self
+    }
+    
+    func refresh() {
+        orderedViewControllers = [self.newViewController("CreateTitleViewController"),
+                                  self.newViewController("CreateLocationNavController"),
+                                  self.newViewController("CreateGuestsViewController"),
+                                  self.newViewController("CreateAboutViewController")]
+        self.pageControlDelegate?.eventPageController(self, didUpdatePageIndex: 0)
+        self.setViewControllers([orderedViewControllers.first!], direction: .forward, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

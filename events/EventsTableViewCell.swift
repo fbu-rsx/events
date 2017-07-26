@@ -10,7 +10,6 @@ import UIKit
 import AlamofireImage
 import FoldingCell
 
-
 class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     

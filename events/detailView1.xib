@@ -28,15 +28,15 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Media" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhz-3A-2iU">
-                    <rect key="frame" x="26" y="12" width="109" height="23"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Media" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rhz-3A-2iU">
+                    <rect key="frame" x="26" y="12" width="114" height="26"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAZ-Fe-1NS">
-                    <rect key="frame" x="254" y="8" width="50" height="30"/>
+                    <rect key="frame" x="246" y="7.5" width="58" height="35"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <state key="normal" title="Upload"/>
                     <connections>
                         <action selector="upload:" destination="iN0-l3-epB" eventType="touchUpInside" id="i17-33-slf"/>
@@ -45,11 +45,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Rhz-3A-2iU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="CWh-Sv-jXl"/>
                 <constraint firstAttribute="bottom" secondItem="Nbc-sO-eQa" secondAttribute="bottom" id="DFs-2u-BOM"/>
                 <constraint firstAttribute="trailing" secondItem="RAZ-Fe-1NS" secondAttribute="trailing" constant="29" id="Pn1-jt-ZcJ"/>
                 <constraint firstAttribute="trailing" secondItem="Nbc-sO-eQa" secondAttribute="trailing" id="fJe-UT-OOa"/>
-                <constraint firstItem="Nbc-sO-eQa" firstAttribute="top" secondItem="RAZ-Fe-1NS" secondAttribute="bottom" constant="17" id="jqq-eN-gC6"/>
+                <constraint firstItem="Rhz-3A-2iU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="hMl-DM-gyJ"/>
                 <constraint firstItem="Nbc-sO-eQa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jrc-uk-iMB"/>
+                <constraint firstItem="RAZ-Fe-1NS" firstAttribute="centerY" secondItem="Rhz-3A-2iU" secondAttribute="centerY" id="nYr-pz-oKf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
