@@ -21,6 +21,7 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var perPersonText: UILabel!
     @IBOutlet weak var dollarSignLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var invitesScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,10 @@ class CreateAboutViewController: UIViewController {
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         // Hide tab bar controller
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    @IBAction func didTapToDismiss(_ sender: Any) {
+          self.view.endEditing(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {

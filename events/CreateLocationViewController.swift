@@ -10,13 +10,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
 class CreateLocationViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var zoomToCurrentLocation: UIButton!
     @IBOutlet weak var selectLocationButton: UIButton!
-   
+    
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
@@ -30,7 +29,7 @@ class CreateLocationViewController: UIViewController {
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
-    
+        
         self.tabBarController?.tabBar.isHidden = false
         CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
@@ -38,7 +37,12 @@ class CreateLocationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         // Select Location button styling
         selectLocationButton.layer.cornerRadius = 5
-        selectLocationButton.backgroundColor = UIColor(hexString: "#C9C9C9")
+        
+        if selectLocationButton.backgroundColor == UIColor(hexString: "#FEB2A4") {
+            selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        } else {
+            selectLocationButton.backgroundColor = UIColor(hexString: "#C9C9C9")
+        }
         
         // SEARCH
         // Programmatically instantiating the locationSearchTable TableViewController
@@ -59,10 +63,11 @@ class CreateLocationViewController: UIViewController {
         resultSearchController?.dimsBackgroundDuringPresentation = true
         // Limit the overlap area just to View Controller, not blocking the Navigation bar
         definesPresentationContext = true
-
+        
     }
     
     @IBAction func onSelected(_ sender: Any) {
+
         selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
@@ -73,7 +78,7 @@ class CreateLocationViewController: UIViewController {
         mapView.setRegion(region, animated: true)
     }
 }
-    
+
 
 // SEARCH extension
 extension CreateLocationViewController: HandleMapSearch {
