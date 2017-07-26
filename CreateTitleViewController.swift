@@ -19,7 +19,6 @@ class CreateTitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
         self.eventTitle.textColor = UIColor(hexString: "#4CB6BE")
         eventTitle.setBottomBorder()
         self.createAnEventText.textColor = UIColor(hexString: "#484848")
@@ -40,9 +39,10 @@ class CreateTitleViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         mapAnimation()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.logoImage.layer.removeAllAnimations()

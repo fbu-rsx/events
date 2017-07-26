@@ -23,6 +23,7 @@ class CreateLocationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.mapView.showsUserLocation = true
         // Tracks the user's location
         self.mapView.setUserTrackingMode(.follow, animated: true)
@@ -31,6 +32,7 @@ class CreateLocationViewController: UIViewController {
         self.mapView.setRegion(region, animated: true)
     
         self.tabBarController?.tabBar.isHidden = false
+        CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,18 +65,7 @@ class CreateLocationViewController: UIViewController {
     @IBAction func onSelected(_ sender: Any) {
         selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
-        CreateEventMaster.shared.event[EventKey.coordinate.rawValue] = mapView.centerCoordinate
     }
-    
-//    @IBAction func loadNextPage(_ sender: Any) {
-//        let parentViewController = self.parent as! CreateEventPageController
-//        parentViewController.setViewControllers([parentViewController.orderedViewControllers[2]],
-//                                                direction: .forward,
-//                                                animated: true,
-//                                                completion: nil)
-//        
-//    }
-//    
     
     @IBAction func onZoomToCurrentLocation(_ sender: Any) {
         guard let coordinate = mapView.userLocation.location?.coordinate else { return }

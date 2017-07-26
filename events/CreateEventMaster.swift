@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CreateEventMasterDelegate: class {
-    func didCreateNewEvent(_ event: Event)
+    func createNewEvent(_ dict: [String: Any])
 }
 
 class CreateEventMaster {
@@ -17,10 +17,17 @@ class CreateEventMaster {
     static var shared = CreateEventMaster()
     
     var event: [String: Any]
-    weak var delegate: CreateEventMasterDelegate?
+    var guestlist: [String: Bool]
+    weak var delegate: CreateEventMasterDelegate!
     
     init() {
         self.event = [EventKey.id.rawValue: FirebaseDatabaseManager.shared.getNewEventID(),
                       EventKey.organizerID.rawValue: AppUser.current.uid]
+        self.guestlist = [:]
+    }
+    
+    func clear() {
+        self.event = [:]
+        self.guestlist = [:]
     }
 }

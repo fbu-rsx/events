@@ -15,9 +15,11 @@ class FacebookAPIManager {
     
     
     
-    func getUserFriendsList() {
-        let params = ["fields": "id, first_name, last_name, name, picture", "limit": "1000"]
+    func getUserFriendsList(completion: @escaping ([FacebookFriend]) -> Void) {
+        let params = ["fields": "id, name, picture", "limit": "1000"]
         let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: params)
+        
+        var friends = [FacebookFriend]()
         
         let connection = FBSDKGraphRequestConnection()
         connection.add(request) { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
@@ -27,10 +29,12 @@ class FacebookAPIManager {
                 print("starting friends list")
                 let arr = result["data"] as! NSArray
                 for x in arr {
-                    print(x)
+                    friends.append(FacebookFriend(dict: x as! [String: Any]))
                 }
                 print(arr.count)
                 print("ending friends list")
+                
+                completion(friends)
             }
         }
         connection.start()

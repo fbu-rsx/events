@@ -16,7 +16,6 @@ enum EventKey: String {
     case cost = "totalcost"
     case date = "datetime"
     case location = "location"
-    case coordinate = "coordinate"
     case radius = "radius"
     case organizerID = "organizerID"
     case about = "about"
@@ -91,7 +90,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.radius = dictionary[EventKey.radius.rawValue] as? Double ?? 100.0
         self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
         self.about = dictionary[EventKey.about.rawValue] as! String
-        self.guestlist = dictionary[EventKey.guestlist.rawValue] as? [String: Bool] ?? [:]
+        self.guestlist = dictionary[EventKey.guestlist.rawValue] as! [String: Bool]
         self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }

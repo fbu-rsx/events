@@ -96,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
-
+        CreateEventMaster.shared.delegate = self
     }
     
 
@@ -266,16 +266,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 }
 
 extension MapViewController: CreateEventMasterDelegate {
-    func didCreateNewEvent(_ event: Event) {
-        if event.radius > locationManager.maximumRegionMonitoringDistance {
-            print("TOO BIG OF A RADIUS")
-            event.radius = locationManager.maximumRegionMonitoringDistance
-        }
+    func createNewEvent(_ dict: [String: Any]) {
+        guard let radius = dict[EventKey.radius.rawValue] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
+        let event = AppUser.current.createEvent(dict)
         add(event: event)
         startMonitoring(event: event)
         saveAllEvents()
-        AppUser.current.createEvent(event.eventDictionary)
         print("new event added")
+        self.tabBarController?.viewControllers?[1] = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventContainerViewController")
     }
 }
 

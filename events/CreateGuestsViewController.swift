@@ -7,103 +7,61 @@
 //
 
 import UIKit
-import EVContactsPicker
 
-class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, EVContactsPickerDelegate {
+class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var inviteButton: UIButton!
-    var selectedContacts: [EVContactProtocol] = []
-    var selectedContactsPhone: [String] = []
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var friends: [FacebookFriend]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
-        // DISPLAY: Rounded buttons
-        inviteButton.layer.cornerRadius = 5
-        inviteButton.layer.borderWidth = 1
-        inviteButton.layer.borderColor = UIColor.white.cgColor
-        inviteButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        inviteButton.clipsToBounds = true
-        // DISPLAY: Hide navigation controller
-//        navigationController?.setNavigationBarHidden(true, animated: true)
-//        self.tabBarController?.tabBar.isHidden = false
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        self.titleLabel.textColor = UIColor(hexString: "#FEB2A4")
         
+        self.friends = AppUser.current.facebookFriends
+        
+        self.tabBarController?.tabBar.isHidden = false
+        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = [String: Bool]()
     }
     
-    @IBAction func onClickInvite(_ sender: Any) {
-        showPicker()
-    }
-    
-    func showPicker() {
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        let contactPicker = EVContactsPickerViewController()
-        contactPicker.delegate = self
-        self.navigationController?.pushViewController(contactPicker, animated: true)
-    }
-    
-    func didChooseContacts(_ contacts: [EVContactProtocol]?) {
-        if let cons = contacts {
-            for con in cons {
-                if !(selectedContacts.contains(where: {$0.phone == con.phone})) {
-                    selectedContacts.append(con)
-                    selectedContactsPhone.append(con.phone!)
-                }
-            }
-        }
-        tableView.reloadData()
-        self.navigationController?.popViewController(animated: true)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = self.selectedContactsPhone
-        // print((CreateEventMaster.shared.event[EventKey.guestlist.rawValue]! as AnyObject).count )
-    }
-    
-    
-    // TABLEVIEW
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if selectedContacts.isEmpty {
-            return 0
-        } else {
-            return selectedContacts.count
-        }
+        return self.friends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GuestListCell", for: indexPath) as! GuestListTableViewCell
-        let guest = selectedContacts[indexPath.row]
-        
-        let firstName = guest.firstName!
-        let lastName = guest.lastName!
-        let fullName = "\(String(describing: firstName)) \(String(describing: lastName))"
-        let phoneNumber = guest.phone
-        
-        cell.guestName.text = fullName
-        cell.guestCell.text = phoneNumber
+        cell.guestName.textColor = UIColor.darkGray
+        cell.guestImage.layer.cornerRadius = 5
+        cell.guestImage.layer.borderWidth = 1
+        cell.guestImage.layer.borderColor = UIColor.white.cgColor
+        cell.guestImage.backgroundColor = UIColor(hexString: "#FEB2A4")
+        cell.guestImage.clipsToBounds = true
+        let guest = friends[indexPath.row]
+        cell.guestImage.af_setImage(withURL: guest.photo)
+        cell.guestName.text = guest.name
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView.cellForRow(at: indexPath)!
+        if cell.accessoryType == .checkmark {
+            cell.accessoryType = .none
+            CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = nil
+        } else {
+            cell.accessoryType = .checkmark
+            CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = false
+        }
+        print(CreateEventMaster.shared.guestlist)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    @IBAction func didTapNext(_ sender: Any) {
-        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = self.selectedContactsPhone
-        self.tabBarController?.selectedIndex = 3
-    }
-    
-    @IBAction func didHitBackButton(_ sender: Any) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    
 }
 
 
