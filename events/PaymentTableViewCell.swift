@@ -1,17 +1,21 @@
 //
-//  userTableViewCell.swift
+//  PaymentTableViewCell.swift
 //  events
 //
-//  Created by Rhian Chavez on 7/26/17.
+//  Created by Xiu Chen on 7/25/17.
 //  Copyright © 2017 fbu-rsx. All rights reserved.
 //
 
 import UIKit
 
-class userTableViewCell: UITableViewCell {
+class PaymentTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label: UILabel!
-    
+    @IBOutlet weak var paymentValueLabel: UILabel!
+    @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var requesterImage: UIImageView!
+    @IBOutlet weak var requesterName: UILabel!
+    @IBOutlet weak var requestedDate: UILabel!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,5 +26,5 @@ class userTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

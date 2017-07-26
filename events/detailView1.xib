@@ -57,18 +57,32 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="collectionView" destination="Nbc-sO-eQa" id="pFy-sl-b9Y"/>
-                <outlet property="collectionViewCell" destination="TFm-xd-igx" id="J5V-U0-Yhx"/>
             </connections>
             <point key="canvasLocation" x="37" y="5"/>
         </view>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="TFm-xd-igx">
-            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="TFm-xd-igx" customClass="ImageCollectionViewCell" customModule="events" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="89" height="81"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="89" height="81"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7wo-uV-TVD">
+                        <rect key="frame" x="0.0" y="0.0" width="89" height="81"/>
+                    </imageView>
+                </subviews>
             </view>
-            <point key="canvasLocation" x="-98" y="326"/>
+            <constraints>
+                <constraint firstItem="7wo-uV-TVD" firstAttribute="top" secondItem="TFm-xd-igx" secondAttribute="top" id="3MG-sS-W7n"/>
+                <constraint firstItem="7wo-uV-TVD" firstAttribute="leading" secondItem="TFm-xd-igx" secondAttribute="leading" id="Bgj-gR-udr"/>
+                <constraint firstAttribute="bottom" secondItem="7wo-uV-TVD" secondAttribute="bottom" id="EUt-OV-j6q"/>
+                <constraint firstAttribute="trailing" secondItem="7wo-uV-TVD" secondAttribute="trailing" id="WXP-rS-k9g"/>
+            </constraints>
+            <size key="customSize" width="89" height="81"/>
+            <connections>
+                <outlet property="imageView" destination="7wo-uV-TVD" id="2sv-7n-K6v"/>
+            </connections>
+            <point key="canvasLocation" x="-78.5" y="341.5"/>
         </collectionViewCell>
     </objects>
 </document>
