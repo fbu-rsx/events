@@ -16,9 +16,7 @@
 		09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */; };
 		09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */; };
 		09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */; };
-		09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */; };
-		09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */; };
-		09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */; };
+		09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */; };
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
 		09F788491F2668A700A311F0 /* detailView0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788481F2668A700A311F0 /* detailView0.xib */; };
@@ -93,9 +91,7 @@
 		09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
 		09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedEventViewController.swift; sourceTree = "<group>"; };
 		09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
-		09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
-		09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = userTableViewCell.xib; sourceTree = "<group>"; };
+		09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
 		09F788481F2668A700A311F0 /* detailView0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = detailView0.xib; path = events/detailView0.xib; sourceTree = SOURCE_ROOT; };
@@ -242,9 +238,6 @@
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
-				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
-				09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */,
-				09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -324,6 +317,7 @@
 				09F7884A1F26694A00A311F0 /* detailView0.swift */,
 				09F7884E1F26783100A311F0 /* detailView1.swift */,
 				09F788521F269F0900A311F0 /* detailView2.swift */,
+				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
 			);
 			path = events;
 			sourceTree = SOURCE_ROOT;
@@ -498,8 +492,6 @@
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
-				09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */,
-				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
@@ -695,11 +687,11 @@
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
+				09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
 				4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
-				09A15CD41F1D7A8600E847CC /* userTableViewCell.swift in Sources */,
 				7CAAA0DF1F27B405005C1A76 /* SpotifyAPIManager.swift in Sources */,
 				09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */,
 				4FFC02F91F26AF1D00B55206 /* SignInViewController.swift in Sources */,

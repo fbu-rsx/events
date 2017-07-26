@@ -2,7 +2,7 @@
 //  userTableViewCell.swift
 //  events
 //
-//  Created by Rhian Chavez on 7/17/17.
+//  Created by Rhian Chavez on 7/26/17.
 //  Copyright © 2017 fbu-rsx. All rights reserved.
 //
 
@@ -22,5 +22,5 @@ class userTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }

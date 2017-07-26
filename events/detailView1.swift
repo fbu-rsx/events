@@ -32,10 +32,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
             picker.delegate = self
         }
     }
-
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionViewCell: UICollectionViewCell!
     
     var photos: [UIImage] = []
     /*
@@ -49,8 +47,6 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
     }*/
     
-    
-    
     @IBAction func upload(_ sender: UIButton) {
         delegate?.presenter(imagePicker: picker)
        
@@ -61,7 +57,9 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        return collectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
+        cell.imageView.image = photos[indexPath.row]
+        return cell
     }
     
     // required function
