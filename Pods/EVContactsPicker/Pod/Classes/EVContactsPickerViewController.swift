@@ -109,7 +109,7 @@ import ContactsUI
 
     override open func viewDidLoad() {
         super.viewDidLoad()
-        
+//        print("hello there")
         barButton = UIBarButtonItem(title: Bundle.evLocalizedStringForKey("Done"), style: .done, target: self, action: #selector(EVContactsPickerViewController.done(_:)))
         barButton?.isEnabled = false
         self.navigationItem.rightBarButtonItem = barButton
@@ -242,6 +242,8 @@ import ContactsUI
                 self.selectedContacts = []
                 self.filteredContacts = self.contacts
                 self.tableView?.reloadData()
+                print("selectedContacts: \(String(describing: self.selectedContacts))")
+                print("filteredContacts: \(String(describing: self.filteredContacts))")
                 
             })
         } catch {
@@ -473,9 +475,6 @@ import ContactsUI
             } else {
                 self.barButton?.isEnabled = false
             }
-//            let imPath = self.curBundle?.path(forResource: kUnselectedCheckbox, ofType: "png", inDirectory: "EVContactsPicker.bundle")
-//            let im = UIImage(contentsOfFile: imPath!)
-//            
             let im = Bundle.evImage(withName: kUnselectedCheckbox, andExtension: "png")!
             cell.checkImage?.image = im
             
@@ -504,7 +503,6 @@ import ContactsUI
     }
     
     @IBAction func viewContactDetail(_ sender: UIButton) -> Void {
-       // print("clicked discloser")
         
         if( self.useExternal == false ) {
             let indexp = IndexPath(row: 0, section: 0)

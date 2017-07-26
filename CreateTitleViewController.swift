@@ -26,14 +26,9 @@ class CreateTitleViewController: UIViewController {
         self.currentTimeText.textColor = UIColor(hexString: "#484848")
         selectTimeButton.layer.cornerRadius = 5
         selectTimeButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        
+        self.eventTime.textColor = UIColor.lightGray
         self.tabBarController?.tabBar.isHidden = false
-        
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
-        self.eventTime.text = dateFormatter.string(from: date)
-      
+        self.updatePageController()
     }
     
     // Bounce up-and-down animation for photo
@@ -53,23 +48,6 @@ class CreateTitleViewController: UIViewController {
         self.logoImage.layer.removeAllAnimations()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let title = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String {
-            eventTitle.text = title
-        }
-        
-        if let selected = CreateEventMaster.shared.event[EventKey.date.rawValue]  {
-            let dateConverter = DateFormatter()
-            dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
-            let date = dateConverter.date(from: selected as! String)!
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM d, h:mm a"
-            self.eventTime.text = dateFormatter.string(from: date)
-        }
-    }
-    
     @IBAction func onSelectTime(_ sender: Any) {
         dateTimePicker()
     }
@@ -82,32 +60,36 @@ class CreateTitleViewController: UIViewController {
         picker.selectedDate = Date()
         picker.dateFormat = "MMM d, h:mm a"
         picker.is12HourFormat = true
-        picker.dateFormat = "MMM d, YYYY H:mm a"
         picker.completionHandler = { date in
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM d, h:mm a"
             self.eventTime.text = dateFormatter.string(from: picker.selectedDate)
-            CreateEventMaster.shared.event[EventKey.date.rawValue] = self.eventTime.text
-            // do something after tapping done
-            
+            self.eventTime.textColor = UIColor(hexString: "#FEB2A4")
+
             CreateEventMaster.shared.event[EventKey.date.rawValue] = date.description
+            self.updatePageController()
         }
     }
     
     @IBAction func didSetTitle(_ sender: Any) {
         CreateEventMaster.shared.event[EventKey.name.rawValue] = eventTitle.text
+        self.updatePageController()
     }
     
     @IBAction func didTapDismiss(_ sender: Any) {
         self.view.endEditing(true)
     }
     
-    func valid() -> Bool {
-        let a = CreateEventMaster.shared.event[EventKey.name.rawValue] != nil
-        let b = CreateEventMaster.shared.event[EventKey.date.rawValue] != nil
-        return a && b
+    func updatePageController() {
+        let name = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String
+        let nameExists = name != nil && name != ""
+        let dateExists = CreateEventMaster.shared.event[EventKey.date.rawValue] != nil
+        if nameExists && dateExists {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+        }
     }
-    
 }
 
 // Enable the use of hex codes

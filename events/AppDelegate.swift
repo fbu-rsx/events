@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
         UIApplication.shared.cancelAllLocalNotifications()
-        
+        //OAuthSwiftManager.shared.logout()
         return true
     }
     
@@ -101,7 +101,7 @@ extension AppDelegate: SignInDelegate {
         }
 
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-        FacebookAPIManager.shared.getUserFriendsList()
+
         Auth.auth().signIn(with: credential) { (user: User?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)

@@ -17,5 +17,19 @@ class detailView2: UIView {
         // Drawing code
     }
     */
+    /*
+    var event: Event?{
+        didSet{
+            
+        }
+    }*/
+    
+    @IBAction func spotifyTap(_ sender: UIButton) {
+        OAuthSwiftManager.shared.spotifyLogin(success: {
+            
+        }) { (Error) in
+            
+        }
+    }
 
 }

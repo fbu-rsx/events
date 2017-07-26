@@ -28,6 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    static var map: MKMapView!
+    
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
@@ -44,7 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
-        
+        MapViewController.map = self.mapView
         // Displays user's current location
         self.mapView.showsUserLocation = true
         // Allows user's location tracking

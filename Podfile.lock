@@ -69,6 +69,7 @@ PODS:
   - RAMAnimatedTabBarController (2.0.13)
   - SCLAlertView (0.7.0)
   - SimpleTab (0.2.1)
+  - SJFluidSegmentedControl (1.1.2)
   - TwitterCore (2.7.0):
     - Fabric
   - TwitterKit (2.7.0):
@@ -93,6 +94,7 @@ DEPENDENCIES:
   - RAMAnimatedTabBarController (~> 2.0.13)
   - SCLAlertView
   - SimpleTab
+  - SJFluidSegmentedControl (~> 1.0)
   - TwitterKit (= 2.7)
 
 SPEC CHECKSUMS:
@@ -123,9 +125,10 @@ SPEC CHECKSUMS:
   RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SimpleTab: d24e026736c30951ce60d194268042a6afedaf4c
+  SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
 
-PODFILE CHECKSUM: 5e0f3d6494699f3e0069dc5346da4893628c6d4f
+PODFILE CHECKSUM: 5a967e08032906928a70c94125a9f62f99f7fef8
 
 COCOAPODS: 1.2.1

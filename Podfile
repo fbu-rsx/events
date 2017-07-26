@@ -26,6 +26,7 @@ target 'events' do
   pod 'FaveButton', '~> 2.0.3'
   pod 'SCLAlertView'
   pod 'FBSDKLoginKit'
+  pod 'SJFluidSegmentedControl', '~> 1.0'
 
 
   target 'eventsTests' do

@@ -84,8 +84,6 @@ class CreateLocationViewController: UIViewController {
 }
     
 
-    
-
 // SEARCH extension
 extension CreateLocationViewController: HandleMapSearch {
     func dropPinZoomIn(placemark:MKPlacemark) {

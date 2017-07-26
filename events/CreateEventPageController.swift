@@ -37,7 +37,7 @@ class CreateEventPageController: UIPageViewController {
     private(set) lazy var orderedViewControllers: [UIViewController] = {
         return [self.newViewController("CreateTitleViewController"),
                 self.newViewController("CreateLocationNavController"),
-                self.newViewController("CreateGuestsNavController"),
+                self.newViewController("CreateGuestsViewController"),
                 self.newViewController("CreateAboutViewController")]
     }()
     
@@ -49,7 +49,7 @@ class CreateEventPageController: UIPageViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.dataSource = self
+        self.dataSource = nil
         self.delegate = self
         
         if let firstViewController = orderedViewControllers.first {
@@ -61,6 +61,18 @@ class CreateEventPageController: UIPageViewController {
         
         pageControlDelegate?.eventPageController(self,
                                                     didUpdatePageCount: orderedViewControllers.count)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.enableSwipe(_:)), name:NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.disableSwipe(_:)), name:NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+
+    }
+    
+    func disableSwipe(_ notification: NSNotification){
+        self.dataSource = nil
+    }
+    
+    func enableSwipe(_ notification: NSNotification){
+        self.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
