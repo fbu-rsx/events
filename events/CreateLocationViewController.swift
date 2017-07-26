@@ -38,12 +38,6 @@ class CreateLocationViewController: UIViewController {
         // Select Location button styling
         selectLocationButton.layer.cornerRadius = 5
         
-        if selectLocationButton.backgroundColor == UIColor(hexString: "#FEB2A4") {
-            selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        } else {
-            selectLocationButton.backgroundColor = UIColor(hexString: "#C9C9C9")
-        }
-        
         // SEARCH
         // Programmatically instantiating the locationSearchTable TableViewController
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable

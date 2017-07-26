@@ -18,6 +18,7 @@ enum EventKey: String {
     case location = "location"
     case radius = "radius"
     case organizerID = "organizerID"
+    case orgURLString = "organizerURLString"
     case about = "about"
     case guestlist = "guestlist"
     case photos = "photos"
@@ -36,6 +37,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
     var organizerID: String //uid of the organizer
+    var organizerURL: URL //organizer photo URL
     var guestlist: [String: Bool] // true if guest attended
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
@@ -87,8 +89,9 @@ class Event: NSObject, NSCoding, MKAnnotation {
         let location = dictionary[EventKey.location.rawValue] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
         
-        self.radius = dictionary[EventKey.radius.rawValue] as? Double ?? 100.0
+        self.radius = dictionary[EventKey.radius.rawValue] as! Double
         self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
+        self.organizerURL = URL(string: dictionary[EventKey.orgURLString.rawValue] as! String)!
         self.about = dictionary[EventKey.about.rawValue] as! String
         self.guestlist = dictionary[EventKey.guestlist.rawValue] as! [String: Bool]
         self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]

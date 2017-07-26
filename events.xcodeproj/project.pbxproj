@@ -245,9 +245,6 @@
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
-				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
-				09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */,
-				09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */,
 				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
 				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
 			);
@@ -453,7 +450,6 @@
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 736R8PG8E6;
-						DevelopmentTeam = TM66RGVAQ6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -505,9 +501,7 @@
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
-				09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */,
 				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
-				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
@@ -864,14 +858,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 736R8PG8E6;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruega.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen1.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -883,15 +875,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 736R8PG8E6;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruega.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen1.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
