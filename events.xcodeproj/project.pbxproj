@@ -62,6 +62,8 @@
 		7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E51F281304005C1A76 /* WalletViewController.xib */; };
 		7CAAA0EF1F281A94005C1A76 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */; };
 		7CAAA0F01F281A94005C1A76 /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */; };
+		7CBC19261F29511E002C65F9 /* MyUploadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBC19241F29511E002C65F9 /* MyUploadsViewController.swift */; };
+		7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */; };
 		7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */; };
 		CCB163A1DDBEE3944D6FE0A3 /* Pods_eventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C04120232A3D15602FB929F /* Pods_eventsTests.framework */; };
 /* End PBXBuildFile section */
@@ -148,6 +150,8 @@
 		7CAAA0E51F281304005C1A76 /* WalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletViewController.xib; sourceTree = "<group>"; };
 		7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
 		7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
+		7CBC19241F29511E002C65F9 /* MyUploadsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUploadsViewController.swift; sourceTree = "<group>"; };
+		7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyUploadsViewController.xib; sourceTree = "<group>"; };
 		A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-events.release.xcconfig"; path = "Pods/Target Support Files/Pods-events/Pods-events.release.xcconfig"; sourceTree = "<group>"; };
 		CB8C73451CEFA2E4231A3210 /* Pods-eventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventsTests/Pods-eventsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -245,11 +249,10 @@
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
-				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
-				09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */,
-				09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */,
 				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
 				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
+				7CBC19241F29511E002C65F9 /* MyUploadsViewController.swift */,
+				7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -501,12 +504,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CAAA0F01F281A94005C1A76 /* PaymentTableViewCell.xib in Resources */,
+				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
-				09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */,
 				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
-				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
@@ -684,6 +686,7 @@
 				4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */,
 				7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */,
 				7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */,
+				7CBC19261F29511E002C65F9 /* MyUploadsViewController.swift in Sources */,
 				09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */,
 				4F010D751F16EE7A00E8EA47 /* CreateLocationViewController.swift in Sources */,
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,

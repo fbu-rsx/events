@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -146,7 +145,6 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9jb-GC-5i8" id="Hhk-Hy-X6t">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Xiu Chen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ze5-pn-WrD">
@@ -346,12 +344,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sRZ-w2-dah" customClass="ButtonBarView" customModule="XLPagerTabStrip">
-                                <rect key="frame" x="16" y="20" width="343" height="64"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3M-v2-MWG">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </scrollView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sRZ-w2-dah" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="Gf7-iY-i51"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="erN-Rb-EMY">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -360,24 +359,19 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3M-v2-MWG">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sRZ-w2-dah" firstAttribute="leading" secondItem="NHv-1p-9tX" secondAttribute="leadingMargin" id="6ZM-L3-reS"/>
                             <constraint firstItem="u3M-v2-MWG" firstAttribute="leading" secondItem="NHv-1p-9tX" secondAttribute="leading" id="7uu-UA-sCS"/>
                             <constraint firstItem="u3M-v2-MWG" firstAttribute="top" secondItem="NHv-1p-9tX" secondAttribute="top" constant="64" id="97t-U7-3wW"/>
                             <constraint firstItem="ha7-bJ-QEC" firstAttribute="top" secondItem="u3M-v2-MWG" secondAttribute="bottom" id="Ff9-ym-6fD"/>
                             <constraint firstAttribute="trailing" secondItem="u3M-v2-MWG" secondAttribute="trailing" id="O0f-Bz-YkJ"/>
-                            <constraint firstItem="sRZ-w2-dah" firstAttribute="top" secondItem="YQl-Jp-4ti" secondAttribute="bottom" id="oz8-dz-8bw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sRZ-w2-dah" secondAttribute="trailing" id="ubK-4o-V9i"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="f0n-il-0vH" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <navigationItem key="navigationItem" id="JW3-Pt-JOV"/>
                     <connections>
+                        <outlet property="barButtonView" destination="sRZ-w2-dah" id="Lc9-ot-56A"/>
                         <outlet property="buttonBarView" destination="sRZ-w2-dah" id="zAP-Av-yYD"/>
                         <outlet property="containerView" destination="u3M-v2-MWG" id="Ml3-r2-mAv"/>
                     </connections>
