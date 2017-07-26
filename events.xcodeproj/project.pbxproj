@@ -59,6 +59,8 @@
 		7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */; };
 		7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E41F281304005C1A76 /* WalletViewController.swift */; };
 		7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E51F281304005C1A76 /* WalletViewController.xib */; };
+		7CAAA0EF1F281A94005C1A76 /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */; };
+		7CAAA0F01F281A94005C1A76 /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */; };
 		7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */; };
 		CCB163A1DDBEE3944D6FE0A3 /* Pods_eventsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C04120232A3D15602FB929F /* Pods_eventsTests.framework */; };
 /* End PBXBuildFile section */
@@ -142,6 +144,8 @@
 		7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E41F281304005C1A76 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E51F281304005C1A76 /* WalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletViewController.xib; sourceTree = "<group>"; };
+		7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTableViewCell.swift; sourceTree = "<group>"; };
+		7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentTableViewCell.xib; sourceTree = "<group>"; };
 		A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eventsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-events.release.xcconfig"; path = "Pods/Target Support Files/Pods-events/Pods-events.release.xcconfig"; sourceTree = "<group>"; };
 		CB8C73451CEFA2E4231A3210 /* Pods-eventsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eventsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eventsTests/Pods-eventsTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */,
+				7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */,
 				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
 				7CAAA0E51F281304005C1A76 /* WalletViewController.xib */,
 				7C5456301F2020D60027009C /* LocationSearchTable.swift */,
@@ -488,6 +494,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CAAA0F01F281A94005C1A76 /* PaymentTableViewCell.xib in Resources */,
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
@@ -674,6 +681,7 @@
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
 				09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */,
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
+				7CAAA0EF1F281A94005C1A76 /* PaymentTableViewCell.swift in Sources */,
 				09F7884F1F26783100A311F0 /* detailView1.swift in Sources */,
 				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
