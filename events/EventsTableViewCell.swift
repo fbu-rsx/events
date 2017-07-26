@@ -30,6 +30,54 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     var pageView : UIPageControl = UIPageControl()
     @IBOutlet weak var scrollView: UIScrollView!
     
+    var delegate: imagePickerDelegate2?{
+        didSet{
+            pageView = UIPageControl(frame:CGRect(x: (self.view2.frame.width-10)/2 - 10, y: self.view2.frame.height - 40, width: 40, height: 40))
+            configurePageControl()
+            scrollView.delegate = self
+            for index in 0...2 {
+                var frame = CGRect.zero
+                frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
+                //print(frame.origin.x)
+                frame.size = self.scrollView.frame.size
+                if index == 0{
+                    let nib = UINib(nibName: "detailView0", bundle: nil)
+                    let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView0
+                    //subView.event = event
+                    subView.frame = frame
+                    //print(subView.frame.width)
+                    self.scrollView.addSubview(subView)
+                    //print(self.scrollView.frame.width)
+                }
+                else if index == 1{
+                    let nib = UINib(nibName: "detailView1", bundle: nil)
+                    let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView1
+                    //subView.event = event
+                    subView.frame = frame
+                    
+                    subView.delegate = delegate
+                    //print(subView.frame.width)
+                    self.scrollView.addSubview(subView)
+                    //print(self.scrollView.frame.width)
+                }
+                else{
+                    let nib = UINib(nibName: "detailView2", bundle: nil)
+                    let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView2
+                    //subView.event = event
+                    subView.frame = frame
+                    //print(subView.frame.width)
+                    self.scrollView.addSubview(subView)
+                    //print(self.scrollView.frame.width)
+                }
+            }
+            
+            self.scrollView.isPagingEnabled = true
+            self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 3, height: self.scrollView.frame.size.height)
+            //print(self.scrollView.frame.width)
+            pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
+        }
+    }
+    
     /*
      var eventid: String
      var eventDictionary: [String: Any]
@@ -73,6 +121,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     override func awakeFromNib() {
         // Initialization code
+        
         backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         foregroundView = view1
         foregroundViewTop = view1topConstraint
@@ -83,48 +132,10 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         foregroundView.layer.masksToBounds = true
         closedProfileImageView.layer.cornerRadius = closedProfileImageView.bounds.width/2
         closedProfileImageView.layer.masksToBounds = true
-        //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
-        //pageView & scrollV8iew code
-        pageView = UIPageControl(frame:CGRect(x: (self.view2.frame.width-10)/2 - 10, y: self.view2.frame.height - 40, width: 40, height: 40))
-        configurePageControl()
-        scrollView.delegate = self
-        for index in 0...2 {
-            var frame = CGRect.zero
-            frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
-            frame.size = self.scrollView.frame.size
-            if index == 0{
-                let nib = UINib(nibName: "detailView0", bundle: nil)
-                let subView = nib.instantiate(withOwner: self, options: nil).first as! UIView
-                subView.frame = frame
-                self.scrollView.addSubview(subView)
-            }
-            else if index == 1{
-                let nib = UINib(nibName: "detailView1", bundle: nil)
-                let subView = nib.instantiate(withOwner: self, options: nil).first as! UIView
-                subView.frame = frame
-                self.scrollView.addSubview(subView)
-            }
-            else{
-                let nib = UINib(nibName: "detailView2", bundle: nil)
-                let subView = nib.instantiate(withOwner: self, options: nil).first as! UIView
-                subView.frame = frame
-                self.scrollView.addSubview(subView)
-            }
-            
-        }
-        self.scrollView.isPagingEnabled = true
-        self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 3, height: self.scrollView.frame.size.height)
-        print(self.scrollView.frame.width)
-        pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
-        // finally awake nibconfigurePageControl()
         super.awakeFromNib()
-        print(String(pageView.currentPage))
+        //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
+        
     }
-    /*
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let x = CGFloat(pageView.currentPage) * scrollView.frame.size.width
-        scrollView.setContentOffset(CGPoint(x: x,y :0), animated: true)
-    }*/
     
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.

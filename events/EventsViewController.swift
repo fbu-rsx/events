@@ -8,13 +8,14 @@
 
 import UIKit
 import FoldingCell
+import ImagePicker
 
-class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2 {
 
     @IBOutlet weak var tableView: UITableView!
     
     let kCloseCellHeight: CGFloat = 144
-    let kOpenCellHeight: CGFloat = 400
+    let kOpenCellHeight: CGFloat = 466
     var events: [Event] = []
     var cellHeights: [CGFloat] = []
     
@@ -47,7 +48,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // which data to display is dependent on selected index of segmented control
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         // see which data to display
-        //print(cell)
+        cell.delegate = self
+        
         return cell
     }
     
@@ -61,9 +63,15 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     fileprivate struct C {
         struct CellHeight {
             static let close: CGFloat = 144 // equal or greater foregroundView height
-            static let open: CGFloat = 400 // equal or greater containerView height
+            static let open: CGFloat = 466 // equal or greater containerView height
         }
     }
+    
+    func presenter(imagePicker : ImagePickerController) {
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cellHeights[indexPath.row]

@@ -20,18 +20,11 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.fbu-rsx.events</string>
+			<string>fbu-rsx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>events</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.1000783554519-b9493h0laaabpc7dkgacsm7ltqqr3sv8</string>
+				<string>fb252853855233171</string>
 			</array>
 		</dict>
 	</array>
@@ -41,8 +34,10 @@
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>googlechromes</string>
-		<string>comgooglemaps</string>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -75,25 +70,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb252853855233171</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>252853855233171</string>
-    <key>FacebookDisplayName</key>
-    <string>PopPin</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-    </array>
+	<key>FacebookAppID</key>
+	<string>252853855233171</string>
+	<key>FacebookDisplayName</key>
+	<string>PopPin</string>
 </dict>
 </plist>
