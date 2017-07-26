@@ -21,7 +21,6 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var perPersonText: UILabel!
     @IBOutlet weak var dollarSignLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var invitesScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +82,7 @@ class CreateAboutViewController: UIViewController {
         CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = CreateEventMaster.shared.guestlist
         CreateEventMaster.shared.delegate.createNewEvent(CreateEventMaster.shared.event)
         self.tabBarController?.selectedIndex = 0
-        CreateEventMaster.shared.clear()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
     }
     
     

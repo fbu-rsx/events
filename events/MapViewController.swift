@@ -11,6 +11,7 @@ import MapKit
 import CoreLocation
 import OAuthSwift
 import FBSDKLoginKit
+import AlamofireImage
 
 struct PreferenceKeys {
     static let savedItems = "savedItems"
@@ -84,6 +85,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 print(self.events)
             }
         }
+        CreateEventMaster.shared.delegate = self
+
         
 //        for region in locationManager.monitoredRegions {
 //            guard let circularRegion = region as? CLCircularRegion else { continue }
@@ -93,10 +96,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //        saveAllEvents()
         
         // Automatically zooms to the user's location upon VC loading
-        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-        self.mapView.setRegion(region, animated: true)
-        CreateEventMaster.shared.delegate = self
+//        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+//        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+//        self.mapView.setRegion(region, animated: true)
     }
     
 
@@ -220,15 +222,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "myEvent"
-        if annotation is Event {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+        if let event = annotation as? Event {
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKAnnotationView
             if annotationView == nil {
-                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                let data = try! Data(contentsOf: URL(string: AppUser.current.photoURLString)!)
+                let image = UIImage(data: data)!
+                annotationView?.image =  image.af_imageRoundedIntoCircle()
+//                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
+                let frame = annotationView!.frame
+                annotationView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: 30.0, height: 30.0)
                 let removeButton = UIButton(type: .custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
                 removeButton.setImage(UIImage(named: "DeleteEvent")!, for: .normal)
                 annotationView?.leftCalloutAccessoryView = removeButton
+//                annotationView?.pinTintColor = UIColor(hexString: "#4CB6BE")
             } else {
                 annotationView?.annotation = annotation
             }
@@ -242,8 +251,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0
-            circleRenderer.strokeColor = .purple
-            circleRenderer.fillColor = UIColor.purple.withAlphaComponent(0.4)
+            circleRenderer.strokeColor = UIColor(hexString: "#FEB2A4")
+            circleRenderer.fillColor = UIColor(hexString: "#FEB2A4").withAlphaComponent(0.4)
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
@@ -268,12 +277,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 extension MapViewController: CreateEventMasterDelegate {
     func createNewEvent(_ dict: [String: Any]) {
         guard let radius = dict[EventKey.radius.rawValue] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
+        print("CREATING NEW EVENT")
         let event = AppUser.current.createEvent(dict)
         add(event: event)
         startMonitoring(event: event)
         saveAllEvents()
         print("new event added")
-        self.tabBarController?.viewControllers?[1] = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventContainerViewController")
+        CreateEventMaster.shared.clear()
     }
 }
 

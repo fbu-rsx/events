@@ -28,6 +28,7 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = [String: Bool]()
     }
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.friends.count
     }
