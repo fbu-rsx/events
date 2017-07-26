@@ -22,6 +22,8 @@ class WalletViewController: UIViewController, IndicatorInfoProvider {
 
         tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentCell")
         // Set the current user's name
+        print(AppUser.current)
+        print(AppUser.current.name)
         userName.text = AppUser.current.name
         // Set the current user's photo
         let photoURLString = AppUser.current.photoURLString
