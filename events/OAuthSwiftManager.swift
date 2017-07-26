@@ -12,8 +12,6 @@ import KeychainAccess
 import Alamofire
 import OAuthSwiftAlamofire
 
-// attempting to follow CodePath's implementation in out Twitter Demo App
-
 class OAuthSwiftManager: SessionManager {
     
     static let spotifyConsumerKey = "c4ee2fb79ba345f39fc00914f36fe4a7"
@@ -24,8 +22,6 @@ class OAuthSwiftManager: SessionManager {
     
     static var shared: OAuthSwiftManager = OAuthSwiftManager()
     var oauth : OAuth2Swift!
-
-
     
     private init() {
         super.init()
@@ -40,7 +36,6 @@ class OAuthSwiftManager: SessionManager {
         // Assign oauth request adapter to Alamofire SessionManager adapter to sign requests
         adapter = oauth.requestAdapter
     }
-    
     
     func spotifyLogin(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
@@ -107,7 +102,6 @@ class OAuthSwiftManager: SessionManager {
     // functions to interact with spotify web client
     // use oauth
     
-    
     private func getSpotifyUserID(){
         let url = URL(string: "https://api.spotify.com/v1/me")!
         request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
@@ -127,17 +121,16 @@ class OAuthSwiftManager: SessionManager {
         let Parameters: [String: Any] = ["name": name, "public": false, "collaborative": true]
         let header = ["Content-Type": "application/json"]
         request(url!, method: .post, parameters: Parameters, encoding: JSONEncoding.default, headers: header).validate().responseJSON { (response) in
-            print(response)
+            //print(response)
             if response.result.isSuccess{
                 let result = response.result.value as! [String: Any]
-                //print(result["uri"])
+                print(result["uri"])
             }else{
                 print(response)
             }
             completion()
         }
     }
-
     
 }
 
