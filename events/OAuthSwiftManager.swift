@@ -22,36 +22,15 @@ class OAuthSwiftManager: SessionManager {
     static let spotifyAccessTokenUrl = "https://accounts.spotify.com/api/token"
     static let callBackUrl = "events://"
     
-    func spotifyLogin(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
-        
-        // Add callback url to open app when returning from Twitter login on web
-        let Scope = "playlist-modify-public playlist-modify-private user-follow-modify"
-        
-        let callback = URL(string: OAuthSwiftManager.callBackUrl)!
-
-        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
-            self.save(credential: credential)
-        }) { (error) in
-            print("Error was hahteklra;sldfjka;sdlfjk")
-            failure(error)
-        }
-        
-    }
-    
-    func logout() {
-        clearCredentials()
-        // TODO: Clear current user by setting it to nil
-        //User.current = nil
-        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
-    }
-    
     static var shared: OAuthSwiftManager = OAuthSwiftManager()
     var oauth : OAuth2Swift!
+
+
     
     private init() {
         super.init()
         
-        oauth = OAuth2Swift(consumerKey: OAuthSwiftManager.spotifyConsumerKey, consumerSecret: OAuthSwiftManager.spotifySecret, authorizeUrl: OAuthSwiftManager.spotifyAuthorizeUrl, accessTokenUrl: OAuthSwiftManager.spotifyAccessTokenUrl, responseType: "code")
+        oauth = OAuth2Swift(consumerKey: OAuthSwiftManager.spotifyConsumerKey, consumerSecret: OAuthSwiftManager.spotifySecret, authorizeUrl: OAuthSwiftManager.spotifyAuthorizeUrl, accessTokenUrl: OAuthSwiftManager.spotifyAccessTokenUrl, responseType: "token")
         
         if let credential = retrieveCredentials() {
             oauth.client.credential.oauthToken = credential.oauthToken
@@ -62,11 +41,35 @@ class OAuthSwiftManager: SessionManager {
         adapter = oauth.requestAdapter
     }
     
+    
+    func spotifyLogin(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
+        
+        // Add callback url to open app when returning from Twitter login on web
+        let Scope = "playlist-modify-public playlist-modify-private user-follow-modify"
+        
+        let callback = URL(string: OAuthSwiftManager.callBackUrl)!
+        
+        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
+            print(credential)
+            self.save(credential: credential)
+            success()
+        }) { (error) in
+            failure(error)
+        }
+        
+    }
+    
+    func logout() {
+        clearCredentials()
+        // User.current = nil
+        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
+    }
+    
     // MARK: Handle url
     // OAuth Step 3
     // Finish oauth process by fetching access token
     func handle(url: URL) {
-        OAuth1Swift.handle(url: url)
+        OAuth2Swift.handle(url: url)
     }
     
     // MARK: Save Tokens in Keychain
@@ -76,6 +79,7 @@ class OAuthSwiftManager: SessionManager {
         let keychain = Keychain()
         let data = NSKeyedArchiver.archivedData(withRootObject: credential)
         keychain[data: "spotify_credentials"] = data
+        getSpotifyUserID()
     }
     
     private func retrieveCredentials() -> OAuthSwiftCredential? {
@@ -101,7 +105,39 @@ class OAuthSwiftManager: SessionManager {
     }
     
     // functions to interact with spotify web client
+    // use oauth
     
+    
+    private func getSpotifyUserID(){
+        let url = URL(string: "https://api.spotify.com/v1/me")!
+        request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            print(response)
+            let response = response.result.value as! [String: Any]
+            let uri = response["uri"] as! String
+            let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
+            //self.spotifyUserID = id
+            UserDefaults.standard.set(id, forKey: "spotify-user")
+        }
+    }
+    
+    func createPlaylist(name: String, completion: @escaping ()->()){
+        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
+        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists")
+        //print(url)
+        let Parameters: [String: Any] = ["name": name, "public": false, "collaborative": true]
+        let header = ["Content-Type": "application/json"]
+        request(url!, method: .post, parameters: Parameters, encoding: JSONEncoding.default, headers: header).validate().responseJSON { (response) in
+            print(response)
+            if response.result.isSuccess{
+                let result = response.result.value as! [String: Any]
+                //print(result["uri"])
+            }else{
+                print(response)
+            }
+            completion()
+        }
+    }
+
     
 }
 

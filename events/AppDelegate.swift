@@ -51,10 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         // Spotify OAuth Management
-        if (url.host == "events://") {
-            OAuthSwift.handle(url: url)
-            return true
-        }
+        
+        OAuthSwift.handle(url: url)
         
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
     }
