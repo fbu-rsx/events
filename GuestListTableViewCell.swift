@@ -10,7 +10,6 @@ import UIKit
 
 class GuestListTableViewCell: UITableViewCell {
     @IBOutlet weak var guestName: UILabel!
-    @IBOutlet weak var guestCell: UILabel!
     @IBOutlet weak var guestImage: UIImageView!
     
     

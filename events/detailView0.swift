@@ -26,7 +26,8 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var profileImage: UIImageView!
     
     
-    var users: [String: Bool]?
+    var users: [String] = []
+    var usersDic: [String: Bool] = [:]
     
     
     @IBAction func goingTap(_ sender: UIButton) {
@@ -52,11 +53,20 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     }*/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! userTableViewCell
+        let user = users[indexPath.row]
+        cell.label.text = FirebaseDatabaseManager.shared.getSingleUser(id: user).name
+        if usersDic[user]!{
+            
+        }
+        else{
+            
+        }
+        return cell
     }
     
 }
