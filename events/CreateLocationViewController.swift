@@ -10,13 +10,12 @@ import UIKit
 import MapKit
 import CoreLocation
 
-
 class CreateLocationViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var zoomToCurrentLocation: UIButton!
     @IBOutlet weak var selectLocationButton: UIButton!
-   
+    
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
@@ -29,14 +28,19 @@ class CreateLocationViewController: UIViewController {
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
-    
+        
         self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // Select Location button styling
         selectLocationButton.layer.cornerRadius = 5
-        selectLocationButton.backgroundColor = UIColor(hexString: "#C9C9C9")
+        
+        if selectLocationButton.backgroundColor == UIColor(hexString: "#FEB2A4") {
+            selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        } else {
+            selectLocationButton.backgroundColor = UIColor(hexString: "#C9C9C9")
+        }
         
         // SEARCH
         // Programmatically instantiating the locationSearchTable TableViewController
@@ -57,24 +61,28 @@ class CreateLocationViewController: UIViewController {
         resultSearchController?.dimsBackgroundDuringPresentation = true
         // Limit the overlap area just to View Controller, not blocking the Navigation bar
         definesPresentationContext = true
-
+        
     }
     
     @IBAction func onSelected(_ sender: Any) {
-        selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
-        CreateEventMaster.shared.event[EventKey.coordinate.rawValue] = mapView.centerCoordinate
+        if selectLocationButton.backgroundColor == UIColor(hexString: "#C9C9C9") {
+            selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+            CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
+            CreateEventMaster.shared.event[EventKey.coordinate.rawValue] = mapView.centerCoordinate
+        } else {
+            selectLocationButton.backgroundColor = UIColor(hexString: "#C9C9C9")
+        }
     }
     
-//    @IBAction func loadNextPage(_ sender: Any) {
-//        let parentViewController = self.parent as! CreateEventPageController
-//        parentViewController.setViewControllers([parentViewController.orderedViewControllers[2]],
-//                                                direction: .forward,
-//                                                animated: true,
-//                                                completion: nil)
-//        
-//    }
-//    
+    //    @IBAction func loadNextPage(_ sender: Any) {
+    //        let parentViewController = self.parent as! CreateEventPageController
+    //        parentViewController.setViewControllers([parentViewController.orderedViewControllers[2]],
+    //                                                direction: .forward,
+    //                                                animated: true,
+    //                                                completion: nil)
+    //
+    //    }
+    //
     
     @IBAction func onZoomToCurrentLocation(_ sender: Any) {
         guard let coordinate = mapView.userLocation.location?.coordinate else { return }
@@ -82,9 +90,9 @@ class CreateLocationViewController: UIViewController {
         mapView.setRegion(region, animated: true)
     }
 }
-    
 
-    
+
+
 
 // SEARCH extension
 extension CreateLocationViewController: HandleMapSearch {

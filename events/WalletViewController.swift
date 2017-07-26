@@ -8,8 +8,9 @@
 
 import UIKit
 import AlamofireImage
+import XLPagerTabStrip
 
-class WalletViewController: UIViewController {
+class WalletViewController: UIViewController, IndicatorInfoProvider {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
@@ -32,6 +33,9 @@ class WalletViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Wallet")
+    }
 
     /*
     // MARK: - Navigation
