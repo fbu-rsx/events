@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         
-        if let user = Auth.auth().currentUser, let fbauth = FBSDKAccessToken.current() {
-            AppUser.current = AppUser(user: user)
+        if Auth.auth().currentUser != nil && FBSDKAccessToken.current() != nil {
+            AppUser.current = AppUser(user: Auth.auth().currentUser!)
         } else {
             let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
             loginController.signInDelegate = self
