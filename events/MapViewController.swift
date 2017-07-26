@@ -107,6 +107,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
         FBSDKLoginManager().logOut()
+        URLCache.shared.removeAllCachedResponses()
+        
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                HTTPCookieStorage.shared.deleteCookie(cookie)
+            }
+        }
+
         let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
         loginController.signInDelegate = UIApplication.shared.delegate! as! AppDelegate
         self.present(loginController, animated: true, completion: nil)

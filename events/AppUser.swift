@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseAuth
+import FBSDKCoreKit
 
 enum UserKey: String {
     case id = "uid"
@@ -37,7 +38,7 @@ class AppUser {
  
     static var current: AppUser!
  
-    var uid: String
+    var uid: String //same as their facebook id
     var name: String
     var photoURLString: String
     var events: [Event] = []
@@ -50,7 +51,7 @@ class AppUser {
     }
     
     convenience init(user: User) {
-        let userDict: [String: Any] = [UserKey.id.rawValue: user.uid,
+        let userDict: [String: Any] = [UserKey.id.rawValue: FBSDKAccessToken.current().userID,
                                        UserKey.name.rawValue: user.displayName!,
                                        UserKey.photo.rawValue: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
