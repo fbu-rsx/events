@@ -13,20 +13,18 @@ import XLPagerTabStrip
 class WalletViewController: UIViewController, IndicatorInfoProvider {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var userImage: UIImageView!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var infoView: UIView!
+      @IBOutlet weak var infoView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentCell")
         // Set the current user's name
-        userName.text = AppUser.current.name
+//        userName.text = AppUser.current.name
         // Set the current user's photo
-        let photoURLString = AppUser.current.photoURLString
-        let photoURL = URL(string: photoURLString)
-        userImage.af_setImage(withURL: photoURL!)
+//        let photoURLString = AppUser.current.photoURLString
+//        let photoURL = URL(string: photoURLString)
+//        userImage.af_setImage(withURL: photoURL!)
         
         // Gradient
         infoView.gradientLayer.colors = [UIColor.black.cgColor, UIColor.white.cgColor]
