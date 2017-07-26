@@ -71,7 +71,7 @@ class CreateAboutViewController: UIViewController {
         // Show mapView with selected location
         
         guard let coordinate = CreateEventMaster.shared.event[EventKey.coordinate.rawValue] as? CLLocationCoordinate2D else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, 500, 500)
         mapView.setRegion(region, animated: true)
         
     }

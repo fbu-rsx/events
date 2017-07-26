@@ -105,7 +105,7 @@ extension AppDelegate: SignInDelegate {
         print(FBSDKAccessToken.current().userID)
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         let params = ["fields": "id, first_name, last_name, name, email, picture"]
-        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: params)
+        let request = FBSDKGraphRequest(graphPath: "/me/invitable_friends", parameters: params)
         
         let connection = FBSDKGraphRequestConnection()
         connection.add(request) { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
@@ -117,6 +117,7 @@ extension AppDelegate: SignInDelegate {
                 for x in arr {
                     print(x)
                 }
+                print(arr.count)
                 print("ending friends list")
             }
         }
