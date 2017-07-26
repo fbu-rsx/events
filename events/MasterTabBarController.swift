@@ -37,9 +37,9 @@ class MasterTabBarController: SimpleTabBarController {
         style.setIconColor(color: UIColor(hexString: "4CB6BE"), forState: UIControlState.selected)
         
         // Set Tab Icons
-        self.tabBar.items?[0].image = UIImage(named: "fireworks")?.withRenderingMode(.alwaysOriginal)
-        self.tabBar.items?[1].image = UIImage(named: "map")?.withRenderingMode(.alwaysOriginal)
-        self.tabBar.items?[2].image = UIImage(named: "monthly-calendar")?.withRenderingMode(.alwaysOriginal)
+        self.tabBar.items?[0].image = UIImage(named: "map")?.withRenderingMode(.alwaysOriginal)
+        self.tabBar.items?[1].image = UIImage(named: "fireworks")?.withRenderingMode(.alwaysOriginal)
+        self.tabBar.items?[2].image = UIImage(named: "calendar")?.withRenderingMode(.alwaysOriginal)
         self.tabBar.items?[2].title = "Events"
         self.tabBar.items?[3].image = UIImage(named: "user1")?.withRenderingMode(.alwaysOriginal)
         

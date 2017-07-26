@@ -28,6 +28,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    static var map: MKMapView!
+    
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
@@ -44,7 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
-        
+        MapViewController.map = self.mapView
         // Displays user's current location
         self.mapView.showsUserLocation = true
         // Allows user's location tracking
@@ -94,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         self.mapView.setRegion(region, animated: true)
-
+        CreateEventMaster.shared.delegate = self
     }
     
 
@@ -107,6 +109,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func onLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
         FBSDKLoginManager().logOut()
+        URLCache.shared.removeAllCachedResponses()
+        
+        if let cookies = HTTPCookieStorage.shared.cookies {
+            for cookie in cookies {
+                HTTPCookieStorage.shared.deleteCookie(cookie)
+            }
+        }
+
         let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
         loginController.signInDelegate = UIApplication.shared.delegate! as! AppDelegate
         self.present(loginController, animated: true, completion: nil)
@@ -256,16 +266,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 }
 
 extension MapViewController: CreateEventMasterDelegate {
-    func didCreateNewEvent(_ event: Event) {
-        if event.radius > locationManager.maximumRegionMonitoringDistance {
-            print("TOO BIG OF A RADIUS")
-            event.radius = locationManager.maximumRegionMonitoringDistance
-        }
+    func createNewEvent(_ dict: [String: Any]) {
+        guard let radius = dict[EventKey.radius.rawValue] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
+        let event = AppUser.current.createEvent(dict)
         add(event: event)
         startMonitoring(event: event)
         saveAllEvents()
-        AppUser.current.createEvent(event.eventDictionary)
         print("new event added")
+        self.tabBarController?.viewControllers?[1] = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EventContainerViewController")
     }
 }
 

@@ -74,6 +74,7 @@ PODS:
     - Fabric
   - TwitterKit (2.7.0):
     - TwitterCore (= 2.7.0)
+  - XLPagerTabStrip (7.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
@@ -96,6 +97,7 @@ DEPENDENCIES:
   - SimpleTab
   - SJFluidSegmentedControl (~> 1.0)
   - TwitterKit (= 2.7)
+  - XLPagerTabStrip
 
 SPEC CHECKSUMS:
   Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
@@ -128,7 +130,8 @@ SPEC CHECKSUMS:
   SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   TwitterCore: fbdbeaf6d2d20cf7c7aa4136fe5173c1c85df2e2
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
+  XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 5a967e08032906928a70c94125a9f62f99f7fef8
+PODFILE CHECKSUM: a24bfb81a6054e35e4e333f35f74521a8f4dedef
 
 COCOAPODS: 1.2.1

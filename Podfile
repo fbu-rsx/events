@@ -27,6 +27,7 @@ target 'events' do
   pod 'SCLAlertView'
   pod 'FBSDKLoginKit'
   pod 'SJFluidSegmentedControl', '~> 1.0'
+  pod 'XLPagerTabStrip'
 
 
   target 'eventsTests' do

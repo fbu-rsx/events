@@ -29,6 +29,7 @@
 		4F010D751F16EE7A00E8EA47 /* CreateLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F010D741F16EE7A00E8EA47 /* CreateLocationViewController.swift */; };
 		4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */; };
 		4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */; };
+		4F4959811F290E31006B90EE /* FacebookFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4959801F290E31006B90EE /* FacebookFriend.swift */; };
 		4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69AB331F22734D0098B191 /* CreateEventPageController.swift */; };
 		4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69AB351F22987A0098B191 /* EventContainerViewController.swift */; };
 		4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */; };
@@ -51,6 +52,8 @@
 		7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */; };
 		7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */; };
 		7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */; };
+		7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4745381F2930E0009CA46E /* SettingsViewController.swift */; };
+		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
 		7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5456301F2020D60027009C /* LocationSearchTable.swift */; };
 		7CAAA0DF1F27B405005C1A76 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */; };
@@ -106,6 +109,7 @@
 		4F010D741F16EE7A00E8EA47 /* CreateLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateLocationViewController.swift; sourceTree = "<group>"; };
 		4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocations.gpx; sourceTree = "<group>"; };
 		4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventMaster.swift; sourceTree = "<group>"; };
+		4F4959801F290E31006B90EE /* FacebookFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookFriend.swift; sourceTree = "<group>"; };
 		4F69AB331F22734D0098B191 /* CreateEventPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventPageController.swift; sourceTree = "<group>"; };
 		4F69AB351F22987A0098B191 /* EventContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventContainerViewController.swift; sourceTree = "<group>"; };
 		4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 		7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGuestsViewController.swift; sourceTree = "<group>"; };
 		7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAboutViewController.swift; sourceTree = "<group>"; };
 		7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuestListTableViewCell.swift; path = ../GuestListTableViewCell.swift; sourceTree = "<group>"; };
+		7C4745381F2930E0009CA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7C5456301F2020D60027009C /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
@@ -193,6 +199,7 @@
 				4F87D3761F168EB5007D4E94 /* Event.swift */,
 				09A15CC01F1568F300E847CC /* Transaction.swift */,
 				4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */,
+				4F4959801F290E31006B90EE /* FacebookFriend.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -238,6 +245,11 @@
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
+				09A15CCF1F182EBC00E847CC /* ImageCollectionViewCell.xib */,
+				09A15CD21F1D7A8600E847CC /* userTableViewCell.swift */,
+				09A15CD31F1D7A8600E847CC /* userTableViewCell.xib */,
+				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
+				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -440,7 +452,8 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = S5MHKF47DJ;
+						DevelopmentTeam = 736R8PG8E6;
+						DevelopmentTeam = TM66RGVAQ6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -492,6 +505,9 @@
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
+				09A15CD51F1D7A8600E847CC /* userTableViewCell.xib in Resources */,
+				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
+				09A15CD11F182EBC00E847CC /* ImageCollectionViewCell.xib in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
@@ -661,6 +677,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4959811F290E31006B90EE /* FacebookFriend.swift in Sources */,
 				7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */,
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
@@ -684,6 +701,7 @@
 				09F788531F269F0900A311F0 /* detailView2.swift in Sources */,
 				09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */,
 				4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */,
+				7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */,
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
@@ -845,13 +863,15 @@
 			baseConfigurationReference = CCAC109E9CF8667FBF9C91A2 /* Pods-events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xsruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruega.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen1.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -862,14 +882,16 @@
 			baseConfigurationReference = C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xsruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruega.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen1.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
