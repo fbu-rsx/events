@@ -44,15 +44,18 @@ class AppUser {
     
     var facebookFriends: [FacebookFriend]!
     
+    init(dictionary: [String: Any]) {
+        self.uid = dictionary[UserKey.id.rawValue] as! String
+        self.name = dictionary[UserKey.name.rawValue] as! String
+        self.photoURLString = dictionary[UserKey.photo.rawValue] as! String
+    }
     
-    init(user: User) {
-        self.uid = FBSDKAccessToken.current().userID
-        self.name = user.displayName!
-        self.photoURLString = user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"
-      
-        let userDict: [String: String] = [UserKey.id.rawValue: self.uid,
-                                          UserKey.name.rawValue: self.name,
-                                          UserKey.photo.rawValue: self.photoURLString]
+    convenience init(user: User) {
+        let userDict: [String: String] = [UserKey.id.rawValue: FBSDKAccessToken.current().userID,
+                                       UserKey.name.rawValue: user.displayName!,
+                                       UserKey.photo.rawValue: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
+        self.init(dictionary: userDict)
+
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.possiblyAddUser(userDict: userDict)
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
@@ -75,8 +78,8 @@ class AppUser {
         self.events.append(event)
     }
     
-    func updateInvitation(_ event: Event) {
-        FirebaseDatabaseManager.shared.addEventToUser(event)
+    func updateInvitation(for event: Event, withStatus status: InviteStatus) {
+        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: status)
     }
     
     //create event and add to user event list and event database

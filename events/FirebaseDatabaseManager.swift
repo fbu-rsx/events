@@ -59,7 +59,7 @@ class FirebaseDatabaseManager {
     }
     
     // dictionary of eventid's
-    func fetchEventsForEventIDs(dictionary: [String: Bool], completion: @escaping ([String: Int], [String: Any]) -> Void) {
+    func fetchEventsForEventIDs(dictionary: [String: Int], completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             var eventsDict: [String: Any] = [:]
             if snapshot.exists() {
@@ -99,13 +99,13 @@ class FirebaseDatabaseManager {
      *
      */
     
-//    // add existing event to user
-//    func addEventToUser(_ event: Event) {
-//        let update: [String: Any] =
-//            ["users/\(AppUser.current.uid)/events/\(event.eventid)": 0,
-//             "events/\(event.eventid)/guestlist/\(AppUser.current.uid)": true]
-//        self.ref.updateChildValues(update)
-//    }
+    // add existing event to user
+    func updateInvitation(for event: Event, withStatus status: InviteStatus) {
+        let update: [String: Any] =
+            ["users/\(AppUser.current.uid)/events/\(event.eventid)": status.rawValue,
+             "events/\(event.eventid)/guestlist/\(AppUser.current.uid)": status.rawValue]
+        self.ref.updateChildValues(update)
+    }
     
     func inviteGuests(_ guests: [String: Int], to event: Event) {
         var update: [String: Any] = [:]
@@ -207,18 +207,6 @@ class FirebaseDatabaseManager {
      * Get methods to retrieve info from database
      *
      */
-    
-    // gets users from an event dictionary, and creates AppUser objects
-    func getUsersFromEventDict(dictionary: [String: Any]) -> [AppUser] {
-        var users: [AppUser] = []
-        for userid in dictionary.keys {
-            let userDict = self.ref.child("users").value(forKey: userid) as! [String: Any]
-            users.append(AppUser(dictionary: userDict))
-        }
-        
-        return users
-    }
-    
     // get user object from a user id
     func getSingleUser(id: String) -> AppUser {
         let dict = self.ref.value(forKeyPath: "users/\(id)") as! [String: Any]
