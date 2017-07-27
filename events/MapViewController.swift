@@ -29,7 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    static var map: MKMapView!
+    static var mapAnnotations: [MKAnnotationView] = []
     
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
@@ -47,7 +47,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         mapView.delegate = self
         
-        MapViewController.map = self.mapView
         // Displays user's current location
         self.mapView.showsUserLocation = true
         // Allows user's location tracking
@@ -86,6 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
         CreateEventMaster.shared.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
 
         
 //        for region in locationManager.monitoredRegions {
@@ -101,30 +101,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //        self.mapView.setRegion(region, animated: true)
     }
     
+    func inviteAdded(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        self.add(event: event)
+        saveAllEvents()
+    }
+    
 
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
     }
     
-    
-    @IBAction func onLogout(_ sender: Any) {
-        FirebaseDatabaseManager.shared.logout()
-        FBSDKLoginManager().logOut()
-        URLCache.shared.removeAllCachedResponses()
-        
-        if let cookies = HTTPCookieStorage.shared.cookies {
-            for cookie in cookies {
-                HTTPCookieStorage.shared.deleteCookie(cookie)
-            }
-        }
-
-        let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
-        loginController.signInDelegate = UIApplication.shared.delegate! as! AppDelegate
-        self.present(loginController, animated: true, completion: nil)
-    }
-    
-
     @IBAction func testTransition(_ sender: Any) {
         performSegue(withIdentifier: "test", sender: nil)
     }
@@ -206,6 +194,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         for event in AppUser.current.events {
             add(event: event)
         }
+        saveAllEvents()
     }
     
     func saveAllEvents() {

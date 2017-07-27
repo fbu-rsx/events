@@ -10,6 +10,12 @@ import Foundation
 import MapKit
 import UIKit
 
+enum InviteStatus: Int {
+    case noResponse = 0
+    case delined = 1
+    case accepted = 2
+}
+
 enum EventKey: String {
     case id = "eventid"
     case name = "eventname"
@@ -41,6 +47,9 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var guestlist: [String: Bool] // true if guest attended
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
+    var myStatus: InviteStatus {
+        return InviteStatus(rawValue: AppUser.current.eventsKeys[organizerID] as! Int)
+    }
     
     
     //for Mapview anotations

@@ -52,9 +52,7 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
 //            }
 //        }
 //        UserDefaults.standard.synchronize()
-        let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
-        loginController.signInDelegate = UIApplication.shared.delegate! as! AppDelegate
-        self.present(loginController, animated: true, completion: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logout"), object: nil)
     }
 
 }
