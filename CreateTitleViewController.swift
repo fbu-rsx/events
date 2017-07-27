@@ -72,7 +72,10 @@ class CreateTitleViewController: UIViewController {
     }
     
     @IBAction func didSetTitle(_ sender: Any) {
-        CreateEventMaster.shared.event[EventKey.name.rawValue] = eventTitle.text
+        if let title = eventTitle.text, title != "" {
+            CreateEventMaster.shared.event[EventKey.name.rawValue] = title
+
+        }
         self.updatePageController()
     }
     
