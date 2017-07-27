@@ -12,7 +12,7 @@ import UIKit
 
 enum InviteStatus: Int {
     case noResponse = 0
-    case delined = 1
+    case declined = 1
     case accepted = 2
 }
 
@@ -49,7 +49,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var myStatus: InviteStatus {
         get {
-            return InviteStatus(rawValue: AppUser.current.eventsKeys[organizerID] as! Int)!
+            return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid] as! Int)!
         }
     }
     

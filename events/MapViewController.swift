@@ -16,7 +16,7 @@ import AlamofireImage
 struct Colors {
     static let coral = UIColor(hexString: "#FF624A")
     static let lightBlue = UIColor(hexString: "#B6E7EF")
-    static let blue = UIColor(hexString: "#4CB6BE")
+    static let green = UIColor(hexString: "#4CB6BE")
     static let yellow = UIColor(hexString: "#FFEB87")
 }
 
@@ -245,13 +245,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return nil
     }
     
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        var event: Event!
+        for e in events {
+            if e.coordinate.latitude == overlay.coordinate.latitude &&
+                e.coordinate.longitude == overlay.coordinate.longitude {
+                event = e
+                break
+            }
+        }
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0
-            circleRenderer.strokeColor = Colors.yellow
-            circleRenderer.fillColor = Colors.yellow.withAlphaComponent(0.4)
+            let color: UIColor!
+            switch event.myStatus {
+            case .accepted:
+                color = Colors.green
+            case .declined:
+                color = Colors.coral
+            default:
+                color = Colors.yellow
+            }
+            circleRenderer.strokeColor = color
+            circleRenderer.fillColor = color.withAlphaComponent(0.4)
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
