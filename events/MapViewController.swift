@@ -116,7 +116,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         saveAllEvents()
         
         // Pop-Up alert when others first invite you to an event
-        
+        print(self.events)
         
     }
     
