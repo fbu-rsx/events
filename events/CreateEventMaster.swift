@@ -17,7 +17,7 @@ class CreateEventMaster {
     static var shared = CreateEventMaster()
     
     var event: [String: Any]
-    var guestlist: [String: Bool]
+    var guestlist: [String: Int]
     weak var delegate: CreateEventMasterDelegate!
     
     init() {

@@ -23,12 +23,12 @@ class CreateLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mapView.showsUserLocation = true
-        // Tracks the user's location
-        self.mapView.setUserTrackingMode(.follow, animated: true)
-        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-        self.mapView.setRegion(region, animated: true)
+//        self.mapView.showsUserLocation = true
+//        // Tracks the user's location
+//        self.mapView.setUserTrackingMode(.follow, animated: true)
+//        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+//        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+//        self.mapView.setRegion(region, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false
         CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]

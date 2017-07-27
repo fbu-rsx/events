@@ -10,6 +10,12 @@ import Foundation
 import MapKit
 import UIKit
 
+enum InviteStatus: Int {
+    case noResponse = 0
+    case delined = 1
+    case accepted = 2
+}
+
 enum EventKey: String {
     case id = "eventid"
     case name = "eventname"
@@ -38,9 +44,14 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var radius: Double = 100
     var organizerID: String //uid of the organizer
     var organizerURL: URL //organizer photo URL
-    var guestlist: [String: Bool] // true if guest attended
+    var guestlist: [String: Int] // int is same as InviteStatus values
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
+    var myStatus: InviteStatus {
+        get {
+            return InviteStatus(rawValue: AppUser.current.eventsKeys[organizerID] as! Int)!
+        }
+    }
     
     
     //for Mapview anotations
@@ -93,15 +104,11 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
         self.organizerURL = URL(string: dictionary[EventKey.orgURLString.rawValue] as! String)!
         self.about = dictionary[EventKey.about.rawValue] as! String
-        self.guestlist = dictionary[EventKey.guestlist.rawValue] as! [String: Bool]
+        self.guestlist = dictionary[EventKey.guestlist.rawValue] as! [String: Int]
         self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }
     
-    
-    func getGuestList() -> [AppUser] {
-        return FirebaseDatabaseManager.shared.getUsersFromEventDict(dictionary: self.guestlist)
-    }
     
     func getDateStringOnly() -> String {
         let dateFormatterPrint = DateFormatter()
