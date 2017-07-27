@@ -21,7 +21,6 @@ class WalletViewController: UIViewController, IndicatorInfoProvider {
         
 
         tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentCell")
-
         
         // Gradient
         let coral = UIColor(hexString: "#FEB2A4")
