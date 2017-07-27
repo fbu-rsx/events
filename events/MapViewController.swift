@@ -221,7 +221,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKAnnotationView
             if annotationView == nil {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                let data = try! Data(contentsOf: URL(string: AppUser.current.photoURLString)!)
+                let data = try! Data(contentsOf: event.organizerURL)
                 let image = UIImage(data: data)!
                 annotationView?.image =  image.af_imageRoundedIntoCircle()
                 annotationView?.canShowCallout = true
