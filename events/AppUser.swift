@@ -34,17 +34,17 @@ enum UserKey: String {
 
 class AppUser {
  
-    static var current: AppUser! {
-        didSet {
-            FirebaseDatabaseManager.shared.addEventsListener()
-        }
-    }
+    static var current: AppUser!
  
     var uid: String //same as their facebook id
     var name: String
     var photoURLString: String
     var events: [Event] = []
-    var eventsKeys: [String: Int] = [:] // Int represents InviteStatus
+    var eventsKeys: [String: Int]!  {
+        didSet {
+            FirebaseDatabaseManager.shared.addEventsListener()
+        }
+    } // Int represents InviteStatus
     
     var facebookFriends: [FacebookFriend]!
     
