@@ -118,10 +118,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         print("Invite events: \(self.events)")
         
         // Pop-Up alert when others first invite you to an event
+
         let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
             UIAlertAction in
-            print("show events page")
+            self.tabBarController?.selectedIndex = 2
             })
         self.present(alertController, animated: true, completion: nil)
         
