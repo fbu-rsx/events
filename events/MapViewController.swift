@@ -89,7 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             locationManager.startUpdatingLocation()
             delegate.fetchEvents() {
                 self.loadAllEvents()
-                print(self.events)
+                print("MapViewController Events: \(self.events)")
             }
         }
         CreateEventMaster.shared.delegate = self
@@ -114,9 +114,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let event = notification.object as! Event
         self.add(event: event)
         saveAllEvents()
+        print("invited added")
+        print("Invite events: \(self.events)")
         
         // Pop-Up alert when others first invite you to an event
-        print(self.events)
+        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            print("show events page")
+            })
+        self.present(alertController, animated: true, completion: nil)
         
     }
     

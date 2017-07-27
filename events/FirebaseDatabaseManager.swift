@@ -73,11 +73,12 @@ class FirebaseDatabaseManager {
     }
     
     func addEventsListener() {
-        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childAdded) { (snapshot: DataSnapshot) in
+        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childChanged) { (snapshot: DataSnapshot) in
             print(snapshot)
             FirebaseDatabaseManager.shared.getSingleEvent(withID: snapshot.key, completion: { (eventDict: [String : Any]) in
                 let event = Event(dictionary: eventDict)
-                if event.organizerID != AppUser.current.uid {
+                let status = InviteStatus(rawValue: snapshot.value as! Int)
+                if event.organizerID != AppUser.current.uid && status == InviteStatus.noResponse {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "inviteAdded"), object: event)
                 }
             })
