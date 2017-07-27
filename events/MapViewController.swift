@@ -13,9 +13,17 @@ import OAuthSwift
 import FBSDKLoginKit
 import AlamofireImage
 
+struct Colors {
+    static let coral = UIColor(hexString: "#FF624A")
+    static let lightBlue = UIColor(hexString: "#B6E7EF")
+    static let blue = UIColor(hexString: "#4CB6BE")
+    static let yellow = UIColor(hexString: "#FFEB87")
+}
+
 struct PreferenceKeys {
     static let savedItems = "savedItems"
 }
+
 
 protocol HandleMapSearch: class {
     func dropPinZoomIn(placemark:MKPlacemark)
@@ -88,17 +96,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
 
         
-//        for region in locationManager.monitoredRegions {
-//            guard let circularRegion = region as? CLCircularRegion else { continue }
-//
-//            locationManager.stopMonitoring(for: circularRegion)
-//        }
-//        saveAllEvents()
+        
+        //        for region in locationManager.monitoredRegions {
+        //            guard let circularRegion = region as? CLCircularRegion else { continue }
+        //
+        //            locationManager.stopMonitoring(for: circularRegion)
+        //        }
+        //        saveAllEvents()
         
         // Automatically zooms to the user's location upon VC loading
-//        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-//        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-//        self.mapView.setRegion(region, animated: true)
+        //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+        //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+        //        self.mapView.setRegion(region, animated: true)
     }
     
     func inviteAdded(_ notification: NSNotification) {
@@ -107,12 +116,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         saveAllEvents()
     }
     
-
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
     }
-    
+ 
     @IBAction func testTransition(_ sender: Any) {
         performSegue(withIdentifier: "test", sender: nil)
     }
@@ -207,8 +215,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "myEvent"
         if let event = annotation as? Event {
@@ -218,15 +224,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 let data = try! Data(contentsOf: URL(string: AppUser.current.photoURLString)!)
                 let image = UIImage(data: data)!
                 annotationView?.image =  image.af_imageRoundedIntoCircle()
-//                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 let frame = annotationView!.frame
-                annotationView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: 30.0, height: 30.0)
+                annotationView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: 35.0, height: 35.0)
+                // Check button on annotation callout
+                let checkInButton = UIButton(type: .custom)
+                checkInButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+                checkInButton.setImage(UIImage(named: "CheckInEvent")!, for: .normal)
+                annotationView?.rightCalloutAccessoryView = checkInButton
+                // Remove button on annotation callout
                 let removeButton = UIButton(type: .custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
                 removeButton.setImage(UIImage(named: "DeleteEvent")!, for: .normal)
                 annotationView?.leftCalloutAccessoryView = removeButton
-//                annotationView?.pinTintColor = UIColor(hexString: "#4CB6BE")
             } else {
                 annotationView?.annotation = annotation
             }
@@ -240,8 +250,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
             circleRenderer.lineWidth = 1.0
-            circleRenderer.strokeColor = UIColor(hexString: "#FEB2A4")
-            circleRenderer.fillColor = UIColor(hexString: "#FEB2A4").withAlphaComponent(0.4)
+            circleRenderer.strokeColor = Colors.yellow
+            circleRenderer.fillColor = Colors.yellow.withAlphaComponent(0.4)
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)

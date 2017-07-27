@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="events" customModuleProvider="target">
             <connections>
+                <outlet property="addPaymentButton" destination="OX9-id-znR" id="L5j-WW-WRs"/>
                 <outlet property="logoutButton" destination="JfD-4a-62w" id="qT9-dC-Lld"/>
                 <outlet property="nameLabel" destination="SFy-EX-Wki" id="VfP-bs-g9Y"/>
                 <outlet property="userImage" destination="udF-2w-8Q3" id="qPV-FC-8Jr"/>
@@ -34,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfD-4a-62w">
-                    <rect key="frame" x="16" y="246" width="343" height="53"/>
+                    <rect key="frame" x="16" y="395" width="343" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="31"/>
@@ -44,6 +45,15 @@
                     <connections>
                         <action selector="didLogout:" destination="-1" eventType="touchUpInside" id="lMB-Dw-Ekv"/>
                     </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-id-znR">
+                    <rect key="frame" x="16" y="319" width="343" height="53"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="31"/>
+                    <state key="normal" title="add payment method">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
