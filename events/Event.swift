@@ -48,7 +48,9 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var myStatus: InviteStatus {
-        return InviteStatus(rawValue: AppUser.current.eventsKeys[organizerID] as! Int)!
+        get {
+            return InviteStatus(rawValue: AppUser.current.eventsKeys[organizerID] as! Int)!
+        }
     }
     
     

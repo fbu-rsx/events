@@ -34,7 +34,11 @@ enum UserKey: String {
 
 class AppUser {
  
-    static var current: AppUser!
+    static var current: AppUser! {
+        didSet {
+            FirebaseDatabaseManager.shared.addEventsListener()
+        }
+    }
  
     var uid: String //same as their facebook id
     var name: String
@@ -61,7 +65,6 @@ class AppUser {
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
             self.facebookFriends = friends
         }
-        FirebaseDatabaseManager.shared.addEventsListener()
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
 
     }
