@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var addPaymentButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,11 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
         let photoURLString = AppUser.current.photoURLString
         let photoURL = URL(string: photoURLString)
         userImage.af_setImage(withURL: photoURL!)
+        
+        
+        // Customize payment method button
+        addPaymentButton.layer.cornerRadius = 5
+        addPaymentButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         
         // Customize logout button
         logoutButton.layer.cornerRadius = 5
