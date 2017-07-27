@@ -114,6 +114,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let event = notification.object as! Event
         self.add(event: event)
         saveAllEvents()
+        
+        // Pop-Up alert when others first invite you to an event
+        
+        
     }
     
     
