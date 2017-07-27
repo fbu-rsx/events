@@ -17,7 +17,7 @@ struct Colors {
     static let coral = UIColor(hexString: "#FF624A")
     static let lightBlue = UIColor(hexString: "#B6E7EF")
     static let green = UIColor(hexString: "#4CB6BE")
-    static let yellow = UIColor(hexString: "#FFEB87")
+    static let yellow = UIColor(hexString: "#fefac8")
 }
 
 struct PreferenceKeys {
@@ -267,7 +267,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 color = Colors.yellow
             }
             circleRenderer.strokeColor = color
-            circleRenderer.fillColor = color.withAlphaComponent(0.4)
+            circleRenderer.fillColor = color.withAlphaComponent(0.3)
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
