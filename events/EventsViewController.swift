@@ -27,9 +27,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.separatorStyle = .none
         //cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
         cellHeights = (0..<6).map { _ in C.CellHeight.close }
-        //tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.frame.size.width = view.frame.size.width
-
         // Load AppUser's events
         events = AppUser.current.events
     }
@@ -38,6 +35,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +43,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    func deleteEvent(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        let index = self.events.index(of: event)!
+        self.events.remove(at: index)
+        tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return cell to present associated with user's events 
@@ -128,13 +132,14 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetail"{
             let destination = segue.destination as! DetailedEventViewController
             destination.event = sender as? Event
         }
     }
-    
+    */
 
     
 }

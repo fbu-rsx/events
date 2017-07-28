@@ -24,7 +24,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     var event: Event?{
         didSet{
             if let ID = event!.spotifyID {
-                OAuthSwiftManager.shared.getTracksForPlaylist(playlistID: ID)
+                OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID! ,playlistID: ID)
             }else{
                 print("no event ID")
             }

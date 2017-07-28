@@ -36,10 +36,10 @@ class FirebaseStorageManager {
     func downloadImage(event: Event, imageID: String, completion: @escaping (_ image: UIImage)->()){
         let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
         // temporary maxSize
-        fileRef.getData(maxSize: 2000*2000) { (data, error) in
+        fileRef.getData(maxSize: 30000*30000) { (data, error) in
             if let error = error {
                 print(error.localizedDescription)
-                return
+                
             }
             else{
                 // Assuming that return value of request is a UIImage

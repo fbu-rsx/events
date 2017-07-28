@@ -19,6 +19,7 @@ enum InviteStatus: Int {
 struct EventKey {
     static let id = "eventid"
     static let spotifyID = "spotifyID"
+    static let playlistCreatorID = "playlistCreatorID"
     static let name = "eventname"
     static let cost = "totalcost"
     static let date = "datetime"
@@ -50,6 +51,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var spotifyID: String?
+    var playlistCreatorID: String?
     var myStatus: InviteStatus {
         get {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
@@ -109,6 +111,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
         self.about = dictionary[EventKey.about] as! String
         self.spotifyID = dictionary[EventKey.spotifyID] as? String
+        self.playlistCreatorID = dictionary[EventKey.playlistCreatorID] as? String
         self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
