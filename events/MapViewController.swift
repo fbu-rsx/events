@@ -45,20 +45,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     // Creates an instance of Core Location class
-    let locationManager = CLLocationManager()
+    var locationManager = (UIApplication.shared.delegate as! AppDelegate).locationManager
     var events: [Event] = []
     
     var delegate: LoadEventsDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-//        for region in locationManager.monitoredRegions {
-//            guard let circularRegion = region as? CLCircularRegion else { continue }
-//            print("Deleted region: \(circularRegion.identifier)")
-//            locationManager.stopMonitoring(for: circularRegion)
-//        }
         
         mapView.delegate = self
         
@@ -88,17 +81,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         definesPresentationContext = true
         
         // Ask for Authorization from the User
-        self.locationManager.requestAlwaysAuthorization()
-        
-        
         self.delegate = AppUser.current
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
         delegate.fetchEvents() {
             self.loadAllEvents()
+            self.removeOldRegions()
             print("MapViewController Events: \(self.events)")
         }
         CreateEventMaster.shared.delegate = self
@@ -211,6 +200,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             add(event: event)
         }
         saveAllEvents()
+    }
+    
+    func removeOldRegions() {
+        for region in locationManager.monitoredRegions {
+            guard let circularRegion = region as? CLCircularRegion else { continue }
+            guard AppUser.current.eventsKeys[circularRegion.identifier] != nil else { continue }
+            print("Deleted region: \(circularRegion.identifier)")
+            locationManager.stopMonitoring(for: circularRegion)
+        }
     }
     
     func saveAllEvents() {
