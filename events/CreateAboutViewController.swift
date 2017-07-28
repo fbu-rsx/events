@@ -80,6 +80,8 @@ class CreateAboutViewController: UIViewController {
         CreateEventMaster.shared.event[EventKey.cost.rawValue] = totalCostText.text
         CreateEventMaster.shared.event[EventKey.about.rawValue] = aboutText.text
         CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = CreateEventMaster.shared.guestlist
+        let name = CreateEventMaster.shared.event[EventKey.name.rawValue]
+        CreateEventMaster.shared.event[EventKey.spotifyID.rawValue] = OAuthSwiftManager.shared.createPlaylist(name: name as! String, completion: {})
         CreateEventMaster.shared.delegate.createNewEvent(CreateEventMaster.shared.event)
         self.tabBarController?.selectedIndex = 0
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
