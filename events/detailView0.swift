@@ -10,14 +10,14 @@ import UIKit
 import MapKit
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
-
+    
     /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
     @IBOutlet weak var tableViewCell: UITableViewCell!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var eventTitle: UILabel!
@@ -35,38 +35,43 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func notGoingTap(_ sender: UIButton) {
     }
-    /*
+    
+    
     var event: Event?{
         didSet{
-            topMap.setCenter(event!.coordinate, animated: true)
-            profileImage.layer.cornerRadius = 0.5*profileImage.frame.width
-            profileImage.layer.masksToBounds = true
-            //centerImage.image = event?.organizerID
-            let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!)
-            // set orgainzer pic
-            let url = URL(string: user.photoURLString)
-            profileImage.af_setImage(withURL: url!)
-            // set organizerlabel as well
-            eventTitle.text = event!.title
-            
+            print("entered")
+            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
+                
+                self.topMap.setCenter(self.event!.coordinate, animated: true)
+                self.profileImage.layer.cornerRadius = 0.5*self.profileImage.frame.width
+                self.profileImage.layer.masksToBounds = true
+               
+                // set orgainzer pic
+                let url = URL(string: user.photoURLString)
+                self.profileImage.af_setImage(withURL: url!)
+                
+                // set organizerlabel as well
+                self.eventTitle.text = self.event!.title
+                self.eventDescription.text = self.event!.about
+            }
         }
-    }*/
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! userTableViewCell
         let user = users[indexPath.row]
         cell.label.text = user // TODO: FIX to user.name, get AppUser
         if usersDic[user]!{
-            
+        
         }
         else{
-            
+        
         }
         return cell
-    }
-    
+        }
+        
 }
