@@ -28,6 +28,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     }*/
     
     var subView: songOverlayView?
+    var added: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,7 +38,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "songCell")
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = nib.instantiate(withOwner: self, options: nil).first as! songOverlayView
-        subView!.frame.offsetBy(dx: 0, dy: 20)
+        subView!.frame = CGRect(x: 0, y: 90, width: self.frame.width, height: self.frame.height - 90)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -52,7 +53,18 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     
     @IBAction func editingChanged(_ sender: Any) {
         print("recognized editing changed")
-        self.addSubview(subView!)
+        if searchField.text == ""{
+            print(0)
+            subView?.removeFromSuperview()
+            added = false
+        }
+        else if added == true {
+            // update subview text
+        }
+        else{
+            self.addSubview(subView!)
+            added = true
+        }
     }
     
 }
