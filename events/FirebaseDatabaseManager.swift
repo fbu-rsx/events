@@ -33,6 +33,7 @@ class FirebaseDatabaseManager {
     
     // Add user only if they do not already exist
     func possiblyAddUser(userDict: [String: String]) {
+        let uid = userDict[UserKey.id]!
         self.ref.child("users/\(uid)").updateChildValues(userDict)
     }
     
