@@ -129,9 +129,11 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 
                 // Set the cell color depending on invite status
                 var color: UIColor!
+                // var backViewColor: UIColor!
                 switch self.event!.myStatus {
                 case .accepted:
                     color = Colors.green
+                
                 case .declined:
                     color = Colors.coral
                 default:
