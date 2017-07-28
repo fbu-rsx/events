@@ -51,7 +51,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var spotifyID: String
     var myStatus: InviteStatus {
         get {
-            return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid] as! Int)!
+            return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
         }
     }
     

@@ -26,7 +26,7 @@ class CreateAboutViewController: UIViewController {
         super.viewDidLoad()
         // Event Title Label
         eventTitleLabel.textColor = UIColor(hexString: "#FEB2A4")
-        eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name.rawValue] as! String
+        eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String
         // Event Time Label
         eventTimeLabel.textColor = UIColor(hexString: "#484848")
         // Total Cost Text Field
