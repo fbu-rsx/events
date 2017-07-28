@@ -93,7 +93,9 @@ class Event: NSObject, NSCoding, MKAnnotation {
     init(dictionary: [String: Any]) {
         self.eventid = dictionary[EventKey.id] as! String
         self.eventname = dictionary[EventKey.name] as! String
-        self.totalcost = dictionary[EventKey.cost] as? Double
+        if let cost = dictionary[EventKey.cost] {
+            self.totalcost = cost as? Double
+        }
         let datetime = dictionary[EventKey.date] as! String
         
         let dateConverter = DateFormatter()

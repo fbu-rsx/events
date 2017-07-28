@@ -18,6 +18,9 @@ struct Colors {
     static let lightBlue = UIColor(hexString: "#B6E7EF")
     static let green = UIColor(hexString: "#4CB6BE")
     static let orange = UIColor(hexString: "#FF9D00")
+    static let greenAccepted =  UIColor(hexString: "4ADB75")
+    static let redDecline = UIColor(hexString: "ED5E63")
+//    static let grayPending =
 }
 
 struct PreferenceKeys {
