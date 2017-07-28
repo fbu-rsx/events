@@ -111,7 +111,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 // Set total cost
 //                print(self.event!.totalcost!)
                 if let total = self.event!.totalcost {
-                    let cost = total/Float(self.event!.guestlist.count + 1)
+                    let cost = total/Double(self.event!.guestlist.count + 1)
                     self.closedUserCost.text = String(format: "$%.2f", cost)
                 } else{
                     self.closedUserCost.text = "N/A"
