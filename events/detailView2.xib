@@ -44,6 +44,7 @@
                 </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="2tv-Vm-taM"/>
                 <constraint firstItem="px7-Ce-Z7a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="5HC-gr-nZd"/>
@@ -64,9 +65,15 @@
             <connections>
                 <outlet property="searchField" destination="RLN-Rs-eaO" id="Yps-vz-dWL"/>
                 <outlet property="tableView" destination="Rk1-5M-chh" id="7MQ-de-o6I"/>
+                <outletCollection property="gestureRecognizers" destination="LG4-v6-vYS" appends="YES" id="slJ-SB-gVM"/>
             </connections>
             <point key="canvasLocation" x="25.5" y="205"/>
         </view>
+        <tapGestureRecognizer id="LG4-v6-vYS">
+            <connections>
+                <action selector="didTap:" destination="iN0-l3-epB" id="tuw-6J-v5h"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="spotify-android.png" width="256" height="256"/>

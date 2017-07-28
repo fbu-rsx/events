@@ -137,6 +137,7 @@ class OAuthSwiftManager: SessionManager {
         // can later specify parameters to only return specific parts of JSON
         request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             // handle the response of the request ??? Probably put them in a list and then return them as result of function??
+            print(response)
         }
     }
     
