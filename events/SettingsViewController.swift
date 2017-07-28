@@ -25,6 +25,8 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
         // Set the current user's photo
         let photoURLString = AppUser.current.photoURLString
         let photoURL = URL(string: photoURLString)
+        userImage.layer.cornerRadius = userImage.frame.width/2
+        userImage.layer.masksToBounds = true
         userImage.af_setImage(withURL: photoURL!)
         
         
