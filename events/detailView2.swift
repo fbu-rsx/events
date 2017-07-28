@@ -11,6 +11,7 @@ import UIKit
 class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchField: UITextField!
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -26,7 +27,6 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }*/
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -45,4 +45,11 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+    @IBAction func valueChanged(_ sender: UITextField) {
+        let nib = UINib(nibName: "songSerachResultsOverlay", bundle: nil)
+        let subView = nib.instantiate(withOwner: self, options: nil).first as! songOverlayView
+        subView.frame.offsetBy(dx: 0, dy: 20)
+        self.addSubview(subView)
+    }
+    
 }
