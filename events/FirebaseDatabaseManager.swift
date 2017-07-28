@@ -55,6 +55,7 @@ class FirebaseDatabaseManager {
                 })
             }
             print("user has no events to get!")
+            completion([:], [:])
         }
     }
     

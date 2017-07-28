@@ -89,11 +89,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            self.delegate.fetchEvents() {
-                self.loadAllEvents()
-                print("MapViewController Events: \(self.events)")
-            }
-            
+        }
+        delegate.fetchEvents() {
+            self.loadAllEvents()
+            print("MapViewController Events: \(self.events)")
         }
         CreateEventMaster.shared.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
