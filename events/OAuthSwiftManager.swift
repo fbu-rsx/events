@@ -152,7 +152,7 @@ class OAuthSwiftManager: SessionManager {
     
     func search(songName: String){
         let name = songName.replacingOccurrences(of: " ", with: "+")
-        var Parameters: [String: Any] = ["q": name, "type": "track", ]
+        let Parameters: [String: Any] = ["q": name, "type": "track"]
         let url = URL(string: "https://api.spotify.com/v1/search")
         request(url!, method: .get, parameters: Parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)

@@ -39,7 +39,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = nib.instantiate(withOwner: self, options: nil).first as! songOverlayView
         subView!.frame = CGRect(x: 0, y: 90, width: self.frame.width, height: self.frame.height - 90)
-        OAuthSwiftManager.shared.getTracksForPlaylist(playlistID: event!.spotifyID!)
+        if let ID = event!.spotifyID {
+            OAuthSwiftManager.shared.getTracksForPlaylist(playlistID: ID)
+        }else{
+            print("no event ID")
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
