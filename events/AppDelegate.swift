@@ -177,6 +177,10 @@ extension AppDelegate: CLLocationManagerDelegate {
     }
     
     func handleEvent(forRegion region: CLRegion!) {
+        // For the App User, check if the region is a 0, 1, or 2
+        // Region identifier is the eventID; Question: How to query the Event array given the ID?
+        // 0 and 2: message / alertBody = You're a few blocks from ___ event. Would you like to check-in?
+        
         // Show an alert if application is active
         if UIApplication.shared.applicationState == .active {
             guard let message = note(fromRegionIdentifier: region.identifier) else { return }
