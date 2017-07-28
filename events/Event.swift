@@ -49,7 +49,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var myStatus: InviteStatus {
         get {
-            return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid] as! Int)!
+            return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
         }
     }
     
@@ -104,7 +104,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
         self.organizerURL = URL(string: dictionary[EventKey.orgURLString.rawValue] as! String)!
         self.about = dictionary[EventKey.about.rawValue] as! String
-        self.guestlist = dictionary[EventKey.guestlist.rawValue] as! [String: Int]
+        self.guestlist = dictionary[EventKey.guestlist.rawValue] as? [String: Int] ?? [:]
         self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }

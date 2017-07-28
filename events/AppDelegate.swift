@@ -44,8 +44,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: NSNotification.Name(rawValue: "logout"), object: nil)
 
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
-        UIApplication.shared.cancelAllLocalNotifications()
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        application.registerForRemoteNotifications()
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
         //OAuthSwiftManager.shared.logout()
         return true
     }
@@ -156,24 +161,24 @@ extension AppDelegate: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        //        if region is CLCircularRegion {
-        //            handleEvent(forRegion: region)
-        //        }
-        print("you're in a region of an event")
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+//        print("you're in a region of an event")
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        //        if region is CLCircularRegion {
-        //            handleEvent(forRegion: region)
-        //        }
-        print("exited event region")
+        if region is CLCircularRegion {
+            handleEvent(forRegion: region)
+        }
+//        print("exited event region")
     }
     // Helper functions
-    func note(fromRegionIdentifier identifier: String) -> String? {
-        let savedItems = UserDefaults.standard.array(forKey: PreferenceKeys.savedItems) as? [NSData]
-        let events = savedItems?.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as? Event }
-        let index = events?.index { $0?.eventid == identifier }
-        return index != nil ? events?[index!]?.about : nil
+    func note(fromRegionIdentifier identifier: String) -> String {
+        let savedItems = UserDefaults.standard.array(forKey: PreferenceKeys.savedItems) as! [Data]
+        let events = savedItems.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as! Event }
+        let index = events.index { $0.eventid == identifier }
+        return "Would you like to check in to \"\(events[index!].title!)\"?"
     }
     
     func handleEvent(forRegion region: CLRegion!) {
@@ -183,16 +188,25 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         // Show an alert if application is active
         if UIApplication.shared.applicationState == .active {
-            guard let message = note(fromRegionIdentifier: region.identifier) else { return }
+            let message = note(fromRegionIdentifier: region.identifier)
             window?.rootViewController?.showAlert(withTitle: nil, message: message)
         } else {
             // Otherwise present a local notification
-            let notification = UILocalNotification()
-            notification.alertBody = note(fromRegionIdentifier: region.identifier)
-            notification.soundName = "Default"
-            UIApplication.shared.presentLocalNotificationNow(notification)
+            let content = UNMutableNotificationContent()
+            content.title = NSString.localizedUserNotificationString(forKey: "You're near a location", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: note(fromRegionIdentifier: region.identifier), arguments: nil)
+            content.sound = UNNotificationSound.default()
+            content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber;
+            content.categoryIdentifier = "com.elonchan.localNotification"
+            // Deliver the notification in five seconds.
+            let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 60.0, repeats: true)
+            let request = UNNotificationRequest.init(identifier: "FiveSecond", content: content, trigger: trigger)
+            
+            // Schedule the notification.
+            let center = UNUserNotificationCenter.current()
+            center.add(request)
         }
-        print("Geofence triggered!")
+//        print("Geofence triggered!")
     }
 }
 
