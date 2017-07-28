@@ -53,7 +53,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 else if index == 1{
                     let nib = UINib(nibName: "detailView1", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView1
-                    //subView.event = event
+                    subView.event = event
                     subView.frame = frame
                     subView.delegate = delegate
                     self.scrollView.addSubview(subView)
