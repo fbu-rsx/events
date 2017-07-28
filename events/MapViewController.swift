@@ -100,13 +100,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         
         
-        //        for region in locationManager.monitoredRegions {
-        //            guard let circularRegion = region as? CLCircularRegion else { continue }
-        //
-        //            locationManager.stopMonitoring(for: circularRegion)
-        //        }
-        //        saveAllEvents()
-        
+//                for region in locationManager.monitoredRegions {
+//                    guard let circularRegion = region as? CLCircularRegion else { continue }
+//        
+//                    locationManager.stopMonitoring(for: circularRegion)
+//                }
+//                saveAllEvents()
+//        
         // Automatically zooms to the user's location upon VC loading
         //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
@@ -136,9 +136,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.zoomToUserLocation()
     }
  
-    @IBAction func testTransition(_ sender: Any) {
-        performSegue(withIdentifier: "test", sender: nil)
-    }
     
     /**
      *
