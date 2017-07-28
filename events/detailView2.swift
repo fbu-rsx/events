@@ -23,7 +23,11 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var event: Event?{
         didSet{
-            
+            if let ID = event!.spotifyID {
+                OAuthSwiftManager.shared.getTracksForPlaylist(playlistID: ID)
+            }else{
+                print("no event ID")
+            }
         }
     }
     
@@ -39,11 +43,6 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = nib.instantiate(withOwner: self, options: nil).first as! songOverlayView
         subView!.frame = CGRect(x: 0, y: 90, width: self.frame.width, height: self.frame.height - 90)
-        if let ID = event!.spotifyID {
-            OAuthSwiftManager.shared.getTracksForPlaylist(playlistID: ID)
-        }else{
-            print("no event ID")
-        }
         
     }
     
