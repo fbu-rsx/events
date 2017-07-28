@@ -113,9 +113,10 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
-    func createPlaylist(name: String, completion: @escaping ()->()) -> String? {
+    func createPlaylist(name: String, completion: @escaping (_ id: String)->()){
         let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
-        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists")
+        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID!)/playlists")
+        print(url)
         let Parameters: [String: Any] = ["name": name, "public": false, "collaborative": true]
         let header = ["Content-Type": "application/json"]
         var final: String?
@@ -126,9 +127,9 @@ class OAuthSwiftManager: SessionManager {
             }else{
                 print("Error: " + response.result.error!.localizedDescription)
             }
-            completion()
+            completion(final!)
         }
-        return final
+        
     }
     
     func getTracksForPlaylist(playlistID: String){
