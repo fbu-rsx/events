@@ -21,7 +21,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     @IBOutlet weak var closedProfileImageView: UIImageView!
     @IBOutlet weak var closedEventTitle: UILabel!
-    @IBOutlet weak var closedEventDescription: UILabel!
+    @IBOutlet weak var closedEventTime: UILabel!
     @IBOutlet weak var closedUserCost: UILabel!
     @IBOutlet weak var closedInvitedNum: UILabel!
     @IBOutlet weak var closedComingNum: UILabel!
@@ -96,11 +96,16 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     var event: Event?{
         didSet{
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
-                // set orgainzer pic
+                // Set organizer's profile picture
                 let url = URL(string: user.photoURLString)
                 self.closedProfileImageView.af_setImage(withURL: url!)
+                // Set event title
                 self.closedEventTitle.text = self.event!.title
-                self.closedEventDescription.text = self.event!.description
+                // Set and format event location
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MMM d, h:mm a"
+                self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
+                // Set total cost
                 if let total = self.event!.totalcost{
                     let cost = String(total/Float(self.event!.guestlist.count))
                     self.closedUserCost.text = cost

@@ -49,7 +49,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var guestlist: [String: Int] // int is same as InviteStatus values
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
-    var spotifyID: String
+    var spotifyID: String?
     var myStatus: InviteStatus {
         get {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
@@ -106,7 +106,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.organizerID = dictionary[EventKey.organizerID] as! String
         self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
         self.about = dictionary[EventKey.about] as! String
-        self.spotifyID = dictionary[EventKey.spotifyID] as! String
+        self.spotifyID = dictionary[EventKey.spotifyID] as? String
         self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
