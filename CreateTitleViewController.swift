@@ -66,14 +66,14 @@ class CreateTitleViewController: UIViewController {
             self.eventTime.text = dateFormatter.string(from: picker.selectedDate)
             self.eventTime.textColor = UIColor(hexString: "#FEB2A4")
 
-            CreateEventMaster.shared.event[EventKey.date.rawValue] = date.description
+            CreateEventMaster.shared.event[EventKey.date] = date.description
             self.updatePageController()
         }
     }
     
     @IBAction func didSetTitle(_ sender: Any) {
         if let title = eventTitle.text, title != "" {
-            CreateEventMaster.shared.event[EventKey.name.rawValue] = title
+            CreateEventMaster.shared.event[EventKey.name] = title
 
         }
         self.updatePageController()
@@ -84,13 +84,13 @@ class CreateTitleViewController: UIViewController {
     }
     
     func updatePageController() {
-        let name = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String
+        let name = CreateEventMaster.shared.event[EventKey.name] as? String
         let nameExists = name != nil && name != ""
-        let dateExists = CreateEventMaster.shared.event[EventKey.date.rawValue] != nil
+        let dateExists = CreateEventMaster.shared.event[EventKey.date] != nil
         if nameExists && dateExists {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "enableSwipe"), object: nil)
+            NotificationCenter.default.post(name: BashNotifications.enableSwipe, object: nil)
         } else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "disableSwipe"), object: nil)
+            NotificationCenter.default.post(name: BashNotifications.disableSwipe, object: nil)
         }
     }
 }

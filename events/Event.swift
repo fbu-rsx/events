@@ -16,19 +16,19 @@ enum InviteStatus: Int {
     case accepted = 2
 }
 
-enum EventKey: String {
-    case id = "eventid"
-    case name = "eventname"
-    case cost = "totalcost"
-    case date = "datetime"
-    case location = "location"
-    case radius = "radius"
-    case organizerID = "organizerID"
-    case orgURLString = "organizerURLString"
-    case about = "about"
-    case guestlist = "guestlist"
-    case photos = "photos"
-    case active = "active"
+struct EventKey {
+    static let id = "eventid"
+    static let name = "eventname"
+    static let cost = "totalcost"
+    static let date = "datetime"
+    static let location = "location"
+    static let radius = "radius"
+    static let organizerID = "organizerID"
+    static let orgURLString = "organizerURLString"
+    static let about = "about"
+    static let guestlist = "guestlist"
+    static let photos = "photos"
+    static let active = "active"
 }
 
 class Event: NSObject, NSCoding, MKAnnotation {
@@ -88,24 +88,24 @@ class Event: NSObject, NSCoding, MKAnnotation {
     }
     */
     init(dictionary: [String: Any]) {
-        self.eventid = dictionary[EventKey.id.rawValue] as! String
-        self.eventname = dictionary[EventKey.name.rawValue] as! String
-        self.totalcost = dictionary[EventKey.cost.rawValue] as? Float
-        let datetime = dictionary[EventKey.date.rawValue] as! String
+        self.eventid = dictionary[EventKey.id] as! String
+        self.eventname = dictionary[EventKey.name] as! String
+        self.totalcost = dictionary[EventKey.cost] as? Float
+        let datetime = dictionary[EventKey.date] as! String
         
         let dateConverter = DateFormatter()
         dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
         self.date = dateConverter.date(from: datetime)!
         
-        let location = dictionary[EventKey.location.rawValue] as! [Double]
+        let location = dictionary[EventKey.location] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
         
-        self.radius = dictionary[EventKey.radius.rawValue] as! Double
-        self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
-        self.organizerURL = URL(string: dictionary[EventKey.orgURLString.rawValue] as! String)!
-        self.about = dictionary[EventKey.about.rawValue] as! String
-        self.guestlist = dictionary[EventKey.guestlist.rawValue] as? [String: Int] ?? [:]
-        self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]
+        self.radius = dictionary[EventKey.radius] as! Double
+        self.organizerID = dictionary[EventKey.organizerID] as! String
+        self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
+        self.about = dictionary[EventKey.about] as! String
+        self.guestlist = dictionary[EventKey.guestlist] as? [String: Int] ?? [:]
+        self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }
     

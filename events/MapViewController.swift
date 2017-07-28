@@ -93,7 +93,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         self.delegate = AppUser.current
         if CLLocationManager.locationServicesEnabled() {
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+//            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
         }
         delegate.fetchEvents() {
@@ -101,7 +102,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             print("MapViewController Events: \(self.events)")
         }
         CreateEventMaster.shared.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         
         // Automatically zooms to the user's location upon VC loading
         //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
@@ -238,12 +239,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 let checkInButton = UIButton(type: .custom)
                 checkInButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
                 checkInButton.setImage(UIImage(named: "CheckInEvent")!, for: .normal)
-                annotationView?.rightCalloutAccessoryView = checkInButton
                 // Remove button on annotation callout
                 let removeButton = UIButton(type: .custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
                 removeButton.setImage(UIImage(named: "DeleteEvent")!, for: .normal)
-                annotationView?.leftCalloutAccessoryView = removeButton
+                if event.organizerID == AppUser.current.uid {
+                    annotationView?.leftCalloutAccessoryView = removeButton
+                } else {
+                    annotationView?.rightCalloutAccessoryView = checkInButton
+                }
             } else {
                 annotationView?.annotation = annotation
             }
@@ -283,15 +287,22 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         // Delete event
         let event = view.annotation as! Event
-        stopMonitoring(event: event)
-        remove(event: event)
+        if control == view.leftCalloutAccessoryView {
+            stopMonitoring(event: event)
+            remove(event: event)
+            NotificationCenter.default.post(name: BashNotifications.delete, object: event)
+        } else {
+            startMonitoring(event: event)
+            NotificationCenter.default.post(name: BashNotifications.accept, object: event)
+        }
         saveAllEvents()
     }
+    
 }
 
 extension MapViewController: CreateEventMasterDelegate {
     func createNewEvent(_ dict: [String: Any]) {
-        guard let radius = dict[EventKey.radius.rawValue] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
+        guard let radius = dict[EventKey.radius] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
         print("CREATING NEW EVENT")
         let event = AppUser.current.createEvent(dict)
         add(event: event)

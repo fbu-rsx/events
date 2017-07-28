@@ -58,7 +58,7 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
 //            }
 //        }
 //        UserDefaults.standard.synchronize()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "logout"), object: nil)
+        NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
     }
 
 }

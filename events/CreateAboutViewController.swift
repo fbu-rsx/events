@@ -26,7 +26,7 @@ class CreateAboutViewController: UIViewController {
         super.viewDidLoad()
         // Event Title Label
         eventTitleLabel.textColor = UIColor(hexString: "#FEB2A4")
-        eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name.rawValue] as? String
+        eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name] as? String
         // Event Time Label
         eventTimeLabel.textColor = UIColor(hexString: "#484848")
         // Total Cost Text Field
@@ -52,7 +52,7 @@ class CreateAboutViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         numberOfGuests = CreateEventMaster.shared.guestlist.count
-        let selected = CreateEventMaster.shared.event[EventKey.date.rawValue] as! String
+        let selected = CreateEventMaster.shared.event[EventKey.date] as! String
         let dateConverter = DateFormatter()
         dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
         let date = dateConverter.date(from: selected)!
@@ -62,7 +62,7 @@ class CreateAboutViewController: UIViewController {
         eventTimeLabel.text = dateFormatter.string(from: date)
 
         // Show mapView with selected location
-        let location = CreateEventMaster.shared.event[EventKey.location.rawValue] as! [Double]
+        let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
         let coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
         let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         mapView.setRegion(region, animated: true)
@@ -77,12 +77,12 @@ class CreateAboutViewController: UIViewController {
     }
     
     @IBAction func onCreate(_ sender: Any) {
-        CreateEventMaster.shared.event[EventKey.cost.rawValue] = totalCostText.text
-        CreateEventMaster.shared.event[EventKey.about.rawValue] = aboutText.text
-        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = CreateEventMaster.shared.guestlist
+        CreateEventMaster.shared.event[EventKey.cost] = totalCostText.text
+        CreateEventMaster.shared.event[EventKey.about] = aboutText.text
+        CreateEventMaster.shared.event[EventKey.guestlist] = CreateEventMaster.shared.guestlist
         CreateEventMaster.shared.delegate.createNewEvent(CreateEventMaster.shared.event)
         self.tabBarController?.selectedIndex = 0
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refresh"), object: nil)
+        NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
     }
     
     

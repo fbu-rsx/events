@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = loginController
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: NSNotification.Name(rawValue: "logout"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
 
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
