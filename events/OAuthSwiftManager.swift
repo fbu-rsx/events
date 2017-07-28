@@ -114,7 +114,7 @@ class OAuthSwiftManager: SessionManager {
     }
     
     func createPlaylist(name: String, completion: @escaping ()->()) -> String? {
-        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
+        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists")
         let Parameters: [String: Any] = ["name": name, "public": false, "collaborative": true]
         let header = ["Content-Type": "application/json"]
