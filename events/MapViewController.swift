@@ -84,7 +84,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Ask for Authorization from the User
         self.locationManager.requestAlwaysAuthorization()
         
-
+        
         self.delegate = AppUser.current
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -93,19 +93,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 self.loadAllEvents()
                 print("MapViewController Events: \(self.events)")
             }
-
+            
         }
         CreateEventMaster.shared.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
-
         
         
-        //        for region in locationManager.monitoredRegions {
-        //            guard let circularRegion = region as? CLCircularRegion else { continue }
-        //
-        //            locationManager.stopMonitoring(for: circularRegion)
-        //        }
-        //        saveAllEvents()
+        
+//        for region in locationManager.monitoredRegions {
+//            guard let circularRegion = region as? CLCircularRegion else { continue }
+//            
+//            locationManager.stopMonitoring(for: circularRegion)
+//        }
+//        saveAllEvents()
         
         // Automatically zooms to the user's location upon VC loading
         //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
@@ -121,12 +121,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         print("Invite events: \(self.events)")
         
         // Pop-Up alert when others first invite you to an event
-
+        
         let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
             UIAlertAction in
             self.tabBarController?.selectedIndex = 2
-            })
+        })
         self.present(alertController, animated: true, completion: nil)
         
     }
@@ -135,10 +135,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
     }
- 
-    @IBAction func testTransition(_ sender: Any) {
-        performSegue(withIdentifier: "test", sender: nil)
-    }
+    
     
     /**
      *

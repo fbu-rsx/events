@@ -25,7 +25,6 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         self.friends = AppUser.current.facebookFriends
         
         self.tabBarController?.tabBar.isHidden = false
-        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = [String: Bool]()
     }
     
     

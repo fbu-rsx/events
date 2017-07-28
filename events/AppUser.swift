@@ -43,9 +43,6 @@ class AppUser {
     var eventsKeys: [String: Int]!  {
         didSet {
             FirebaseDatabaseManager.shared.addEventsListener()
-            FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
-                self.facebookFriends = friends
-            }
         }
     } // Int represents InviteStatus
     
@@ -65,6 +62,9 @@ class AppUser {
 
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.possiblyAddUser(userDict: userDict)
+        FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
+            self.facebookFriends = friends
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
 
     }
