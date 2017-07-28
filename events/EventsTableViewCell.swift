@@ -144,9 +144,9 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     backViewColor = Colors.green
                     sideBarColor = Colors.green
                 default:
-                    color = UIColor(hexString: "#36C9E2")
-                    sideBarColor = UIColor(hexString: "#8CF7AC")
-                    backViewColor = UIColor(hexString: "#81E3F4")
+                    color = UIColor(hexString: "#76E5FC")
+                    sideBarColor = UIColor(hexString: "#ABEEFC")
+                    backViewColor = UIColor(hexString: "#ABEEFC")
                 }
                 self.sideBar.backgroundColor = sideBarColor
                 self.sideBar1.backgroundColor = sideBarColor
