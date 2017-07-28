@@ -48,29 +48,22 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView0
                     //subView.event = event
                     subView.frame = frame
-                    //print(subView.frame.width)
                     self.scrollView.addSubview(subView)
-                    //print(self.scrollView.frame.width)
                 }
                 else if index == 1{
                     let nib = UINib(nibName: "detailView1", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView1
                     //subView.event = event
                     subView.frame = frame
-                    
                     subView.delegate = delegate
-                    //print(subView.frame.width)
                     self.scrollView.addSubview(subView)
-                    //print(self.scrollView.frame.width)
                 }
                 else{
                     let nib = UINib(nibName: "detailView2", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView2
-                    //subView.event = event
+                    subView.event = event
                     subView.frame = frame
-                    //print(subView.frame.width)
                     self.scrollView.addSubview(subView)
-                    //print(self.scrollView.frame.width)
                 }
             }
             
