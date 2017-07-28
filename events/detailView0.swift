@@ -59,7 +59,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! userTableViewCell
         let user = users[indexPath.row]
-        cell.label.text = FirebaseDatabaseManager.shared.getSingleUser(id: user).name
+        cell.label.text = user // TODO: FIX to user.name, get AppUser
         if usersDic[user]!{
             
         }

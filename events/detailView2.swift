@@ -26,6 +26,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }*/
     
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

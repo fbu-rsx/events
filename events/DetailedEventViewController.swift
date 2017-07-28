@@ -38,16 +38,16 @@ class DetailedEventViewController: UIViewController, ImagePickerDelegate, UIColl
             centerImage.layer.masksToBounds = true
             mapView.setCenter(event!.coordinate, animated: true)
             //centerImage.image = event?.organizerID
-            let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!)
-            // set orgainzer pic
-            let url = URL(string: user.photoURLString)
-            centerImage.af_setImage(withURL: url!)
-            // set organizerlabel as well
-            organizerLabel.text = user.name
-            for imageID in (event?.photos.keys)!{
-                FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
-                    self.images.append(image)
-                })
+            FirebaseDatabaseManager.shared.getSingleUser(id: event!.organizerID) { (user: AppUser) in
+                let url = URL(string: user.photoURLString)
+                self.centerImage.af_setImage(withURL: url!)
+                // set organizerlabel as well
+                self.organizerLabel.text = user.name
+                for imageID in (self.event?.photos.keys)!{
+                    FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+                        self.images.append(image)
+                    })
+                }
             }
         }
     }

@@ -53,13 +53,13 @@ class OAuthSwiftManager: SessionManager {
         }
         
     }
-    
-    func logout() {
-        clearCredentials()
-        // User.current = nil
-        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
-    }
-    
+//    
+//    func logout() {
+//        clearCredentials()
+//        // User.current = nil
+//        NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
+//    }
+//    
     // MARK: Handle url
     // OAuth Step 3
     // Finish oauth process by fetching access token

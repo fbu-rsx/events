@@ -21,18 +21,18 @@ class CreateEventMaster {
     weak var delegate: CreateEventMasterDelegate!
     
     init() {
-        self.event = [EventKey.id.rawValue: FirebaseDatabaseManager.shared.getNewEventID(),
-                      EventKey.organizerID.rawValue: AppUser.current.uid,
-                      EventKey.radius.rawValue: 50.0,
-                      EventKey.orgURLString.rawValue: AppUser.current.photoURLString]
+        self.event = [EventKey.id: FirebaseDatabaseManager.shared.getNewEventID(),
+                      EventKey.organizerID: AppUser.current.uid,
+                      EventKey.radius: 50.0,
+                      EventKey.orgURLString: AppUser.current.photoURLString]
         self.guestlist = [:]
     }
     
     func clear() {
-        self.event = [EventKey.id.rawValue: FirebaseDatabaseManager.shared.getNewEventID(),
-                      EventKey.organizerID.rawValue: AppUser.current.uid,
-                      EventKey.radius.rawValue: 50.0,
-                      EventKey.orgURLString.rawValue: AppUser.current.photoURLString]
+        self.event = [EventKey.id: FirebaseDatabaseManager.shared.getNewEventID(),
+                      EventKey.organizerID: AppUser.current.uid,
+                      EventKey.radius: 50.0,
+                      EventKey.orgURLString: AppUser.current.photoURLString]
         self.guestlist = [:]
     }
 }
