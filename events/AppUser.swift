@@ -76,9 +76,8 @@ class AppUser {
             self.facebookFriends = friends
         }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.delete, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.accept, object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.accept(_:)), name: BashNotifications.accept, object: nil)
     }
     
     /**
@@ -93,8 +92,15 @@ class AppUser {
         self.events.append(event)
     }
     
-    func updateInvitation(for event: Event, withStatus status: InviteStatus) {
-        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: status)
+    @objc func delete(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        FirebaseDatabaseManager.shared.deleteEvent(event)
+        self.removeUserFromEvent(event)
+    }
+    
+    @objc func accept(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .accepted)
     }
     
     //create event and add to user event list and event database
@@ -111,21 +117,9 @@ class AppUser {
     //remove event from user event list
     func removeUserFromEvent(_ event: Event) {
         FirebaseDatabaseManager.shared.removeUserFromEvent(event)
-        var index: Int!
-        for i in 0..<self.events.count {
-            if event.eventid == self.events[i].eventid {
-                index = i
-                break
-            }
-        }
+        let index = self.events.index(of: event)!
         self.events.remove(at: index)
         self.eventsKeys.removeValue(forKey: event.eventid)
-    }
-    
-    // delete event and delete from all its users' event lists
-    func deleteEvent(_ event: Event) {
-        FirebaseDatabaseManager.shared.deleteEvent(event)
-        self.removeUserFromEvent(event)
     }
 }
 
