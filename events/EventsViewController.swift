@@ -24,13 +24,16 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         //let bundle = Bundle(path: "/Users/rhianchavez11/Documents/events/events/Views")
         tableView.register(UINib(nibName: "EventsTableViewCell", bundle: nil), forCellReuseIdentifier: "eventCell")
-        events = AppUser.current.events
         tableView.separatorStyle = .none
         //cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
         cellHeights = (0..<6).map { _ in C.CellHeight.close }
         //tableView.rowHeight = UITableViewAutomaticDimension
         //tableView.frame.size.width = view.frame.size.width
+
+        // Load AppUser's events
+        events = AppUser.current.events
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // return cell to present associated with user's events 
         // which data to display is dependent on selected index of segmented control
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
+        cell.event = events[indexPath.row]
         // see which data to display
         cell.delegate = self
         
@@ -57,7 +61,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // return number of events associated with user in current section
         // number will be dependent on selected index of segmented control
         //return events.count
-        return 5
+        return self.events.count
     }
     
     fileprivate struct C {
@@ -68,7 +72,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func presenter(imagePicker : ImagePickerController) {
-        
         present(imagePicker, animated: true, completion: nil)
     }
     

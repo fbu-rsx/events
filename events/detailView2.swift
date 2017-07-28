@@ -25,7 +25,7 @@ class detailView2: UIView {
     }*/
     
     @IBAction func spotifyTap(_ sender: UIButton) {
-        OAuthSwiftManager.shared.logout()
+//        OAuthSwiftManager.shared.logout()
         OAuthSwiftManager.shared.spotifyLogin(success: {
             print("somethign worked")
         }) { (Error) in

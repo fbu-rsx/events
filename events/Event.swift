@@ -18,6 +18,7 @@ enum InviteStatus: Int {
 
 struct EventKey {
     static let id = "eventid"
+    static let spotifyID = "spotifyID"
     static let name = "eventname"
     static let cost = "totalcost"
     static let date = "datetime"
@@ -30,6 +31,7 @@ struct EventKey {
     static let photos = "photos"
     static let active = "active"
 }
+
 
 class Event: NSObject, NSCoding, MKAnnotation {
     
@@ -47,6 +49,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var guestlist: [String: Int] // int is same as InviteStatus values
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
+    var spotifyID: String
     var myStatus: InviteStatus {
         get {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
@@ -99,12 +102,12 @@ class Event: NSObject, NSCoding, MKAnnotation {
         
         let location = dictionary[EventKey.location] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
-        
         self.radius = dictionary[EventKey.radius] as! Double
         self.organizerID = dictionary[EventKey.organizerID] as! String
         self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
         self.about = dictionary[EventKey.about] as! String
-        self.guestlist = dictionary[EventKey.guestlist] as? [String: Int] ?? [:]
+        self.spotifyID = dictionary[EventKey.spotifyID] as! String
+        self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }
