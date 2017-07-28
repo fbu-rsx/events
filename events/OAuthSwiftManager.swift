@@ -133,7 +133,7 @@ class OAuthSwiftManager: SessionManager {
     }
     
     func getTracksForPlaylist(playlistID: String){
-        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
+        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists/\(playlistID)/tracks")
         // can later specify parameters to only return specific parts of JSON
         request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
