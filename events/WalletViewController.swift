@@ -21,6 +21,13 @@ class WalletViewController: UIViewController, IndicatorInfoProvider {
         
 
         tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentCell")
+
+        // Set the current user's name
+        //userName.text = AppUser.current.name
+        // Set the current user's photo
+//        let photoURLString = AppUser.current.photoURLString
+//        let photoURL = URL(string: photoURLString)
+//        userImage.af_setImage(withURL: photoURL!)
         
         // Gradient
         let coral = UIColor(hexString: "#FEB2A4")
