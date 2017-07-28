@@ -48,14 +48,11 @@ class FirebaseDatabaseManager {
     // completion function provides dictionary of events
     func fetchUserEvents(userid: String, completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("users/\(userid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            if snapshot.exists() {
-                let result = snapshot.value as! [String: Int]
-                FirebaseDatabaseManager.shared.fetchEventsForEventIDs(dictionary: result, completion: { (keys: [String: Int], events: [String: Any]) in
-                    completion(keys, events)
-                })
-            }
-            print("user has no events to get!")
-            completion([:], [:])
+            let result: [String: Int] = snapshot.value as? [String: Int] ?? [:]
+            print("user events results: \(result)")
+            FirebaseDatabaseManager.shared.fetchEventsForEventIDs(dictionary: result, completion: { (keys: [String: Int], events: [String: Any]) in
+                completion(keys, events)
+            })
         }
     }
     

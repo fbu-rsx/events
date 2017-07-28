@@ -77,7 +77,7 @@ class CreateAboutViewController: UIViewController {
     }
     
     @IBAction func onCreate(_ sender: Any) {
-        CreateEventMaster.shared.event[EventKey.cost] = totalCostText.text
+        CreateEventMaster.shared.event[EventKey.cost] = Float(totalCostText.text ?? "0.0")
         CreateEventMaster.shared.event[EventKey.about] = aboutText.text
         CreateEventMaster.shared.event[EventKey.guestlist] = CreateEventMaster.shared.guestlist
         let name = CreateEventMaster.shared.event[EventKey.name]

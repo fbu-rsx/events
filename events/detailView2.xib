@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-5M-chh">
-                    <rect key="frame" x="8" y="98" width="317" height="344"/>
+                    <rect key="frame" x="8" y="90" width="317" height="352"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNZ-Y3-HHg">
@@ -32,30 +32,36 @@
                         <constraint firstAttribute="width" constant="40" id="p3P-hh-WqG"/>
                     </constraints>
                 </imageView>
-                <searchBar contentMode="redraw" placeholder="add music" translatesAutoresizingMaskIntoConstraints="NO" id="jLM-0V-jG2">
-                    <rect key="frame" x="0.0" y="54" width="333" height="44"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="add to playlist..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-Rs-eaO">
+                    <rect key="frame" x="8" y="52" width="317" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
-                </searchBar>
+                    <connections>
+                        <action selector="valueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="fDv-w8-Utu"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="2tv-Vm-taM"/>
-                <constraint firstItem="Rk1-5M-chh" firstAttribute="top" secondItem="jLM-0V-jG2" secondAttribute="bottom" id="3rw-en-LUn"/>
                 <constraint firstItem="px7-Ce-Z7a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="5HC-gr-nZd"/>
                 <constraint firstAttribute="bottom" secondItem="Rk1-5M-chh" secondAttribute="bottom" constant="8" id="5JD-hD-SYr"/>
                 <constraint firstAttribute="trailing" secondItem="Rk1-5M-chh" secondAttribute="trailing" constant="8" id="6jM-fn-vzG"/>
-                <constraint firstItem="jLM-0V-jG2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Kl8-F3-0pH"/>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="top" secondItem="RLN-Rs-eaO" secondAttribute="bottom" constant="8" id="Avs-aJ-apH"/>
                 <constraint firstItem="CNZ-Y3-HHg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Mzd-Zh-oFt"/>
-                <constraint firstItem="jLM-0V-jG2" firstAttribute="top" secondItem="px7-Ce-Z7a" secondAttribute="bottom" constant="10" id="P06-WC-tTY"/>
+                <constraint firstItem="RLN-Rs-eaO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="YIV-jY-dLn"/>
                 <constraint firstAttribute="trailing" secondItem="px7-Ce-Z7a" secondAttribute="trailing" constant="4" id="aoz-hP-hD9"/>
+                <constraint firstAttribute="trailing" secondItem="RLN-Rs-eaO" secondAttribute="trailing" constant="8" id="gG7-4r-9DY"/>
+                <constraint firstItem="px7-Ce-Z7a" firstAttribute="bottom" secondItem="RLN-Rs-eaO" secondAttribute="top" constant="-8" id="giT-xq-UkK"/>
                 <constraint firstItem="CNZ-Y3-HHg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="rF1-Hv-nos"/>
-                <constraint firstAttribute="trailing" secondItem="jLM-0V-jG2" secondAttribute="trailing" id="sHu-Au-fjO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="searchField" destination="RLN-Rs-eaO" id="Yps-vz-dWL"/>
                 <outlet property="tableView" destination="Rk1-5M-chh" id="7MQ-de-o6I"/>
             </connections>
             <point key="canvasLocation" x="25.5" y="205"/>
