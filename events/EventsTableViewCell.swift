@@ -110,8 +110,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
                 // Set total cost
-                //                print(self.event!.totalcost!)
-                print(self.event!.totalcost)
+
                 if let total = self.event!.totalcost {
                     let cost = total/Double(self.event!.guestlist.count + 1)
                     self.closedUserCost.text = String(format: "$%.2f", cost)
@@ -140,11 +139,11 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     sideBarColor = UIColor(hexString: "#8CF7AC")
                     backViewColor = UIColor(hexString: "#8CF7AC")
                 case .declined:
-                    color = Colors.coral
-                    backViewColor = Colors.green
-                    sideBarColor = Colors.green
+                    color = Colors.redDeclined
+                    backViewColor = UIColor(hexString: "#F4ABB1")
+                    sideBarColor = UIColor(hexString: "#F4ABB1")
                 default:
-                    color = UIColor(hexString: "#76E5FC")
+                    color = Colors.pendingBlue
                     sideBarColor = UIColor(hexString: "#ABEEFC")
                     backViewColor = UIColor(hexString: "#ABEEFC")
                 }
@@ -153,26 +152,11 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 self.oneCell.backgroundColor = color
                 self.backViewColor = backViewColor
             }
-            
         }
     }
     
     override func awakeFromNib() {
         // Initialization code
-        
-        // Set the cell left-bar color
-//        var color: UIColor!
-//        switch self.event!.myStatus {
-//        case .accepted:
-//            color = Colors.green
-//        case .declined:
-//            color = Colors.coral
-//        default:
-//            color = Colors.orange
-//        }
-//        self.backViewColor = color
-        
-        //backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         foregroundView = view1
         foregroundViewTop = view1topConstraint
         containerView = view2
