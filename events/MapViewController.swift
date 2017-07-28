@@ -54,6 +54,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         
+//        for region in locationManager.monitoredRegions {
+//            guard let circularRegion = region as? CLCircularRegion else { continue }
+//            print("Deleted region: \(circularRegion.identifier)")
+//            locationManager.stopMonitoring(for: circularRegion)
+//        }
+        
         mapView.delegate = self
         
         // Displays user's current location
@@ -97,14 +103,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         CreateEventMaster.shared.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
         
-        
-//        for region in locationManager.monitoredRegions {
-//            guard let circularRegion = region as? CLCircularRegion else { continue }
-//            
-//            locationManager.stopMonitoring(for: circularRegion)
-//        }
-//        saveAllEvents()
-        
         // Automatically zooms to the user's location upon VC loading
         //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
@@ -133,7 +131,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
     }
-
+    
     /**
      *
      * Functions for Geofencing
@@ -227,7 +225,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "myEvent"
         if let event = annotation as? Event {
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKAnnotationView
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             if annotationView == nil {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 let data = try! Data(contentsOf: event.organizerURL)
