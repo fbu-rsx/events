@@ -53,6 +53,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         mapView.delegate = self
         
         // Displays user's current location
@@ -83,14 +84,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Ask for Authorization from the User
         self.locationManager.requestAlwaysAuthorization()
         
+
         self.delegate = AppUser.current
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            delegate.fetchEvents() {
+            self.delegate.fetchEvents() {
                 self.loadAllEvents()
                 print("MapViewController Events: \(self.events)")
             }
+
         }
         CreateEventMaster.shared.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
@@ -292,13 +295,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         remove(event: event)
         saveAllEvents()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CreateEventSegue" {
-            CreateEventMaster.shared.delegate = self
-        }
-    }
-    
 }
 
 extension MapViewController: CreateEventMasterDelegate {
