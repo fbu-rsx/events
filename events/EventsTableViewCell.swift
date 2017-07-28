@@ -95,28 +95,29 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
  
     var event: Event?{
         didSet{
-            // make user object
-            let user = FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) 
-            // set orgainzer pic
-            let url = URL(string: user.photoURLString)
-            closedProfileImageView.af_setImage(withURL: url!)
-            closedEventTitle.text = event!.title
-            closedEventDescription.text = event!.description
-            if let total = event!.totalcost{
-                let cost = String(total/Float(event!.guestlist.count))
-                closedUserCost.text = cost
-            }else{
-                closedUserCost.text = "n/a"
+            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
+                // set orgainzer pic
+                let url = URL(string: user.photoURLString)
+                self.closedProfileImageView.af_setImage(withURL: url!)
+                self.closedEventTitle.text = self.event!.title
+                self.closedEventDescription.text = self.event!.description
+                if let total = self.event!.totalcost{
+                    let cost = String(total/Float(self.event!.guestlist.count))
+                    self.closedUserCost.text = cost
+                }else{
+                    self.closedUserCost.text = "n/a"
+                }
+                self.closedInvitedNum.text = String(self.event!.guestlist.count)
+                // accepted num will eventually be added to Event class
+                var coming: Int = 0
+                for user in self.event!.guestlist.keys{
+                    if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
+                }
+                self.closedComingNum.text = String(coming)
             }
-            closedInvitedNum.text = String(event!.guestlist.count)
-            // accepted num will eventually be added to Event class
-            var coming: Int = 0
-            for user in event!.guestlist.keys{
-                if event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
+
             }
-            closedComingNum.text = String(coming)
         }
-    }
     
     override func awakeFromNib() {
         // Initialization code

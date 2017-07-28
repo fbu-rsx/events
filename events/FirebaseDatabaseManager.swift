@@ -212,9 +212,14 @@ class FirebaseDatabaseManager {
      *
      */
     // get user object from a user id
-    func getSingleUser(id: String) -> AppUser {
-        let dict = self.ref.value(forKeyPath: "users/\(id)") as! [String: Any]
-        return AppUser(dictionary: dict)
+    func getSingleUser(id: String, completion: @escaping (AppUser) -> Void) {
+        print(id)
+        self.ref.child("users/\(id)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.exists() {
+                let dict = snapshot.value as! [String: Any]
+                completion(AppUser(dictionary: dict))
+            }
+        }
     }
     
     // get unique id for a new event
