@@ -46,7 +46,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 if index == 0{
                     let nib = UINib(nibName: "detailView0", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView0
-                    //subView.event = event
+                    subView.event = event
                     subView.frame = frame
                     self.scrollView.addSubview(subView)
                 }
@@ -108,7 +108,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     let cost = total/Double(self.event!.guestlist.count + 1)
                     self.closedUserCost.text = String(format: "$%.2f", cost)
                 } else{
-                    self.closedUserCost.text = "N/A"
+                    self.closedUserCost.text = "Free"
                 }
                 
                 // Set number of guests invited
