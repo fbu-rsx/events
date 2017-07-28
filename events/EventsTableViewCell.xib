@@ -159,6 +159,8 @@
                 <outlet property="foregroundView" destination="RpP-AQ-Woc" id="era-un-7uX"/>
                 <outlet property="oneCell" destination="RpP-AQ-Woc" id="cck-43-BRW"/>
                 <outlet property="scrollView" destination="cvr-Lm-S0p" id="q1X-kB-01g"/>
+                <outlet property="sideBar" destination="pRR-lD-k3e" id="dxM-Zh-0vH"/>
+                <outlet property="sideBar1" destination="ebP-AO-Do6" id="mzD-CB-msf"/>
                 <outlet property="view1" destination="RpP-AQ-Woc" id="Vxv-wX-BFT"/>
                 <outlet property="view1topConstraint" destination="77a-ql-325" id="m3B-uJ-e8t"/>
                 <outlet property="view2" destination="ozZ-Ph-dSv" id="QLk-C2-yTg"/>

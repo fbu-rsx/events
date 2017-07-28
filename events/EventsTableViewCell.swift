@@ -12,13 +12,14 @@ import FoldingCell
 
 class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
-    
+    @IBOutlet weak var sideBar: UIView!
+    @IBOutlet weak var sideBar1: UIView!
     @IBOutlet weak var oneCell: RotatedView!
     @IBOutlet weak var view1topConstraint: NSLayoutConstraint!
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
     @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
-
+    
     
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
@@ -95,7 +96,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
      var photos: [String: Bool]
      var about: String //description of event, the description variable as unfortunately taken by Objective C
      */
- 
+    
     var event: Event?{
         didSet{
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
@@ -109,7 +110,8 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
                 // Set total cost
-//                print(self.event!.totalcost!)
+                //                print(self.event!.totalcost!)
+                print(self.event!.totalcost)
                 if let total = self.event!.totalcost {
                     let cost = total/Double(self.event!.guestlist.count + 1)
                     self.closedUserCost.text = String(format: "$%.2f", cost)
@@ -129,25 +131,48 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 
                 // Set the cell color depending on invite status
                 var color: UIColor!
+                var sideBarColor: UIColor!
+                var backViewColor: UIColor!
                 // var backViewColor: UIColor!
                 switch self.event!.myStatus {
                 case .accepted:
-                    color = Colors.green
-                
+                    color = Colors.greenAccepted
+                    sideBarColor = UIColor(hexString: "#8CF7AC")
+                    backViewColor = UIColor(hexString: "#8CF7AC")
                 case .declined:
                     color = Colors.coral
+                    backViewColor = Colors.green
+                    sideBarColor = Colors.green
                 default:
-                    color = Colors.orange
+                    color = UIColor(hexString: "#36C9E2")
+                    sideBarColor = UIColor(hexString: "#8CF7AC")
+                    backViewColor = UIColor(hexString: "#81E3F4")
                 }
+                self.sideBar.backgroundColor = sideBarColor
+                self.sideBar1.backgroundColor = sideBarColor
                 self.oneCell.backgroundColor = color
+                self.backViewColor = backViewColor
             }
-
-            }
+            
         }
+    }
     
     override func awakeFromNib() {
         // Initialization code
-        backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
+        
+        // Set the cell left-bar color
+//        var color: UIColor!
+//        switch self.event!.myStatus {
+//        case .accepted:
+//            color = Colors.green
+//        case .declined:
+//            color = Colors.coral
+//        default:
+//            color = Colors.orange
+//        }
+//        self.backViewColor = color
+        
+        //backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         foregroundView = view1
         foregroundViewTop = view1topConstraint
         containerView = view2
@@ -191,11 +216,11 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         return durations[itemIndex]
     }
     
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
