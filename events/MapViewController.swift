@@ -40,6 +40,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
+    let spotifyAlert = UIAlertController(title: "Spotify Login", message:  "Please login to Spotify", preferredStyle: .alert)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+        // ...
+    }
+    
+    let OKAction = UIAlertAction(title: "OK", style: .default) { action in
+        // ...
+        OAuthSwiftManager.shared.spotifyLogin(success: {}, failure: {_ in })
+    }
+    
     static var mapAnnotations: [MKAnnotationView] = []
     
     // Search Variable Instantiations
@@ -100,6 +110,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         //        self.mapView.setRegion(region, animated: true)
+        
+        spotifyAlert.addAction(cancelAction)
+        spotifyAlert.addAction(OKAction)
+        if UserDefaults.standard.value(forKey: "spotify-user") == nil {
+            self.present(spotifyAlert, animated: true)
+        }
     }
     
     func inviteAdded(_ notification: NSNotification) {

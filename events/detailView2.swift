@@ -20,12 +20,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         // Drawing code
     }
     */
-    /*
+    
     var event: Event?{
         didSet{
             
         }
-    }*/
+    }
     
     var subView: songOverlayView?
     var added: Bool = false
@@ -39,6 +39,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = nib.instantiate(withOwner: self, options: nil).first as! songOverlayView
         subView!.frame = CGRect(x: 0, y: 90, width: self.frame.width, height: self.frame.height - 90)
+        OAuthSwiftManager.shared.getTracksForPlaylist(playlistID: event!.spotifyID!)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,10 +52,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    @IBAction func didTap(_ sender: Any) {
+        self.endEditing(true)
+    }
+    
     @IBAction func editingChanged(_ sender: Any) {
-        print("recognized editing changed")
         if searchField.text == ""{
-            print(0)
             subView?.removeFromSuperview()
             added = false
         }
