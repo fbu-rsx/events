@@ -83,9 +83,9 @@ class CreateAboutViewController: UIViewController {
         let name = CreateEventMaster.shared.event[EventKey.name]
         OAuthSwiftManager.shared.createPlaylist(name: name as! String, completion: {id in
             CreateEventMaster.shared.event[EventKey.spotifyID] = id
-            CreateEventMaster.shared.delegate.createNewEvent(CreateEventMaster.shared.event)
+            let event = CreateEventMaster.shared.delegate.createNewEvent(CreateEventMaster.shared.event)
             self.tabBarController?.selectedIndex = 0
-            NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
+            NotificationCenter.default.post(name: BashNotifications.refresh, object: event)
         })
     }
     

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CreateEventMasterDelegate: class {
-    func createNewEvent(_ dict: [String: Any])
+    func createNewEvent(_ dict: [String: Any]) -> Event
 }
 
 class CreateEventMaster {
