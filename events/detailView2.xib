@@ -38,6 +38,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
+                        <action selector="editingChanged:" destination="iN0-l3-epB" eventType="editingChanged" id="Ewt-xO-Vxh"/>
                         <action selector="valueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="fDv-w8-Utu"/>
                     </connections>
                 </textField>
