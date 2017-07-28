@@ -40,7 +40,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
 
     //all below are required in the dictionary user to initialize an event
     var eventname: String
-    var totalcost: Float? //optional because may just be a free event
+    var totalcost: Double?
     var date: Date
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
@@ -93,7 +93,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     init(dictionary: [String: Any]) {
         self.eventid = dictionary[EventKey.id] as! String
         self.eventname = dictionary[EventKey.name] as! String
-        self.totalcost = dictionary[EventKey.cost] as! Float
+        self.totalcost = dictionary[EventKey.cost] as? Double
         let datetime = dictionary[EventKey.date] as! String
         
         let dateConverter = DateFormatter()

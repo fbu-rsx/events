@@ -13,12 +13,15 @@ import FoldingCell
 class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     
+    @IBOutlet weak var oneCell: RotatedView!
     @IBOutlet weak var view1topConstraint: NSLayoutConstraint!
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
     @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
 
     
+    @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var closedProfileImageView: UIImageView!
     @IBOutlet weak var closedEventTitle: UILabel!
     @IBOutlet weak var closedEventTime: UILabel!
@@ -106,20 +109,37 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
                 // Set total cost
-                print(self.event!.totalcost)
+//                print(self.event!.totalcost!)
                 if let total = self.event!.totalcost {
-                    let cost = String(total/Float(self.event!.guestlist.count))
-                    self.closedUserCost.text = cost
-                }else{
-                    self.closedUserCost.text = "n/a"
+                    let cost = total/Double(self.event!.guestlist.count + 1)
+                    self.closedUserCost.text = String(format: "$%.2f", cost)
+                } else{
+                    self.closedUserCost.text = "N/A"
                 }
+                
+                // Set number of guests invited
                 self.closedInvitedNum.text = String(self.event!.guestlist.count)
+                
                 // accepted num will eventually be added to Event class
                 var coming: Int = 0
                 for user in self.event!.guestlist.keys{
                     if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
                 }
                 self.closedComingNum.text = String(coming)
+                
+                // Set the cell color depending on invite status
+                var color: UIColor!
+                // var backViewColor: UIColor!
+                switch self.event!.myStatus {
+                case .accepted:
+                    color = Colors.green
+                
+                case .declined:
+                    color = Colors.coral
+                default:
+                    color = Colors.orange
+                }
+                self.oneCell.backgroundColor = color
             }
 
             }
@@ -127,7 +147,6 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     override func awakeFromNib() {
         // Initialization code
-        
         backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         foregroundView = view1
         foregroundViewTop = view1topConstraint
