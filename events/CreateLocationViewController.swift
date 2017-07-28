@@ -31,7 +31,7 @@ class CreateLocationViewController: UIViewController {
         self.mapView.setRegion(region, animated: true)
         
         self.tabBarController?.tabBar.isHidden = false
-        CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
+        CreateEventMaster.shared.event[EventKey.location] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +64,7 @@ class CreateLocationViewController: UIViewController {
       
         selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         self.mapView.isUserInteractionEnabled = false
-        CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
+        CreateEventMaster.shared.event[EventKey.location] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
     
     @IBAction func onZoomToCurrentLocation(_ sender: Any) {

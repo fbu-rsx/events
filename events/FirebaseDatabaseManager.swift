@@ -33,8 +33,8 @@ class FirebaseDatabaseManager {
     
     // Add user only if they do not already exist
     func possiblyAddUser(userDict: [String: String]) {
-        let uid = userDict[UserKey.id.rawValue]!
-        let name = userDict[UserKey.name.rawValue]!
+        let uid = userDict[UserKey.id]!
+        let name = userDict[UserKey.name]!
         self.ref.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             print("possiblyAddUser snapshot started")
             if !snapshot.exists() {
@@ -82,7 +82,7 @@ class FirebaseDatabaseManager {
             FirebaseDatabaseManager.shared.getSingleEvent(withID: snapshot.key, completion: { (eventDict: [String : Any]) in
                 let event = Event(dictionary: eventDict)
                 if event.organizerID != AppUser.current.uid {
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "inviteAdded"), object: event)
+                    NotificationCenter.default.post(name: BashNotifications.invite, object: event)
                 }
             })
         }
@@ -121,7 +121,7 @@ class FirebaseDatabaseManager {
     
     // create event from event dictionary
     func createEvent(_ dict: [String: Any], completion: @escaping () -> Void) {
-        let eventid = dict[EventKey.id.rawValue] as! String
+        let eventid = dict[EventKey.id] as! String
         let update: [String: Any] = ["users/\(AppUser.current.uid)/events/\(eventid)": InviteStatus.accepted.rawValue,
                                      "events/\(eventid)": dict]
         self.ref.updateChildValues(update)

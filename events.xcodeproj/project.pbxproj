@@ -17,6 +17,8 @@
 		09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */; };
 		09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */; };
 		09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */; };
+		09B321521F2BB55F0044F05C /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B321501F2BB55F0044F05C /* SongTableViewCell.swift */; };
+		09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09B321511F2BB55F0044F05C /* SongTableViewCell.xib */; };
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
 		09F788491F2668A700A311F0 /* detailView0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788481F2668A700A311F0 /* detailView0.xib */; };
@@ -99,6 +101,8 @@
 		09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedEventViewController.swift; sourceTree = "<group>"; };
 		09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
+		09B321501F2BB55F0044F05C /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
+		09B321511F2BB55F0044F05C /* SongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
 		09F788481F2668A700A311F0 /* detailView0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = detailView0.xib; path = events/detailView0.xib; sourceTree = SOURCE_ROOT; };
@@ -339,6 +343,8 @@
 				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
 				4FD2FE8F1F2ADBDE00E565B9 /* apple.gpx */,
 				4FD2FE911F2ADBEE00E565B9 /* google.gpx */,
+				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
+				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
 			);
 			path = events;
 			sourceTree = SOURCE_ROOT;
@@ -461,7 +467,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = TM66RGVAQ6;
+						DevelopmentTeam = 736R8PG8E6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -509,6 +515,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */,
 				7CAAA0F01F281A94005C1A76 /* PaymentTableViewCell.xib in Resources */,
 				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
@@ -710,6 +717,7 @@
 				4F87D3771F168EB5007D4E94 /* Event.swift in Sources */,
 				09F788531F269F0900A311F0 /* detailView2.swift in Sources */,
 				09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */,
+				09B321521F2BB55F0044F05C /* SongTableViewCell.swift in Sources */,
 				4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */,
 				7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */,
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
@@ -873,13 +881,13 @@
 			baseConfigurationReference = CCAC109E9CF8667FBF9C91A2 /* Pods-events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -890,14 +898,14 @@
 			baseConfigurationReference = C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

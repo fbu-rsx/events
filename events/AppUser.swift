@@ -10,12 +10,22 @@ import Foundation
 import FirebaseAuth
 import FBSDKCoreKit
 
-enum UserKey: String {
-    case id = "uid"
-    case name = "name"
-    case date = "datetime"
-    case photo = "photoURLString"
-    case events = "events"
+struct BashNotifications {
+    static let invite = NSNotification.Name(rawValue: "inviteAdded")
+    static let delete = NSNotification.Name(rawValue: "deleteEvent")
+    static let accept = NSNotification.Name(rawValue: "acceptedInvitation")
+    static let logout = NSNotification.Name(rawValue: "logout")
+    static let refresh = NSNotification.Name(rawValue: "refresh")
+    static let enableSwipe = NSNotification.Name(rawValue: "enableSwipe")
+    static let disableSwipe = NSNotification.Name(rawValue: "disableSwipe")
+
+}
+
+struct UserKey {
+    static let id = "uid"
+    static let name = "name"
+    static let photo = "photoURLString"
+    static let events = "events"
 }
 
 /*
@@ -49,15 +59,15 @@ class AppUser {
     var facebookFriends: [FacebookFriend]!
     
     init(dictionary: [String: Any]) {
-        self.uid = dictionary[UserKey.id.rawValue] as! String
-        self.name = dictionary[UserKey.name.rawValue] as! String
-        self.photoURLString = dictionary[UserKey.photo.rawValue] as! String
+        self.uid = dictionary[UserKey.id] as! String
+        self.name = dictionary[UserKey.name] as! String
+        self.photoURLString = dictionary[UserKey.photo] as! String
     }
     
     convenience init(user: User) {
-        let userDict: [String: String] = [UserKey.id.rawValue: FBSDKAccessToken.current().userID,
-                                       UserKey.name.rawValue: user.displayName!,
-                                       UserKey.photo.rawValue: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
+        let userDict: [String: String] = [UserKey.id: FBSDKAccessToken.current().userID,
+                                       UserKey.name: user.displayName!,
+                                       UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
 
         // Adds user only if the user does not exists
@@ -65,8 +75,9 @@ class AppUser {
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
             self.facebookFriends = friends
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.accept(_:)), name: BashNotifications.accept, object: nil)
     }
     
     /**
@@ -81,8 +92,15 @@ class AppUser {
         self.events.append(event)
     }
     
-    func updateInvitation(for event: Event, withStatus status: InviteStatus) {
-        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: status)
+    @objc func delete(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        FirebaseDatabaseManager.shared.deleteEvent(event)
+        self.removeUserFromEvent(event)
+    }
+    
+    @objc func accept(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .accepted)
     }
     
     //create event and add to user event list and event database
@@ -99,21 +117,9 @@ class AppUser {
     //remove event from user event list
     func removeUserFromEvent(_ event: Event) {
         FirebaseDatabaseManager.shared.removeUserFromEvent(event)
-        var index: Int!
-        for i in 0..<self.events.count {
-            if event.eventid == self.events[i].eventid {
-                index = i
-                break
-            }
-        }
+        let index = self.events.index(of: event)!
         self.events.remove(at: index)
         self.eventsKeys.removeValue(forKey: event.eventid)
-    }
-    
-    // delete event and delete from all its users' event lists
-    func deleteEvent(_ event: Event) {
-        FirebaseDatabaseManager.shared.deleteEvent(event)
-        self.removeUserFromEvent(event)
     }
 }
 

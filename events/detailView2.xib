@@ -15,41 +15,50 @@
             <rect key="frame" x="0.0" y="0.0" width="333" height="450"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-5M-chh">
-                    <rect key="frame" x="16" y="123" width="288" height="307"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-5M-chh">
+                    <rect key="frame" x="8" y="98" width="317" height="344"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Spotify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNZ-Y3-HHg">
-                    <rect key="frame" x="40" y="20" width="64" height="26"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spotify" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNZ-Y3-HHg">
+                    <rect key="frame" x="12" y="10" width="64" height="26"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qZ6-R6-ljA">
-                    <rect key="frame" x="264" y="10" width="40" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button" image="spotify-android.png"/>
-                    <connections>
-                        <action selector="spotifyTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="bEL-s3-5zA"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IrW-4k-dhJ">
-                    <rect key="frame" x="143" y="26" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="test:" destination="iN0-l3-epB" eventType="touchUpInside" id="9lE-J0-8bG"/>
-                    </connections>
-                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="spotify-android.png" translatesAutoresizingMaskIntoConstraints="NO" id="px7-Ce-Z7a">
+                    <rect key="frame" x="289" y="4" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="2WY-bG-hc6"/>
+                        <constraint firstAttribute="width" constant="40" id="p3P-hh-WqG"/>
+                    </constraints>
+                </imageView>
+                <searchBar contentMode="redraw" placeholder="add music" translatesAutoresizingMaskIntoConstraints="NO" id="jLM-0V-jG2">
+                    <rect key="frame" x="0.0" y="54" width="333" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="2tv-Vm-taM"/>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="top" secondItem="jLM-0V-jG2" secondAttribute="bottom" id="3rw-en-LUn"/>
+                <constraint firstItem="px7-Ce-Z7a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="5HC-gr-nZd"/>
+                <constraint firstAttribute="bottom" secondItem="Rk1-5M-chh" secondAttribute="bottom" constant="8" id="5JD-hD-SYr"/>
+                <constraint firstAttribute="trailing" secondItem="Rk1-5M-chh" secondAttribute="trailing" constant="8" id="6jM-fn-vzG"/>
+                <constraint firstItem="jLM-0V-jG2" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Kl8-F3-0pH"/>
+                <constraint firstItem="CNZ-Y3-HHg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="Mzd-Zh-oFt"/>
+                <constraint firstItem="jLM-0V-jG2" firstAttribute="top" secondItem="px7-Ce-Z7a" secondAttribute="bottom" constant="10" id="P06-WC-tTY"/>
+                <constraint firstAttribute="trailing" secondItem="px7-Ce-Z7a" secondAttribute="trailing" constant="4" id="aoz-hP-hD9"/>
+                <constraint firstItem="CNZ-Y3-HHg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="12" id="rF1-Hv-nos"/>
+                <constraint firstAttribute="trailing" secondItem="jLM-0V-jG2" secondAttribute="trailing" id="sHu-Au-fjO"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="26" y="205"/>
+            <connections>
+                <outlet property="tableView" destination="Rk1-5M-chh" id="7MQ-de-o6I"/>
+            </connections>
+            <point key="canvasLocation" x="25.5" y="205"/>
         </view>
     </objects>
     <resources>
