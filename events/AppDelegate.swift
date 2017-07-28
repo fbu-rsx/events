@@ -41,11 +41,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             loginController.signInDelegate = self
             window?.rootViewController = loginController
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: NSNotification.Name(rawValue: "logout"), object: nil)
 
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
         UIApplication.shared.cancelAllLocalNotifications()
         //OAuthSwiftManager.shared.logout()
         return true
+    }
+    
+    func logout() {
+        let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
+        loginController.signInDelegate = self
+        window?.rootViewController = loginController
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {

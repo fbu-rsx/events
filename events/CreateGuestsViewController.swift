@@ -25,7 +25,6 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         self.friends = AppUser.current.facebookFriends
         
         self.tabBarController?.tabBar.isHidden = false
-        CreateEventMaster.shared.event[EventKey.guestlist.rawValue] = [String: Bool]()
     }
     
     
@@ -54,7 +53,7 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
             CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = nil
         } else {
             cell.accessoryType = .checkmark
-            CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = false
+            CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = InviteStatus.noResponse.rawValue
         }
         print(CreateEventMaster.shared.guestlist)
     }

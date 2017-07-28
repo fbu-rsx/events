@@ -61,8 +61,9 @@ class CreateLocationViewController: UIViewController {
     }
     
     @IBAction func onSelected(_ sender: Any) {
-
+      
         selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        self.mapView.isUserInteractionEnabled = false
         CreateEventMaster.shared.event[EventKey.location.rawValue] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
     

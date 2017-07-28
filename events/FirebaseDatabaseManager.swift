@@ -32,36 +32,35 @@ class FirebaseDatabaseManager {
      */
     
     // Add user only if they do not already exist
-    func possiblyAddUser(userDict: [String: Any]) {
-        let uid = userDict[UserKey.id.rawValue] as! String
-        let name = userDict[UserKey.name.rawValue] as! String
+    func possiblyAddUser(userDict: [String: String]) {
+        let uid = userDict[UserKey.id.rawValue]!
+        let name = userDict[UserKey.name.rawValue]!
         self.ref.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            print("addUser snapshot started")
+            print("possiblyAddUser snapshot started")
             if !snapshot.exists() {
                 self.ref.child("users/\(uid)").updateChildValues(userDict)
                 print("new user \(name) added")
-            } else {
-                print(snapshot)
-                // self.setupConnectionObservers(userid: appUser.uid)
             }
+            print(snapshot)
         }
     }
     
     // completion function provides dictionary of events
-    func fetchUserEvents(userid: String, completion: @escaping ([String: Bool], [String: Any]) -> Void) {
+    func fetchUserEvents(userid: String, completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("users/\(userid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.exists() {
-                let result = snapshot.value as! [String: Bool]
-                FirebaseDatabaseManager.shared.fetchEventsForEventIDs(dictionary: result, completion: { (keys: [String: Bool], events: [String: Any]) in
+                let result = snapshot.value as! [String: Int]
+                FirebaseDatabaseManager.shared.fetchEventsForEventIDs(dictionary: result, completion: { (keys: [String: Int], events: [String: Any]) in
                     completion(keys, events)
                 })
             }
             print("user has no events to get!")
+            completion([:], [:])
         }
     }
     
     // dictionary of eventid's
-    func fetchEventsForEventIDs(dictionary: [String: Bool], completion: @escaping ([String: Bool], [String: Any]) -> Void) {
+    func fetchEventsForEventIDs(dictionary: [String: Int], completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             var eventsDict: [String: Any] = [:]
             if snapshot.exists() {
@@ -74,6 +73,27 @@ class FirebaseDatabaseManager {
         }
     }
     
+    func addEventsListener() {
+        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childAdded) { (snapshot: DataSnapshot) in
+            if AppUser.current.eventsKeys[snapshot.key] != nil {
+                return
+            }
+            print(snapshot)
+            FirebaseDatabaseManager.shared.getSingleEvent(withID: snapshot.key, completion: { (eventDict: [String : Any]) in
+                let event = Event(dictionary: eventDict)
+                if event.organizerID != AppUser.current.uid {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "inviteAdded"), object: event)
+                }
+            })
+        }
+    }
+    
+    func getSingleEvent(withID id: String, completion: @escaping ([String: Any]) -> Void) {
+        self.ref.child("events/\(id)").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            completion(snapshot.value as! [String: Any])
+        })
+    }
+    
     
     
     
@@ -84,19 +104,34 @@ class FirebaseDatabaseManager {
      */
     
     // add existing event to user
-    func addEventToUser(_ event: Event) {
+    func updateInvitation(for event: Event, withStatus status: InviteStatus) {
         let update: [String: Any] =
-            ["users/\(AppUser.current.uid)/events/\(event.eventid)": true,
-             "events/\(event.eventid)/guestlist/\(AppUser.current.uid)": true]
+            ["users/\(AppUser.current.uid)/events/\(event.eventid)": status.rawValue,
+             "events/\(event.eventid)/guestlist/\(AppUser.current.uid)": status.rawValue]
+        self.ref.updateChildValues(update)
+    }
+    
+    func inviteGuests(_ guests: [String: Int], to event: Event) {
+        var update: [String: Any] = [:]
+        for guest in guests.keys {
+            update["users/\(guest)/events/\(event.eventid)"] = InviteStatus.noResponse.rawValue
+        }
         self.ref.updateChildValues(update)
     }
     
     // create event from event dictionary
-    func createEvent(_ dict: [String: Any]) {
-        let eventid = dict["eventid"] as! String
-        let update: [String: Any] = ["users/\(AppUser.current.uid)/events/\(eventid)": true,
+    func createEvent(_ dict: [String: Any], completion: @escaping () -> Void) {
+        let eventid = dict[EventKey.id.rawValue] as! String
+        let update: [String: Any] = ["users/\(AppUser.current.uid)/events/\(eventid)": InviteStatus.accepted.rawValue,
                                      "events/\(eventid)": dict]
         self.ref.updateChildValues(update)
+        self.ref.updateChildValues(update) { (error: Error?, ref: DatabaseReference) in
+            if let error = error {
+                print("ERROR CREATING EVENT: \(error.localizedDescription)")
+            } else {
+                completion()
+            }
+        }
     }
     
     // add images to existing event
@@ -176,18 +211,6 @@ class FirebaseDatabaseManager {
      * Get methods to retrieve info from database
      *
      */
-    
-    // gets users from an event dictionary, and creates AppUser objects
-    func getUsersFromEventDict(dictionary: [String: Any]) -> [AppUser] {
-        var users: [AppUser] = []
-        for userid in dictionary.keys {
-            let userDict = self.ref.child("users").value(forKey: userid) as! [String: Any]
-            users.append(AppUser(dictionary: userDict))
-        }
-        
-        return users
-    }
-    
     // get user object from a user id
     func getSingleUser(id: String) -> AppUser {
         let dict = self.ref.value(forKeyPath: "users/\(id)") as! [String: Any]

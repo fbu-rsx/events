@@ -17,7 +17,7 @@ class CreateEventMaster {
     static var shared = CreateEventMaster()
     
     var event: [String: Any]
-    var guestlist: [String: Bool]
+    var guestlist: [String: Int]
     weak var delegate: CreateEventMasterDelegate!
     
     init() {
@@ -29,7 +29,10 @@ class CreateEventMaster {
     }
     
     func clear() {
-        self.event = [:]
+        self.event = [EventKey.id.rawValue: FirebaseDatabaseManager.shared.getNewEventID(),
+                      EventKey.organizerID.rawValue: AppUser.current.uid,
+                      EventKey.radius.rawValue: 100.0,
+                      EventKey.orgURLString.rawValue: AppUser.current.photoURLString]
         self.guestlist = [:]
     }
 }

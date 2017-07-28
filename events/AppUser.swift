@@ -26,8 +26,8 @@ enum UserKey: String {
     - "location": [latitude, longitude]
     - "events":
         - "eventid1": true
-        - "eventid2": true
-        - "eventid3": true
+        - "eventid2": false
+        - "eventid3": false
     - "transactions":
  */
 
@@ -40,7 +40,11 @@ class AppUser {
     var name: String
     var photoURLString: String
     var events: [Event] = []
-    var eventsKeys: [String: Bool] = [:]
+    var eventsKeys: [String: Int]!  {
+        didSet {
+            FirebaseDatabaseManager.shared.addEventsListener()
+        }
+    } // Int represents InviteStatus
     
     var facebookFriends: [FacebookFriend]!
     
@@ -51,16 +55,18 @@ class AppUser {
     }
     
     convenience init(user: User) {
-        let userDict: [String: Any] = [UserKey.id.rawValue: FBSDKAccessToken.current().userID,
+        let userDict: [String: String] = [UserKey.id.rawValue: FBSDKAccessToken.current().userID,
                                        UserKey.name.rawValue: user.displayName!,
                                        UserKey.photo.rawValue: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
-      
+
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.possiblyAddUser(userDict: userDict)
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
             self.facebookFriends = friends
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
+
     }
     
     /**
@@ -69,18 +75,24 @@ class AppUser {
      *
      */
     //adds existing event to user event list
-    func addEventToUser(_ event: Event) {
-        FirebaseDatabaseManager.shared.addEventToUser(event)
+    @objc func inviteAdded(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        self.eventsKeys[event.eventid] = InviteStatus.noResponse.rawValue
         self.events.append(event)
-        self.eventsKeys[event.eventid] = true
+    }
+    
+    func updateInvitation(for event: Event, withStatus status: InviteStatus) {
+        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: status)
     }
     
     //create event and add to user event list and event database
     func createEvent(_ eventDict: [String: Any]) -> Event {
-        FirebaseDatabaseManager.shared.createEvent(eventDict)
         let event = Event(dictionary: eventDict)
+        self.eventsKeys[event.eventid] = InviteStatus.accepted.rawValue
         self.events.append(event)
-        self.eventsKeys[event.eventid] = true
+        FirebaseDatabaseManager.shared.createEvent(eventDict) {
+            FirebaseDatabaseManager.shared.inviteGuests(event.guestlist, to: event)
+        }
         return event
     }
     
@@ -107,13 +119,13 @@ class AppUser {
 
 extension AppUser: LoadEventsDelegate {
     func fetchEvents(completion: @escaping () -> Void) {
-        FirebaseDatabaseManager.shared.fetchUserEvents(userid: self.uid) { (keys: [String: Bool], events: [String: Any]) in
+        FirebaseDatabaseManager.shared.fetchUserEvents(userid: self.uid) { (keys: [String: Int], events: [String: Any]) in
             self.eventsKeys = keys
             for id in events.keys {
                 let dict = events[id] as! [String: Any]
                 self.events.append(Event(dictionary: dict))
             }
-            print(self.events)
+            print("AppUser Events: \(self.events)")
             completion()
         }
     }

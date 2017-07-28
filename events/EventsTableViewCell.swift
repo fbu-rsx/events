@@ -112,7 +112,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
             // accepted num will eventually be added to Event class
             var coming: Int = 0
             for user in event!.guestlist.keys{
-                if event!.guestlist[user] == true {coming += 1}
+                if event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
             }
             closedComingNum.text = String(coming)
         }

@@ -17,8 +17,11 @@ class WalletViewController: UIViewController, IndicatorInfoProvider {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentCell")
+
         // Set the current user's name
         //userName.text = AppUser.current.name
         // Set the current user's photo
@@ -27,7 +30,9 @@ class WalletViewController: UIViewController, IndicatorInfoProvider {
 //        userImage.af_setImage(withURL: photoURL!)
         
         // Gradient
-        infoView.gradientLayer.colors = [UIColor.black.cgColor, UIColor.white.cgColor]
+        let coral = UIColor(hexString: "#FEB2A4")
+        let lightBlue = UIColor(hexString: "#8CDEDC")
+        infoView.gradientLayer.colors = [lightBlue.cgColor, coral.cgColor]
         infoView.gradientLayer.gradient = GradientPoint.bottomTop.draw()
     }
 

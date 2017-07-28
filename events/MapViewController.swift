@@ -13,9 +13,17 @@ import OAuthSwift
 import FBSDKLoginKit
 import AlamofireImage
 
+struct Colors {
+    static let coral = UIColor(hexString: "#EF5B5B")
+    static let lightBlue = UIColor(hexString: "#B6E7EF")
+    static let green = UIColor(hexString: "#4CB6BE")
+    static let orange = UIColor(hexString: "#FF9D00")
+}
+
 struct PreferenceKeys {
     static let savedItems = "savedItems"
 }
+
 
 protocol HandleMapSearch: class {
     func dropPinZoomIn(placemark:MKPlacemark)
@@ -29,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
-    static var map: MKMapView!
+    static var mapAnnotations: [MKAnnotationView] = []
     
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
@@ -45,9 +53,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         mapView.delegate = self
         
-        MapViewController.map = self.mapView
         // Displays user's current location
         self.mapView.showsUserLocation = true
         // Allows user's location tracking
@@ -76,59 +84,56 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Ask for Authorization from the User
         self.locationManager.requestAlwaysAuthorization()
         
+        
         self.delegate = AppUser.current
         if CLLocationManager.locationServicesEnabled() {
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
             locationManager.startUpdatingLocation()
-            delegate.fetchEvents() {
-                self.loadAllEvents()
-                print(self.events)
-            }
+        }
+        delegate.fetchEvents() {
+            self.loadAllEvents()
+            print("MapViewController Events: \(self.events)")
         }
         CreateEventMaster.shared.delegate = self
-
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: NSNotification.Name(rawValue: "inviteAdded"), object: nil)
+        
         
 //        for region in locationManager.monitoredRegions {
 //            guard let circularRegion = region as? CLCircularRegion else { continue }
-//
+//            
 //            locationManager.stopMonitoring(for: circularRegion)
 //        }
 //        saveAllEvents()
         
         // Automatically zooms to the user's location upon VC loading
-//        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-//        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-//        self.mapView.setRegion(region, animated: true)
+        //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
+        //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
+        //        self.mapView.setRegion(region, animated: true)
     }
     
-
+    func inviteAdded(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        self.add(event: event)
+        saveAllEvents()
+        print("invited added")
+        print("Invite events: \(self.events)")
+        
+        // Pop-Up alert when others first invite you to an event
+        
+        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
+            UIAlertAction in
+            self.tabBarController?.selectedIndex = 2
+        })
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.zoomToUserLocation()
     }
-    
-    
-    @IBAction func onLogout(_ sender: Any) {
-        FirebaseDatabaseManager.shared.logout()
-        FBSDKLoginManager().logOut()
-        URLCache.shared.removeAllCachedResponses()
-        
-        if let cookies = HTTPCookieStorage.shared.cookies {
-            for cookie in cookies {
-                HTTPCookieStorage.shared.deleteCookie(cookie)
-            }
-        }
 
-        let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
-        loginController.signInDelegate = UIApplication.shared.delegate! as! AppDelegate
-        self.present(loginController, animated: true, completion: nil)
-    }
-    
-
-    @IBAction func testTransition(_ sender: Any) {
-        performSegue(withIdentifier: "test", sender: nil)
-    }
-    
     /**
      *
      * Functions for Geofencing
@@ -206,6 +211,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         for event in AppUser.current.events {
             add(event: event)
         }
+        saveAllEvents()
     }
     
     func saveAllEvents() {
@@ -218,26 +224,28 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    
-    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "myEvent"
         if let event = annotation as? Event {
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKAnnotationView
             if annotationView == nil {
                 annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                let data = try! Data(contentsOf: URL(string: AppUser.current.photoURLString)!)
+                let data = try! Data(contentsOf: event.organizerURL)
                 let image = UIImage(data: data)!
                 annotationView?.image =  image.af_imageRoundedIntoCircle()
-//                annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 let frame = annotationView!.frame
-                annotationView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: 30.0, height: 30.0)
+                annotationView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: 35.0, height: 35.0)
+                // Check button on annotation callout
+                let checkInButton = UIButton(type: .custom)
+                checkInButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
+                checkInButton.setImage(UIImage(named: "CheckInEvent")!, for: .normal)
+                annotationView?.rightCalloutAccessoryView = checkInButton
+                // Remove button on annotation callout
                 let removeButton = UIButton(type: .custom)
                 removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
                 removeButton.setImage(UIImage(named: "DeleteEvent")!, for: .normal)
                 annotationView?.leftCalloutAccessoryView = removeButton
-//                annotationView?.pinTintColor = UIColor(hexString: "#4CB6BE")
             } else {
                 annotationView?.annotation = annotation
             }
@@ -246,13 +254,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return nil
     }
     
-    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        var event: Event!
+        for e in events {
+            if e.coordinate.latitude == overlay.coordinate.latitude &&
+                e.coordinate.longitude == overlay.coordinate.longitude {
+                event = e
+                break
+            }
+        }
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.lineWidth = 1.0
-            circleRenderer.strokeColor = UIColor(hexString: "#FEB2A4")
-            circleRenderer.fillColor = UIColor(hexString: "#FEB2A4").withAlphaComponent(0.4)
+            circleRenderer.lineWidth = 1.5
+            let color: UIColor!
+            switch event.myStatus {
+            case .accepted:
+                color = Colors.green
+            case .declined:
+                color = Colors.coral
+            default:
+                color = Colors.orange
+            }
+            circleRenderer.strokeColor = color
+            circleRenderer.fillColor = color.withAlphaComponent(0.3)
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
@@ -265,13 +289,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         remove(event: event)
         saveAllEvents()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "CreateEventSegue" {
-            CreateEventMaster.shared.delegate = self
-        }
-    }
-    
 }
 
 extension MapViewController: CreateEventMasterDelegate {
