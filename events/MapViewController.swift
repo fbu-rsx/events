@@ -14,10 +14,10 @@ import FBSDKLoginKit
 import AlamofireImage
 
 struct Colors {
-    static let coral = UIColor(hexString: "#FF624A")
+    static let coral = UIColor(hexString: "#EF5B5B")
     static let lightBlue = UIColor(hexString: "#B6E7EF")
     static let green = UIColor(hexString: "#4CB6BE")
-    static let yellow = UIColor(hexString: "#EEF27D")
+    static let orange = UIColor(hexString: "#FF9D00")
 }
 
 struct PreferenceKeys {
@@ -268,7 +268,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         if overlay is MKCircle {
             let circleRenderer = MKCircleRenderer(overlay: overlay)
-            circleRenderer.lineWidth = 1.0
+            circleRenderer.lineWidth = 1.5
             let color: UIColor!
             switch event.myStatus {
             case .accepted:
@@ -276,7 +276,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             case .declined:
                 color = Colors.coral
             default:
-                color = Colors.yellow
+                color = Colors.orange
             }
             circleRenderer.strokeColor = color
             circleRenderer.fillColor = color.withAlphaComponent(0.3)
