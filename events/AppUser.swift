@@ -59,6 +59,8 @@ class AppUser {
     var facebookFriends: [FacebookFriend]!
     
     init(dictionary: [String: Any]) {
+        print("XXXXXXXXXX")
+        print(dictionary)
         self.uid = dictionary[UserKey.id] as! String
         self.name = dictionary[UserKey.name] as! String
         self.photoURLString = dictionary[UserKey.photo] as! String
