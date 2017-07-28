@@ -102,13 +102,13 @@ class Event: NSObject, NSCoding, MKAnnotation {
         
         let location = dictionary[EventKey.location] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
-        self.radius = dictionary[EventKey.radius.rawValue] as! Double
-        self.organizerID = dictionary[EventKey.organizerID.rawValue] as! String
-        self.organizerURL = URL(string: dictionary[EventKey.orgURLString.rawValue] as! String)!
-        self.about = dictionary[EventKey.about.rawValue] as! String
-        self.spotifyID = dictionary[EventKey.spotifyID.rawValue] as? String
-        self.guestlist = dictionary[EventKey.guestlist.rawValue] as! [String: Int]
-        self.photos = dictionary[EventKey.photos.rawValue] as? [String: Bool] ?? [:]
+        self.radius = dictionary[EventKey.radius] as! Double
+        self.organizerID = dictionary[EventKey.organizerID] as! String
+        self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
+        self.about = dictionary[EventKey.about] as! String
+        self.spotifyID = dictionary[EventKey.spotifyID] as? String
+        self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
+        self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
     }
     
