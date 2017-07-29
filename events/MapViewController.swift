@@ -12,6 +12,9 @@ import CoreLocation
 import OAuthSwift
 import FBSDKLoginKit
 import AlamofireImage
+import UserNotifications
+import GoogleMaps
+import GooglePlaces
 
 struct Colors {
     static let coral = UIColor(hexString: "#EF5B5B")
@@ -19,11 +22,6 @@ struct Colors {
     static let green = UIColor(hexString: "#4CB6BE")
     static let orange = UIColor(hexString: "#FF9D00")
 }
-
-struct PreferenceKeys {
-    static let savedItems = "savedItems"
-}
-
 
 protocol HandleMapSearch: class {
     func dropPinZoomIn(placemark:MKPlacemark)
@@ -35,38 +33,49 @@ protocol LoadEventsDelegate: class {
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: GMSMapView!
     
-    static var mapAnnotations: [MKAnnotationView] = []
+    var currentLocation: CLLocation?
+    var placesClient: GMSPlacesClient!
+    var zoomLevel: Float = 15.0
     
     // Search Variable Instantiations
     var resultSearchController: UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
+    var lastTimeStamp = Date()
     
     
     // Creates an instance of Core Location class
-    var locationManager = (UIApplication.shared.delegate as! AppDelegate).locationManager
+    var locationManager = CLLocationManager()
     var events: [Event] = []
     
     var delegate: LoadEventsDelegate!
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        mapView.delegate = self
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 50
+        locationManager.pausesLocationUpdatesAutomatically = true
+        locationManager.allowsBackgroundLocationUpdates = true
         
-        // Displays user's current location
-        self.mapView.showsUserLocation = true
-        // Allows user's location tracking
-        self.mapView.setUserTrackingMode(.follow, animated: true)
+        placesClient = GMSPlacesClient.shared()
         
-        // SEARCH
-        // Programmatically instantiating the locationSearchTable TableViewController
+//        mapView.delegate = self
+//        mapView.showsUserLocation = true
+//        mapView.setUserTrackingMode(.follow, animated: true)
+        
+//        // SEARCH
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
-        locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
+//        locationSearchTable.mapView = mapView
+//        locationSearchTable.handleMapSearchDelegate = self
         
         // Programatically embedding the search bar in Navigation Controller
         let searchBar = resultSearchController!.searchBar
@@ -81,13 +90,29 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         definesPresentationContext = true
         
         // Ask for Authorization from the User
-        self.delegate = AppUser.current
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
+            mapView.settings.myLocationButton = false
+            mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            mapView.isMyLocationEnabled = true
+            mapView.isHidden = true
+            mapView.mapType = .normal
+            do {
+                // Set the map style by passing the URL of the local file.
+                if let styleURL = Bundle.main.url(forResource: "paper", withExtension: "json") {
+                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                } else {
+                    NSLog("Unable to find style.json")
+                }
+            } catch {
+                NSLog("One or more of the map styles failed to load. \(error)")
+            }
+
         }
+        
+        self.delegate = AppUser.current
         delegate.fetchEvents() {
-            self.loadAllEvents()
-            self.removeOldRegions()
+//            self.loadAllEvents()
             print("MapViewController Events: \(self.events)")
         }
         CreateEventMaster.shared.delegate = self
@@ -102,7 +127,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func inviteAdded(_ notification: NSNotification) {
         let event = notification.object as! Event
         self.add(event: event)
-        saveAllEvents()
         print("invited added")
         print("Invite events: \(self.events)")
         
@@ -119,19 +143,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
-        mapView.zoomToUserLocation()
+//        mapView.zoomToUserLocation()
     }
     
-    /**
-     *
-     * Functions for Geofencing
-     *
-     */
     
     // MARK: Add an event to the mapView
     func add(event: Event) {
         self.events.append(event)
-        mapView.addAnnotation(event)
+//        mapView.addAnnotation(event)
         addRadiusOverlay(forEvent: event)
     }
     
@@ -139,87 +158,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if let indexInArray = events.index(of: event) {
             events.remove(at: indexInArray)
         }
-        mapView.removeAnnotation(event)
+//        mapView.removeAnnotation(event)
         removeRadiusOverlay(forEvent: event)
     }
     
     // MARK: Map overlay functions
     func addRadiusOverlay(forEvent event: Event) {
-        mapView.add(MKCircle(center: event.coordinate, radius: event.radius))
+//        mapView.add(MKCircle(center: event.coordinate, radius: event.radius))
     }
     
     func removeRadiusOverlay(forEvent event: Event) {
         // Find exactly one overlay which has the same coordinates & radius to remove
-        for overlay in mapView.overlays {
-            guard let circleOverlay = overlay as? MKCircle else { continue }
-            let coord = circleOverlay.coordinate
-            if coord.latitude == event.coordinate.latitude && coord.longitude == event.coordinate.longitude && circleOverlay.radius == event.radius {
-                mapView.remove(circleOverlay)
-                break
-            }
-        }
-    }
-    
-    func region(withEvent event: Event) -> CLCircularRegion {
-        // 1
-        let region = CLCircularRegion(center: event.coordinate, radius: event.radius, identifier: event.eventid)
-        // 2
-        region.notifyOnEntry = true
-        region.notifyOnExit = true
-        //        region.notifyOnEntry = (geotification.eventType == .onEntry)
-        //        region.notifyOnExit = !region.notifyOnEntry
-        return region
-    }
-    
-    func startMonitoring(event: Event) {
-        // 1
-        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
-            return
-        }
-        // 2
-        if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            showAlert(withTitle:"Warning", message: "Your event is saved but will only be activated once you grant us permission to access the device location.")
-        }
-        // 3
-        let region = self.region(withEvent: event)
-        // 4
-        locationManager.startMonitoring(for: region)
-    }
-    
-    
-    func stopMonitoring(event: Event) {
-        for region in locationManager.monitoredRegions {
-            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == event.eventid else { continue }
-            locationManager.stopMonitoring(for: circularRegion)
-        }
+//        for overlay in mapView.overlays {
+//            guard let circleOverlay = overlay as? MKCircle else { continue }
+//            let coord = circleOverlay.coordinate
+//            if coord.latitude == event.coordinate.latitude && coord.longitude == event.coordinate.longitude && circleOverlay.radius == event.radius {
+//                mapView.remove(circleOverlay)
+//                break
+//            }
+//        }
     }
     
     func loadAllEvents() {
         for event in AppUser.current.events {
             add(event: event)
         }
-        saveAllEvents()
     }
-    
-    func removeOldRegions() {
-        for region in locationManager.monitoredRegions {
-            guard let circularRegion = region as? CLCircularRegion else { continue }
-            guard AppUser.current.eventsKeys[circularRegion.identifier] != nil else { continue }
-            print("Deleted region: \(circularRegion.identifier)")
-            locationManager.stopMonitoring(for: circularRegion)
-        }
-    }
-    
-    func saveAllEvents() {
-        var items: [Data] = []
-        for event in self.events {
-            let item = NSKeyedArchiver.archivedData(withRootObject: event)
-            items.append(item)
-        }
-        UserDefaults.standard.set(items, forKey: PreferenceKeys.savedItems)
-    }
-    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let identifier = "myEvent"
@@ -286,26 +250,87 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Delete event
         let event = view.annotation as! Event
         if control == view.leftCalloutAccessoryView {
-            stopMonitoring(event: event)
             remove(event: event)
             NotificationCenter.default.post(name: BashNotifications.delete, object: event)
         } else {
-            startMonitoring(event: event)
             NotificationCenter.default.post(name: BashNotifications.accept, object: event)
         }
-        saveAllEvents()
+    }
+}
+
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Location Manager failed with the following error: \(error)")
+        locationManager.stopUpdatingLocation()
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations.last!
+        updateGoogleMaps(location)
+        guard location.timestamp.timeIntervalSince(self.lastTimeStamp) > 3 else { return }
+        self.lastTimeStamp = location.timestamp
+        guard AppUser.current.events.count > 0 else { return }
+        var closest: Event!
+        var closestDistance = DBL_MAX
+        for event in AppUser.current.events {
+            let coordinate = CLLocation(latitude: event.coordinate.latitude, longitude: event.coordinate.longitude)
+            let dist = location.distance(from: coordinate)
+            if dist < closestDistance {
+                closestDistance = dist
+                closest = event
+            }
+        }
+        print(closestDistance)
+        if closestDistance <= 50.0 {
+            handleEvent(closest)
+        }
+    }
+    
+    func updateGoogleMaps(_ location: CLLocation) {
+        print("Location: \(location)")
+        
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                              longitude: location.coordinate.longitude,
+                                              zoom: zoomLevel)
+        
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera
+        } else {
+            mapView.animate(to: camera)
+        }
+    }
+    
+    func handleEvent(_ event: Event) {
+        switch UIApplication.shared.applicationState {
+        case .active:
+            let message = "Would you like to check in to \"\(event.eventname)\"?"
+            self.showAlert(withTitle: "Check In", message: message)
+        case .inactive: fallthrough
+        case .background:
+            let content = UNMutableNotificationContent()
+            content.title = NSString.localizedUserNotificationString(forKey: "Check In", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "You're near \(event.eventname)!", arguments: nil)
+            content.sound = UNNotificationSound.default()
+            content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber;
+            content.categoryIdentifier = "com.sruesga.localNotification"
+            let request = UNNotificationRequest.init(identifier: "invitation", content: content, trigger: nil)
+            
+            let center = UNUserNotificationCenter.current()
+            center.add(request)
+
+        }
+    }
 }
+
 
 extension MapViewController: CreateEventMasterDelegate {
     func createNewEvent(_ dict: [String: Any]) {
-        guard let radius = dict[EventKey.radius] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
         print("CREATING NEW EVENT")
         let event = AppUser.current.createEvent(dict)
         add(event: event)
-        startMonitoring(event: event)
-        saveAllEvents()
         print("new event added")
         CreateEventMaster.shared.clear()
     }
@@ -326,10 +351,10 @@ extension MapViewController: HandleMapSearch {
         // Custom pin view
         let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
         annotationView.image = UIImage(named: "placeholder.png")
-        mapView.addAnnotation(annotationView.annotation!)
+//        mapView.addAnnotation(annotationView.annotation!)
         
         let span = MKCoordinateSpanMake(0.01, 0.01)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
-        mapView.setRegion(region, animated: true)
+//        mapView.setRegion(region, animated: true)
     }
 }

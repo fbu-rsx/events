@@ -96,14 +96,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kw2-sL-pEH">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ljt-8o-2CA">
-                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -428,9 +428,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UU5-5w-Rqk">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="le7-gx-8ns" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                            </mapView>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ezg-rZ-fpB">
                                 <rect key="frame" x="12" y="72" width="51" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -442,16 +444,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="UU5-5w-Rqk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4hg-fm-cKP"/>
-                            <constraint firstItem="UU5-5w-Rqk" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="gZm-Gs-JhT"/>
-                            <constraint firstAttribute="trailing" secondItem="UU5-5w-Rqk" secondAttribute="trailing" id="kX0-th-2XE"/>
-                            <constraint firstItem="UU5-5w-Rqk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="smO-FD-nDb"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hfl-ce-2ab"/>
                     <connections>
-                        <outlet property="mapView" destination="UU5-5w-Rqk" id="dSZ-HM-XHG"/>
+                        <outlet property="mapView" destination="le7-gx-8ns" id="Y3U-OL-fpa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -627,7 +623,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -646,7 +642,7 @@
                 <navigationController storyboardIdentifier="CreateLocationNavController" title="CreateLocationNavController" automaticallyAdjustsScrollViewInsets="NO" id="chc-gD-98Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s1M-MY-l19">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s1M-MY-l19">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

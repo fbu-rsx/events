@@ -9,37 +9,26 @@
 import UIKit
 import Firebase
 import Alamofire
-import CoreLocation
 import OAuthSwift
 import UserNotifications
 import FBSDKCoreKit
 import FBSDKLoginKit
+import GoogleMaps
+import GooglePlaces
 
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    //    static var aUI: FUIAuth?
-    var locationManager = CLLocationManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        // Override point for customization after application launch.
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.pausesLocationUpdatesAutomatically = true
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.activityType = .fitness
 
-        
-        // Use Firebase library to configure APIs
         FirebaseApp.configure()
-        
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        GMSServices.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
+        GMSPlacesClient.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
         
         if Auth.auth().currentUser != nil && FBSDKAccessToken.current() != nil {
             AppUser.current = AppUser(user: Auth.auth().currentUser!)
@@ -49,8 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = loginController
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
-
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
             // Enable or disable features based on authorization.
@@ -59,6 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.removeAllDeliveredNotifications()
         center.removeAllPendingNotificationRequests()
         //OAuthSwiftManager.shared.logout()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
         return true
     }
     
@@ -93,6 +82,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -138,78 +131,3 @@ extension AppDelegate: SignInDelegate {
         self.window?.rootViewController = loginController
     }
 }
-
-extension AppDelegate: CLLocationManagerDelegate {
-    
-    //    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    //        self.mapView.showsUserLocation = (status == .authorizedAlways)
-    //    }
-    
-    //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //
-    //        // Sets current location the first element of list of all locations
-    //        let location = locations[0]
-    //        // Initiates the span of the view
-    //        let span: MKCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
-    //        // Initiates the coordinates
-    //        let myLocation: CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-    //        // Sets the region to the span and coordinates
-    //        let region: MKCoordinateRegion = MKCoordinateRegionMake(myLocation, span)
-    //        mapView.setRegion(region, animated: true)
-    //
-    //    }
-    
-    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-        print("Monitoring failed for region with identifier: \(region!.identifier)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Location Manager failed with the following error: \(error)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-//        print("you're in a region of an event")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        if region is CLCircularRegion {
-            handleEvent(forRegion: region)
-        }
-//        print("exited event region")
-    }
-    // Helper functions
-    func note(fromRegionIdentifier identifier: String) -> String {
-        let savedItems = UserDefaults.standard.array(forKey: PreferenceKeys.savedItems) as! [Data]
-        let events = savedItems.map { NSKeyedUnarchiver.unarchiveObject(with: $0 as Data) as! Event }
-        let index = events.index { $0.eventid == identifier }
-        return "Would you like to check in to \"\(events[index!].title!)\"?"
-    }
-    
-    func handleEvent(forRegion region: CLRegion!) {
-        // Show an alert if application is active
-        if UIApplication.shared.applicationState == .active {
-            let message = note(fromRegionIdentifier: region.identifier)
-            window?.rootViewController?.showAlert(withTitle: nil, message: message)
-        } else {
-            // Otherwise present a local notification
-            let content = UNMutableNotificationContent()
-            content.title = NSString.localizedUserNotificationString(forKey: "You're near a location", arguments: nil)
-            content.body = NSString.localizedUserNotificationString(forKey: note(fromRegionIdentifier: region.identifier), arguments: nil)
-            content.sound = UNNotificationSound.default()
-            content.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber;
-            content.categoryIdentifier = "com.elonchan.localNotification"
-            // Deliver the notification in five seconds.
-            let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 60.0, repeats: true)
-            let request = UNNotificationRequest.init(identifier: "FiveSecond", content: content, trigger: trigger)
-            
-            // Schedule the notification.
-            let center = UNUserNotificationCenter.current()
-            center.add(request)
-        }
-//        print("Geofence triggered!")
-    }
-}
-
