@@ -18,6 +18,8 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     */
     
+    var Songs: [String] = []
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func awakeFromNib() {
@@ -29,13 +31,13 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as! SongTableViewCell
+        cell.label.text = Songs[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return Songs.count
     }
 
 }
