@@ -73,13 +73,19 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         else if added == true {
             // update subview text
-            OAuthSwiftManager.shared.search(songName: searchField.text!)
+            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs) in
+                self.subView?.Songs = songs
+                self.subView?.tableView.reloadData()
+            })
         }
         else{
             self.addSubview(subView!)
             added = true
             // update subview text
-            OAuthSwiftManager.shared.search(songName: searchField.text!)
+            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs) in
+                self.subView?.Songs = songs
+                self.subView?.tableView.reloadData()
+            })
         }
     }
     

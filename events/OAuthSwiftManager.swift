@@ -165,12 +165,20 @@ class OAuthSwiftManager: SessionManager {
         request(url!, method: .post, parameters: Parameters, encoding: JSONEncoding.default, headers: header).validate()
     }
     
-    func search(songName: String){
-        let name = songName.replacingOccurrences(of: " ", with: "+")
+    func search(songName: String, completion: @escaping (_ songs: [String])->()){
+        let name = songName.replacingOccurrences(of: " ", with: "%20")
         let Parameters: [String: Any] = ["q": name, "type": "track"]
-        let url = URL(string: "https://api.spotify.com/v1/search")
-        request(url!, method: .get, parameters: Parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            print(response)
+        //print(Parameters)
+        let url = URL(string: "https://api.spotify.com/v1/search?q=\(name)&type=track")
+        request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            let result = response.result.value as! [String: Any]
+            let tracks = result["tracks"] as! [String: Any]
+            let items = tracks["items"] as! [[String: Any]]
+            var songs: [String] = []
+            for item in items{
+                songs.append(item["name"] as! String)
+            }
+            completion(songs)
         }
     }
     
