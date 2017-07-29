@@ -116,7 +116,7 @@ class OAuthSwiftManager: SessionManager {
     func createPlaylist(name: String, completion: @escaping (_ id: String)->()){
         let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID!)/playlists")
-        print(url)
+        //print(url)
         let Parameters: [String: Any] = ["name": name, "public": false, "collaborative": true]
         let header = ["Content-Type": "application/json"]
         var final: String?
@@ -132,19 +132,33 @@ class OAuthSwiftManager: SessionManager {
         
     }
     
-    func getTracksForPlaylist(userID: String, playlistID: String){
+    func getTracksForPlaylist(userID: String, playlistID: String, completion: @escaping (_ tracks: [String]) -> ()){
         //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks")
         // can later specify parameters to only return specific parts of JSON
         request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            
-            print(response)
+            if response.result.isSuccess {
+                let result = response.result.value as! [String: Any]
+                var names: [String] = []
+                let tracks = result["items"] as! [[String: Any]]
+                //print(tracks)
+                
+                for track in tracks{
+                    let inner = track["track"] as! [String: Any]
+                    names.append(inner["name"] as! String)
+                }
+                print(names)
+                completion(names)
+            }
+            else{
+                print("Error")
+            }
         }
     }
     
-    func addSongToPlaylist(playlistID: String, songsArray: [String]){
-        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
-        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists/\(playlistID)/tracks")
+    func addSongToPlaylist(userID: String, playlistID: String, songsArray: [String]){
+        //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
+        let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks")
         let header = ["Content-Type": "application/json"]
         // uris format: uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh, spotify:track:1301WleyT98MSxVHPZCA6M
         let Parameters: [String: Any] = ["uris": ""]

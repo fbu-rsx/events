@@ -21,10 +21,16 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     */
     
+    var songs: [String] = []
+    
     var event: Event?{
         didSet{
             if let ID = event!.spotifyID {
-                OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID! ,playlistID: ID)
+                //OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID! ,playlistID: ID, completion: )
+                OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs) in
+                    self.songs = songs
+                    self.tableView.reloadData()
+                })
             }else{
                 print("no event ID")
             }
@@ -47,12 +53,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return songs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as! SongTableViewCell
-        
+        cell.label.text = songs[indexPath.row]
         return cell
     }
     

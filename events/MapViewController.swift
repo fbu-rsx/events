@@ -113,9 +113,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         spotifyAlert.addAction(cancelAction)
         spotifyAlert.addAction(OKAction)
+        self.present(spotifyAlert, animated: true)
+        /*
         if UserDefaults.standard.value(forKey: "spotify-user") == nil {
             self.present(spotifyAlert, animated: true)
-        }
+        }*/
     }
     
     func inviteAdded(_ notification: NSNotification) {
