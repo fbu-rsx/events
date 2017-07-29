@@ -26,7 +26,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var profileImage: UIImageView!
     
     
-    var users: [String] = []
+    var guests: [[String:Int]] = []
     var usersDic: [String: Bool] = [:]
     
     
@@ -39,13 +39,12 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var event: Event?{
         didSet{
-            print("entered")
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
                 
                 self.topMap.setCenter(self.event!.coordinate, animated: true)
                 self.profileImage.layer.cornerRadius = 0.5*self.profileImage.frame.width
                 self.profileImage.layer.masksToBounds = true
-               
+                
                 // set orgainzer pic
                 let url = URL(string: user.photoURLString)
                 self.profileImage.af_setImage(withURL: url!)
@@ -53,25 +52,37 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 // set organizerlabel as well
                 self.eventTitle.text = self.event!.title
                 self.eventDescription.text = self.event!.about
+                
+                // Zoom map to event location
+                let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
+                self.topMap.setRegion(region, animated: true)
+                
+                // Populate the guest list
+                for guest in self.event!.guestlist {
+                    print("hello?")
+                    print(guest)
+                    //guests.append(guest)
+                }
+                
             }
         }
     }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.guests.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! userTableViewCell
-        let user = users[indexPath.row]
-        cell.label.text = user // TODO: FIX to user.name, get AppUser
-        if usersDic[user]!{
-        
-        }
-        else{
-        
-        }
+        //let user = users[indexPath.row]
+       // cell.label.text = user // TODO: FIX to user.name, get AppUser
+//        if usersDic[user]!{
+//            
+//        }
+//        else{
+//            
+//        }
         return cell
-        }
-        
+    }
+    
 }

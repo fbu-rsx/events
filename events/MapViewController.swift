@@ -320,8 +320,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 }
 
 extension MapViewController: CreateEventMasterDelegate {
-    func createNewEvent(_ dict: [String: Any]) {
-        guard let radius = dict[EventKey.radius] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
+    func createNewEvent(_ dict: [String: Any]) -> Event {
         print("CREATING NEW EVENT")
         let event = AppUser.current.createEvent(dict)
         add(event: event)
@@ -329,6 +328,7 @@ extension MapViewController: CreateEventMasterDelegate {
         saveAllEvents()
         print("new event added")
         CreateEventMaster.shared.clear()
+        return event
     }
 }
 
