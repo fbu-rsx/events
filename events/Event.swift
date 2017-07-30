@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import MapKit
 import UIKit
+import GoogleMaps
 
 enum InviteStatus: Int {
     case noResponse = 0
@@ -33,7 +33,7 @@ struct EventKey {
 }
 
 
-class Event: NSObject, NSCoding, MKAnnotation {
+class Event: GMSMarker {
     
     var eventid: String
     var eventDictionary: [String: Any]
@@ -56,18 +56,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
         }
     }
     
-    
-    //for Mapview anotations
-    var title: String? {
-        return eventname
-    }
-    var subtitle: String? {
-        if about.isEmpty {
-            return "No description."
-        }
-        return about
-    }
-
+    var circle: GMSCircle?
     
     
     /* Example Dictionary:
@@ -138,18 +127,6 @@ class Event: NSObject, NSCoding, MKAnnotation {
             }
         }
         return false
-    }
-    
-    
-    
-    // MARK: NSCoding
-    required convenience init?(coder decoder: NSCoder) {
-        let dict = decoder.decodeObject(forKey: "eventDictionary") as! [String: Any]
-        self.init(dictionary: dict)
-    }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(self.eventDictionary, forKey: "eventDictionary")
     }
     
     func uploadImage(_ image: UIImage) {
