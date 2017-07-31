@@ -28,6 +28,8 @@ target 'events' do
   pod 'FBSDKLoginKit'
   pod 'SJFluidSegmentedControl', '~> 1.0'
   pod 'XLPagerTabStrip'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
 
 
   target 'eventsTests' do
