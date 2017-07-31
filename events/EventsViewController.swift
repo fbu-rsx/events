@@ -27,41 +27,45 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.separatorStyle = .none
         //cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
         cellHeights = (0..<6).map { _ in C.CellHeight.close }
-        //tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.frame.size.width = view.frame.size.width
-
         // Load AppUser's events
         events = AppUser.current.events
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
         // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
     }
 
+    func refresh(_ notification: Notification) {
+        let event = notification.object as! Event
+        self.events.append(event)
+        tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func deleteEvent(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        let index = self.events.index(of: event)!
+        self.events.remove(at: index)
+        tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // return cell to present associated with user's events 
-        // which data to display is dependent on selected index of segmented control
+        // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         cell.event = events[indexPath.row]
-        // see which data to display
         cell.delegate = self
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // return number of events associated with user in current section
-        // number will be dependent on selected index of segmented control
-        //return events.count
-        return self.events.count
+        return events.count
     }
     
     fileprivate struct C {
@@ -97,13 +101,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var duration = 0.0
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
-            //cell.selectedAnimation(true, animated: true, completion: nil)
             cell.unfold(true, animated: true, completion: nil)
             duration = 0.5
             tableView.isScrollEnabled = false
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
-            //cell.selectedAnimation(false, animated: true, completion: nil)
             cell.unfold(false, animated: true, completion: nil)
             duration = 1.1
             tableView.isScrollEnabled = true
@@ -113,6 +115,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.beginUpdates()
             tableView.endUpdates()
         }, completion: nil)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -124,17 +127,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             } else {
                 //cell.selectedAnimation(true, animated: false, completion: nil)
                 cell.unfold(true, animated: false, completion: nil)
+                
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toDetail"{
-            let destination = segue.destination as! DetailedEventViewController
-            destination.event = sender as? Event
-        }
-    }
-    
-
     
 }

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+>>>>>>> 8abd7f26f8b92196d87c286ff244244aa1b069e9
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="333" height="450"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="UZ7-F5-Yue">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UZ7-F5-Yue">
                     <rect key="frame" x="0.0" y="0.0" width="333" height="120"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="Sno-OO-q07"/>
@@ -32,13 +36,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZyC-OX-9ok">
-                    <rect key="frame" x="16" y="124" width="49" height="35"/>
+                    <rect key="frame" x="16" y="124" width="54" height="35"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="49" id="dHk-18-XEo"/>
                         <constraint firstAttribute="height" constant="35" id="vuZ-Mc-Hpm"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                    <state key="normal" title="Going"/>
+                    <state key="normal" title="Accept"/>
                     <connections>
                         <action selector="goingTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="cKV-Tb-028"/>
                     </connections>
@@ -60,14 +63,18 @@
                         <constraint firstAttribute="height" constant="70" id="pXf-jZ-ilG"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcE-xW-sSM">
-                    <rect key="frame" x="234" y="124" width="83" height="35"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps-and-flags" translatesAutoresizingMaskIntoConstraints="NO" id="xWD-Vj-fXl">
+                    <rect key="frame" x="147" y="22" width="35" height="38"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcE-xW-sSM">
+                    <rect key="frame" x="250" y="124" width="83" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="CnY-C4-dLg"/>
                         <constraint firstAttribute="width" constant="83" id="eVz-fP-czO"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                    <state key="normal" title="Not Going"/>
+                    <state key="normal" title="Decline"/>
                     <connections>
                         <action selector="notGoingTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="sgb-lm-7gb"/>
                     </connections>
@@ -103,6 +110,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="acceptButton" destination="ZyC-OX-9ok" id="sAi-QN-Qih"/>
                 <outlet property="eventDescription" destination="iNj-Cf-R9V" id="Tg0-EK-HTp"/>
                 <outlet property="eventTitle" destination="prb-to-Tzt" id="BpC-gS-DsW"/>
                 <outlet property="profileImage" destination="pEZ-TD-N4u" id="to7-Ev-eAC"/>
@@ -134,4 +142,7 @@
             <point key="canvasLocation" x="64.5" y="335"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="maps-and-flags" width="64" height="64"/>
+    </resources>
 </document>

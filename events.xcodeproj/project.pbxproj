@@ -14,13 +14,13 @@
 		09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC61F17DE7600E847CC /* EventsViewController.swift */; };
 		09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */; };
 		09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */; };
-		09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */; };
-		09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */; };
 		09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */; };
 		09B321521F2BB55F0044F05C /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B321501F2BB55F0044F05C /* SongTableViewCell.swift */; };
 		09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09B321511F2BB55F0044F05C /* SongTableViewCell.xib */; };
 		09B321551F2BB79B0044F05C /* songSearchResultsOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */; };
 		09B321571F2BB7DA0044F05C /* songOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B321561F2BB7DA0044F05C /* songOverlayView.swift */; };
+		09C808A51F2BFD95009AA56F /* imageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */; };
+		09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */; };
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
 		09F788491F2668A700A311F0 /* detailView0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788481F2668A700A311F0 /* detailView0.xib */; };
@@ -44,7 +44,6 @@
 		4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */; };
 		4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627D1F143DC400BBDC71 /* MapViewController.swift */; };
 		4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB627F1F143DC400BBDC71 /* Main.storyboard */; };
-		4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62821F143DC400BBDC71 /* Assets.xcassets */; };
 		4FCB62911F143DC400BBDC71 /* eventsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB62901F143DC400BBDC71 /* eventsTests.swift */; };
 		4FCB629C1F143DC400BBDC71 /* eventsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB629B1F143DC400BBDC71 /* eventsUITests.swift */; };
 		4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */; };
@@ -54,6 +53,7 @@
 		4FFC02F91F26AF1D00B55206 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC02F71F26AF1D00B55206 /* SignInViewController.swift */; };
 		4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */; };
 		4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC02FB1F27BDCC00B55206 /* FacebookAPIManager.swift */; };
+		7C021E231F2BF0A300029CCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62821F143DC400BBDC71 /* Assets.xcassets */; };
 		7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */; };
 		7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */; };
 		7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */; };
@@ -62,7 +62,6 @@
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
 		7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5456301F2020D60027009C /* LocationSearchTable.swift */; };
-		7CAAA0DF1F27B405005C1A76 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */; };
 		7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */; };
 		7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E41F281304005C1A76 /* WalletViewController.swift */; };
 		7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E51F281304005C1A76 /* WalletViewController.xib */; };
@@ -100,13 +99,13 @@
 		09A15CC61F17DE7600E847CC /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
-		09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedEventViewController.swift; sourceTree = "<group>"; };
-		09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
 		09B321501F2BB55F0044F05C /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
-		09B321511F2BB55F0044F05C /* SongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
+		09B321511F2BB55F0044F05C /* SongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SongTableViewCell.xib; path = events/SongTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = songSearchResultsOverlay.xib; sourceTree = "<group>"; };
 		09B321561F2BB7DA0044F05C /* songOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = songOverlayView.swift; sourceTree = "<group>"; };
+		09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = imageCollectionViewCell.xib; sourceTree = "<group>"; };
+		09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
 		09F788481F2668A700A311F0 /* detailView0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = detailView0.xib; path = events/detailView0.xib; sourceTree = SOURCE_ROOT; };
@@ -156,7 +155,6 @@
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7C5456301F2020D60027009C /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
-		7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
 		7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E41F281304005C1A76 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E51F281304005C1A76 /* WalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletViewController.xib; sourceTree = "<group>"; };
@@ -200,22 +198,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09A15CBA1F15485900E847CC /* OAuthSwift */ = {
-			isa = PBXGroup;
-			children = (
-				09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */,
-			);
-			name = OAuthSwift;
-			sourceTree = "<group>";
-		};
 		09A15CBF1F1568E300E847CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4F87D3741F168EA0007D4E94 /* AppUser.swift */,
-				4F87D3761F168EB5007D4E94 /* Event.swift */,
-				09A15CC01F1568F300E847CC /* Transaction.swift */,
 				4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */,
+				4F87D3761F168EB5007D4E94 /* Event.swift */,
 				4F4959801F290E31006B90EE /* FacebookFriend.swift */,
+				09A15CC01F1568F300E847CC /* Transaction.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -227,6 +217,29 @@
 				09A15CC51F15A2B600E847CC /* eventsKeyCertBundle.p12 */,
 			);
 			name = certs;
+			sourceTree = "<group>";
+		};
+		09EB68D81F2F89CE00967BA8 /* EventsTableViewPage */ = {
+			isa = PBXGroup;
+			children = (
+				09F7884A1F26694A00A311F0 /* detailView0.swift */,
+				09F788481F2668A700A311F0 /* detailView0.xib */,
+				09F7884E1F26783100A311F0 /* detailView1.swift */,
+				09F7884C1F26781400A311F0 /* detailView1.xib */,
+				09F788521F269F0900A311F0 /* detailView2.swift */,
+				09F788501F269EE800A311F0 /* detailView2.xib */,
+				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
+				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
+				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
+				09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */,
+				09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */,
+				09B321561F2BB7DA0044F05C /* songOverlayView.swift */,
+				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
+				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
+				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
+				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
+			);
+			name = EventsTableViewPage;
 			sourceTree = "<group>";
 		};
 		20D303D004903CD73037EFE1 /* Pods */ = {
@@ -253,18 +266,16 @@
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */,
-				7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */,
-				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
-				7CAAA0E51F281304005C1A76 /* WalletViewController.xib */,
-				7C5456301F2020D60027009C /* LocationSearchTable.swift */,
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
-				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
-				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
-				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
-				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
+				7C5456301F2020D60027009C /* LocationSearchTable.swift */,
 				7CBC19241F29511E002C65F9 /* MyUploadsViewController.swift */,
 				7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */,
+				7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */,
+				7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */,
+				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
+				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
+				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
+				7CAAA0E51F281304005C1A76 /* WalletViewController.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -273,12 +284,10 @@
 			isa = PBXGroup;
 			children = (
 				7C10FCA21F1D7E15009EE12F /* CreateEvents */,
-				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
-				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
-				09A15CCC1F18136F00E847CC /* DetailedEventViewController.swift */,
-				09D42D441F1FCFE900438801 /* MediaViewController.swift */,
 				09D42D461F1FD62300438801 /* DetailPictureViewController.swift */,
+				4FCB627D1F143DC400BBDC71 /* MapViewController.swift */,
 				4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */,
+				09D42D441F1FCFE900438801 /* MediaViewController.swift */,
 				7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
@@ -287,12 +296,12 @@
 		4F9887261F144A7B00759564 /* APIManagers */ = {
 			isa = PBXGroup;
 			children = (
-				7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */,
-				4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */,
-				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
-				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
-				4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */,
 				4FFC02FB1F27BDCC00B55206 /* FacebookAPIManager.swift */,
+				4F87D3721F168E6F007D4E94 /* FirebaseAuthManager.swift */,
+				4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */,
+				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
+				09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */,
+				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
 			);
 			name = APIManagers;
 			sourceTree = "<group>";
@@ -323,34 +332,22 @@
 			isa = PBXGroup;
 			children = (
 				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
-				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
 				4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */,
-				09F788481F2668A700A311F0 /* detailView0.xib */,
-				09F7884C1F26781400A311F0 /* detailView1.xib */,
-				09F788501F269EE800A311F0 /* detailView2.xib */,
 				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
 				4F87D3781F168F59007D4E94 /* Views */,
-				09A15CC41F15A28700E847CC /* certs */,
+				09EB68D81F2F89CE00967BA8 /* EventsTableViewPage */,
 				09A15CBF1F1568E300E847CC /* Models */,
-				09A15CBA1F15485900E847CC /* OAuthSwift */,
 				4F9887261F144A7B00759564 /* APIManagers */,
+				09A15CC41F15A28700E847CC /* certs */,
 				4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */,
 				7C4BA22A1F18163B004739EE /* Utilities.swift */,
 				4FCB62821F143DC400BBDC71 /* Assets.xcassets */,
 				4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */,
 				4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */,
 				4FCB62871F143DC400BBDC71 /* Info.plist */,
-				09F7884A1F26694A00A311F0 /* detailView0.swift */,
-				09F7884E1F26783100A311F0 /* detailView1.swift */,
-				09F788521F269F0900A311F0 /* detailView2.swift */,
-				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
 				4FD2FE8F1F2ADBDE00E565B9 /* apple.gpx */,
 				4FD2FE911F2ADBEE00E565B9 /* google.gpx */,
-				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
-				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
-				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
-				09B321561F2BB7DA0044F05C /* songOverlayView.swift */,
 			);
 			path = events;
 			sourceTree = SOURCE_ROOT;
@@ -376,11 +373,11 @@
 		7C10FCA21F1D7E15009EE12F /* CreateEvents */ = {
 			isa = PBXGroup;
 			children = (
-				4F69AB331F22734D0098B191 /* CreateEventPageController.swift */,
-				7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */,
-				4F010D741F16EE7A00E8EA47 /* CreateLocationViewController.swift */,
-				7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */,
 				7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */,
+				4F69AB331F22734D0098B191 /* CreateEventPageController.swift */,
+				7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */,
+				4F010D741F16EE7A00E8EA47 /* CreateLocationViewController.swift */,
+				7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */,
 				4F69AB351F22987A0098B191 /* EventContainerViewController.swift */,
 			);
 			name = CreateEvents;
@@ -473,7 +470,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 736R8PG8E6;
+						DevelopmentTeam = S5MHKF47DJ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -526,13 +523,14 @@
 				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
-				4FCB62831F143DC400BBDC71 /* Assets.xcassets in Resources */,
 				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
+				7C021E231F2BF0A300029CCB /* Assets.xcassets in Resources */,
 				09B321551F2BB79B0044F05C /* songSearchResultsOverlay.xib in Resources */,
 				4FD2FE901F2ADBDE00E565B9 /* apple.gpx in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
+				09C808A51F2BFD95009AA56F /* imageCollectionViewCell.xib in Resources */,
 				09F788511F269EE800A311F0 /* detailView2.xib in Resources */,
 				09F7884D1F26781400A311F0 /* detailView1.xib in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
@@ -713,12 +711,10 @@
 				09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */,
 				4F010D751F16EE7A00E8EA47 /* CreateLocationViewController.swift in Sources */,
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
-				09A15CCD1F18136F00E847CC /* DetailedEventViewController.swift in Sources */,
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
 				7CAAA0EF1F281A94005C1A76 /* PaymentTableViewCell.swift in Sources */,
 				09F7884F1F26783100A311F0 /* detailView1.swift in Sources */,
 				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
-				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
 				4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
@@ -733,10 +729,10 @@
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
+				09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */,
 				4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
-				7CAAA0DF1F27B405005C1A76 /* SpotifyAPIManager.swift in Sources */,
 				09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */,
 				4FFC02F91F26AF1D00B55206 /* SignInViewController.swift in Sources */,
 				4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */,
@@ -889,13 +885,13 @@
 			baseConfigurationReference = CCAC109E9CF8667FBF9C91A2 /* Pods-events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen2.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -906,14 +902,14 @@
 			baseConfigurationReference = C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen2.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

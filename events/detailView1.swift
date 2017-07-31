@@ -33,23 +33,46 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
     }
     
+    override func awakeFromNib() {
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        let nib = UINib(nibName: "imageCollectionViewCell", bundle: nil)
+        collectionView.register(nib, forCellWithReuseIdentifier: "imageCell")
+        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: self.frame.width/3, height: self.frame.width/3)
+        layout.sectionInset.left = 0
+        layout.sectionInset.right = 0
+        layout.sectionInset.bottom = 0
+        layout.sectionInset.top = 0
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        collectionView.collectionViewLayout = layout
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     var photos: [UIImage] = []
-    /*
+    
     var event: Event?{
         didSet{
-            for imageID in event!.photos.keys{
-                FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
-                    self.photos.append(image)
-                })
-            }
+            loadImages()
         }
-    }*/
+    }
+    
+    func loadImages(){
+        for imageID in event!.photos.keys{
+            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+                if self.photos.contains(image) == false {
+                    self.photos.append(image)
+                }
+                self.collectionView.reloadData()
+            })
+        }
+        //self.collectionView.reloadData()
+    }
     
     @IBAction func upload(_ sender: UIButton) {
         delegate?.presenter(imagePicker: picker)
-       
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
@@ -57,8 +80,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! ImageCollectionViewCell
-        cell.imageView.image = photos[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! imageCollectionViewCell
+        cell.image.image = photos[indexPath.row]
         return cell
     }
     
@@ -68,12 +91,12 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     }
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
-        //for image in stride(from: 0, to: images.count, by: 1){
-            //event?.uploadImage(images[image])
-        //}
-        print("got here")
-        imagePicker.dismiss(animated: true, completion: nil)
+        for image in stride(from: 0, to: images.count, by: 1){
+            event?.uploadImage(images[image])
+            photos.insert(images[image], at: 0)
+        }
         collectionView.reloadData()
+        imagePicker.dismiss(animated: true, completion: nil)
     }
     
     // required function

@@ -59,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         center.removeAllDeliveredNotifications()
         center.removeAllPendingNotificationRequests()
         //OAuthSwiftManager.shared.logout()
+        /*OAuthSwiftManager.shared.createPlaylist(name: "test") { (st) in
+            print(st)
+        }*/
         return true
     }
     

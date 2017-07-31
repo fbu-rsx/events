@@ -19,6 +19,7 @@ enum InviteStatus: Int {
 struct EventKey {
     static let id = "eventid"
     static let spotifyID = "spotifyID"
+    static let playlistCreatorID = "playlistCreatorID"
     static let name = "eventname"
     static let cost = "totalcost"
     static let date = "datetime"
@@ -50,6 +51,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var spotifyID: String?
+    var playlistCreatorID: String?
     var myStatus: InviteStatus {
         get {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
@@ -90,12 +92,14 @@ class Event: NSObject, NSCoding, MKAnnotation {
         "photo2": true
     }
     */
+    
     init(dictionary: [String: Any]) {
         self.eventid = dictionary[EventKey.id] as! String
         self.eventname = dictionary[EventKey.name] as! String
-        self.totalcost = dictionary[EventKey.cost] as? Double
+        if let cost = dictionary[EventKey.cost] {
+            self.totalcost = cost as? Double
+        }
         let datetime = dictionary[EventKey.date] as! String
-        
         let dateConverter = DateFormatter()
         dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
         self.date = dateConverter.date(from: datetime)!
@@ -107,11 +111,15 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
         self.about = dictionary[EventKey.about] as! String
         self.spotifyID = dictionary[EventKey.spotifyID] as? String
+        self.playlistCreatorID = dictionary[EventKey.playlistCreatorID] as? String
         self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
+        super.init()
+        if self.organizerID == AppUser.current.uid{
+            FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
+        }
     }
-    
     
     func getDateStringOnly() -> String {
         let dateFormatterPrint = DateFormatter()

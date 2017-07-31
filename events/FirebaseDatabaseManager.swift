@@ -34,15 +34,7 @@ class FirebaseDatabaseManager {
     // Add user only if they do not already exist
     func possiblyAddUser(userDict: [String: String]) {
         let uid = userDict[UserKey.id]!
-        let name = userDict[UserKey.name]!
-        self.ref.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            print("possiblyAddUser snapshot started")
-            if !snapshot.exists() {
-                self.ref.child("users/\(uid)").updateChildValues(userDict)
-                print("new user \(name) added")
-            }
-            print(snapshot)
-        }
+        self.ref.child("users/\(uid)").updateChildValues(userDict)
     }
     
     // completion function provides dictionary of events
@@ -83,6 +75,20 @@ class FirebaseDatabaseManager {
                 }
             })
         }
+    }
+    
+    func addQueuedSongsListener(event: Event) {
+        self.ref.child("events/\(event.eventid)/queued_songs").observe(.childAdded) { (snapshot: DataSnapshot) in
+            print(snapshot)
+            OAuthSwiftManager.shared.addSongToPlaylist(userID: event.playlistCreatorID!, playlistID: event.spotifyID!, song: snapshot.key)
+            let update = ["events/\(event.eventid)/queued_songs/\(snapshot.key)": NSNull()]
+            self.ref.updateChildValues(update)
+        }
+    }
+    
+    func addQueuedSong(event: Event, songID: String){
+        let update = ["events/\(event.eventid)/queued_songs/\(songID)": true]
+        self.ref.updateChildValues(update)
     }
     
     func getSingleEvent(withID id: String, completion: @escaping ([String: Any]) -> Void) {
@@ -214,6 +220,7 @@ class FirebaseDatabaseManager {
         self.ref.child("users/\(id)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.exists() {
                 let dict = snapshot.value as! [String: Any]
+                print(dict)
                 completion(AppUser(dictionary: dict))
             }
         }

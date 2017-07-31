@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol tapped {
+    func wasTapped(songIndex: Int)
+}
+
 class SongTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
+    
+    var index: Int?
+    var delegate: tapped?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,5 +29,10 @@ class SongTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    /*
+    @IBAction func tapped(_ sender: UITapGestureRecognizer) {
+        delegate?.wasTapped(songIndex: index!)
+    }*/
     
 }

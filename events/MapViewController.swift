@@ -18,6 +18,9 @@ struct Colors {
     static let lightBlue = UIColor(hexString: "#B6E7EF")
     static let green = UIColor(hexString: "#4CB6BE")
     static let orange = UIColor(hexString: "#FF9D00")
+    static let greenAccepted =  UIColor(hexString: "4ADB75")
+    static let pendingBlue = UIColor(hexString: "#76E5FC")
+    static let redDeclined = UIColor(hexString: "#F46E79")
 }
 
 struct PreferenceKeys {
@@ -36,6 +39,16 @@ protocol LoadEventsDelegate: class {
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    
+    let spotifyAlert = UIAlertController(title: "Spotify Login", message:  "Please login to Spotify", preferredStyle: .alert)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+        // ...
+    }
+    
+    let OKAction = UIAlertAction(title: "OK", style: .default) { action in
+        // ...
+        OAuthSwiftManager.shared.spotifyLogin(success: {}, failure: {_ in })
+    }
     
     static var mapAnnotations: [MKAnnotationView] = []
     
@@ -97,6 +110,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
         //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
         //        self.mapView.setRegion(region, animated: true)
+        
+        spotifyAlert.addAction(cancelAction)
+        spotifyAlert.addAction(OKAction)
+        //self.present(spotifyAlert, animated: true)
+        self.present(spotifyAlert, animated: true)
+        /*
+        guard UserDefaults.standard.value(forKey: "spotify-user") != nil else{
+            self.present(spotifyAlert, animated: true)
+            return
+        }*/
     }
     
     func inviteAdded(_ notification: NSNotification) {
@@ -299,8 +322,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 }
 
 extension MapViewController: CreateEventMasterDelegate {
-    func createNewEvent(_ dict: [String: Any]) {
-        guard let radius = dict[EventKey.radius] as? Double, radius < locationManager.maximumRegionMonitoringDistance else { return }
+    func createNewEvent(_ dict: [String: Any]) -> Event {
         print("CREATING NEW EVENT")
         let event = AppUser.current.createEvent(dict)
         add(event: event)
@@ -308,6 +330,7 @@ extension MapViewController: CreateEventMasterDelegate {
         saveAllEvents()
         print("new event added")
         CreateEventMaster.shared.clear()
+        return event
     }
 }
 

@@ -113,9 +113,10 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
-    func createPlaylist(name: String, completion: @escaping ()->()) -> String? {
+    func createPlaylist(name: String, completion: @escaping (_ id: String)->()){
         let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
-        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists")
+        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID!)/playlists")
+        //print(url)
         let Parameters: [String: Any] = ["name": name, "public": false, "collaborative": true]
         let header = ["Content-Type": "application/json"]
         var final: String?
@@ -126,35 +127,60 @@ class OAuthSwiftManager: SessionManager {
             }else{
                 print("Error: " + response.result.error!.localizedDescription)
             }
-            completion()
+            completion(final!)
         }
-        return final
+        
     }
     
-    func getTracksForPlaylist(playlistID: String){
-        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
-        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists/\(playlistID)/tracks")
+    func getTracksForPlaylist(userID: String, playlistID: String, completion: @escaping (_ tracks: [String]) -> ()){
+        //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
+        let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks")
         // can later specify parameters to only return specific parts of JSON
         request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            // handle the response of the request ??? Probably put them in a list and then return them as result of function??
+            if response.result.isSuccess {
+                let result = response.result.value as! [String: Any]
+                var names: [String] = []
+                let tracks = result["items"] as! [[String: Any]]
+                //print(tracks)
+                
+                for track in tracks{
+                    let inner = track["track"] as! [String: Any]
+                    names.append(inner["name"] as! String)
+                }
+                print(names)
+                completion(names)
+            }
+            else{
+                print("Error")
+            }
         }
     }
     
-    func addSongToPlaylist(playlistID: String, songsArray: [String]){
-        let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
-        let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID)/playlists/\(playlistID)/tracks")
+    func addSongToPlaylist(userID: String, playlistID: String, song: String){
+        //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
+        let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks?=uris=spotify%3Atrack%3A\(song)")
+        print(url)
         let header = ["Content-Type": "application/json"]
         // uris format: uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh, spotify:track:1301WleyT98MSxVHPZCA6M
-        let Parameters: [String: Any] = ["uris": ""]
-        request(url!, method: .post, parameters: Parameters, encoding: JSONEncoding.default, headers: header).validate()
+        request(url!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().responseJSON { (response) in
+            print(response)
+        }
     }
     
-    func search(songName: String){
-        let name = songName.replacingOccurrences(of: " ", with: "+")
-        var Parameters: [String: Any] = ["q": name, "type": "track", ]
-        let url = URL(string: "https://api.spotify.com/v1/search")
-        request(url!, method: .get, parameters: Parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            print(response)
+    func search(songName: String, completion: @escaping (_ songs: [String], _ uris: [String])->()){
+        let name = songName.replacingOccurrences(of: " ", with: "%20")
+        let url = URL(string: "https://api.spotify.com/v1/search?q=\(name)&type=track")
+        request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            let result = response.result.value as! [String: Any]
+            let tracks = result["tracks"] as! [String: Any]
+            let items = tracks["items"] as! [[String: Any]]
+            var songs: [String] = []
+            var uris: [String] = []
+            for item in items{
+                songs.append(item["name"] as! String)
+                uris.append(item["uri"] as! String)
+            }
+            completion(songs, uris)
         }
     }
     

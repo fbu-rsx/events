@@ -36,7 +36,7 @@
                     <rect key="frame" x="8" y="52" width="317" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                     <connections>
                         <action selector="editingChanged:" destination="iN0-l3-epB" eventType="editingChanged" id="Ewt-xO-Vxh"/>
                         <action selector="valueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="fDv-w8-Utu"/>
@@ -44,6 +44,7 @@
                 </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="2tv-Vm-taM"/>
                 <constraint firstItem="px7-Ce-Z7a" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="4" id="5HC-gr-nZd"/>

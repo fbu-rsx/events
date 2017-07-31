@@ -12,13 +12,14 @@ import FoldingCell
 
 class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
-    
+    @IBOutlet weak var sideBar: UIView!
+    @IBOutlet weak var sideBar1: UIView!
     @IBOutlet weak var oneCell: RotatedView!
     @IBOutlet weak var view1topConstraint: NSLayoutConstraint!
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
     @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
-
+    
     
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
@@ -45,31 +46,24 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 if index == 0{
                     let nib = UINib(nibName: "detailView0", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView0
-                    //subView.event = event
+                    subView.event = event
                     subView.frame = frame
-                    //print(subView.frame.width)
                     self.scrollView.addSubview(subView)
-                    //print(self.scrollView.frame.width)
                 }
                 else if index == 1{
                     let nib = UINib(nibName: "detailView1", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView1
-                    //subView.event = event
+                    subView.event = event
                     subView.frame = frame
-                    
                     subView.delegate = delegate
-                    //print(subView.frame.width)
                     self.scrollView.addSubview(subView)
-                    //print(self.scrollView.frame.width)
                 }
                 else{
                     let nib = UINib(nibName: "detailView2", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView2
-                    //subView.event = event
+                    subView.event = event
                     subView.frame = frame
-                    //print(subView.frame.width)
                     self.scrollView.addSubview(subView)
-                    //print(self.scrollView.frame.width)
                 }
             }
             
@@ -80,22 +74,6 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         }
     }
     
-    /*
-     var eventid: String
-     var eventDictionary: [String: Any]
-     
-     //all below are required in the dictionary user to initialize an event
-     var eventname: String
-     var totalcost: Float? //optional because may just be a free event
-     var date: Date
-     var coordinate: CLLocationCoordinate2D
-     var radius: Double = 100
-     var organizerID: String //uid of the organizer
-     var guestlist: [String: Bool] // true if guest attended
-     var photos: [String: Bool]
-     var about: String //description of event, the description variable as unfortunately taken by Objective C
-     */
- 
     var event: Event?{
         didSet{
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
@@ -109,12 +87,12 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
                 // Set total cost
-//                print(self.event!.totalcost!)
+
                 if let total = self.event!.totalcost {
                     let cost = total/Double(self.event!.guestlist.count + 1)
                     self.closedUserCost.text = String(format: "$%.2f", cost)
                 } else{
-                    self.closedUserCost.text = "N/A"
+                    self.closedUserCost.text = "Free"
                 }
                 
                 // Set number of guests invited
@@ -129,23 +107,49 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 
                 // Set the cell color depending on invite status
                 var color: UIColor!
+                var sideBarColor: UIColor!
+                var backViewColor: UIColor!
+                // var backViewColor: UIColor!
                 switch self.event!.myStatus {
                 case .accepted:
-                    color = Colors.green
+                    color = Colors.greenAccepted
+                    sideBarColor = UIColor(hexString: "#8CF7AC")
+                    backViewColor = UIColor(hexString: "#8CF7AC")
+                    
+                    // if accepted, hide "accept" and "decline" buttons
+                    self.declineButton.isHidden = true
+                    self.acceptButton.setTitle("Accepted", for: .normal)
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#F46E79")
+                    self.acceptButton.isEnabled = false
+                    self.acceptButton.sizeToFit()
+                    
                 case .declined:
-                    color = Colors.coral
+                    color = Colors.redDeclined
+                    backViewColor = UIColor(hexString: "#F4ABB1")
+                    sideBarColor = UIColor(hexString: "#F4ABB1")
+                    
+                    // if declined, hide "accept" and "decline" buttons
+                    self.declineButton.isHidden = true
+                    self.acceptButton.setTitle("Declined", for: .normal)
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#F46E79")
+                    self.acceptButton.isEnabled = false
+                    self.acceptButton.sizeToFit()
+                    
                 default:
-                    color = Colors.orange
+                    color = Colors.pendingBlue
+                    sideBarColor = UIColor(hexString: "#ABEEFC")
+                    backViewColor = UIColor(hexString: "#ABEEFC")
                 }
+                self.sideBar.backgroundColor = sideBarColor
+                self.sideBar1.backgroundColor = sideBarColor
                 self.oneCell.backgroundColor = color
-            }
-
+                self.backViewColor = backViewColor
             }
         }
+    }
     
     override func awakeFromNib() {
         // Initialization code
-        backViewColor = #colorLiteral(red: 0, green: 1, blue: 0.8928422928, alpha: 1)
         foregroundView = view1
         foregroundViewTop = view1topConstraint
         containerView = view2
@@ -158,6 +162,10 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         super.awakeFromNib()
         //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
         
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        declineButton.layer.cornerRadius = 5
+        declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
     
     func configurePageControl() {
@@ -189,11 +197,11 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         return durations[itemIndex]
     }
     
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
