@@ -31,8 +31,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     
     var guests: [String] = []
-    //    var usersDic: [String: Bool] = [:]
-    
     
     @IBAction func goingTap(_ sender: UIButton) {
     }
@@ -88,7 +86,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 
                 self.guests = Array(self.event!.guestlist.keys)
                 self.tableView.reloadData()
-                
                 // Setting button colors depending on myStatus
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
@@ -96,6 +93,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in (self.event?.guestlist.keys)!{
                     self.guests.append(guest)
                 }
+
                 
                 switch self.event!.myStatus {
                 case .accepted:
