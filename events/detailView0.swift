@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,7 +22,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
-    @IBOutlet weak var topMap: MKMapView!
+    @IBOutlet weak var topMap: GMSMapView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     
@@ -38,11 +38,24 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    var event: Event?{
-        didSet{
+    var event: Event? {
+        didSet {
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
+                Utilities.setupGoogleMap(self.topMap)
+                let camera = GMSCameraPosition.camera(withLatitude: self.event!.coordinate.latitude,
+                                                      longitude: self.event!.coordinate.longitude,
+                                                      zoom: Utilities.zoomLevel)
+                self.topMap.camera = camera
+                self.topMap.isUserInteractionEnabled = false
                 
-                self.topMap.setCenter(self.event!.coordinate, animated: true)
+                let marker = GMSMarker()
+                marker.position = self.event!.coordinate
+                marker.map = self.topMap
+                marker.isDraggable = false
+                
+                self.topMap.isHidden = false
+                
+                self.topMap.isHidden = false
                 self.profileImage.layer.cornerRadius = 0.5*self.profileImage.frame.width
                 self.profileImage.layer.masksToBounds = true
                 
@@ -53,10 +66,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 // set organizerlabel as well
                 self.eventTitle.text = self.event!.title
                 self.eventDescription.text = self.event!.about
-                
-                // Zoom map to event location
-                let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
-                self.topMap.setRegion(region, animated: true)
                 
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
