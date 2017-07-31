@@ -46,7 +46,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         // Initialization code
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        let bundle = Bundle(path: "/Users/xiuchen/Desktop/events/events/GuestsTableViewCell.swift")
+        let bundle = Bundle(path: "events/GuestsTableViewCell.swift")
         let nib1 = UINib(nibName: "GuestsTableViewCell", bundle: bundle)
         tableView.register(nib1, forCellReuseIdentifier: "userCell")
         
@@ -86,10 +86,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.eventTitle.text = self.event!.title
                 self.eventDescription.text = self.event!.about
                 
-                // Zoom map to event location
-                let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
-                self.topMap.setRegion(region, animated: true)
-                
                 self.guests = Array(self.event!.guestlist.keys)
                 self.tableView.reloadData()
                 
@@ -97,7 +93,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
                 }
-                self.guests = self.event!.guestlist
+                for guest in (self.event?.guestlist.keys)!{
+                    self.guests.append(guest)
+                }
                 
                 switch self.event!.myStatus {
                 case .accepted:

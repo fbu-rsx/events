@@ -14,7 +14,6 @@
 		09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC61F17DE7600E847CC /* EventsViewController.swift */; };
 		09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */; };
 		09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */; };
-		09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */; };
 		09B321521F2BB55F0044F05C /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B321501F2BB55F0044F05C /* SongTableViewCell.swift */; };
 		09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09B321511F2BB55F0044F05C /* SongTableViewCell.xib */; };
 		09B321551F2BB79B0044F05C /* songSearchResultsOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */; };
@@ -66,7 +65,6 @@
 		7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4745381F2930E0009CA46E /* SettingsViewController.swift */; };
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
-		7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5456301F2020D60027009C /* LocationSearchTable.swift */; };
 		7C9A6B7F1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */; };
 		7C9A6B801F2FBC4F00A70FD3 /* GuestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */; };
 		7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */; };
@@ -106,7 +104,6 @@
 		09A15CC61F17DE7600E847CC /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
-		09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userTableViewCell.swift; sourceTree = "<group>"; };
 		09B321501F2BB55F0044F05C /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		09B321511F2BB55F0044F05C /* SongTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SongTableViewCell.xib; path = events/SongTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = songSearchResultsOverlay.xib; sourceTree = "<group>"; };
@@ -166,7 +163,6 @@
 		7C4745381F2930E0009CA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		7C5456301F2020D60027009C /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestsTableViewCell.swift; sourceTree = "<group>"; };
 		7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuestsTableViewCell.xib; sourceTree = "<group>"; };
 		7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -247,7 +243,6 @@
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */,
 				09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */,
-				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
 				7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */,
 				7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */,
 			);
@@ -753,7 +748,6 @@
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
-				09B3214D1F28FCAC0044F05C /* userTableViewCell.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
 				09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */,
 				4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */,
