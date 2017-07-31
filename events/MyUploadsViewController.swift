@@ -20,6 +20,9 @@ class MyUploadsViewController: UIViewController, IndicatorInfoProvider, UICollec
         }
     }
     
+    override func viewDidLoad() {
+    }
+    
     override func awakeFromNib() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -36,13 +39,22 @@ class MyUploadsViewController: UIViewController, IndicatorInfoProvider, UICollec
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         collectionView.collectionViewLayout = layout
+        loadImages()
+        print("pls print photos")
+        print(AppUser.current.photos)
+        
     }
     
     func loadImages(){
+        
+        
+        
+        
         for imageID in event!.photos.keys{
             FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
                 if self.photos.contains(image) == false {
                     self.photos.append(image)
+                    print("here")
                 }
                 self.collectionView.reloadData()
             })
