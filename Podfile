@@ -30,7 +30,6 @@ target 'events' do
   pod 'XLPagerTabStrip'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'Mapbox-iOS-SDK', '~> 3.6'
 
 
   target 'eventsTests' do
