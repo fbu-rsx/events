@@ -26,13 +26,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     var event: Event?{
         didSet{
             if let ID = event!.spotifyID {
-                //OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID! ,playlistID: ID, completion: )
                 OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs) in
                     self.songs = songs
                     self.tableView.reloadData()
                 })
             }else{
-                print("no event ID")
+                print("Spotify not working")
             }
         }
     }
