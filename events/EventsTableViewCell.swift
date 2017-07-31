@@ -154,7 +154,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         foregroundViewTop = view1topConstraint
         containerView = view2
         containerViewTop = view2topConstraint
-        itemCount = 3
+        itemCount = 4
         foregroundView.layer.cornerRadius = 10
         foregroundView.layer.masksToBounds = true
         closedProfileImageView.layer.cornerRadius = closedProfileImageView.bounds.width/2
