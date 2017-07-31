@@ -76,15 +76,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         return cell
     }
     
-    @IBAction func didTap(_ sender: Any) {
-        self.endEditing(true)
-    }
     
     @IBAction func editingChanged(_ sender: Any) {
         if searchField.text == ""{
             subView?.removeFromSuperview()
             added = false
-            //textFieldShouldReturn(searchField)
+            textFieldShouldReturn(searchField)
         }
         else if added == true {
             // update subview text
@@ -110,6 +107,10 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         let song = searchedSongsURIS[songIndex].replacingOccurrences(of: "spotify:track:", with: "")
         FirebaseDatabaseManager.shared.addQueuedSong(event: event!, songID: song)
         getTracks()
+        searchField.text = nil
+        subView?.removeFromSuperview()
+        added = false
+        textFieldShouldReturn(searchField)
     }
     
 }
