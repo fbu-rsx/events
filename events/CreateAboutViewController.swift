@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
 
 class CreateAboutViewController: UIViewController {
     var numberOfGuests = 0
@@ -20,7 +20,7 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var sendInvitesButton: UIButton!
     @IBOutlet weak var perPersonText: UILabel!
     @IBOutlet weak var dollarSignLabel: UILabel!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,10 @@ class CreateAboutViewController: UIViewController {
         // Send Invites Button
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        // Hide tab bar controller
+        
+        setupMap()
+        
+        // Show tab bar controller
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -60,13 +63,24 @@ class CreateAboutViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM d, h:mm a"
         eventTimeLabel.text = dateFormatter.string(from: date)
-
-        // Show mapView with selected location
+    }
+    
+    func setupMap() {
         let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
         let coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-        mapView.setRegion(region, animated: true)
+        Utilities.setupGoogleMap(mapView)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+                                              longitude: coordinate.longitude,
+                                              zoom: Utilities.zoomLevel)
+        mapView.camera = camera
+        mapView.isUserInteractionEnabled = false
         
+        let marker = GMSMarker()
+        marker.position = coordinate
+        marker.map = mapView
+        marker.isDraggable = false
+
+        mapView.isHidden = false
     }
     
     @IBAction func calculateCostPerPerson(_ sender: Any) {

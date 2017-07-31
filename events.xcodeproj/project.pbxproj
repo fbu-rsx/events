@@ -66,7 +66,6 @@
 		7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4745381F2930E0009CA46E /* SettingsViewController.swift */; };
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
-		7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5456301F2020D60027009C /* LocationSearchTable.swift */; };
 		7CAAA0DF1F27B405005C1A76 /* SpotifyAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */; };
 		7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */; };
 		7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E41F281304005C1A76 /* WalletViewController.swift */; };
@@ -165,7 +164,6 @@
 		7C4745381F2930E0009CA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		7C5456301F2020D60027009C /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		7CAAA0DE1F27B405005C1A76 /* SpotifyAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyAPIManager.swift; sourceTree = "<group>"; };
 		7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E41F281304005C1A76 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 				7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */,
 				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
 				7CAAA0E51F281304005C1A76 /* WalletViewController.xib */,
-				7C5456301F2020D60027009C /* LocationSearchTable.swift */,
 				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CCE1F182EBC00E847CC /* ImageCollectionViewCell.swift */,
@@ -737,7 +734,6 @@
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
 				7CAAA0EF1F281A94005C1A76 /* PaymentTableViewCell.swift in Sources */,
 				09F7884F1F26783100A311F0 /* detailView1.swift in Sources */,
-				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
 				09A15CD01F182EBC00E847CC /* ImageCollectionViewCell.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
 				4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */,

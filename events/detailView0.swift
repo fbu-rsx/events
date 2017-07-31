@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
 
@@ -22,7 +22,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
-    @IBOutlet weak var topMap: MKMapView!
+    @IBOutlet weak var topMap: GMSMapView!
     @IBOutlet weak var profileImage: UIImageView!
     
     

@@ -34,15 +34,7 @@ class FirebaseDatabaseManager {
     // Add user only if they do not already exist
     func possiblyAddUser(userDict: [String: String]) {
         let uid = userDict[UserKey.id]!
-        let name = userDict[UserKey.name]!
-        self.ref.child("users/\(uid)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-            print("possiblyAddUser snapshot started")
-            if !snapshot.exists() {
-                self.ref.child("users/\(uid)").updateChildValues(userDict)
-                print("new user \(name) added")
-            }
-            print(snapshot)
-        }
+        self.ref.child("users/\(uid)").updateChildValues(userDict)
     }
     
     // completion function provides dictionary of events

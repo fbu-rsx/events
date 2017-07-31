@@ -21,22 +21,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Vrg-ot-aAj">
-                                <rect key="frame" x="0.0" y="46" width="375" height="465"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OGU-eb-Wy1" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUh-xz-xOC">
-                                <rect key="frame" x="57" y="527" width="283" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="31"/>
-                                <state key="normal" title="set location">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSelected:" destination="h1v-m1-jDG" eventType="touchUpInside" id="j9L-iB-faY"/>
-                                </connections>
-                            </button>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAj-gT-oub">
                                 <rect key="frame" x="16" y="64" width="37" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -45,17 +34,13 @@
                                     <action selector="onZoomToCurrentLocation:" destination="h1v-m1-jDG" eventType="touchUpInside" id="KY4-t7-3LE"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps-and-flags" translatesAutoresizingMaskIntoConstraints="NO" id="vnd-It-wo4">
-                                <rect key="frame" x="170" y="247" width="35" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create an Event" id="qdH-aF-weZ"/>
+                    <navigationItem key="navigationItem" id="qdH-aF-weZ"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="mapView" destination="Vrg-ot-aAj" id="goj-2y-o1v"/>
-                        <outlet property="selectLocationButton" destination="gUh-xz-xOC" id="r6s-HC-y5S"/>
+                        <outlet property="mapView" destination="OGU-eb-Wy1" id="1sl-oP-TBy"/>
                         <outlet property="zoomToCurrentLocation" destination="yAj-gT-oub" id="tiM-cD-RgV"/>
                     </connections>
                 </viewController>
@@ -198,6 +183,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DV5-5O-K5c" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="total cost" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-tE-igi">
                                 <rect key="frame" x="71" y="280" width="107" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -224,10 +214,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltC-pi-qIr">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w4e-2h-fum">
                                 <rect key="frame" x="16" y="529" width="343" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -277,10 +263,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="maps-and-flags" translatesAutoresizingMaskIntoConstraints="NO" id="S2A-YS-rH0">
-                                <rect key="frame" x="170" y="64" width="35" height="38"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="/ person" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjZ-pX-F5Y">
                                 <rect key="frame" x="123" y="325" width="83" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -302,7 +284,7 @@
                         <outlet property="dollarSignLabel" destination="46H-jp-cap" id="xCR-QE-QTq"/>
                         <outlet property="eventTimeLabel" destination="g9B-ez-dwe" id="aiK-1h-rDa"/>
                         <outlet property="eventTitleLabel" destination="EVN-yU-7LG" id="bwq-yZ-I0r"/>
-                        <outlet property="mapView" destination="ltC-pi-qIr" id="Pm3-Oz-5bl"/>
+                        <outlet property="mapView" destination="DV5-5O-K5c" id="lem-OZ-VSr"/>
                         <outlet property="perPersonText" destination="gjZ-pX-F5Y" id="0pI-cJ-3m9"/>
                         <outlet property="sendInvitesButton" destination="w4e-2h-fum" id="y8B-Py-Qum"/>
                         <outlet property="totalCostText" destination="Un7-tE-igi" id="HFy-Dh-bBE"/>
@@ -315,7 +297,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3052" y="2246"/>
+            <point key="canvasLocation" x="3052" y="2245.7271364317844"/>
         </scene>
         <!--CreateEventPageControllerViewController-->
         <scene sceneID="Gxh-W5-uzv">
@@ -448,9 +430,18 @@
                     <navigationItem key="navigationItem" id="hfl-ce-2ab"/>
                     <connections>
                         <outlet property="mapView" destination="le7-gx-8ns" id="Y3U-OL-fpa"/>
+                        <outlet property="searchDisplayController" destination="3pA-ee-CMu" id="6gp-Em-sFk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="3pA-ee-CMu">
+                    <connections>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="1f2-L6-UAF"/>
+                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="fa5-QD-S7d"/>
+                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="tcd-Iu-3Al"/>
+                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="Hbh-3e-MGR"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2053.5999999999999" y="689.5052473763119"/>
         </scene>
@@ -620,6 +611,7 @@
         <!--Map-->
         <scene sceneID="ddD-Mu-M3Z">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UfR-Xs-Y5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
@@ -632,16 +624,17 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="MAt-I2-rRK"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UfR-Xs-Y5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1297" y="690"/>
         </scene>
         <!--CreateLocationNavController-->
         <scene sceneID="j5E-h3-f1j">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7h-lu-Z8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="CreateLocationNavController" title="CreateLocationNavController" automaticallyAdjustsScrollViewInsets="NO" id="chc-gD-98Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s1M-MY-l19">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -651,7 +644,6 @@
                         <segue destination="h1v-m1-jDG" kind="relationship" relationship="rootViewController" id="xld-gl-fod"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I7h-lu-Z8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="725.60000000000002" y="2245.7271364317844"/>
         </scene>
@@ -663,7 +655,6 @@
         <image name="envelope" width="64" height="64"/>
         <image name="fireworks" width="64" height="64"/>
         <image name="mapLogo" width="16" height="16"/>
-        <image name="maps-and-flags" width="64" height="64"/>
         <image name="piggybank" width="64" height="64"/>
         <image name="user" width="64" height="64"/>
     </resources>

@@ -55,7 +55,7 @@ class Event: GMSMarker {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
         }
     }
-    
+        
     var circle: GMSCircle?
     
     

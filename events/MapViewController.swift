@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import MapKit
 import CoreLocation
 import OAuthSwift
 import FBSDKLoginKit
 import AlamofireImage
 import UserNotifications
 import GoogleMaps
-import GooglePlaces
 
 struct Colors {
     static let coral = UIColor(hexString: "#EF5B5B")
@@ -23,25 +21,18 @@ struct Colors {
     static let orange = UIColor(hexString: "#FF9D00")
 }
 
-protocol HandleMapSearch: class {
-    func dropPinZoomIn(placemark:MKPlacemark)
-}
-
 protocol LoadEventsDelegate: class {
     func fetchEvents(completion: @escaping () -> Void)
 }
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var mapView: GMSMapView!
     
     var currentLocation: CLLocation!
-    var placesClient: GMSPlacesClient!
-    var zoomLevel: Float = 15.0
     
     // Search Variable Instantiations
-    var resultSearchController: UISearchController? = nil
-    var selectedPin:MKPlacemark? = nil
+    var searchController: UISearchController!
     var lastTimeStamp = Date()
     
     
@@ -65,52 +56,20 @@ class MapViewController: UIViewController {
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        placesClient = GMSPlacesClient.shared()
-        
-        //        mapView.delegate = self
-        //        mapView.showsUserLocation = true
-        //        mapView.setUserTrackingMode(.follow, animated: true)
-        
-        //        // SEARCH
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController?.searchResultsUpdater = locationSearchTable
-        //        locationSearchTable.mapView = mapView
-        //        locationSearchTable.handleMapSearchDelegate = self
-        
-        // Programatically embedding the search bar in Navigation Controller
-        let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Search"
-        navigationItem.titleView = resultSearchController?.searchBar
-        // NavBar does not disappear when search results are shown
-        resultSearchController?.hidesNavigationBarDuringPresentation = false
-        // When search bar is selected, modal overlay has a semi-transparent overlay
-        resultSearchController?.dimsBackgroundDuringPresentation = true
-        // Limit the overlap area just to View Controller, not blocking the Navigation bar
-        definesPresentationContext = true
-        
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = true
+        self.navigationItem.titleView = searchController.searchBar
+        self.definesPresentationContext = true
+
         mapView.delegate = self
         // Ask for Authorization from the User
         if CLLocationManager.locationServicesEnabled() {
             print("updating")
             locationManager.startUpdatingLocation()
-            mapView.settings.myLocationButton = false
-            mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            mapView.isMyLocationEnabled = true
-            mapView.isHidden = true
-            mapView.mapType = .normal
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "paper", withExtension: "json") {
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
-            
+            Utilities.setupGoogleMap(self.mapView)
         }
         
         self.delegate = AppUser.current
@@ -124,7 +83,7 @@ class MapViewController: UIViewController {
     
     func inviteAdded(_ notification: NSNotification) {
         let event = notification.object as! Event
-        self.add(event: event)
+        add(event: event)
         print("invited added")
         print("Invite events: \(self.events)")
         
@@ -142,8 +101,7 @@ class MapViewController: UIViewController {
     
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.animate(toLocation: currentLocation.coordinate)
-        mapView.animate(toZoom: zoomLevel)
-        //        mapView.zoomToUserLocation()
+        mapView.animate(toZoom: Utilities.zoomLevel)
     }
     
     
@@ -159,7 +117,7 @@ class MapViewController: UIViewController {
         event.icon = image.af_imageRoundedIntoCircle()
         event.groundAnchor = CGPoint(x: event.groundAnchor.x, y: event.groundAnchor.y / 2.0)
         //        mapView.addAnnotation(event)
-        addRadiusOverlay(forEvent: event)
+        addCircle(forEvent: event)
         event.map = mapView
     }
     
@@ -169,11 +127,11 @@ class MapViewController: UIViewController {
             events.remove(at: indexInArray)
         }
         //        mapView.removeAnnotation(event)
-        removeRadiusOverlay(forEvent: event)
+        event.circle?.map = nil
     }
     
     // MARK: Map overlay functions
-    func addRadiusOverlay(forEvent event: Event) {
+    private func addCircle(forEvent event: Event) {
         let circle = GMSCircle(position: event.coordinate, radius: event.radius)
         circle.strokeWidth = 1.5
         let color: UIColor!
@@ -188,18 +146,7 @@ class MapViewController: UIViewController {
         circle.strokeColor = color
         circle.fillColor = color.withAlphaComponent(0.3)
         circle.map = mapView
-        //        mapView.add(MKCircle(center: event.coordinate, radius: event.radius))
-    }
-    
-    func removeRadiusOverlay(forEvent event: Event) {
-        //        for overlay in mapView.overlays {
-        //            guard let circleOverlay = overlay as? MKCircle else { continue }
-        //            let coord = circleOverlay.coordinate
-        //            if coord.latitude == event.coordinate.latitude && coord.longitude == event.coordinate.longitude && circleOverlay.radius == event.radius {
-        //                mapView.remove(circleOverlay)
-        //                break
-        //            }
-        //        }
+        event.circle = circle
     }
     
     func loadAllEvents() {
@@ -207,78 +154,6 @@ class MapViewController: UIViewController {
             add(event: event)
         }
     }
-    
-    //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-    //        let identifier = "myEvent"
-    //        if let event = annotation as? Event {
-    //            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-    //            if annotationView == nil {
-    //                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-    //                let data = try! Data(contentsOf: event.organizerURL)
-    //                let image = UIImage(data: data)!
-    //                annotationView?.image =  image.af_imageRoundedIntoCircle()
-    //                annotationView?.canShowCallout = true
-    //                let frame = annotationView!.frame
-    //                annotationView?.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: 35.0, height: 35.0)
-    //                // Check button on annotation callout
-    //                let checkInButton = UIButton(type: .custom)
-    //                checkInButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
-    //                checkInButton.setImage(UIImage(named: "CheckInEvent")!, for: .normal)
-    //                // Remove button on annotation callout
-    //                let removeButton = UIButton(type: .custom)
-    //                removeButton.frame = CGRect(x: 0, y: 0, width: 23, height: 23)
-    //                removeButton.setImage(UIImage(named: "DeleteEvent")!, for: .normal)
-    //                if event.organizerID == AppUser.current.uid {
-    //                    annotationView?.leftCalloutAccessoryView = removeButton
-    //                } else {
-    //                    annotationView?.rightCalloutAccessoryView = checkInButton
-    //                }
-    //            } else {
-    //                annotationView?.annotation = annotation
-    //            }
-    //            return annotationView
-    //        }
-    //        return nil
-    //    }
-    //
-    //    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-    //        var event: Event!
-    //        for e in events {
-    //            if e.coordinate.latitude == overlay.coordinate.latitude &&
-    //                e.coordinate.longitude == overlay.coordinate.longitude {
-    //                event = e
-    //                break
-    //            }
-    //        }
-    //        if overlay is MKCircle {
-    //            let circleRenderer = MKCircleRenderer(overlay: overlay)
-    //            circleRenderer.lineWidth = 1.5
-    //            let color: UIColor!
-    //            switch event.myStatus {
-    //            case .accepted:
-    //                color = Colors.green
-    //            case .declined:
-    //                color = Colors.coral
-    //            default:
-    //                color = Colors.orange
-    //            }
-    //            circleRenderer.strokeColor = color
-    //            circleRenderer.fillColor = color.withAlphaComponent(0.3)
-    //            return circleRenderer
-    //        }
-    //        return MKOverlayRenderer(overlay: overlay)
-    //    }
-    //
-    //    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    //        // Delete event
-    //        let event = view.annotation as! Event
-    //        if control == view.leftCalloutAccessoryView {
-    //            remove(event: event)
-    //            NotificationCenter.default.post(name: BashNotifications.delete, object: event)
-    //        } else {
-    //            NotificationCenter.default.post(name: BashNotifications.accept, object: event)
-    //        }
-    //    }
 }
 
 extension MapViewController: GMSMapViewDelegate {
@@ -310,7 +185,7 @@ extension MapViewController: GMSMapViewDelegate {
         guard self.events.count > 0 else { return nil}
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         var closest: Event!
-        var closestDist = DBL_MAX
+        var closestDist = Double.greatestFiniteMagnitude
         for event in self.events {
             let loc = CLLocation(latitude: event.coordinate.latitude, longitude: event.coordinate.longitude)
             let dist = location.distance(from: loc)
@@ -343,7 +218,7 @@ extension MapViewController: CLLocationManagerDelegate {
         self.lastTimeStamp = location.timestamp
         guard AppUser.current.events.count > 0 else { return }
         var closest: Event!
-        var closestDistance = DBL_MAX
+        var closestDistance = Double.greatestFiniteMagnitude
         for event in AppUser.current.events {
             let coordinate = CLLocation(latitude: event.coordinate.latitude, longitude: event.coordinate.longitude)
             let dist = location.distance(from: coordinate)
@@ -352,7 +227,7 @@ extension MapViewController: CLLocationManagerDelegate {
                 closest = event
             }
         }
-        if closestDistance <= 50.0 {
+        if closestDistance <= closest.radius {
             handleEvent(closest)
         }
     }
@@ -362,7 +237,7 @@ extension MapViewController: CLLocationManagerDelegate {
         guard mapView.isHidden else { return }
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
-                                              zoom: zoomLevel)
+                                              zoom: Utilities.zoomLevel)
         
         if mapView.isHidden {
             mapView.isHidden = false
@@ -394,6 +269,11 @@ extension MapViewController: CLLocationManagerDelegate {
     }
 }
 
+extension MapViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+}
 
 extension MapViewController: CreateEventMasterDelegate {
     func createNewEvent(_ dict: [String: Any]) {
@@ -402,28 +282,5 @@ extension MapViewController: CreateEventMasterDelegate {
         add(event: event)
         print("new event added")
         CreateEventMaster.shared.clear()
-    }
-}
-
-// SEARCH extension
-extension MapViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark) {
-        // cache the pin
-        selectedPin = placemark
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        if let city = placemark.locality,
-            let state = placemark.administrativeArea {
-            annotation.subtitle = "\(city), \(state)"
-        }
-        // Custom pin view
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
-        annotationView.image = UIImage(named: "placeholder.png")
-        //        mapView.addAnnotation(annotationView.annotation!)
-        
-        let span = MKCoordinateSpanMake(0.01, 0.01)
-        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-        //        mapView.setRegion(region, animated: true)
     }
 }
