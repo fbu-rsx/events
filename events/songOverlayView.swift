@@ -54,7 +54,7 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate, UIGes
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         wasTapped(songIndex: indexPath.row)
-        print("recognized selection")
+        //print("recognized selection")
     }
 
 }

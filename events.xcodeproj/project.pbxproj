@@ -49,6 +49,11 @@
 		4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */; };
 		4FD2FE901F2ADBDE00E565B9 /* apple.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE8F1F2ADBDE00E565B9 /* apple.gpx */; };
 		4FD2FE921F2ADBEE00E565B9 /* google.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE911F2ADBEE00E565B9 /* google.gpx */; };
+		4FD2FE9A1F2C160E00E565B9 /* custom.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE971F2C160E00E565B9 /* custom.json */; };
+		4FD2FE9B1F2C160E00E565B9 /* dark.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE981F2C160E00E565B9 /* dark.json */; };
+		4FD2FE9C1F2C160E00E565B9 /* default.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE991F2C160E00E565B9 /* default.json */; };
+		4FD2FE9F1F2C161800E565B9 /* paper.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE9D1F2C161800E565B9 /* paper.json */; };
+		4FD2FEA01F2C161800E565B9 /* retro.json in Resources */ = {isa = PBXBuildFile; fileRef = 4FD2FE9E1F2C161800E565B9 /* retro.json */; };
 		4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */; };
 		4FFC02F91F26AF1D00B55206 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFC02F71F26AF1D00B55206 /* SignInViewController.swift */; };
 		4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */; };
@@ -145,6 +150,11 @@
 		4FCB62A91F1446EB00BBDC71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FD2FE8F1F2ADBDE00E565B9 /* apple.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = apple.gpx; sourceTree = "<group>"; };
 		4FD2FE911F2ADBEE00E565B9 /* google.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = google.gpx; sourceTree = "<group>"; };
+		4FD2FE971F2C160E00E565B9 /* custom.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = custom.json; sourceTree = "<group>"; };
+		4FD2FE981F2C160E00E565B9 /* dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dark.json; sourceTree = "<group>"; };
+		4FD2FE991F2C160E00E565B9 /* default.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = default.json; sourceTree = "<group>"; };
+		4FD2FE9D1F2C161800E565B9 /* paper.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = paper.json; sourceTree = "<group>"; };
+		4FD2FE9E1F2C161800E565B9 /* retro.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = retro.json; sourceTree = "<group>"; };
 		4FE3AF701F2660D20055FD90 /* MasterTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterTabBarController.swift; sourceTree = "<group>"; };
 		4FFC02F71F26AF1D00B55206 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
@@ -237,10 +247,6 @@
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */,
 				09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */,
-				09B321561F2BB7DA0044F05C /* songOverlayView.swift */,
-				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
-				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
-				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
 				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
 				7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */,
 				7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */,
@@ -272,12 +278,11 @@
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
-				7C5456301F2020D60027009C /* LocationSearchTable.swift */,
 				7CBC19241F29511E002C65F9 /* MyUploadsViewController.swift */,
 				7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */,
 				7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */,
 				7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */,
+				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
 				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
 				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
@@ -354,6 +359,15 @@
 				4FCB62871F143DC400BBDC71 /* Info.plist */,
 				4FD2FE8F1F2ADBDE00E565B9 /* apple.gpx */,
 				4FD2FE911F2ADBEE00E565B9 /* google.gpx */,
+				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
+				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
+				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
+				09B321561F2BB7DA0044F05C /* songOverlayView.swift */,
+				4FD2FE9D1F2C161800E565B9 /* paper.json */,
+				4FD2FE9E1F2C161800E565B9 /* retro.json */,
+				4FD2FE971F2C160E00E565B9 /* custom.json */,
+				4FD2FE981F2C160E00E565B9 /* dark.json */,
+				4FD2FE991F2C160E00E565B9 /* default.json */,
 			);
 			path = events;
 			sourceTree = SOURCE_ROOT;
@@ -476,7 +490,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = TM66RGVAQ6;
+						DevelopmentTeam = 736R8PG8E6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -525,14 +539,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */,
+				4FD2FE9C1F2C160E00E565B9 /* default.json in Resources */,
 				7CAAA0F01F281A94005C1A76 /* PaymentTableViewCell.xib in Resources */,
 				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
 				7C021E231F2BF0A300029CCB /* Assets.xcassets in Resources */,
+				4FD2FE9B1F2C160E00E565B9 /* dark.json in Resources */,
 				09B321551F2BB79B0044F05C /* songSearchResultsOverlay.xib in Resources */,
+				4FD2FE9F1F2C161800E565B9 /* paper.json in Resources */,
 				4FD2FE901F2ADBDE00E565B9 /* apple.gpx in Resources */,
+				4FD2FEA01F2C161800E565B9 /* retro.json in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
@@ -540,6 +558,7 @@
 				09F788511F269EE800A311F0 /* detailView2.xib in Resources */,
 				09F7884D1F26781400A311F0 /* detailView1.xib in Resources */,
 				7C9A6B801F2FBC4F00A70FD3 /* GuestsTableViewCell.xib in Resources */,
+				4FD2FE9A1F2C160E00E565B9 /* custom.json in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
 				4FD2FE921F2ADBEE00E565B9 /* google.gpx in Resources */,
 				09F788491F2668A700A311F0 /* detailView0.xib in Resources */,
@@ -722,7 +741,6 @@
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
 				7CAAA0EF1F281A94005C1A76 /* PaymentTableViewCell.swift in Sources */,
 				09F7884F1F26783100A311F0 /* detailView1.swift in Sources */,
-				7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
 				4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
@@ -893,13 +911,13 @@
 			baseConfigurationReference = CCAC109E9CF8667FBF9C91A2 /* Pods-events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -910,14 +928,14 @@
 			baseConfigurationReference = C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

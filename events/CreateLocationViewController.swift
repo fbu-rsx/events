@@ -7,95 +7,69 @@
 //
 
 import UIKit
-import MapKit
+import GoogleMaps
+import GooglePlaces
 import CoreLocation
 
-class CreateLocationViewController: UIViewController {
+class CreateLocationViewController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var zoomToCurrentLocation: UIButton!
-    @IBOutlet weak var selectLocationButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // Search Variable Instantiations
-    var resultSearchController: UISearchController? = nil
-    var selectedPin:MKPlacemark? = nil
+    var searchController: UISearchController!
+    var locationManager = CLLocationManager()
+    var marker: GMSMarker!
+    var placesClient: GMSPlacesClient!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mapView.showsUserLocation = true
-        // Tracks the user's location
-        self.mapView.setUserTrackingMode(.follow, animated: true)
-        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-        self.mapView.setRegion(region, animated: true)
+        placesClient = GMSPlacesClient.shared()
         
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = true
+        self.navigationItem.titleView = searchController.searchBar
+        self.definesPresentationContext = true
+        
+        Utilities.setupGoogleMap(self.mapView)
+        guard let coordinate = locationManager.location?.coordinate else { mapView.isHidden = false; return }
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+                                              longitude: coordinate.longitude,
+                                              zoom: Utilities.zoomLevel)
+        mapView.camera = camera
+        marker = GMSMarker(position: coordinate)
+        marker.isDraggable = true
+        marker.map = mapView
+        mapView.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
-        CreateEventMaster.shared.event[EventKey.location] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        // Select Location button styling
-        selectLocationButton.layer.cornerRadius = 5
-        
-        // SEARCH
-        // Programmatically instantiating the locationSearchTable TableViewController
-        let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
-        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-        resultSearchController?.searchResultsUpdater = locationSearchTable
-        locationSearchTable.mapView = mapView
-        locationSearchTable.handleMapSearchDelegate = self
-        
-        // Programatically embedding the search bar in Navigation Controller
-        let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Search"
-        navigationItem.titleView = resultSearchController?.searchBar
-        // NavBar does not disappear when search results are shown
-        resultSearchController?.hidesNavigationBarDuringPresentation = false
-        // When search bar is selected, modal overlay has a semi-transparent overlay
-        resultSearchController?.dimsBackgroundDuringPresentation = true
-        // Limit the overlap area just to View Controller, not blocking the Navigation bar
-        definesPresentationContext = true
-        
-    }
-    
-    @IBAction func onSelected(_ sender: Any) {
-      
-        selectLocationButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        self.mapView.isUserInteractionEnabled = false
-        CreateEventMaster.shared.event[EventKey.location] = [mapView.centerCoordinate.latitude, mapView.centerCoordinate.longitude]
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        CreateEventMaster.shared.event[EventKey.location] = [marker.position.latitude, marker.position.longitude]
     }
     
     @IBAction func onZoomToCurrentLocation(_ sender: Any) {
-        guard let coordinate = mapView.userLocation.location?.coordinate else { return }
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, 100, 100)
-        mapView.setRegion(region, animated: true)
+        let controller = GMSAutocompleteViewController()
+        present(controller, animated: true, completion: nil)
+//        guard let coordinate = locationManager.location?.coordinate else { return }
+//        mapView.animate(toLocation: coordinate)
+//        mapView.animate(toZoom: Utilities.zoomLevel)
     }
 }
 
-
-// SEARCH extension
-extension CreateLocationViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark) {
-        // cache the pin
-        selectedPin = placemark
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
-        if let city = placemark.locality,
-            let state = placemark.administrativeArea {
-            annotation.subtitle = "\(city), \(state)"
-        }
-        // Custom pin view
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "placeholder")
-        annotationView.image = UIImage(named: "placeholder.png")
-        mapView.addAnnotation(annotationView.annotation!)
+extension CreateLocationViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
         
-        let span = MKCoordinateSpanMake(0.01, 0.01)
-        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-        mapView.setRegion(region, animated: true)
     }
 }
+
+
+
 
 

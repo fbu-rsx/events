@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import AlamofireImage
+import GoogleMaps
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
@@ -23,7 +24,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
-    @IBOutlet weak var topMap: MKMapView!
+    @IBOutlet weak var topMap: GMSMapView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
@@ -55,12 +56,25 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         declineButton.layer.cornerRadius = 5
         declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
-    
-    var event: Event?{
-        didSet{
+
+    var event: Event? {
+        didSet {
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
+                Utilities.setupGoogleMap(self.topMap)
+                let camera = GMSCameraPosition.camera(withLatitude: self.event!.coordinate.latitude,
+                                                      longitude: self.event!.coordinate.longitude,
+                                                      zoom: Utilities.zoomLevel)
+                self.topMap.camera = camera
+                self.topMap.isUserInteractionEnabled = false
                 
-                self.topMap.setCenter(self.event!.coordinate, animated: true)
+                let marker = GMSMarker()
+                marker.position = self.event!.coordinate
+                marker.map = self.topMap
+                marker.isDraggable = false
+                
+                self.topMap.isHidden = false
+                
+                self.topMap.isHidden = false
                 self.profileImage.layer.cornerRadius = 0.5*self.profileImage.frame.width
                 self.profileImage.layer.masksToBounds = true
                 
@@ -75,10 +89,15 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 // Zoom map to event location
                 let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
                 self.topMap.setRegion(region, animated: true)
+                
                 self.guests = Array(self.event!.guestlist.keys)
                 self.tableView.reloadData()
                 
                 // Setting button colors depending on myStatus
+                for guest in self.event!.guestlist {
+                    print("guest: \(guest)")
+                }
+                self.guests = self.event!.guestlist
                 
                 switch self.event!.myStatus {
                 case .accepted:
@@ -106,6 +125,8 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.guests.count
