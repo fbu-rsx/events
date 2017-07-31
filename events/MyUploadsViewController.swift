@@ -40,8 +40,7 @@ class MyUploadsViewController: UIViewController, IndicatorInfoProvider, UICollec
         layout.minimumLineSpacing = 0
         collectionView.collectionViewLayout = layout
         loadImages()
-        print("pls print photos")
-        print(AppUser.current.photos)
+  
         
     }
     
