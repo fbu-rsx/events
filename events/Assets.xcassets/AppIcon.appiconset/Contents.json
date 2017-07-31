@@ -12,11 +12,6 @@
     },
     {
       "idiom" : "iphone",
-      "size" : "20x20",
-      "scale" : "3x"
-    },
-    {
-      "idiom" : "iphone",
       "size" : "29x29",
       "scale" : "2x"
     },
@@ -91,6 +86,12 @@
       "idiom" : "ipad",
       "size" : "83.5x83.5",
       "scale" : "2x"
+    },
+    {
+      "size" : "20x20",
+      "idiom" : "iphone",
+      "unassigned" : true,
+      "scale" : "3x"
     }
   ],
   "info" : {
