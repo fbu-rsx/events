@@ -16,7 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+<<<<<<< HEAD
+                <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
+=======
                 <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-AQ-Woc" customClass="RotatedView" customModule="FoldingCell">
@@ -115,8 +119,13 @@
                             <constraint firstItem="pRR-lD-k3e" firstAttribute="leading" secondItem="RpP-AQ-Woc" secondAttribute="leading" id="w2x-Bb-SYE"/>
                         </constraints>
                     </view>
+<<<<<<< HEAD
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-Ph-dSv" customClass="RotatedView" customModule="FoldingCell">
+                        <rect key="frame" x="16" y="62" width="309" height="285"/>
+=======
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-Ph-dSv" customClass="RotatedView" customModule="FoldingCell">
                         <rect key="frame" x="16" y="16" width="343" height="525"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebP-AO-Do6">
                                 <rect key="frame" x="0.0" y="0.0" width="10" height="525"/>
@@ -125,8 +134,13 @@
                                     <constraint firstAttribute="width" constant="10" id="jp8-jV-hwQ"/>
                                 </constraints>
                             </view>
+<<<<<<< HEAD
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
+                                <rect key="frame" x="8" y="0.0" width="333" height="450"/>
+=======
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
                                 <rect key="frame" x="10" y="0.0" width="333" height="525"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.86801654220000002" green="0.86801654220000002" blue="0.86801654220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -172,7 +186,11 @@
                 <outlet property="view2topConstraint" destination="71W-PU-evm" id="HxW-Zy-ghQ"/>
                 <outletCollection property="foregroundView" destination="RpP-AQ-Woc" collectionClass="NSMutableArray" id="Q4J-8m-545"/>
             </connections>
+<<<<<<< HEAD
+            <point key="canvasLocation" x="-251" y="277"/>
+=======
             <point key="canvasLocation" x="-217.5" y="357.5"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
         </tableViewCell>
     </objects>
     <resources>

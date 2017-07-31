@@ -1,16 +1,16 @@
 //
-//  userTableViewCell.swift
+//  GuestsTableViewCell.swift
 //  events
 //
-//  Created by Rhian Chavez on 7/26/17.
+//  Created by Xiu Chen on 7/31/17.
 //  Copyright © 2017 fbu-rsx. All rights reserved.
 //
 
 import UIKit
 
-class userTableViewCell: UITableViewCell {
+class GuestsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var guestImage: UIImageView!
     
     override func awakeFromNib() {
@@ -23,5 +23,5 @@ class userTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }

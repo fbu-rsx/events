@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MapKit
+import AlamofireImage
 import GoogleMaps
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
@@ -25,10 +27,11 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var topMap: GMSMapView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
+    @IBOutlet weak var declineButton: UIButton!
     
     
-    var guests: [String:Int] = [:]
-    var usersDic: [String: Bool] = [:]
+    var guests: [String] = []
+    //    var usersDic: [String: Bool] = [:]
     
     
     @IBAction func goingTap(_ sender: UIButton) {
@@ -38,6 +41,22 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    
+    override func awakeFromNib() {
+        // Initialization code
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        let bundle = Bundle(path: "/Users/xiuchen/Desktop/events/events/GuestsTableViewCell.swift")
+        let nib1 = UINib(nibName: "GuestsTableViewCell", bundle: bundle)
+        tableView.register(nib1, forCellReuseIdentifier: "userCell")
+        
+        // Setting invitiation button colors
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        declineButton.layer.cornerRadius = 5
+        declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+    }
+
     var event: Event? {
         didSet {
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
@@ -67,14 +86,43 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.eventTitle.text = self.event!.title
                 self.eventDescription.text = self.event!.about
                 
+                // Zoom map to event location
+                let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
+                self.topMap.setRegion(region, animated: true)
+                
+                self.guests = Array(self.event!.guestlist.keys)
+                self.tableView.reloadData()
+                
+                // Setting button colors depending on myStatus
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
                 }
                 self.guests = self.event!.guestlist
                 
-//                print("here \(self.guests)")
+                switch self.event!.myStatus {
+                case .accepted:
+                    self.acceptButton.setTitle("Accepted", for: .normal)
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#4ADB75")
+                    self.acceptButton.isEnabled = false
+                    self.acceptButton.sizeToFit()
+                    self.declineButton.isEnabled = false
+                    self.declineButton.backgroundColor = UIColor(hexString: "#95a5a6")
+                    
+                case .declined:
+                    self.declineButton.setTitle("Declined", for: .normal)
+                    self.declineButton.backgroundColor = UIColor(hexString: "#F46E79")
+                    self.declineButton.isEnabled = false
+                    self.declineButton.sizeToFit()
+                    self.acceptButton.isEnabled = false
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#95a5a6")
+                    
+                default:
+                    self.acceptButton.layer.cornerRadius = 5
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+                    self.declineButton.layer.cornerRadius = 5
+                    self.declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+                }
             }
-             self.tableView.reloadData()
         }
     }
     
@@ -85,21 +133,15 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! userTableViewCell
-//        FirebaseDatabaseManager.shared.getSingleUser(id: self.guests[indexPath.row]) { (user: AppUser) in
-//            cell.user = user
-//        }
-        //let user = self.guests[indexPath.row]
-        
-        
-                // cell.label.text = user // TODO: FIX to user.name, get AppUser
-        //        if usersDic[user]!{
-        //
-        //        }
-        //        else{
-        //
-        //        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! GuestsTableViewCell
+        FirebaseDatabaseManager.shared.getSingleUser(id: self.guests[indexPath.row]) { (user: AppUser) in
+            cell.nameLabel.text = user.name
+            let photoURLString = user.photoURLString
+            let photoURL = URL(string: photoURLString)
+            cell.guestImage.af_setImage(withURL: photoURL!)
+            cell.guestImage.layer.cornerRadius = 0.5*cell.guestImage.frame.width
+            cell.guestImage.layer.masksToBounds = true
+        }
         return cell
     }
-    
 }

@@ -25,16 +25,16 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNj-Cf-R9V">
-                    <rect key="frame" x="16" y="210" width="301" height="92"/>
+                    <rect key="frame" x="16" y="211" width="301" height="92"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="92" id="dJI-jy-loB"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prb-to-Tzt">
-                    <rect key="frame" x="8" y="171" width="317" height="32.5"/>
+                    <rect key="frame" x="8" y="171" width="317" height="33"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -44,7 +44,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pEZ-TD-N4u">
-                    <rect key="frame" x="131.5" y="93" width="70" height="70"/>
+                    <rect key="frame" x="132" y="93" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="ePb-ru-HeI"/>
                         <constraint firstAttribute="height" constant="70" id="pXf-jZ-ilG"/>
@@ -57,7 +57,9 @@
                         <constraint firstAttribute="width" constant="83" id="eVz-fP-czO"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                    <state key="normal" title="Decline"/>
+                    <state key="normal" title="Decline">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="notGoingTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="sgb-lm-7gb"/>
                     </connections>
@@ -107,35 +109,14 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="acceptButton" destination="ZyC-OX-9ok" id="sAi-QN-Qih"/>
+                <outlet property="declineButton" destination="mcE-xW-sSM" id="AgL-Yu-ptf"/>
                 <outlet property="eventDescription" destination="iNj-Cf-R9V" id="Tg0-EK-HTp"/>
                 <outlet property="eventTitle" destination="prb-to-Tzt" id="BpC-gS-DsW"/>
                 <outlet property="profileImage" destination="pEZ-TD-N4u" id="to7-Ev-eAC"/>
                 <outlet property="tableView" destination="Srr-gh-wZ7" id="6pM-ix-GI3"/>
-                <outlet property="tableViewCell" destination="BFT-rm-bIL" id="xzk-bn-jMp"/>
                 <outlet property="topMap" destination="7e4-8N-Z5m" id="SL7-KD-cSY"/>
             </connections>
             <point key="canvasLocation" x="63.5" y="15"/>
         </view>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userCell" id="BFT-rm-bIL" customClass="userTableViewCell" customModule="events" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="291" height="44"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BFT-rm-bIL" id="efA-KZ-1Ny">
-                <rect key="frame" x="0.0" y="0.0" width="291" height="43.5"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User's Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fzx-fz-0GL">
-                        <rect key="frame" x="82" y="11" width="98" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                </subviews>
-            </tableViewCellContentView>
-            <connections>
-                <outlet property="label" destination="fzx-fz-0GL" id="gkn-Dy-SWC"/>
-            </connections>
-            <point key="canvasLocation" x="64.5" y="335"/>
-        </tableViewCell>
     </objects>
 </document>

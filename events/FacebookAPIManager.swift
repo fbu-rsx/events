@@ -26,14 +26,10 @@ class FacebookAPIManager {
             if let error = error {
                 print(error.localizedDescription)
             } else if let result = result as? [String: Any] {
-                print("starting friends list")
                 let arr = result["data"] as! NSArray
                 for x in arr {
                     friends.append(FacebookFriend(dict: x as! [String: Any]))
                 }
-                print(arr.count)
-                print("ending friends list")
-                
                 completion(friends)
             }
         }
