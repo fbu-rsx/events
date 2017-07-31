@@ -74,22 +74,6 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         }
     }
     
-    /*
-     var eventid: String
-     var eventDictionary: [String: Any]
-     
-     //all below are required in the dictionary user to initialize an event
-     var eventname: String
-     var totalcost: Float? //optional because may just be a free event
-     var date: Date
-     var coordinate: CLLocationCoordinate2D
-     var radius: Double = 100
-     var organizerID: String //uid of the organizer
-     var guestlist: [String: Bool] // true if guest attended
-     var photos: [String: Bool]
-     var about: String //description of event, the description variable as unfortunately taken by Objective C
-     */
-    
     var event: Event?{
         didSet{
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
