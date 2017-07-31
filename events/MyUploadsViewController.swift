@@ -9,33 +9,58 @@
 import UIKit
 import XLPagerTabStrip
 
-class MyUploadsViewController: UIViewController, IndicatorInfoProvider{
+class MyUploadsViewController: UIViewController, IndicatorInfoProvider, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    var photos: [UIImage] = []
+    var event: Event? {
+        didSet{
+            loadImages()
+        }
     }
     
+    override func awakeFromNib() {
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        let bundle = Bundle(path: "/Users/xiuchen/Desktop/events/events/imageCollectionViewCell.xib")
+        let nib = UINib(nibName: "imageCollectionViewCell", bundle: bundle)
+        collectionView.register(nib, forCellWithReuseIdentifier: "imageCell")
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        //layout.itemSize = CGSize(width: self.frame.width/3, height: self.frame.width/3)
+        layout.sectionInset.left = 0
+        layout.sectionInset.right = 0
+        layout.sectionInset.bottom = 0
+        layout.sectionInset.top = 0
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        collectionView.collectionViewLayout = layout
+    }
+    
+    func loadImages(){
+        for imageID in event!.photos.keys{
+            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+                if self.photos.contains(image) == false {
+                    self.photos.append(image)
+                }
+                self.collectionView.reloadData()
+            })
+        }
+    }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Uploads")
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
     }
-    */
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! imageCollectionViewCell
+        cell.image.image = photos[indexPath.row]
+        return cell
+    }
 
 }

@@ -31,8 +31,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     
     var guests: [String] = []
-    //    var usersDic: [String: Bool] = [:]
-    
     
     @IBAction func goingTap(_ sender: UIButton) {
     }
@@ -86,18 +84,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.eventTitle.text = self.event!.title
                 self.eventDescription.text = self.event!.about
                 
-                // Zoom map to event location
-                let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
-                self.topMap.setRegion(region, animated: true)
-                
                 self.guests = Array(self.event!.guestlist.keys)
                 self.tableView.reloadData()
                 
-                // Setting button colors depending on myStatus
-                for guest in self.event!.guestlist {
-                    print("guest: \(guest)")
-                }
-                self.guests = self.event!.guestlist
                 
                 switch self.event!.myStatus {
                 case .accepted:
