@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="eventsCell" selectionStyle="default" indentationWidth="10" rowHeight="495" id="KGk-i7-Jjw" customClass="EventsTableViewCell" customModule="events" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="eventsCell" selectionStyle="default" indentationWidth="10" rowHeight="663" id="KGk-i7-Jjw" customClass="EventsTableViewCell" customModule="events" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+<<<<<<< HEAD
                 <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
+=======
+                <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-AQ-Woc" customClass="RotatedView" customModule="FoldingCell">
@@ -115,40 +119,50 @@
                             <constraint firstItem="pRR-lD-k3e" firstAttribute="leading" secondItem="RpP-AQ-Woc" secondAttribute="leading" id="w2x-Bb-SYE"/>
                         </constraints>
                     </view>
+<<<<<<< HEAD
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-Ph-dSv" customClass="RotatedView" customModule="FoldingCell">
                         <rect key="frame" x="16" y="62" width="309" height="285"/>
+=======
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-Ph-dSv" customClass="RotatedView" customModule="FoldingCell">
+                        <rect key="frame" x="16" y="16" width="343" height="525"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebP-AO-Do6">
-                                <rect key="frame" x="0.0" y="0.0" width="10" height="450"/>
+                                <rect key="frame" x="0.0" y="0.0" width="10" height="525"/>
                                 <color key="backgroundColor" red="0.26316654760000002" green="1" blue="0.89469563119999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="L3T-G8-y6b"/>
+                                    <constraint firstAttribute="width" constant="10" id="jp8-jV-hwQ"/>
                                 </constraints>
                             </view>
+<<<<<<< HEAD
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
                                 <rect key="frame" x="8" y="0.0" width="333" height="450"/>
+=======
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
+                                <rect key="frame" x="10" y="0.0" width="333" height="525"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.86801654220000002" green="0.86801654220000002" blue="0.86801654220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="cvr-Lm-S0p" secondAttribute="trailing" id="0Vk-y8-oea"/>
-                            <constraint firstItem="ebP-AO-Do6" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="1l6-8G-2sz"/>
-                            <constraint firstAttribute="bottom" secondItem="cvr-Lm-S0p" secondAttribute="bottom" id="Qtg-Px-mIV"/>
-                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="TKg-zy-rue"/>
-                            <constraint firstAttribute="height" constant="450" id="ddg-rT-Hy6"/>
-                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="leading" secondItem="ebP-AO-Do6" secondAttribute="trailing" id="kh3-DG-283"/>
-                            <constraint firstAttribute="bottom" secondItem="ebP-AO-Do6" secondAttribute="bottom" id="mdt-67-iee"/>
-                            <constraint firstItem="ebP-AO-Do6" firstAttribute="leading" secondItem="ozZ-Ph-dSv" secondAttribute="leading" id="obN-nc-K2h"/>
+                            <constraint firstAttribute="height" constant="525" id="E0U-sm-euN"/>
+                            <constraint firstItem="ebP-AO-Do6" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="F0S-I6-Pse"/>
+                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="leading" secondItem="ebP-AO-Do6" secondAttribute="trailing" id="KAb-8Q-ENb"/>
+                            <constraint firstItem="ebP-AO-Do6" firstAttribute="leading" secondItem="ozZ-Ph-dSv" secondAttribute="leading" id="Kcn-dF-xc9"/>
+                            <constraint firstAttribute="bottom" secondItem="ebP-AO-Do6" secondAttribute="bottom" id="Ruj-US-1dB"/>
+                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="ljs-p0-12a"/>
+                            <constraint firstAttribute="trailing" secondItem="cvr-Lm-S0p" secondAttribute="trailing" id="oa3-Tp-87e"/>
+                            <constraint firstAttribute="bottom" secondItem="cvr-Lm-S0p" secondAttribute="bottom" id="zlv-c2-p6h"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="RpP-AQ-Woc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="3Ob-g9-aLF"/>
-                    <constraint firstItem="RpP-AQ-Woc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="77a-ql-325"/>
+                    <constraint firstItem="RpP-AQ-Woc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="3pF-V2-G6k"/>
+                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="71W-PU-evm"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RpP-AQ-Woc" secondAttribute="trailing" constant="8" id="dH2-JM-bbo"/>
-                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="g0n-iP-TvB"/>
-                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="gIw-mX-WRp"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ozZ-Ph-dSv" secondAttribute="trailing" constant="8" id="lgv-9w-qCg"/>
+                    <constraint firstAttribute="trailing" secondItem="ozZ-Ph-dSv" secondAttribute="trailing" constant="16" id="ehW-eB-aCt"/>
+                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="jWg-Nd-zc8"/>
                 </constraints>
             </tableViewCellContentView>
             <gestureRecognizers/>
@@ -167,12 +181,16 @@
                 <outlet property="sideBar" destination="pRR-lD-k3e" id="dxM-Zh-0vH"/>
                 <outlet property="sideBar1" destination="ebP-AO-Do6" id="mzD-CB-msf"/>
                 <outlet property="view1" destination="RpP-AQ-Woc" id="Vxv-wX-BFT"/>
-                <outlet property="view1topConstraint" destination="77a-ql-325" id="m3B-uJ-e8t"/>
+                <outlet property="view1topConstraint" destination="3pF-V2-G6k" id="Cgd-Tv-5qD"/>
                 <outlet property="view2" destination="ozZ-Ph-dSv" id="QLk-C2-yTg"/>
-                <outlet property="view2topConstraint" destination="gIw-mX-WRp" id="WjS-aT-Y8g"/>
+                <outlet property="view2topConstraint" destination="71W-PU-evm" id="HxW-Zy-ghQ"/>
                 <outletCollection property="foregroundView" destination="RpP-AQ-Woc" collectionClass="NSMutableArray" id="Q4J-8m-545"/>
             </connections>
+<<<<<<< HEAD
             <point key="canvasLocation" x="-251" y="277"/>
+=======
+            <point key="canvasLocation" x="-217.5" y="357.5"/>
+>>>>>>> 934ee49f3f1e8dfe818e7d4a663fc71daa740575
         </tableViewCell>
     </objects>
     <resources>
