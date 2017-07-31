@@ -62,6 +62,8 @@
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
 		7C5456311F2020D60027009C /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5456301F2020D60027009C /* LocationSearchTable.swift */; };
+		7C9A6B7F1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */; };
+		7C9A6B801F2FBC4F00A70FD3 /* GuestsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */; };
 		7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */; };
 		7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E41F281304005C1A76 /* WalletViewController.swift */; };
 		7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0E51F281304005C1A76 /* WalletViewController.xib */; };
@@ -155,6 +157,8 @@
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7C5456301F2020D60027009C /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestsTableViewCell.swift; sourceTree = "<group>"; };
+		7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GuestsTableViewCell.xib; sourceTree = "<group>"; };
 		7CAAA0E01F27CC49005C1A76 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E41F281304005C1A76 /* WalletViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		7CAAA0E51F281304005C1A76 /* WalletViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletViewController.xib; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
 				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
 				09B3214C1F28FCAC0044F05C /* userTableViewCell.swift */,
+				7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */,
+				7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */,
 			);
 			name = EventsTableViewPage;
 			sourceTree = "<group>";
@@ -533,6 +539,7 @@
 				09C808A51F2BFD95009AA56F /* imageCollectionViewCell.xib in Resources */,
 				09F788511F269EE800A311F0 /* detailView2.xib in Resources */,
 				09F7884D1F26781400A311F0 /* detailView1.xib in Resources */,
+				7C9A6B801F2FBC4F00A70FD3 /* GuestsTableViewCell.xib in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
 				4FD2FE921F2ADBEE00E565B9 /* google.gpx in Resources */,
 				09F788491F2668A700A311F0 /* detailView0.xib in Resources */,
@@ -706,6 +713,7 @@
 				7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */,
 				4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */,
 				7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */,
+				7C9A6B7F1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift in Sources */,
 				7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */,
 				7CBC19261F29511E002C65F9 /* MyUploadsViewController.swift in Sources */,
 				09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */,

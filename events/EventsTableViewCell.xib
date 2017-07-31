@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="494.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-AQ-Woc" customClass="RotatedView" customModule="FoldingCell">
@@ -116,11 +116,8 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ozZ-Ph-dSv" customClass="RotatedView" customModule="FoldingCell">
-                        <rect key="frame" x="50" y="181" width="309" height="285"/>
+                        <rect key="frame" x="16" y="62" width="309" height="285"/>
                         <subviews>
-                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
-                                <rect key="frame" x="10" y="0.0" width="333" height="450"/>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebP-AO-Do6">
                                 <rect key="frame" x="0.0" y="0.0" width="10" height="450"/>
                                 <color key="backgroundColor" red="0.26316654760000002" green="1" blue="0.89469563119999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -128,6 +125,9 @@
                                     <constraint firstAttribute="width" constant="10" id="L3T-G8-y6b"/>
                                 </constraints>
                             </view>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
+                                <rect key="frame" x="8" y="0.0" width="333" height="450"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.86801654220000002" green="0.86801654220000002" blue="0.86801654220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -172,7 +172,7 @@
                 <outlet property="view2topConstraint" destination="gIw-mX-WRp" id="WjS-aT-Y8g"/>
                 <outletCollection property="foregroundView" destination="RpP-AQ-Woc" collectionClass="NSMutableArray" id="Q4J-8m-545"/>
             </connections>
-            <point key="canvasLocation" x="-217.5" y="273.5"/>
+            <point key="canvasLocation" x="-251" y="277"/>
         </tableViewCell>
     </objects>
     <resources>
