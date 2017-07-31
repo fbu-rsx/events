@@ -98,19 +98,21 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
+        cell.backgroundColor = .clear
+        
         var duration = 0.0
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
             cell.unfold(true, animated: true, completion: nil)
-            duration = 0.5
+            duration = 0.3
             tableView.isScrollEnabled = false
         } else {// close cell
             cellHeights[indexPath.row] = kCloseCellHeight
             cell.unfold(false, animated: true, completion: nil)
-            duration = 1.1
+            duration = 0.5
             tableView.isScrollEnabled = true
         }
-        
+
         UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
             tableView.beginUpdates()
             tableView.endUpdates()
@@ -118,18 +120,17 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if case let cell as FoldingCell = cell {
-            cell.backgroundColor = .clear
-            if cellHeights[indexPath.row] == C.CellHeight.close {
-                //cell.selectedAnimation(false, animated: false, completion:nil)
-                cell.unfold(false, animated: false, completion: nil)
-            } else {
-                //cell.selectedAnimation(true, animated: false, completion: nil)
-                cell.unfold(true, animated: false, completion: nil)
-                
-            }
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if case let cell as FoldingCell = cell {
+//            cell.backgroundColor = .clear
+//            if cellHeights[indexPath.row] == C.CellHeight.close {
+//                //cell.selectedAnimation(false, animated: false, completion:nil)
+//                cell.unfold(false, animated: false, completion: nil)
+//            } else {
+//                //cell.selectedAnimation(true, animated: false, completion: nil)
+//                cell.unfold(true, animated: false, completion: nil)
+//            }
+//        }
+//    }
     
 }

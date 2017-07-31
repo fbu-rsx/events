@@ -33,7 +33,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     var pageView : UIPageControl = UIPageControl()
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var delegate: imagePickerDelegate2?{
+    var delegate: imagePickerDelegate2? {
         didSet{
             pageView = UIPageControl(frame:CGRect(x: (self.view2.frame.width-10)/2 - 10, y: self.view2.frame.height - 40, width: 40, height: 40))
             configurePageControl()
@@ -74,7 +74,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         }
     }
     
-    var event: Event?{
+    weak var event: Event? {
         didSet{
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
                 // Set organizer's profile picture
@@ -167,7 +167,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         declineButton.layer.cornerRadius = 5
         declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
-    
+        
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
         

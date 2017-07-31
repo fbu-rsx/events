@@ -22,6 +22,8 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var dollarSignLabel: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     
+    var marker: GMSMarker!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Event Title Label
@@ -47,6 +49,17 @@ class CreateAboutViewController: UIViewController {
         
         // Show tab bar controller
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
+        let coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
+        marker.position = coordinate
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+                                              longitude: coordinate.longitude,
+                                              zoom: Utilities.zoomLevel)
+        mapView.camera = camera
     }
     
     @IBAction func didTapToDismiss(_ sender: Any) {
@@ -75,7 +88,7 @@ class CreateAboutViewController: UIViewController {
         mapView.camera = camera
         mapView.isUserInteractionEnabled = false
         
-        let marker = GMSMarker()
+        marker = GMSMarker()
         marker.position = coordinate
         marker.map = mapView
         marker.isDraggable = false
