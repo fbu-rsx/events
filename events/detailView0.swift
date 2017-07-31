@@ -13,14 +13,6 @@ import GoogleMaps
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-     // Drawing code
-     }
-     */
-    @IBOutlet weak var tableViewCell: UITableViewCell!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var eventTitle: UILabel!
     @IBOutlet weak var eventDescription: UILabel!
@@ -28,7 +20,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
-    
     
     var guests: [String] = []
     
@@ -38,8 +29,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBAction func notGoingTap(_ sender: UIButton) {
     }
     
-    
-    
     override func awakeFromNib() {
         // Initialization code
         self.tableView.dataSource = self
@@ -47,7 +36,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         let bundle = Bundle(path: "events/GuestsTableViewCell.swift")
         let nib1 = UINib(nibName: "GuestsTableViewCell", bundle: bundle)
         tableView.register(nib1, forCellReuseIdentifier: "userCell")
-        
         // Setting invitiation button colors
         acceptButton.layer.cornerRadius = 5
         acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
@@ -93,7 +81,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in (self.event?.guestlist.keys)!{
                     self.guests.append(guest)
                 }
-
                 
                 switch self.event!.myStatus {
                 case .accepted:
@@ -121,8 +108,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.guests.count
