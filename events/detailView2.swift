@@ -8,7 +8,7 @@
 
 import UIKit
 
-class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
+class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDelegate, UITextFieldDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchField: UITextField!
@@ -23,16 +23,11 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var songs: [String] = []
     
+    var searchedSongsURIS: [String] = []
+    
     var event: Event?{
         didSet{
-            if let ID = event!.spotifyID {
-                OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs) in
-                    self.songs = songs
-                    self.tableView.reloadData()
-                })
-            }else{
-                print("Spotify not working")
-            }
+            getTracks()
         }
     }
     
@@ -44,11 +39,31 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         // Initialization code
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "songCell")
+        let nib1 = UINib(nibName: "SongTableViewCell", bundle: nil)
+        tableView.register(nib1, forCellReuseIdentifier: "songCell")
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
-        subView = nib.instantiate(withOwner: self, options: nil).first as! songOverlayView
+        subView = (nib.instantiate(withOwner: self, options: nil).first as! songOverlayView)
         subView!.frame = CGRect(x: 0, y: 90, width: self.frame.width, height: self.frame.height - 90)
+        subView?.delegate = self
+        searchField.delegate = self
         
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchField.resignFirstResponder()
+        getTracks()
+        return true
+    }
+    
+    func getTracks(){
+        if let ID = event!.spotifyID {
+            OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs) in
+                self.songs = songs
+                self.tableView.reloadData()
+            })
+        }else{
+            print("Spotify not working")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,10 +84,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
         if searchField.text == ""{
             subView?.removeFromSuperview()
             added = false
+            //textFieldShouldReturn(searchField)
         }
         else if added == true {
             // update subview text
-            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs) in
+            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris) in
+                self.searchedSongsURIS = uris
                 self.subView?.Songs = songs
                 self.subView?.tableView.reloadData()
             })
@@ -81,11 +98,17 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource {
             self.addSubview(subView!)
             added = true
             // update subview text
-            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs) in
+            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris) in
+                self.searchedSongsURIS = uris
                 self.subView?.Songs = songs
                 self.subView?.tableView.reloadData()
             })
         }
+    }
+    
+    func addSong(songIndex: Int) {
+        let song = searchedSongsURIS[songIndex].replacingOccurrences(of: "spotify:track:", with: "")
+        FirebaseDatabaseManager.shared.addQueuedSong(event: event!, songID: song)
     }
     
 }

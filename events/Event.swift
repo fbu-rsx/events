@@ -92,6 +92,7 @@ class Event: NSObject, NSCoding, MKAnnotation {
         "photo2": true
     }
     */
+    
     init(dictionary: [String: Any]) {
         self.eventid = dictionary[EventKey.id] as! String
         self.eventname = dictionary[EventKey.name] as! String
@@ -99,7 +100,6 @@ class Event: NSObject, NSCoding, MKAnnotation {
             self.totalcost = cost as? Double
         }
         let datetime = dictionary[EventKey.date] as! String
-        
         let dateConverter = DateFormatter()
         dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
         self.date = dateConverter.date(from: datetime)!
@@ -115,8 +115,11 @@ class Event: NSObject, NSCoding, MKAnnotation {
         self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
+        super.init()
+        if self.organizerID == AppUser.current.uid{
+            FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
+        }
     }
-    
     
     func getDateStringOnly() -> String {
         let dateFormatterPrint = DateFormatter()

@@ -77,6 +77,20 @@ class FirebaseDatabaseManager {
         }
     }
     
+    func addQueuedSongsListener(event: Event) {
+        self.ref.child("events/\(event.eventid)/queued_songs").observe(.childAdded) { (snapshot: DataSnapshot) in
+            print(snapshot)
+            OAuthSwiftManager.shared.addSongToPlaylist(userID: event.playlistCreatorID!, playlistID: event.spotifyID!, song: snapshot.key)
+            let update = ["events/\(event.eventid)/queued_songs/\(snapshot.key)": NSNull()]
+            self.ref.updateChildValues(update)
+        }
+    }
+    
+    func addQueuedSong(event: Event, songID: String){
+        let update = ["events/\(event.eventid)/queued_songs/\(songID)": true]
+        self.ref.updateChildValues(update)
+    }
+    
     func getSingleEvent(withID id: String, completion: @escaping ([String: Any]) -> Void) {
         self.ref.child("events/\(id)").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
             completion(snapshot.value as! [String: Any])

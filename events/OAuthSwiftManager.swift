@@ -156,29 +156,31 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
-    func addSongToPlaylist(userID: String, playlistID: String, songsArray: [String]){
+    func addSongToPlaylist(userID: String, playlistID: String, song: String){
         //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
-        let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks")
+        let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks?=uris=spotify%3Atrack%3A\(song)")
+        print(url)
         let header = ["Content-Type": "application/json"]
         // uris format: uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh, spotify:track:1301WleyT98MSxVHPZCA6M
-        let Parameters: [String: Any] = ["uris": ""]
-        request(url!, method: .post, parameters: Parameters, encoding: JSONEncoding.default, headers: header).validate()
+        request(url!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().responseJSON { (response) in
+            print(response)
+        }
     }
     
-    func search(songName: String, completion: @escaping (_ songs: [String])->()){
+    func search(songName: String, completion: @escaping (_ songs: [String], _ uris: [String])->()){
         let name = songName.replacingOccurrences(of: " ", with: "%20")
-        let Parameters: [String: Any] = ["q": name, "type": "track"]
-        //print(Parameters)
         let url = URL(string: "https://api.spotify.com/v1/search?q=\(name)&type=track")
         request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             let result = response.result.value as! [String: Any]
             let tracks = result["tracks"] as! [String: Any]
             let items = tracks["items"] as! [[String: Any]]
             var songs: [String] = []
+            var uris: [String] = []
             for item in items{
                 songs.append(item["name"] as! String)
+                uris.append(item["uri"] as! String)
             }
-            completion(songs)
+            completion(songs, uris)
         }
     }
     

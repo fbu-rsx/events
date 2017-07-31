@@ -36,7 +36,7 @@
                     <rect key="frame" x="8" y="52" width="317" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                     <connections>
                         <action selector="editingChanged:" destination="iN0-l3-epB" eventType="editingChanged" id="Ewt-xO-Vxh"/>
                         <action selector="valueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="fDv-w8-Utu"/>
@@ -65,15 +65,9 @@
             <connections>
                 <outlet property="searchField" destination="RLN-Rs-eaO" id="Yps-vz-dWL"/>
                 <outlet property="tableView" destination="Rk1-5M-chh" id="7MQ-de-o6I"/>
-                <outletCollection property="gestureRecognizers" destination="LG4-v6-vYS" appends="YES" id="slJ-SB-gVM"/>
             </connections>
             <point key="canvasLocation" x="25.5" y="205"/>
         </view>
-        <tapGestureRecognizer id="LG4-v6-vYS">
-            <connections>
-                <action selector="didTap:" destination="iN0-l3-epB" id="tuw-6J-v5h"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="spotify-android.png" width="256" height="256"/>
