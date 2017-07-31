@@ -24,9 +24,10 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var eventDescription: UILabel!
     @IBOutlet weak var topMap: MKMapView!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var acceptButton: UIButton!
     
     
-    var guests: [[String:Int]] = []
+    var guests: [String:Int] = [:]
     var usersDic: [String: Bool] = [:]
     
     
@@ -57,14 +58,14 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 let region = MKCoordinateRegionMakeWithDistance(self.event!.coordinate, 1000, 1000)
                 self.topMap.setRegion(region, animated: true)
                 
-                // Populate the guest list
                 for guest in self.event!.guestlist {
-                    print("hello?")
-                    print(guest)
-                    //guests.append(guest)
+                    print("guest: \(guest)")
                 }
+                self.guests = self.event!.guestlist
                 
+//                print("here \(self.guests)")
             }
+             self.tableView.reloadData()
         }
     }
     
@@ -74,14 +75,19 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as! userTableViewCell
-        //let user = users[indexPath.row]
-       // cell.label.text = user // TODO: FIX to user.name, get AppUser
-//        if usersDic[user]!{
-//            
+//        FirebaseDatabaseManager.shared.getSingleUser(id: self.guests[indexPath.row]) { (user: AppUser) in
+//            cell.user = user
 //        }
-//        else{
-//            
-//        }
+        //let user = self.guests[indexPath.row]
+        
+        
+                // cell.label.text = user // TODO: FIX to user.name, get AppUser
+        //        if usersDic[user]!{
+        //
+        //        }
+        //        else{
+        //
+        //        }
         return cell
     }
     

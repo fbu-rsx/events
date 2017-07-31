@@ -131,10 +131,26 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     color = Colors.greenAccepted
                     sideBarColor = UIColor(hexString: "#8CF7AC")
                     backViewColor = UIColor(hexString: "#8CF7AC")
+                    
+                    // if accepted, hide "accept" and "decline" buttons
+                    self.declineButton.isHidden = true
+                    self.acceptButton.setTitle("Accepted", for: .normal)
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#F46E79")
+                    self.acceptButton.isEnabled = false
+                    self.acceptButton.sizeToFit()
+                    
                 case .declined:
                     color = Colors.redDeclined
                     backViewColor = UIColor(hexString: "#F4ABB1")
                     sideBarColor = UIColor(hexString: "#F4ABB1")
+                    
+                    // if declined, hide "accept" and "decline" buttons
+                    self.declineButton.isHidden = true
+                    self.acceptButton.setTitle("Declined", for: .normal)
+                    self.acceptButton.backgroundColor = UIColor(hexString: "#F46E79")
+                    self.acceptButton.isEnabled = false
+                    self.acceptButton.sizeToFit()
+                    
                 default:
                     color = Colors.pendingBlue
                     sideBarColor = UIColor(hexString: "#ABEEFC")
@@ -162,6 +178,10 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         super.awakeFromNib()
         //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
         
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        declineButton.layer.cornerRadius = 5
+        declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
     
     func configurePageControl() {
