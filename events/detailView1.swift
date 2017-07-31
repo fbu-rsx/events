@@ -25,6 +25,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     }
     */
     
+    @IBOutlet weak var button: UIButton!
+
     let picker = ImagePickerController()
     
     var delegate: imagePickerDelegate2?{
@@ -47,11 +49,14 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         collectionView.collectionViewLayout = layout
+        collectionView.allowsMultipleSelection = true
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     var photos: [UIImage] = []
+    
+    var selectedPhotos: [UIImage] = []
     
     var event: Event?{
         didSet{
@@ -68,11 +73,36 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
                 self.collectionView.reloadData()
             })
         }
-        //self.collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedPhotos.append(photos[indexPath.row])
+        if selectedPhotos.count != 0 {
+            button.setTitle("Download", for: .normal)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        selectedPhotos.remove(at: selectedPhotos.index(of: photos[indexPath.row])!)
+        if selectedPhotos.count == 0 {
+            button.setTitle("Upload", for: .normal)
+        }
+        return true
     }
     
     @IBAction func upload(_ sender: UIButton) {
-        delegate?.presenter(imagePicker: picker)
+        if selectedPhotos.count == 0{
+            delegate?.presenter(imagePicker: picker)
+        }
+        else{
+            for image in selectedPhotos{
+                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            }
+            
+            for index in collectionView.indexPathsForSelectedItems!{
+                collectionView.deselectItem(at: index, animated: true)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{

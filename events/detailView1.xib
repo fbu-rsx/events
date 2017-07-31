@@ -45,8 +45,8 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="Nbc-sO-eQa" firstAttribute="top" secondItem="RAZ-Fe-1NS" secondAttribute="bottom" constant="17.5" id="A8a-4T-Zqm"/>
                 <constraint firstItem="Rhz-3A-2iU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="CWh-Sv-jXl"/>
-                <constraint firstAttribute="bottom" secondItem="Nbc-sO-eQa" secondAttribute="bottom" id="DFs-2u-BOM"/>
                 <constraint firstAttribute="trailing" secondItem="RAZ-Fe-1NS" secondAttribute="trailing" constant="29" id="Pn1-jt-ZcJ"/>
                 <constraint firstAttribute="trailing" secondItem="Nbc-sO-eQa" secondAttribute="trailing" id="fJe-UT-OOa"/>
                 <constraint firstItem="Rhz-3A-2iU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="hMl-DM-gyJ"/>
@@ -58,6 +58,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="button" destination="RAZ-Fe-1NS" id="sQS-D9-KoQ"/>
                 <outlet property="collectionView" destination="Nbc-sO-eQa" id="pFy-sl-b9Y"/>
             </connections>
             <point key="canvasLocation" x="36.5" y="4.5"/>
