@@ -117,11 +117,8 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     backViewColor = UIColor(hexString: "#8CF7AC")
                     
                     // if accepted, hide "accept" and "decline" buttons
+                    self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
-                    self.acceptButton.setTitle("Accepted", for: .normal)
-                    self.acceptButton.backgroundColor = UIColor(hexString: "#F46E79")
-                    self.acceptButton.isEnabled = false
-                    self.acceptButton.sizeToFit()
                     
                 case .declined:
                     color = Colors.redDeclined
@@ -129,11 +126,8 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     sideBarColor = UIColor(hexString: "#F4ABB1")
                     
                     // if declined, hide "accept" and "decline" buttons
+                    self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
-                    self.acceptButton.setTitle("Declined", for: .normal)
-                    self.acceptButton.backgroundColor = UIColor(hexString: "#F46E79")
-                    self.acceptButton.isEnabled = false
-                    self.acceptButton.sizeToFit()
                     
                 default:
                     color = Colors.pendingBlue
@@ -154,7 +148,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         foregroundViewTop = view1topConstraint
         containerView = view2
         containerViewTop = view2topConstraint
-        itemCount = 3
+        itemCount = 4
         foregroundView.layer.cornerRadius = 10
         foregroundView.layer.masksToBounds = true
         closedProfileImageView.layer.cornerRadius = closedProfileImageView.bounds.width/2

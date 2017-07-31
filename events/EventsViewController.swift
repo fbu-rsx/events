@@ -15,7 +15,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     let kCloseCellHeight: CGFloat = 144
-    let kOpenCellHeight: CGFloat = 466
+    let kOpenCellHeight: CGFloat = 541
     var events: [Event] = []
     var cellHeights: [CGFloat] = []
     
@@ -71,7 +71,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     fileprivate struct C {
         struct CellHeight {
             static let close: CGFloat = 144 // equal or greater foregroundView height
-            static let open: CGFloat = 466 // equal or greater containerView height
+            static let open: CGFloat = 525 // equal or greater containerView height
         }
     }
     
@@ -101,6 +101,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.backgroundColor = .clear
         
         var duration = 0.0
+        
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
             cellHeights[indexPath.row] = kOpenCellHeight
             cell.unfold(true, animated: true, completion: nil)
