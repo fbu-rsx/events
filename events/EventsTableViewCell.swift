@@ -162,6 +162,12 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         super.awakeFromNib()
         //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
         
+        acceptButton.layer.cornerRadius = 5
+        acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        declineButton.layer.cornerRadius = 5
+        declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        
+        
     }
     
     func configurePageControl() {
