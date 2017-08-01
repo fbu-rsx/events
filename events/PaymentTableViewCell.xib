@@ -6,66 +6,103 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PaymentCell" rowHeight="112" id="KGk-i7-Jjw" customClass="PaymentTableViewCell" customModule="events" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="112"/>
+            <rect key="frame" x="0.0" y="0.0" width="334" height="112"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="325" height="111"/>
+                <rect key="frame" x="0.0" y="0.0" width="334" height="111.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="8.62" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dJ-AF-emt">
-                        <rect key="frame" x="24" y="0.0" width="208" height="62"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="47"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.62" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dJ-AF-emt">
+                        <rect key="frame" x="30" y="1" width="188" height="45.5"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Requested by Xiu Chen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-OO-PGT">
-                        <rect key="frame" x="56" y="61" width="179" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Requested by Xiu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8s-OO-PGT">
+                        <rect key="frame" x="63" y="54.5" width="255" height="19.5"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fDa-Ab-IGS">
-                        <rect key="frame" x="8" y="61" width="40" height="38"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fDa-Ab-IGS">
+                        <rect key="frame" x="8" y="53.5" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="HGp-Tj-JhI"/>
+                            <constraint firstAttribute="width" constant="50" id="Nvm-IZ-FvE"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryb-By-uZz">
-                        <rect key="frame" x="11" y="8" width="13" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryb-By-uZz">
+                        <rect key="frame" x="16" y="8" width="13" height="26"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jun 29, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgv-N2-neU">
-                        <rect key="frame" x="56" y="82" width="179" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIr-b2-fLa">
+                        <rect key="frame" x="226" y="8" width="100" height="32"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="g6B-jq-2Zx"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <state key="normal" title="Pay">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jun 29, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgv-N2-neU">
+                        <rect key="frame" x="63" y="79" width="263" height="19.5"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wIr-b2-fLa">
-                        <rect key="frame" x="221" y="9" width="96" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3M-nE-3cE">
+                        <rect key="frame" x="226" y="48" width="100" height="32"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <state key="normal" title="Pay"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="wYp-SZ-gjX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
+                        <state key="normal" title="Details">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="wgv-N2-neU" firstAttribute="leading" secondItem="fDa-Ab-IGS" secondAttribute="trailing" constant="5" id="0hh-WP-Qci"/>
+                    <constraint firstItem="ryb-By-uZz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="2iH-JR-X5d"/>
+                    <constraint firstItem="7dJ-AF-emt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="4zz-Ti-do6"/>
+                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="wgv-N2-neU" secondAttribute="trailing" constant="8" id="BLA-67-XPQ"/>
+                    <constraint firstAttribute="bottom" secondItem="fDa-Ab-IGS" secondAttribute="bottom" constant="8" id="HfE-T2-eD4"/>
+                    <constraint firstItem="g8s-OO-PGT" firstAttribute="leading" secondItem="fDa-Ab-IGS" secondAttribute="trailing" constant="5" id="MaW-gd-1HF"/>
+                    <constraint firstItem="7dJ-AF-emt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="1" id="S3O-aR-NMJ"/>
+                    <constraint firstItem="ryb-By-uZz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="WW0-15-rvS"/>
+                    <constraint firstAttribute="trailing" secondItem="wIr-b2-fLa" secondAttribute="trailing" constant="8" id="atD-0O-HW8"/>
+                    <constraint firstItem="g8s-OO-PGT" firstAttribute="top" secondItem="7dJ-AF-emt" secondAttribute="bottom" constant="8" id="f88-WC-59D"/>
+                    <constraint firstItem="wIr-b2-fLa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="hha-0D-3Ak"/>
+                    <constraint firstAttribute="trailing" secondItem="A3M-nE-3cE" secondAttribute="trailing" constant="8" id="nRr-fa-elJ"/>
+                    <constraint firstItem="wIr-b2-fLa" firstAttribute="leading" secondItem="7dJ-AF-emt" secondAttribute="trailing" constant="8" id="njo-W9-kYm"/>
+                    <constraint firstItem="wgv-N2-neU" firstAttribute="top" secondItem="g8s-OO-PGT" secondAttribute="bottom" constant="5" id="oSc-gP-dbB"/>
+                    <constraint firstItem="fDa-Ab-IGS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sFP-nr-Qmo"/>
+                    <constraint firstItem="A3M-nE-3cE" firstAttribute="top" secondItem="wIr-b2-fLa" secondAttribute="bottom" constant="8" id="vbD-IV-6f2"/>
+                    <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="g8s-OO-PGT" secondAttribute="trailing" constant="8" id="yBg-Ow-Uup"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="cellView" destination="H2p-sc-9uM" id="35u-Jl-r3n"/>
+                <outlet property="detailsButton" destination="A3M-nE-3cE" id="Afd-g5-beD"/>
                 <outlet property="payButton" destination="wIr-b2-fLa" id="e7R-Kr-NoR"/>
                 <outlet property="paymentValueLabel" destination="7dJ-AF-emt" id="ciH-yM-an9"/>
                 <outlet property="requestedDate" destination="wgv-N2-neU" id="meo-QL-4vZ"/>
                 <outlet property="requesterImage" destination="fDa-Ab-IGS" id="4iv-Nd-o9Z"/>
                 <outlet property="requesterName" destination="g8s-OO-PGT" id="kaU-cA-rJL"/>
             </connections>
-            <point key="canvasLocation" x="37.5" y="101"/>
+            <point key="canvasLocation" x="102" y="-6"/>
         </tableViewCell>
     </objects>
 </document>

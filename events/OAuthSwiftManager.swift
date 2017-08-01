@@ -62,11 +62,23 @@ class OAuthSwiftManager: SessionManager {
         }
         
     }
-    /*
-    func renewAccess(){
-        oauth.renewAccessToken(withRefreshToken: <#T##String#>, success: <#T##OAuthSwift.TokenSuccessHandler##OAuthSwift.TokenSuccessHandler##(OAuthSwiftCredential, OAuthSwiftResponse?, OAuthSwift.Parameters) -> Void#>, failure: <#T##OAuthSwift.FailureHandler?##OAuthSwift.FailureHandler?##(OAuthSwiftError) -> Void#>)
-        
-    }*/
+    
+    func refreshConnection(){
+        if testConnection() {
+            //print(OAuthSwiftManager.shared.oauth.client.credential.oauthRefreshToken)
+            print("YYYYYYYYY")
+        }
+        else{
+            print("XxxxxxXXXXXXxxxXX")
+        }
+        oauth.renewAccessToken(withRefreshToken: oauth.client.credential.oauthRefreshToken, success: { (credential, response, parameters) in
+            self.save(credential: credential)
+            print(response)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
     
 //    
 //    func logout() {
@@ -125,14 +137,24 @@ class OAuthSwiftManager: SessionManager {
     // functions to interact with spotify web client
     // use oauth
     
-    private func getSpotifyUserID(){
+    func getSpotifyUserID(){
         let url = URL(string: "https://api.spotify.com/v1/me")!
+        var thing = true
         request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            //print(response)
-            let response = response.result.value as! [String: Any]
-            let uri = response["uri"] as! String
-            let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
-            UserDefaults.standard.set(id, forKey: "spotify-user")
+                //print(response)
+                if response.result.isSuccess{
+                let response = response.result.value as! [String: Any]
+                let uri = response["uri"] as! String
+                let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
+                UserDefaults.standard.set(id, forKey: "spotify-user")
+                
+            }
+            else{
+                print("Should Prompt for Spotify Login")
+                    self.spotifyLogin(success: {}, failure: { (error) in
+                        print(error?.localizedDescription)
+                    })
+            }
         }
     }
     

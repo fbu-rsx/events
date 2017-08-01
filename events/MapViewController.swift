@@ -87,14 +87,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
         spotifyAlert.addAction(cancelAction)
         spotifyAlert.addAction(OKAction)
-        /*
-        OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
-        self.present(spotifyAlert, animated: true) */
-        guard OAuthSwiftManager.shared.testConnection() else{
-            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
-            self.present(spotifyAlert, animated: true)
-            return
-        }
+        OAuthSwiftManager.shared.getSpotifyUserID()
     }
     
     func inviteAdded(_ notification: NSNotification) {
@@ -104,13 +97,18 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         print("Invite events: \(self.events)")
         
         // Pop-Up alert when others first invite you to an event
-        
-        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
-            UIAlertAction in
+        let alertView = SCLAlertView()
+        alertView.addButton("Show More Details") {
             self.tabBarController?.selectedIndex = 2
-        })
-        self.present(alertController, animated: true, completion: nil)
+        }
+        alertView.showInfo("You've Been Invited!", subTitle: event.eventname)
+
+//        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
+//        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
+//            UIAlertAction in
+//            self.tabBarController?.selectedIndex = 2
+//        })
+//        self.present(alertController, animated: true, completion: nil)
         
     }
     
