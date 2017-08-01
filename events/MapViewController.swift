@@ -115,13 +115,18 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         print("Invite events: \(self.events)")
         
         // Pop-Up alert when others first invite you to an event
-        
-        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
-            UIAlertAction in
+        let alertView = SCLAlertView()
+        alertView.addButton("Show More Details") {
             self.tabBarController?.selectedIndex = 2
-        })
-        self.present(alertController, animated: true, completion: nil)
+        }
+        alertView.showInfo("You've Been Invited!", subTitle: event.eventname)
+
+//        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
+//        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
+//            UIAlertAction in
+//            self.tabBarController?.selectedIndex = 2
+//        })
+//        self.present(alertController, animated: true, completion: nil)
         
     }
     

@@ -10,32 +10,51 @@ import UIKit
 import AlamofireImage
 import XLPagerTabStrip
 
-class WalletViewController: UIViewController, IndicatorInfoProvider {
+class WalletViewController: UIViewController, IndicatorInfoProvider, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-      @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var walletImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Setting dataSource and delegate
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        
+        // Registering the cell xib file with tableview
+        let bundle = Bundle(path: "/Users/xiuchen/Desktop/events/events/PaymentTableViewCell.swift")
+        let nib = UINib(nibName: "PaymentTableViewCell", bundle: bundle)
+        tableView.register(nib, forCellReuseIdentifier: "PaymentCell")
 
-        tableView.register(UINib(nibName: "PaymentTableViewCell", bundle: nil), forCellReuseIdentifier: "PaymentCell")
-
-        // Set the current user's name
-        //userName.text = AppUser.current.name
-        // Set the current user's photo
-//        let photoURLString = AppUser.current.photoURLString
-//        let photoURL = URL(string: photoURLString)
-//        userImage.af_setImage(withURL: photoURL!)
-        
         // Gradient
         let coral = UIColor(hexString: "#FEB2A4")
         let lightBlue = UIColor(hexString: "#8CDEDC")
         infoView.gradientLayer.colors = [lightBlue.cgColor, coral.cgColor]
         infoView.gradientLayer.gradient = GradientPoint.bottomTop.draw()
+        
+        walletAnimation()
     }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("hello: \(AppUser.current.events.count )")
+        return AppUser.current.events.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentCell", for: indexPath) as! PaymentTableViewCell
+        return cell
+    }
+    
+    func walletAnimation () {
+        UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
+            self.walletImage.frame.origin.y -= 10
+        })
+        self.walletImage.frame.origin.y += 10
+        
+        
+    }
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         //return IndicatorInfo(title: "Wallet", image: UIImage(named: "wallet"))
         return IndicatorInfo(title: "Wallet")
