@@ -112,7 +112,7 @@ class Event: GMSMarker {
     
     func getDateStringOnly() -> String {
         let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "MMM dd,yyyy"
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
         return dateFormatterPrint.string(from: self.date)
     }
     

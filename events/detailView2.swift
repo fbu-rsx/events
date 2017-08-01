@@ -13,14 +13,6 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchField: UITextField!
     
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
     var songs: [String] = []
     
     var searchedSongsURIS: [String] = []
@@ -49,6 +41,8 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         
     }
     
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchField.resignFirstResponder()
         getTracks()
@@ -75,7 +69,6 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         cell.label.text = songs[indexPath.row]
         return cell
     }
-    
     
     @IBAction func editingChanged(_ sender: Any) {
         if searchField.text == ""{

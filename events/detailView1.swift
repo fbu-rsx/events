@@ -16,7 +16,7 @@ protocol imagePickerDelegate2 {
 }
 
 class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -98,10 +98,10 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
             for image in selectedPhotos{
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             }
-            
             for index in collectionView.indexPathsForSelectedItems!{
                 collectionView.deselectItem(at: index, animated: true)
             }
+            button.setTitle("Upload", for: .normal)
         }
     }
     
@@ -127,6 +127,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
         collectionView.reloadData()
         imagePicker.dismiss(animated: true, completion: nil)
+        //imagePicker. somehow deselect previously selected items
     }
     
     // required function

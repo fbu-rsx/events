@@ -20,7 +20,7 @@ class FacebookFriend {
     var photo: URL
     
     init(dict: [String: Any]) {
-        print(dict)
+        //print(dict)
         self.id = dict[FriendKey.id.rawValue] as! String
         self.name = dict[FriendKey.name.rawValue] as! String
         let picDict = dict[FriendKey.photo.rawValue] as! [String: Any]
