@@ -136,7 +136,7 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
-    func createPlaylist(name: String, completion: @escaping (_ id: String)->()){
+    func createPlaylist(name: String, completion: @escaping (_ id: String?)->()){
         let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID!)/playlists")
         //print(url)
@@ -150,7 +150,7 @@ class OAuthSwiftManager: SessionManager {
             }else{
                 print("Error: " + response.result.error!.localizedDescription)
             }
-            completion(final!)
+            completion(final)
         }
         
     }

@@ -8,17 +8,12 @@
 
 import Foundation
 
-protocol CreateEventMasterDelegate: class {
-    func createNewEvent(_ dict: [String: Any]) -> Event
-}
-
 class CreateEventMaster {
     
     static var shared = CreateEventMaster()
     
     var event: [String: Any]
     var guestlist: [String: Int]
-    weak var delegate: CreateEventMasterDelegate!
     
     init() {
         self.event = [EventKey.id: FirebaseDatabaseManager.shared.getNewEventID(),
@@ -34,5 +29,12 @@ class CreateEventMaster {
                       EventKey.radius: 50.0,
                       EventKey.orgURLString: AppUser.current.photoURLString]
         self.guestlist = [:]
+    }
+    
+    func createNewEvent() -> Event {
+        print("CREATING NEW EVENT")
+        let event = AppUser.current.createEvent(self.event)
+        CreateEventMaster.shared.clear()
+        return event
     }
 }
