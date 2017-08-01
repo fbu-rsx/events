@@ -29,6 +29,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cellHeights = (0..<6).map { _ in C.CellHeight.close }
         // Load AppUser's events
         events = AppUser.current.events
+
     }
     
     override func viewDidLoad() {

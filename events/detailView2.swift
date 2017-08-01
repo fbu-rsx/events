@@ -110,6 +110,18 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         subView?.removeFromSuperview()
         added = false
         textFieldShouldReturn(searchField)
+        // inform user that song was added
+        let alertController = UIAlertController(title: "Requested", message: "Song request made", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(OKAction)
+        var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
+        }
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+        rootViewController?.present(alertController, animated: true, completion: nil)
     }
     
 }
