@@ -32,7 +32,7 @@ target 'events' do
   pod 'GooglePlaces'
   pod 'PeekPop', '~> 1.0'
   pod 'SCLAlertView'
-
+  pod 'IQKeyboardManagerSwift'
 
   target 'eventsTests' do
     inherit! :search_paths

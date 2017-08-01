@@ -15,6 +15,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import GoogleMaps
 import GooglePlaces
+import IQKeyboardManagerSwift
 
 
 @UIApplicationMain
@@ -49,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /*OAuthSwiftManager.shared.createPlaylist(name: "test") { (st) in
             print(st)
         }*/
+        
+        IQKeyboardManager.sharedManager().enable = true
+        IQKeyboardManager.sharedManager().toolbarTintColor = Colors.green
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
         return true
