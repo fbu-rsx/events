@@ -33,9 +33,13 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         infoView.gradientLayer.colors = [lightBlue.cgColor, coral.cgColor]
         infoView.gradientLayer.gradient = GradientPoint.bottomTop.draw()
         
-        walletAnimation()
+        tableView.allowsSelection = false
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        walletAnimation()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("hello: \(AppUser.current.events.count )")
         return AppUser.current.events.count
@@ -48,11 +52,9 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
     
     func walletAnimation () {
         UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
-            self.walletImage.frame.origin.y -= 10
+            self.walletImage.frame.origin.y -= 8
         })
-        self.walletImage.frame.origin.y += 10
-        
-        
+        self.walletImage.frame.origin.y += 8
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

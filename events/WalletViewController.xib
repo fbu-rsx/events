@@ -46,7 +46,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallet-with-card-sticking-out" translatesAutoresizingMaskIntoConstraints="NO" id="VhO-b1-I0y">
-                            <rect key="frame" x="172" y="23" width="30" height="29"/>
+                            <rect key="frame" x="172" y="21" width="30" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
                     </subviews>
