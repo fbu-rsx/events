@@ -28,9 +28,11 @@ class OAuthSwiftManager: SessionManager {
         
         oauth = OAuth2Swift(consumerKey: OAuthSwiftManager.spotifyConsumerKey, consumerSecret: OAuthSwiftManager.spotifySecret, authorizeUrl: OAuthSwiftManager.spotifyAuthorizeUrl, accessTokenUrl: OAuthSwiftManager.spotifyAccessTokenUrl, responseType: "token")
         
+        
         if let credential = retrieveCredentials() {
             oauth.client.credential.oauthToken = credential.oauthToken
             oauth.client.credential.oauthTokenSecret = credential.oauthTokenSecret
+            oauth.client.credential.oauthRefreshToken = credential.oauthRefreshToken
         }
         else{
             spotifyLogin(success: {}, failure: { (error) in
@@ -45,9 +47,11 @@ class OAuthSwiftManager: SessionManager {
     func spotifyLogin(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
         // Add callback url to open app when returning from Twitter login on web
+        
         let Scope = "playlist-modify-public playlist-modify-private user-follow-modify user-read-private"
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
+        //oauth.auth
         
         oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
             print(credential)
@@ -58,6 +62,12 @@ class OAuthSwiftManager: SessionManager {
         }
         
     }
+    /*
+    func renewAccess(){
+        oauth.renewAccessToken(withRefreshToken: <#T##String#>, success: <#T##OAuthSwift.TokenSuccessHandler##OAuthSwift.TokenSuccessHandler##(OAuthSwiftCredential, OAuthSwiftResponse?, OAuthSwift.Parameters) -> Void#>, failure: <#T##OAuthSwift.FailureHandler?##OAuthSwift.FailureHandler?##(OAuthSwiftError) -> Void#>)
+        
+    }*/
+    
 //    
 //    func logout() {
 //        clearCredentials()

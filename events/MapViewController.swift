@@ -101,8 +101,11 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
         spotifyAlert.addAction(cancelAction)
         spotifyAlert.addAction(OKAction)
-
+        /*
+        OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
+        self.present(spotifyAlert, animated: true) */
         guard OAuthSwiftManager.shared.testConnection() else{
+            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
             self.present(spotifyAlert, animated: true)
             return
         }
@@ -125,12 +128,10 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
     }
     
-    
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.animate(toLocation: currentLocation.coordinate)
         mapView.animate(toZoom: Utilities.zoomLevel)
     }
-    
     
     // MARK: Add an event to the mapView
     func add(event: Event) {
@@ -194,7 +195,6 @@ extension MapViewController: GMSMapViewDelegate {
             if event.organizerID == AppUser.current.uid {
                 alertView.addButton("Delete") {
                     NotificationCenter.default.post(name: BashNotifications.delete, object: event)
-                
                 }
                 alertView.showEdit(event.eventname, subTitle: event.getDateStringOnly())
             } else {
@@ -209,11 +209,9 @@ extension MapViewController: GMSMapViewDelegate {
                 } else if event.myStatus == InviteStatus.accepted || event.myStatus == InviteStatus.declined  {
                     alertView.showInfo(event.eventname, subTitle: event.getDateStringOnly())
                 }
-                
             }
         }
     }
-    
     
     func eventWithinCoordinate(_ coordinate: CLLocationCoordinate2D) -> Event? {
         guard self.events.count > 0 else { return nil}

@@ -40,7 +40,8 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         searchField.delegate = self
         self.backgroundColor = .black
         tableView.backgroundColor = .black
-        //tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorInset = .zero
+        tableView.layoutMargins = .zero
     }
     
     
@@ -72,12 +73,14 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
         cell.layoutMargins = UIEdgeInsets.zero
+        cell.isUserInteractionEnabled = false
         return cell
     }
     
     @IBAction func editingChanged(_ sender: Any){
         if searchField.text == ""{
-            
+            subView?.removeFromSuperview()
+            added = false
         }
         else if added == true {
             // update subview text
