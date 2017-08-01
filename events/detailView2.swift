@@ -41,6 +41,8 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         
     }
     
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchField.resignFirstResponder()
         getTracks()
