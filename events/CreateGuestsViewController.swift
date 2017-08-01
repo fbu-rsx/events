@@ -19,7 +19,7 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
+    
         self.titleLabel.textColor = UIColor(hexString: "#FEB2A4")
         
         self.friends = AppUser.current.facebookFriends

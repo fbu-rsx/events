@@ -16,7 +16,7 @@ protocol imagePickerDelegate2 {
 }
 
 class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
-
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
