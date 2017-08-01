@@ -49,7 +49,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().toolbarTintColor = Colors.green
-        
+        /*
+        if OAuthSwiftManager.shared.testConnection() {
+            OAuthSwiftManager.shared.refreshConnection()
+        }
+        */
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
         return true
     }

@@ -42,3 +42,20 @@ class Utilities {
         
     }
 }
+
+extension UIColor {
+    func getUInt() -> UInt{
+        // read colors to CGFloats and convert and position to proper bit positions in UInt32
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
+            
+            var colorAsUInt : UInt = 0
+            
+            colorAsUInt += UInt(red * 255.0) << 16 +
+                UInt(green * 255.0) << 8 +
+                UInt(blue * 255.0)
+            return colorAsUInt
+        }
+        return 0
+    }
+}

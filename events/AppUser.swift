@@ -18,7 +18,8 @@ struct BashNotifications {
     static let refresh = NSNotification.Name(rawValue: "refresh")
     static let enableSwipe = NSNotification.Name(rawValue: "enableSwipe")
     static let disableSwipe = NSNotification.Name(rawValue: "disableSwipe")
-
+    static let eventsLoaded = NSNotification.Name(rawValue: "eventsLoaded")
+    
 }
 
 struct UserKey {
@@ -30,22 +31,22 @@ struct UserKey {
 
 /*
  - "uid":
-    - "uid": "gMrf7HieuJHoH7fsdg"
-    - "name": "Skyler Ruesga"
-    - "photoURLString": "https://etc.com/kjhdf76vf8"
-    - "location": [latitude, longitude]
-    - "events":
-        - "eventid1": true
-        - "eventid2": false
-        - "eventid3": false
-    - "transactions":
+ - "uid": "gMrf7HieuJHoH7fsdg"
+ - "name": "Skyler Ruesga"
+ - "photoURLString": "https://etc.com/kjhdf76vf8"
+ - "location": [latitude, longitude]
+ - "events":
+ - "eventid1": true
+ - "eventid2": false
+ - "eventid3": false
+ - "transactions":
  */
 
 
 class AppUser {
- 
+    
     static var current: AppUser!
- 
+    
     var uid: String //same as their facebook id
     var name: String
     var photoURLString: String
@@ -66,14 +67,23 @@ class AppUser {
     
     convenience init(user: User) {
         let userDict: [String: String] = [UserKey.id: FBSDKAccessToken.current().userID,
-                                       UserKey.name: user.displayName!,
-                                       UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
+                                          UserKey.name: user.displayName!,
+                                          UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
-
+        
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.possiblyAddUser(userDict: userDict)
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
             self.facebookFriends = friends
+        }
+        FirebaseDatabaseManager.shared.fetchUserEvents(userid: self.uid) { (keys: [String: Int], events: [String: Any]) in
+            self.eventsKeys = keys
+            for id in events.keys {
+                let dict = events[id] as! [String: Any]
+                self.events.append(Event(dictionary: dict))
+            }
+            //print("AppUser Events: \(self.events)")
+            NotificationCenter.default.post(name: BashNotifications.eventsLoaded, object: nil)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
@@ -121,20 +131,6 @@ class AppUser {
         let index = self.events.index(of: event)!
         self.events.remove(at: index)
         self.eventsKeys.removeValue(forKey: event.eventid)
-    }
-}
-
-extension AppUser: LoadEventsDelegate {
-    func fetchEvents(completion: @escaping () -> Void) {
-        FirebaseDatabaseManager.shared.fetchUserEvents(userid: self.uid) { (keys: [String: Int], events: [String: Any]) in
-            self.eventsKeys = keys
-            for id in events.keys {
-                let dict = events[id] as! [String: Any]
-                self.events.append(Event(dictionary: dict))
-            }
-            //print("AppUser Events: \(self.events)")
-            completion()
-        }
     }
 }
 

@@ -25,9 +25,6 @@ struct Colors {
     static let redDeclined = UIColor(hexString: "#F46E79")
 }
 
-protocol LoadEventsDelegate: class {
-    func fetchEvents(completion: @escaping () -> Void)
-}
 
 class MapViewController: UIViewController, UISearchControllerDelegate, UISearchBarDelegate {
     
@@ -53,8 +50,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     // Creates an instance of Core Location class
     var locationManager = CLLocationManager()
     var events: [Event] = []
-    
-    var delegate: LoadEventsDelegate!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -86,26 +81,13 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             Utilities.setupGoogleMap(self.mapView)
         }
         
-        self.delegate = AppUser.current
-        delegate.fetchEvents() {
-            self.loadAllEvents()
-            print("MapViewController Events: \(self.events)")
-        }
-        CreateEventMaster.shared.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
-        
-        // Automatically zooms to the user's location upon VC loading
-        //        guard let coordinate = self.mapView.userLocation.location?.coordinate else { return }
-        //        let region = MKCoordinateRegionMakeWithDistance(coordinate, 1000, 1000)
-        //        self.mapView.setRegion(region, animated: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
         
         spotifyAlert.addAction(cancelAction)
         spotifyAlert.addAction(OKAction)
-
-        guard OAuthSwiftManager.shared.testConnection() else{
-            self.present(spotifyAlert, animated: true)
-            return
-        }
+        OAuthSwiftManager.shared.getSpotifyUserID()
     }
     
     func inviteAdded(_ notification: NSNotification) {
@@ -130,12 +112,23 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
     }
     
+
+    func eventsLoaded(_ notification: NSNotification) {
+        self.loadAllEvents()
+        print("MapViewController Events: \(self.events)")
+    }
     
+    func refresh(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        add(event: event)
+        print("new event added")
+    }
+    
+
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.animate(toLocation: currentLocation.coordinate)
         mapView.animate(toZoom: Utilities.zoomLevel)
     }
-    
     
     // MARK: Add an event to the mapView
     func add(event: Event) {
@@ -145,7 +138,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         event.snippet = event.about.isEmpty ? "No description." : event.about
         event.position = event.coordinate
         let data = try! Data(contentsOf: event.organizerURL)
-        let image = UIImage(data: data)!.af_imageScaled(to: CGSize(width: 50.0, height: 50.0))
+        let image = UIImage(data: data)!.af_imageScaled(to: CGSize(width: 45.0, height: 45.0))
         event.icon = image.af_imageRoundedIntoCircle()
         event.groundAnchor = CGPoint(x: event.groundAnchor.x, y: event.groundAnchor.y / 2.0)
         //        mapView.addAnnotation(event)
@@ -195,31 +188,36 @@ extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
         if let event = eventWithinCoordinate(coordinate) {
-            let alertView = SCLAlertView()
-            if event.organizerID == AppUser.current.uid {
-                alertView.addButton("Delete") {
-                    NotificationCenter.default.post(name: BashNotifications.delete, object: event)
-                
-                }
-                alertView.showEdit(event.eventname, subTitle: event.getDateStringOnly())
-            } else {
-                if event.myStatus == InviteStatus.noResponse {
-                    alertView.addButton("Accept") {
-                        NotificationCenter.default.post(name: BashNotifications.accept, object: event)
-                    }
-                    alertView.addButton("Decline") {
-                        print("Still need to add a decline notification")
-                    }
-                    alertView.showInfo(event.eventname, subTitle: event.getDateStringOnly())
-                } else if event.myStatus == InviteStatus.accepted || event.myStatus == InviteStatus.declined  {
-                    alertView.showInfo(event.eventname, subTitle: event.getDateStringOnly())
-                }
-                
-            }
+
+            showAlert(for: event)
         }
     }
     
-    
+    func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
+        showAlert(for: marker as! Event)
+    }
+
+    func showAlert(for event: Event) {
+        let alertView = SCLAlertView()
+        if event.organizerID == AppUser.current.uid {
+            alertView.addButton("Delete") {
+                NotificationCenter.default.post(name: BashNotifications.delete, object: event)
+                
+            }
+        } else {
+            if event.myStatus == InviteStatus.noResponse {
+                alertView.addButton("Accept") {
+                    NotificationCenter.default.post(name: BashNotifications.accept, object: event)
+
+                }
+                alertView.addButton("Decline") {
+                    print("Still need to add a decline notification")
+                }
+            }
+        }
+        alertView.showTitle(event.eventname, subTitle: event.getDateTimeString(), style: SCLAlertViewStyle.info, closeButtonTitle: "Not now", duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+    }
+
     func eventWithinCoordinate(_ coordinate: CLLocationCoordinate2D) -> Event? {
         guard self.events.count > 0 else { return nil}
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -233,7 +231,7 @@ extension MapViewController: GMSMapViewDelegate {
                 closest = event
             }
         }
-        if closestDist < closest.radius {
+        if closestDist < 3 * closest.radius {
             return closest
         }
         return nil
@@ -303,7 +301,6 @@ extension MapViewController: CLLocationManagerDelegate {
             
             let center = UNUserNotificationCenter.current()
             center.add(request)
-            
         }
     }
 }
@@ -311,16 +308,5 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         
-    }
-}
-
-extension MapViewController: CreateEventMasterDelegate {
-    func createNewEvent(_ dict: [String: Any]) -> Event {
-        print("CREATING NEW EVENT")
-        let event = AppUser.current.createEvent(dict)
-        add(event: event)
-        print("new event added")
-        CreateEventMaster.shared.clear()
-        return event
     }
 }

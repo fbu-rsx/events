@@ -243,10 +243,14 @@
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
-				09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */,
-				09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */,
 				7C9A6B7D1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift */,
 				7C9A6B7E1F2FBC4F00A70FD3 /* GuestsTableViewCell.xib */,
+				09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */,
+				09C808A31F2BFD95009AA56F /* imageCollectionViewCell.xib */,
+				09B321561F2BB7DA0044F05C /* songOverlayView.swift */,
+				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
+				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
+				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
 			);
 			name = EventsTableViewPage;
 			sourceTree = "<group>";
@@ -356,10 +360,6 @@
 				4FCB62871F143DC400BBDC71 /* Info.plist */,
 				4FD2FE8F1F2ADBDE00E565B9 /* apple.gpx */,
 				4FD2FE911F2ADBEE00E565B9 /* google.gpx */,
-				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
-				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
-				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
-				09B321561F2BB7DA0044F05C /* songOverlayView.swift */,
 				4FD2FE9D1F2C161800E565B9 /* paper.json */,
 				4FD2FE9E1F2C161800E565B9 /* retro.json */,
 				4FD2FE971F2C160E00E565B9 /* custom.json */,

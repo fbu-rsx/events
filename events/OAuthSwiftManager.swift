@@ -28,9 +28,11 @@ class OAuthSwiftManager: SessionManager {
         
         oauth = OAuth2Swift(consumerKey: OAuthSwiftManager.spotifyConsumerKey, consumerSecret: OAuthSwiftManager.spotifySecret, authorizeUrl: OAuthSwiftManager.spotifyAuthorizeUrl, accessTokenUrl: OAuthSwiftManager.spotifyAccessTokenUrl, responseType: "token")
         
+        
         if let credential = retrieveCredentials() {
             oauth.client.credential.oauthToken = credential.oauthToken
             oauth.client.credential.oauthTokenSecret = credential.oauthTokenSecret
+            oauth.client.credential.oauthRefreshToken = credential.oauthRefreshToken
         }
         else{
             spotifyLogin(success: {}, failure: { (error) in
@@ -45,9 +47,11 @@ class OAuthSwiftManager: SessionManager {
     func spotifyLogin(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
         // Add callback url to open app when returning from Twitter login on web
+        
         let Scope = "playlist-modify-public playlist-modify-private user-follow-modify user-read-private"
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
+        //oauth.auth
         
         oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
             print(credential)
@@ -58,6 +62,24 @@ class OAuthSwiftManager: SessionManager {
         }
         
     }
+    
+    func refreshConnection(){
+        if testConnection() {
+            //print(OAuthSwiftManager.shared.oauth.client.credential.oauthRefreshToken)
+            print("YYYYYYYYY")
+        }
+        else{
+            print("XxxxxxXXXXXXxxxXX")
+        }
+        oauth.renewAccessToken(withRefreshToken: oauth.client.credential.oauthRefreshToken, success: { (credential, response, parameters) in
+            self.save(credential: credential)
+            print(response)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    
 //    
 //    func logout() {
 //        clearCredentials()
@@ -115,18 +137,28 @@ class OAuthSwiftManager: SessionManager {
     // functions to interact with spotify web client
     // use oauth
     
-    private func getSpotifyUserID(){
+    func getSpotifyUserID(){
         let url = URL(string: "https://api.spotify.com/v1/me")!
+        var thing = true
         request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            //print(response)
-            let response = response.result.value as! [String: Any]
-            let uri = response["uri"] as! String
-            let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
-            UserDefaults.standard.set(id, forKey: "spotify-user")
+                //print(response)
+                if response.result.isSuccess{
+                let response = response.result.value as! [String: Any]
+                let uri = response["uri"] as! String
+                let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
+                UserDefaults.standard.set(id, forKey: "spotify-user")
+                
+            }
+            else{
+                print("Should Prompt for Spotify Login")
+                    self.spotifyLogin(success: {}, failure: { (error) in
+                        print(error?.localizedDescription)
+                    })
+            }
         }
     }
     
-    func createPlaylist(name: String, completion: @escaping (_ id: String)->()){
+    func createPlaylist(name: String, completion: @escaping (_ id: String?)->()){
         let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(spotifyUserID!)/playlists")
         //print(url)
@@ -140,7 +172,7 @@ class OAuthSwiftManager: SessionManager {
             }else{
                 print("Error: " + response.result.error!.localizedDescription)
             }
-            completion(final!)
+            completion(final)
         }
         
     }
