@@ -21,8 +21,10 @@ class CreateAboutViewController: UIViewController {
     @IBOutlet weak var sendInvitesButton: UIButton!
     @IBOutlet weak var perPersonText: UILabel!
     @IBOutlet weak var dollarSignLabel: UILabel!
-    @IBOutlet weak var mapImageView: UIImageView!
+    @IBOutlet weak var mapImageView: UIView!
     
+    var gMapView: GMSMapView?
+    var gMarker: GMSMarker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +47,14 @@ class CreateAboutViewController: UIViewController {
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
 
-        let imageURLString = "https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyDRsT9yyNdWk_mUCVYoKLFNupN6znQyWoo"
-        mapImageView.af_setImage(withURL: URL(string: imageURLString)!)
-        
         // Show tab bar controller
         self.tabBarController?.tabBar.isHidden = false
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setupMap()
+        setupMap()
     }
     
     @IBAction func didTapToDismiss(_ sender: Any) {
@@ -73,30 +73,33 @@ class CreateAboutViewController: UIViewController {
         eventTimeLabel.text = dateFormatter.string(from: date)
     }
     
-//    func setupMap() {
-//        mapView = GMSMapView(frame: mapImageView.frame)
-//        marker = GMSMarker()
-//        let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
-//        let coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
-//        Utilities.setupGoogleMap(mapView!)
-//        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
-//                                              longitude: coordinate.longitude,
-//                                              zoom: Utilities.zoomLevel)
-//        mapView!.camera = camera
-//        mapView!.isUserInteractionEnabled = false
-//        
-//        marker!.position = coordinate
-//        marker!.map = mapView
-//        marker!.isDraggable = false
-//
-//        mapView!.isHidden = false
-//        
-//        image = UIImage(view: mapView!.snapshotView(afterScreenUpdates: true)!)
-//        
-//        mapView = nil
-//        marker = nil
-//        
-//    }
+    func setupMap() {
+        gMapView = GMSMapView(frame: mapImageView.frame)
+        gMarker = GMSMarker()
+        let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
+        let coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
+        Utilities.setupGoogleMap(gMapView!)
+        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+                                              longitude: coordinate.longitude,
+                                              zoom: 1.0)
+        gMapView!.camera = camera
+        gMapView!.isUserInteractionEnabled = false
+        
+        gMarker!.position = coordinate
+        gMarker!.map = gMapView
+        gMarker!.isDraggable = false
+        gMapView?.animate(to: camera)
+        gMapView!.delegate = self
+        gMapView!.isHidden = false
+        
+//        let image = UIImage(view: gMapView!.snapshotView(afterScreenUpdates: true)!)
+//        self.mapImageView.image = image
+        self.mapImageView.addSubview(gMapView!.snapshotView(afterScreenUpdates: true)!)
+        
+        gMapView = nil
+        gMarker = nil
+        
+    }
     
     @IBAction func calculateCostPerPerson(_ sender: Any) {
         let totalCost = Double(totalCostText.text!) ?? 0
@@ -124,6 +127,10 @@ class CreateAboutViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension CreateAboutViewController: GMSMapViewDelegate {
+    
 }
 
 extension UIImage {
