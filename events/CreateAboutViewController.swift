@@ -26,6 +26,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var mapImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -48,7 +49,15 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         // Send Invites Button
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+
+
+        let imageURLString = "https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318&markers=color:red%7Clabel:C%7C40.718217,-73.998284&key=AIzaSyDRsT9yyNdWk_mUCVYoKLFNupN6znQyWoo"
+        mapImageView.af_setImage(withURL: URL(string: imageURLString)!)
+
         
+        
+        
+
         // Map
         setupMap()
         // Set guest list array
@@ -57,6 +66,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         self.tabBarController?.tabBar.isHidden = false
     }
     
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        setupMap()
@@ -65,10 +75,11 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         
     }
     
+
     @IBAction func didTapToDismiss(_ sender: Any) {
         self.view.endEditing(true)
     }
-    
+
         
         override func viewDidAppear(_ animated: Bool) {
             //        collectionView.dataSource = self
@@ -149,6 +160,35 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
             super.didReceiveMemoryWarning()
             // Dispose of any resources that can be recreated.
         }
+
+    
+
+
+//    func setupMap() {
+//        mapView = GMSMapView(frame: mapImageView.frame)
+//        marker = GMSMarker()
+//        let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
+//        let coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
+//        Utilities.setupGoogleMap(mapView!)
+//        let camera = GMSCameraPosition.camera(withLatitude: coordinate.latitude,
+//                                              longitude: coordinate.longitude,
+//                                              zoom: Utilities.zoomLevel)
+//        mapView!.camera = camera
+//        mapView!.isUserInteractionEnabled = false
+//        
+//        marker!.position = coordinate
+//        marker!.map = mapView
+//        marker!.isDraggable = false
+//
+//        mapView!.isHidden = false
+//        
+//        image = UIImage(view: mapView!.snapshotView(afterScreenUpdates: true)!)
+//        
+//        mapView = nil
+//        marker = nil
+//        
+//    }
+    
 }
 
 
