@@ -41,7 +41,7 @@ class FirebaseDatabaseManager {
     func fetchUserEvents(userid: String, completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("users/\(userid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             let result: [String: Int] = snapshot.value as? [String: Int] ?? [:]
-            print("user events results: \(result)")
+            //print("user events results: \(result)")
             FirebaseDatabaseManager.shared.fetchEventsForEventIDs(dictionary: result, completion: { (keys: [String: Int], events: [String: Any]) in
                 completion(keys, events)
             })
@@ -67,7 +67,7 @@ class FirebaseDatabaseManager {
             if AppUser.current.eventsKeys[snapshot.key] != nil {
                 return
             }
-            print(snapshot)
+            //print(snapshot)
             FirebaseDatabaseManager.shared.getSingleEvent(withID: snapshot.key, completion: { (eventDict: [String : Any]) in
                 let event = Event(dictionary: eventDict)
                 if event.organizerID != AppUser.current.uid {
@@ -79,7 +79,7 @@ class FirebaseDatabaseManager {
     
     func addQueuedSongsListener(event: Event) {
         self.ref.child("events/\(event.eventid)/queued_songs").observe(.childAdded) { (snapshot: DataSnapshot) in
-            print(snapshot)
+            //print(snapshot)
             OAuthSwiftManager.shared.addSongToPlaylist(userID: event.playlistCreatorID!, playlistID: event.spotifyID!, song: snapshot.key)
             let update = ["events/\(event.eventid)/queued_songs/\(snapshot.key)": NSNull()]
             self.ref.updateChildValues(update)
@@ -216,11 +216,11 @@ class FirebaseDatabaseManager {
      */
     // get user object from a user id
     func getSingleUser(id: String, completion: @escaping (AppUser) -> Void) {
-        print(id)
+        //print(id)
         self.ref.child("users/\(id)").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.exists() {
                 let dict = snapshot.value as! [String: Any]
-                print(dict)
+                //print(dict)
                 completion(AppUser(dictionary: dict))
             }
         }

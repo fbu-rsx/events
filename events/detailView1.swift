@@ -127,6 +127,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
         collectionView.reloadData()
         imagePicker.dismiss(animated: true, completion: nil)
+        //imagePicker. somehow deselect previously selected items
     }
     
     // required function

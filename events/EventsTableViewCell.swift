@@ -18,8 +18,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     @IBOutlet weak var view1topConstraint: NSLayoutConstraint!
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
-    @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var view2topConstraint: NSLayoutConstraint!  
     
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
@@ -69,10 +68,8 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     self.scrollView.addSubview(subView)
                 }
             }
-            
             self.scrollView.isPagingEnabled = true
             self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 3, height: self.scrollView.frame.size.height)
-            //print(self.scrollView.frame.width)
             pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
         }
     }
@@ -93,24 +90,20 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
                 // Set total cost
-
                 if let total = self.event!.totalcost {
                     let cost = total/Double(self.event!.guestlist.count + 1)
                     self.closedUserCost.text = String(format: "$%.2f", cost)
                 } else{
                     self.closedUserCost.text = "Free"
                 }
-                
                 // Set number of guests invited
                 self.closedInvitedNum.text = String(self.event!.guestlist.count)
-                
                 // accepted num will eventually be added to Event class
                 var coming: Int = 0
                 for user in self.event!.guestlist.keys{
                     if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
                 }
                 self.closedComingNum.text = String(coming)
-                
                 // Set the cell color depending on invite status
                 var color: UIColor!
                 var sideBarColor: UIColor!
@@ -121,20 +114,16 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     color = Colors.greenAccepted
                     sideBarColor = UIColor(hexString: "#8CF7AC")
                     backViewColor = UIColor(hexString: "#8CF7AC")
-                    
                     // if accepted, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
-                    
                 case .declined:
                     color = Colors.redDeclined
                     backViewColor = UIColor(hexString: "#F4ABB1")
                     sideBarColor = UIColor(hexString: "#F4ABB1")
-                    
                     // if declined, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
-                    
                 default:
                     color = Colors.pendingBlue
                     sideBarColor = UIColor(hexString: "#ABEEFC")
@@ -154,14 +143,13 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         foregroundViewTop = view1topConstraint
         containerView = view2
         containerViewTop = view2topConstraint
-        itemCount = 4
+        itemCount = 3
         foregroundView.layer.cornerRadius = 10
         foregroundView.layer.masksToBounds = true
         closedProfileImageView.layer.cornerRadius = closedProfileImageView.bounds.width/2
         closedProfileImageView.layer.masksToBounds = true
         super.awakeFromNib()
         //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
-        
         acceptButton.layer.cornerRadius = 5
         acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         declineButton.layer.cornerRadius = 5
@@ -170,7 +158,6 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
-        
         self.pageView.numberOfPages = 3
         self.pageView.currentPage = 0
         self.pageView.tintColor = UIColor.red
@@ -185,22 +172,18 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageView.currentPage = Int(pageNumber)
     }
     
     override func animationDuration(_ itemIndex:NSInteger, type:AnimationType)-> TimeInterval {
-        
         // durations count equal it itemCount
         let durations = [0.33, 0.26, 0.26] // timing animation for each view
         return durations[itemIndex]
     }
     
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     

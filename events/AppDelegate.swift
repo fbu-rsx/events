@@ -46,10 +46,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         center.removeAllDeliveredNotifications()
         center.removeAllPendingNotificationRequests()
-        //OAuthSwiftManager.shared.logout()
-        /*OAuthSwiftManager.shared.createPlaylist(name: "test") { (st) in
-            print(st)
-        }*/
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().toolbarTintColor = Colors.green

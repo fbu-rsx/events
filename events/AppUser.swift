@@ -131,7 +131,7 @@ extension AppUser: LoadEventsDelegate {
                 let dict = events[id] as! [String: Any]
                 self.events.append(Event(dictionary: dict))
             }
-            print("AppUser Events: \(self.events)")
+            //print("AppUser Events: \(self.events)")
             completion()
         }
     }
