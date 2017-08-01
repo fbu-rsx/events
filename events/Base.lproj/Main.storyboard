@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -307,7 +307,6 @@
                         <outlet property="dollarSignLabel" destination="46H-jp-cap" id="xCR-QE-QTq"/>
                         <outlet property="eventTimeLabel" destination="g9B-ez-dwe" id="aiK-1h-rDa"/>
                         <outlet property="eventTitleLabel" destination="EVN-yU-7LG" id="bwq-yZ-I0r"/>
-                        <outlet property="mapImageView" destination="1mO-Rt-p6r" id="LCf-bT-iXn"/>
                         <outlet property="perPersonText" destination="gjZ-pX-F5Y" id="0pI-cJ-3m9"/>
                         <outlet property="sendInvitesButton" destination="w4e-2h-fum" id="y8B-Py-Qum"/>
                         <outlet property="totalCostText" destination="Un7-tE-igi" id="HFy-Dh-bBE"/>

@@ -32,6 +32,11 @@ class OAuthSwiftManager: SessionManager {
             oauth.client.credential.oauthToken = credential.oauthToken
             oauth.client.credential.oauthTokenSecret = credential.oauthTokenSecret
         }
+        else{
+            spotifyLogin(success: {}, failure: { (error) in
+                print(error!.localizedDescription)
+            })
+        }
         
         // Assign oauth request adapter to Alamofire SessionManager adapter to sign requests
         adapter = oauth.requestAdapter
@@ -79,7 +84,6 @@ class OAuthSwiftManager: SessionManager {
     
     private func retrieveCredentials() -> OAuthSwiftCredential? {
         let keychain = Keychain()
-        
         if let data = keychain[data: "spotify_credentials"] {
             let credential = NSKeyedUnarchiver.unarchiveObject(with: data) as! OAuthSwiftCredential
             return credential
@@ -99,13 +103,22 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
+    func testConnection() -> Bool{
+        if let credential = retrieveCredentials(){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    
     // functions to interact with spotify web client
     // use oauth
     
     private func getSpotifyUserID(){
         let url = URL(string: "https://api.spotify.com/v1/me")!
         request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
-            print(response)
+            //print(response)
             let response = response.result.value as! [String: Any]
             let uri = response["uri"] as! String
             let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
@@ -147,11 +160,11 @@ class OAuthSwiftManager: SessionManager {
                     let inner = track["track"] as! [String: Any]
                     names.append(inner["name"] as! String)
                 }
-                print(names)
+                //print(names)
                 completion(names)
             }
             else{
-                print("Error")
+                print("Error: Couldn't fetch Spotify Tracks")
             }
         }
     }
@@ -159,7 +172,7 @@ class OAuthSwiftManager: SessionManager {
     func addSongToPlaylist(userID: String, playlistID: String, song: String){
         //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as! String
         let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks?=uris=spotify%3Atrack%3A\(song)")
-        print(url)
+        //print(url)
         let header = ["Content-Type": "application/json"]
         // uris format: uris=spotify:track:4iV5W9uYEdYUVa79Axb7Rh, spotify:track:1301WleyT98MSxVHPZCA6M
         request(url!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: header).validate().responseJSON { (response) in

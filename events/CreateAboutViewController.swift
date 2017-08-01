@@ -57,8 +57,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         
         
         
-        
-        
+
         // Map
         setupMap()
         // Set guest list array
@@ -67,22 +66,20 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         self.tabBarController?.tabBar.isHidden = false
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-////        setupMap()
-//    }
-//    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        setupMap()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+    }
+    
+
     @IBAction func didTapToDismiss(_ sender: Any) {
         self.view.endEditing(true)
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-    
-        
-      
-        }
+
         
         override func viewDidAppear(_ animated: Bool) {
             //        collectionView.dataSource = self
@@ -163,6 +160,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
             super.didReceiveMemoryWarning()
             // Dispose of any resources that can be recreated.
         }
+
     
 
 
@@ -191,8 +189,8 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
 //        
 //    }
     
-
 }
+
 
 extension UIImage {
     convenience init(view: UIView) {
@@ -203,3 +201,4 @@ extension UIImage {
         self.init(cgImage: image!.cgImage!)
     }
 }
+

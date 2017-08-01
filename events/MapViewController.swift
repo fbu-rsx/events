@@ -101,13 +101,11 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
         spotifyAlert.addAction(cancelAction)
         spotifyAlert.addAction(OKAction)
-        //self.present(spotifyAlert, animated: true)
-        self.present(spotifyAlert, animated: true)
-        /*
-         guard UserDefaults.standard.value(forKey: "spotify-user") != nil else{
-         self.present(spotifyAlert, animated: true)
-         return
-         }*/
+
+        guard OAuthSwiftManager.shared.testConnection() else{
+            self.present(spotifyAlert, animated: true)
+            return
+        }
     }
     
     func inviteAdded(_ notification: NSNotification) {

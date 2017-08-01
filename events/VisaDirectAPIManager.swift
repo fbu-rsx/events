@@ -6,6 +6,8 @@
 //  Copyright © 2017 fbu-rsx. All rights reserved.
 //
 
+// Currently Unused Class
+
 import Foundation
 import Alamofire
 
