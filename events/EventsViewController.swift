@@ -98,8 +98,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        cell.backgroundColor = .clear
-        
         var duration = 0.0
         
         if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
@@ -114,24 +112,29 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             tableView.isScrollEnabled = true
         }
 
-        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
+//        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
+//            tableView.beginUpdates()
+//            tableView.endUpdates()
+//        }, completion: nil)
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { 
             tableView.beginUpdates()
             tableView.endUpdates()
-        }, completion: nil)
+        }) { (finished: Bool) in
+        }
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if case let cell as FoldingCell = cell {
-//            cell.backgroundColor = .clear
-//            if cellHeights[indexPath.row] == C.CellHeight.close {
-//                //cell.selectedAnimation(false, animated: false, completion:nil)
-//                cell.unfold(false, animated: false, completion: nil)
-//            } else {
-//                //cell.selectedAnimation(true, animated: false, completion: nil)
-//                cell.unfold(true, animated: false, completion: nil)
-//            }
-//        }
-//    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if case let cell as FoldingCell = cell {
+            
+            cell.backgroundColor = .clear
+            if cellHeights[indexPath.row] == C.CellHeight.close {
+                cell.unfold(false, animated: false, completion: nil)
+            } else {
+                cell.unfold(true, animated: false, completion: nil)
+            }
+        }
+    }
     
 }

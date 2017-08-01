@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -129,7 +129,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9jb-GC-5i8" id="Hhk-Hy-X6t">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Xiu Chen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ze5-pn-WrD">
@@ -183,11 +183,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DV5-5O-K5c" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="196"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="total cost" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-tE-igi">
                                 <rect key="frame" x="71" y="280" width="107" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -270,6 +265,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1mO-Rt-p6r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="204"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -284,7 +284,7 @@
                         <outlet property="dollarSignLabel" destination="46H-jp-cap" id="xCR-QE-QTq"/>
                         <outlet property="eventTimeLabel" destination="g9B-ez-dwe" id="aiK-1h-rDa"/>
                         <outlet property="eventTitleLabel" destination="EVN-yU-7LG" id="bwq-yZ-I0r"/>
-                        <outlet property="mapView" destination="DV5-5O-K5c" id="lem-OZ-VSr"/>
+                        <outlet property="mapImageView" destination="1mO-Rt-p6r" id="LCf-bT-iXn"/>
                         <outlet property="perPersonText" destination="gjZ-pX-F5Y" id="0pI-cJ-3m9"/>
                         <outlet property="sendInvitesButton" destination="w4e-2h-fum" id="y8B-Py-Qum"/>
                         <outlet property="totalCostText" destination="Un7-tE-igi" id="HFy-Dh-bBE"/>
@@ -571,7 +571,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ng5-Ag-17X" id="6hu-No-xPP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -611,11 +611,10 @@
         <!--Map-->
         <scene sceneID="ddD-Mu-M3Z">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UfR-Xs-Y5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -624,18 +623,18 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="MAt-I2-rRK"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UfR-Xs-Y5q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1297" y="690"/>
         </scene>
         <!--CreateLocationNavController-->
         <scene sceneID="j5E-h3-f1j">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I7h-lu-Z8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="CreateLocationNavController" title="CreateLocationNavController" automaticallyAdjustsScrollViewInsets="NO" id="chc-gD-98Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s1M-MY-l19">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s1M-MY-l19">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -644,6 +643,7 @@
                         <segue destination="h1v-m1-jDG" kind="relationship" relationship="rootViewController" id="xld-gl-fod"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7h-lu-Z8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="725.60000000000002" y="2245.7271364317844"/>
         </scene>

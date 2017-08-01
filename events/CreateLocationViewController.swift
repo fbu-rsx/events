@@ -46,6 +46,7 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
         marker.isDraggable = true
         marker.map = mapView
         mapView.isHidden = false
+        CreateEventMaster.shared.event[EventKey.location] = [coordinate.latitude, coordinate.longitude]
         self.tabBarController?.tabBar.isHidden = false
     }
     

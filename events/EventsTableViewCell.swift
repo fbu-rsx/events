@@ -35,6 +35,9 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     var delegate: imagePickerDelegate2? {
         didSet{
+            if self.delegate == nil {
+                return 
+            }
             pageView = UIPageControl(frame:CGRect(x: (self.view2.frame.width-10)/2 - 10, y: self.view2.frame.height - 40, width: 40, height: 40))
             configurePageControl()
             scrollView.delegate = self
@@ -76,6 +79,9 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     
     weak var event: Event? {
         didSet{
+            if self.event == nil {
+                return
+            }
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
                 // Set organizer's profile picture
                 let url = URL(string: user.photoURLString)

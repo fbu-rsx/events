@@ -68,6 +68,7 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMSessionFetcher/Core (1.1.11)
   - ImagePicker (2.1.1)
+  - IQKeyboardManagerSwift (4.0.10)
   - KeychainAccess (3.0.2)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -104,6 +105,7 @@ DEPENDENCIES:
   - GoogleMaps
   - GooglePlaces
   - ImagePicker
+  - IQKeyboardManagerSwift
   - KeychainAccess
   - OAuthSwift (~> 1.1.2)
   - OAuthSwiftAlamofire
@@ -137,6 +139,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
+  IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
@@ -150,6 +153,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: b341bcc3fee69186989b8e83c0f3a497f841adcb
+PODFILE CHECKSUM: bfebe389f5a2fc3ae0f9fda39827e8dda595347f
 
 COCOAPODS: 1.2.1
