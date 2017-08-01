@@ -46,7 +46,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
 
     var event: Event? {
         didSet {
-            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
+            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
                 Utilities.setupGoogleMap(self.topMap)
                 let camera = GMSCameraPosition.camera(withLatitude: self.event!.coordinate.latitude,
                                                       longitude: self.event!.coordinate.longitude,

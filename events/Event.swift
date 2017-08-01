@@ -45,8 +45,7 @@ class Event: GMSMarker {
     var date: Date
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
-    var organizerID: String //uid of the organizer
-    var organizerURL: URL //organizer photo URL
+    var organizer: AppUser!
     var guestlist: [String: Int] // int is same as InviteStatus values
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
@@ -96,8 +95,6 @@ class Event: GMSMarker {
         let location = dictionary[EventKey.location] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
         self.radius = dictionary[EventKey.radius] as! Double
-        self.organizerID = dictionary[EventKey.organizerID] as! String
-        self.organizerURL = URL(string: dictionary[EventKey.orgURLString] as! String)!
         self.about = dictionary[EventKey.about] as! String
         self.spotifyID = dictionary[EventKey.spotifyID] as? String
         self.playlistCreatorID = dictionary[EventKey.playlistCreatorID] as? String
@@ -105,8 +102,11 @@ class Event: GMSMarker {
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
         super.init()
-        if self.organizerID == AppUser.current.uid{
-            FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
+        FirebaseDatabaseManager.shared.getSingleUser(id: dictionary[EventKey.organizerID] as! String) { (user: AppUser) in
+            self.organizer = user
+            if user.uid == AppUser.current.uid {
+                FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
+            }
         }
     }
     
