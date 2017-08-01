@@ -22,8 +22,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         tableView.delegate = self
         tableView.dataSource = self
-        //let bundle = Bundle(path: "/Users/rhianchavez11/Documents/events/events/Views")
-        tableView.register(UINib(nibName: "EventsTableViewCell", bundle: nil), forCellReuseIdentifier: "eventCell")
+        let bundle = Bundle(path: "events/EventsTableViewPage")
+        tableView.register(UINib(nibName: "EventsTableViewCell", bundle: bundle), forCellReuseIdentifier: "eventCell")
         tableView.separatorStyle = .none
         //cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
         cellHeights = (0..<6).map { _ in C.CellHeight.close }
@@ -71,7 +71,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     fileprivate struct C {
         struct CellHeight {
             static let close: CGFloat = 144 // equal or greater foregroundView height
-            static let open: CGFloat = 525 // equal or greater containerView height
+            static let open: CGFloat = 541 // equal or greater containerView height
         }
     }
     

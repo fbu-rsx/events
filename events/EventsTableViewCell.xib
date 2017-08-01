@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="663"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="662.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-AQ-Woc" customClass="RotatedView" customModule="FoldingCell">
@@ -122,7 +122,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="10" height="525"/>
                                 <color key="backgroundColor" red="0.26316654760000002" green="1" blue="0.89469563119999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="10" id="jp8-jV-hwQ"/>
+                                    <constraint firstAttribute="width" constant="10" id="c3u-Mj-8sW"/>
                                 </constraints>
                             </view>
                             <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cvr-Lm-S0p">
@@ -131,24 +131,24 @@
                         </subviews>
                         <color key="backgroundColor" red="0.86801654220000002" green="0.86801654220000002" blue="0.86801654220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="525" id="E0U-sm-euN"/>
-                            <constraint firstItem="ebP-AO-Do6" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="F0S-I6-Pse"/>
-                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="leading" secondItem="ebP-AO-Do6" secondAttribute="trailing" id="KAb-8Q-ENb"/>
-                            <constraint firstItem="ebP-AO-Do6" firstAttribute="leading" secondItem="ozZ-Ph-dSv" secondAttribute="leading" id="Kcn-dF-xc9"/>
-                            <constraint firstAttribute="bottom" secondItem="ebP-AO-Do6" secondAttribute="bottom" id="Ruj-US-1dB"/>
-                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="ljs-p0-12a"/>
-                            <constraint firstAttribute="trailing" secondItem="cvr-Lm-S0p" secondAttribute="trailing" id="oa3-Tp-87e"/>
-                            <constraint firstAttribute="bottom" secondItem="cvr-Lm-S0p" secondAttribute="bottom" id="zlv-c2-p6h"/>
+                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="leading" secondItem="ebP-AO-Do6" secondAttribute="trailing" id="1Xq-Gz-6oO"/>
+                            <constraint firstItem="cvr-Lm-S0p" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="UlK-md-o0c"/>
+                            <constraint firstAttribute="bottom" secondItem="ebP-AO-Do6" secondAttribute="bottom" id="VdR-OH-cZI"/>
+                            <constraint firstAttribute="height" constant="525" id="dnU-7y-Ejx"/>
+                            <constraint firstAttribute="trailing" secondItem="cvr-Lm-S0p" secondAttribute="trailing" id="iaH-fb-ht5"/>
+                            <constraint firstItem="ebP-AO-Do6" firstAttribute="top" secondItem="ozZ-Ph-dSv" secondAttribute="top" id="tom-wW-sRc"/>
+                            <constraint firstAttribute="bottom" secondItem="cvr-Lm-S0p" secondAttribute="bottom" id="ur9-YC-2bX"/>
+                            <constraint firstItem="ebP-AO-Do6" firstAttribute="leading" secondItem="ozZ-Ph-dSv" secondAttribute="leading" id="x57-aM-vN9"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="RpP-AQ-Woc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="3Ob-g9-aLF"/>
                     <constraint firstItem="RpP-AQ-Woc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="3pF-V2-G6k"/>
-                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="71W-PU-evm"/>
+                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Lfm-Le-sKc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ozZ-Ph-dSv" secondAttribute="trailing" constant="8" id="cpn-wp-Lpj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="RpP-AQ-Woc" secondAttribute="trailing" constant="8" id="dH2-JM-bbo"/>
-                    <constraint firstAttribute="trailing" secondItem="ozZ-Ph-dSv" secondAttribute="trailing" constant="16" id="ehW-eB-aCt"/>
-                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="jWg-Nd-zc8"/>
+                    <constraint firstItem="ozZ-Ph-dSv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="rQh-hf-aby"/>
                 </constraints>
             </tableViewCellContentView>
             <gestureRecognizers/>
@@ -169,10 +169,10 @@
                 <outlet property="view1" destination="RpP-AQ-Woc" id="Vxv-wX-BFT"/>
                 <outlet property="view1topConstraint" destination="3pF-V2-G6k" id="Cgd-Tv-5qD"/>
                 <outlet property="view2" destination="ozZ-Ph-dSv" id="QLk-C2-yTg"/>
-                <outlet property="view2topConstraint" destination="71W-PU-evm" id="HxW-Zy-ghQ"/>
+                <outlet property="view2topConstraint" destination="rQh-hf-aby" id="Is2-J9-LRO"/>
                 <outletCollection property="foregroundView" destination="RpP-AQ-Woc" collectionClass="NSMutableArray" id="Q4J-8m-545"/>
             </connections>
-            <point key="canvasLocation" x="-217.5" y="357.5"/>
+            <point key="canvasLocation" x="-251" y="277"/>
         </tableViewCell>
     </objects>
     <resources>
