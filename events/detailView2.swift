@@ -35,10 +35,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         tableView.register(nib1, forCellReuseIdentifier: "songCell")
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = (nib.instantiate(withOwner: self, options: nil).first as! songOverlayView)
-        subView!.frame = CGRect(x: 0, y: 90, width: self.frame.width, height: self.frame.height - 90)
+        subView!.frame = CGRect(x: 8, y: 92, width: self.frame.width, height: self.frame.height - 92)
         subView?.delegate = self
         searchField.delegate = self
-        
+        self.backgroundColor = .black
+        tableView.backgroundColor = .black
+        //tableView.layoutMargins = UIEdgeInsets.zero
     }
     
     
@@ -67,14 +69,15 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as! SongTableViewCell
         cell.label.text = songs[indexPath.row]
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         return cell
     }
     
-    @IBAction func editingChanged(_ sender: Any) {
+    @IBAction func editingChanged(_ sender: Any){
         if searchField.text == ""{
-            subView?.removeFromSuperview()
-            added = false
-            textFieldShouldReturn(searchField)
+            
         }
         else if added == true {
             // update subview text
