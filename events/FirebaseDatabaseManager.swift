@@ -22,9 +22,6 @@ class FirebaseDatabaseManager {
     }
     
     
-    
-    
-    
     /**
      *
      * User initialization functions
@@ -32,7 +29,7 @@ class FirebaseDatabaseManager {
      */
     
     // Add user only if they do not already exist
-    func possiblyAddUser(userDict: [String: String]) {
+    func addUser(userDict: [String: Any]) {
         let uid = userDict[UserKey.id]!
         self.ref.child("users/\(uid)").updateChildValues(userDict)
     }
@@ -62,6 +59,19 @@ class FirebaseDatabaseManager {
         }
     }
     
+    func createWallet(id: String) {
+        self.ref.child("users/\(id)/wallet").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if !snapshot.exists() {
+                self.updateWallet(id: id, withValue: 0.0)
+            }
+        }
+    }
+    
+    func updateWallet(id: String, withValue value: Double) {
+        let update = ["users/\(id)/wallet": value]
+        self.ref.updateChildValues(update)
+    }
+    
     func addEventsListener() {
         self.ref.child("users/\(AppUser.current.uid)/events").observe(.childAdded) { (snapshot: DataSnapshot) in
             if AppUser.current.eventsKeys[snapshot.key] != nil {
@@ -70,7 +80,7 @@ class FirebaseDatabaseManager {
             //print(snapshot)
             FirebaseDatabaseManager.shared.getSingleEvent(withID: snapshot.key, completion: { (eventDict: [String : Any]) in
                 let event = Event(dictionary: eventDict)
-                if event.organizerID != AppUser.current.uid {
+                if event.organizer.uid != AppUser.current.uid {
                     NotificationCenter.default.post(name: BashNotifications.invite, object: event)
                 }
             })

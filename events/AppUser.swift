@@ -27,6 +27,7 @@ struct UserKey {
     static let name = "name"
     static let photo = "photoURLString"
     static let events = "events"
+    static let wallet = "wallet"
 }
 
 /*
@@ -51,11 +52,7 @@ class AppUser {
     var name: String
     var photoURLString: String
     var events: [Event] = []
-    var eventsKeys: [String: Int]!  {
-        didSet {
-            FirebaseDatabaseManager.shared.addEventsListener()
-        }
-    } // Int represents InviteStatus
+    var eventsKeys: [String: Int]!
     
     var facebookFriends: [FacebookFriend]!
     
@@ -66,13 +63,14 @@ class AppUser {
     }
     
     convenience init(user: User) {
-        let userDict: [String: String] = [UserKey.id: FBSDKAccessToken.current().userID,
+        let userDict: [String: Any] = [UserKey.id: FBSDKAccessToken.current().userID,
                                           UserKey.name: user.displayName!,
                                           UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
         self.init(dictionary: userDict)
         
         // Adds user only if the user does not exists
-        FirebaseDatabaseManager.shared.possiblyAddUser(userDict: userDict)
+        FirebaseDatabaseManager.shared.addUser(userDict: userDict)
+        FirebaseDatabaseManager.shared.createWallet(id: uid)
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
             self.facebookFriends = friends
         }
@@ -82,7 +80,7 @@ class AppUser {
                 let dict = events[id] as! [String: Any]
                 self.events.append(Event(dictionary: dict))
             }
-            //print("AppUser Events: \(self.events)")
+            FirebaseDatabaseManager.shared.addEventsListener()
             NotificationCenter.default.post(name: BashNotifications.eventsLoaded, object: nil)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)

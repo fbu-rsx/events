@@ -19,7 +19,8 @@ class CreateEventMaster {
         self.event = [EventKey.id: FirebaseDatabaseManager.shared.getNewEventID(),
                       EventKey.organizerID: AppUser.current.uid,
                       EventKey.radius: 50.0,
-                      EventKey.orgURLString: AppUser.current.photoURLString]
+                      EventKey.orgURLString: AppUser.current.photoURLString,
+                      EventKey.orgName: AppUser.current.name]
         self.guestlist = [:]
     }
     
@@ -27,7 +28,8 @@ class CreateEventMaster {
         self.event = [EventKey.id: FirebaseDatabaseManager.shared.getNewEventID(),
                       EventKey.organizerID: AppUser.current.uid,
                       EventKey.radius: 50.0,
-                      EventKey.orgURLString: AppUser.current.photoURLString]
+                      EventKey.orgURLString: AppUser.current.photoURLString,
+                      EventKey.orgName: AppUser.current.name]
         self.guestlist = [:]
     }
     

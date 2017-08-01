@@ -137,7 +137,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         event.title = event.eventname
         event.snippet = event.about.isEmpty ? "No description." : event.about
         event.position = event.coordinate
-        let data = try! Data(contentsOf: event.organizerURL)
+        let data = try! Data(contentsOf: URL(string: event.organizer.photoURLString)!)
         let image = UIImage(data: data)!.af_imageScaled(to: CGSize(width: 45.0, height: 45.0))
         event.icon = image.af_imageRoundedIntoCircle()
         event.groundAnchor = CGPoint(x: event.groundAnchor.x, y: event.groundAnchor.y / 2.0)
@@ -199,7 +199,7 @@ extension MapViewController: GMSMapViewDelegate {
 
     func showAlert(for event: Event) {
         let alertView = SCLAlertView()
-        if event.organizerID == AppUser.current.uid {
+        if event.organizer.uid == AppUser.current.uid {
             alertView.addButton("Delete") {
                 NotificationCenter.default.post(name: BashNotifications.delete, object: event)
                 
