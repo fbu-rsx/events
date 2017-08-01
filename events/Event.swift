@@ -27,6 +27,7 @@ struct EventKey {
     static let radius = "radius"
     static let organizerID = "organizerID"
     static let orgURLString = "organizerURLString"
+    static let orgName = "organizerName"
     static let about = "about"
     static let guestlist = "guestlist"
     static let photos = "photos"
@@ -45,7 +46,7 @@ class Event: GMSMarker {
     var date: Date
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
-    var organizer: AppUser!
+    var organizer: AppUser
     var guestlist: [String: Int] // int is same as InviteStatus values
     var photos: [String: Bool]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
@@ -95,6 +96,12 @@ class Event: GMSMarker {
         let location = dictionary[EventKey.location] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
         self.radius = dictionary[EventKey.radius] as! Double
+        
+        let userDict: [String: Any] = [UserKey.id: dictionary[EventKey.organizerID]!,
+                                       UserKey.name: dictionary[EventKey.orgName]!,
+                                       UserKey.photo: dictionary[EventKey.orgURLString]!]
+        self.organizer = AppUser(dictionary: userDict)
+        
         self.about = dictionary[EventKey.about] as! String
         self.spotifyID = dictionary[EventKey.spotifyID] as? String
         self.playlistCreatorID = dictionary[EventKey.playlistCreatorID] as? String
@@ -102,11 +109,8 @@ class Event: GMSMarker {
         self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
         self.eventDictionary = dictionary
         super.init()
-        FirebaseDatabaseManager.shared.getSingleUser(id: dictionary[EventKey.organizerID] as! String) { (user: AppUser) in
-            self.organizer = user
-            if user.uid == AppUser.current.uid {
-                FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
-            }
+        if organizer.uid == AppUser.current.uid {
+            FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
         }
     }
     

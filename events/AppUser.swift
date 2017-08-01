@@ -81,7 +81,6 @@ class AppUser {
                 self.events.append(Event(dictionary: dict))
             }
             FirebaseDatabaseManager.shared.addEventsListener()
-            //print("AppUser Events: \(self.events)")
             NotificationCenter.default.post(name: BashNotifications.eventsLoaded, object: nil)
         }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
