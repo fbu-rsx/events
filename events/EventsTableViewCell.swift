@@ -79,7 +79,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
             if self.event == nil {
                 return
             }
-            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizerID)!) { (user: AppUser) in
+            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
                 // Set organizer's profile picture
                 let url = URL(string: user.photoURLString)
                 self.closedProfileImageView.af_setImage(withURL: url!)

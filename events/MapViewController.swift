@@ -97,13 +97,18 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         print("Invite events: \(self.events)")
         
         // Pop-Up alert when others first invite you to an event
-        
-        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
-            UIAlertAction in
+        let alertView = SCLAlertView()
+        alertView.addButton("Show More Details") {
             self.tabBarController?.selectedIndex = 2
-        })
-        self.present(alertController, animated: true, completion: nil)
+        }
+        alertView.showInfo("You've Been Invited!", subTitle: event.eventname)
+
+//        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
+//        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
+//            UIAlertAction in
+//            self.tabBarController?.selectedIndex = 2
+//        })
+//        self.present(alertController, animated: true, completion: nil)
         
     }
     
@@ -132,7 +137,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         event.title = event.eventname
         event.snippet = event.about.isEmpty ? "No description." : event.about
         event.position = event.coordinate
-        let data = try! Data(contentsOf: event.organizerURL)
+        let data = try! Data(contentsOf: URL(string: event.organizer.photoURLString)!)
         let image = UIImage(data: data)!.af_imageScaled(to: CGSize(width: 45.0, height: 45.0))
         event.icon = image.af_imageRoundedIntoCircle()
         event.groundAnchor = CGPoint(x: event.groundAnchor.x, y: event.groundAnchor.y / 2.0)
@@ -194,7 +199,7 @@ extension MapViewController: GMSMapViewDelegate {
 
     func showAlert(for event: Event) {
         let alertView = SCLAlertView()
-        if event.organizerID == AppUser.current.uid {
+        if event.organizer.uid == AppUser.current.uid {
             alertView.addButton("Delete") {
                 NotificationCenter.default.post(name: BashNotifications.delete, object: event)
                 

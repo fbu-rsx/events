@@ -54,7 +54,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         userImage.af_setImage(withURL: photoURL!)
         
         setupMap()
-        
+
         // Show tab bar controller
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -62,7 +62,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         eventTitleLabel.text = CreateEventMaster.shared.event[EventKey.name] as? String
         
         let datetime = CreateEventMaster.shared.event[EventKey.date] as! String
@@ -92,7 +92,6 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBAction func didTapToDismiss(_ sender: Any) {
         self.view.endEditing(true)
     }
-    
     
     
     func setupMap() {
@@ -144,6 +143,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
             self.tabBarController?.selectedIndex = 0
         })
     }
+
     
     
     override func didReceiveMemoryWarning() {

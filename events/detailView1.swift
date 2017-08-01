@@ -134,4 +134,5 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     func cancelButtonDidPress(_ imagePicker: ImagePickerController){
         
     }
+    
 }
