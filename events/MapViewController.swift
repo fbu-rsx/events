@@ -299,7 +299,6 @@ extension MapViewController: CLLocationManagerDelegate {
             
             let center = UNUserNotificationCenter.current()
             center.add(request)
-            
         }
     }
 }

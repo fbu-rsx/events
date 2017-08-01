@@ -111,11 +111,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             duration = 0.5
             tableView.isScrollEnabled = true
         }
-
-//        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseOut, animations: { _ in
-//            tableView.beginUpdates()
-//            tableView.endUpdates()
-//        }, completion: nil)
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { 
             tableView.beginUpdates()
