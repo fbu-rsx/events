@@ -98,10 +98,10 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
             for image in selectedPhotos{
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             }
-            
             for index in collectionView.indexPathsForSelectedItems!{
                 collectionView.deselectItem(at: index, animated: true)
             }
+            button.setTitle("Upload", for: .normal)
         }
     }
     
