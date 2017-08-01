@@ -87,14 +87,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
         spotifyAlert.addAction(cancelAction)
         spotifyAlert.addAction(OKAction)
-        /*
-        OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
-        self.present(spotifyAlert, animated: true) */
-        guard OAuthSwiftManager.shared.testConnection() else{
-            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
-            self.present(spotifyAlert, animated: true)
-            return
-        }
+        OAuthSwiftManager.shared.getSpotifyUserID()
     }
     
     func inviteAdded(_ notification: NSNotification) {
