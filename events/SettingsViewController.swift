@@ -38,6 +38,12 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
         logoutButton.layer.cornerRadius = 5
         logoutButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
+    
+    @IBAction func onAddPayment(_ sender: Any) {
+        let addPaymentVC = AddPaymentViewController(nibName: "AddPaymentViewController", bundle: nil)
+        self.present(addPaymentVC, animated: true, completion: nil)
+    }
+    
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Settings")

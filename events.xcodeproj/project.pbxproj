@@ -68,6 +68,8 @@
 		7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */; };
 		7C26DE9B1F310EC10079BE1A /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */; };
 		7C26DE9C1F310EEB0079BE1A /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */; };
+		7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */; };
+		7C26DEA01F312C960079BE1A /* AddPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C26DE9E1F312C960079BE1A /* AddPaymentViewController.xib */; };
 		7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4745381F2930E0009CA46E /* SettingsViewController.swift */; };
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
@@ -169,6 +171,8 @@
 		7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGuestsViewController.swift; sourceTree = "<group>"; };
 		7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAboutViewController.swift; sourceTree = "<group>"; };
 		7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuestListTableViewCell.swift; path = ../GuestListTableViewCell.swift; sourceTree = "<group>"; };
+		7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPaymentViewController.swift; sourceTree = "<group>"; };
+		7C26DE9E1F312C960079BE1A /* AddPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPaymentViewController.xib; sourceTree = "<group>"; };
 		7C4745381F2930E0009CA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -287,6 +291,8 @@
 		4F87D3781F168F59007D4E94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */,
+				7C26DE9E1F312C960079BE1A /* AddPaymentViewController.xib */,
 				7CBC19241F29511E002C65F9 /* MyUploadsViewController.swift */,
 				7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */,
 				7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */,
@@ -570,6 +576,7 @@
 				4FD2FE901F2ADBDE00E565B9 /* apple.gpx in Resources */,
 				4FD2FEA01F2C161800E565B9 /* retro.json in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
+				7C26DEA01F312C960079BE1A /* AddPaymentViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
 				09C808A51F2BFD95009AA56F /* imageCollectionViewCell.xib in Resources */,
@@ -749,6 +756,7 @@
 				7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */,
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
+				7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */,
 				7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */,
 				4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */,
 				7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */,

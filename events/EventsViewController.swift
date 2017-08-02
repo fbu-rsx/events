@@ -27,7 +27,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let bundle = Bundle(path: "events/EventsTableViewPage")
         tableView.register(UINib(nibName: "EventsTableViewCell", bundle: bundle), forCellReuseIdentifier: "eventCell")
         tableView.separatorStyle = .none
-        
+
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
