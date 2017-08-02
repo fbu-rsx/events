@@ -23,45 +23,27 @@ class Utilities {
     static var zoomLevel: Float = 15.0
     
     static func setupGoogleMap(_ mapView: GMSMapView) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH.mm"
+        let currTime = Float(dateFormatter.string(from: Date()))!
+        let theme = currTime >= 18.00 || currTime <= 6.00 ? "dark" : "paper"
+        
         mapView.isHidden = true
         mapView.settings.myLocationButton = false
         mapView.isMyLocationEnabled = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.mapType = .normal
-        
-        // Checking if time is between 20:00 and 3:00 (8 pm and 3 am)
-        let now = Date()
-        let eightPM = now.dateAt(hours: 20, minutes: 0)
-        let threeAM = now.dateAt(hours: 3, minutes: 0)
-        
-        if now >= eightPM && now <= threeAM {
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "night", withExtension: "json") {
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: theme, withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
             }
-        } else {
-            do {
-                // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "day", withExtension: "json") {
-                    mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
-                } else {
-                    NSLog("Unable to find style.json")
-                }
-            } catch {
-                NSLog("One or more of the map styles failed to load. \(error)")
-            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
         }
-        
-        
-      
-
-        
     }
 }
 

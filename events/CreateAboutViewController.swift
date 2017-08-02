@@ -16,7 +16,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
-    @IBOutlet weak var aboutText: UITextField!
+    @IBOutlet weak var aboutText: UITextView!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var sendInvitesButton: UIButton!
@@ -24,6 +24,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var gMapView: GMSMapView!
+    @IBOutlet weak var leftArrowButton: UIButton!
     
     var gMarker: GMSMarker!
     
@@ -39,9 +40,6 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         totalCostText.setBottomBorder()
         // Cost Per Person Label
         costPerPersonText.textColor = UIColor(hexString: "#4CB6BE")
-        // Notes about Event Text Field
-        aboutText.textColor = UIColor(hexString: "#4CB6BE")
-        aboutText.setBottomBorder()
         // Send Invites Button
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
@@ -55,8 +53,11 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         userImage.layer.cornerRadius = 0.5*userImage.frame.width
         userImage.layer.masksToBounds = true
         
+        aboutText.delegate = self
+        aboutText.text = "description of event"
+        aboutText.textColor = .lightGray
+        
         setupMap()
-
         // Show tab bar controller
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -88,6 +89,8 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
                                               longitude: coordinate.longitude,
                                               zoom: Utilities.zoomLevel)
         gMapView.animate(to: camera)
+        
+        leftArrowButton.isUserInteractionEnabled = true
     }
     
     
@@ -122,13 +125,17 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "invitedCell", for: indexPath) as! InvitedCollectionViewCell
-        FirebaseDatabaseManager.shared.getSingleUser(id: self.guests[indexPath.row]) { (user: AppUser) in
-            let photoURLString = user.photoURLString
-            let photoURL = URL(string: photoURLString)
-            cell.invitedImage.af_setImage(withURL: photoURL!)
-            cell.invitedImage.layer.cornerRadius = 0.5*cell.invitedImage.frame.width
-            cell.invitedImage.layer.masksToBounds = true
+        let id = self.guests[indexPath.row]
+        var friend: FacebookFriend!
+        for f in AppUser.current.facebookFriends {
+            if f.id == id {
+                friend = f
+                break
+            }
         }
+        cell.invitedImage.af_setImage(withURL: friend.photo)
+        cell.invitedImage.layer.cornerRadius = 0.5*cell.invitedImage.frame.width
+        cell.invitedImage.layer.masksToBounds = true
         return cell
     }
     
@@ -147,10 +154,34 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     }
 
     
+    @IBAction func hitLeftArror(_ sender: Any) {
+        leftArrowButton.isUserInteractionEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension CreateAboutViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if (textView.text == "description of event")
+        {
+            textView.text = ""
+            textView.textColor = .black
+        }
+        textView.becomeFirstResponder() //Optional
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (textView.text == "")
+        {
+            textView.text = "description of event"
+            textView.textColor = .lightGray
+        }
+        textView.resignFirstResponder()
+    }
 }

@@ -15,7 +15,8 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
     
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var zoomToCurrentLocation: UIButton!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var leftArrowButton: UIButton!
+    @IBOutlet weak var rightArrowButton: UIButton!
     
     // Search Variable Instantiations
     var searchController: UISearchController!
@@ -50,18 +51,32 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        leftArrowButton.isUserInteractionEnabled = true
+        rightArrowButton.isUserInteractionEnabled = true
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CreateEventMaster.shared.event[EventKey.location] = [marker.position.latitude, marker.position.longitude]
     }
     
     @IBAction func onZoomToCurrentLocation(_ sender: Any) {
-        let controller = GMSAutocompleteViewController()
-        present(controller, animated: true, completion: nil)
-//        guard let coordinate = locationManager.location?.coordinate else { return }
-//        mapView.animate(toLocation: coordinate)
-//        mapView.animate(toZoom: Utilities.zoomLevel)
+        guard let coordinate = locationManager.location?.coordinate else { return }
+        mapView.animate(toLocation: coordinate)
+        mapView.animate(toZoom: Utilities.zoomLevel)
     }
+    
+    @IBAction func hitLeftArror(_ sender: Any) {
+        leftArrowButton.isUserInteractionEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
+    }
+
+    @IBAction func hitRightArrow(_ sender: Any) {
+        rightArrowButton.isUserInteractionEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
+    }
+    
 }
 
 extension CreateLocationViewController: UISearchResultsUpdating {
