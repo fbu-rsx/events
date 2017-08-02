@@ -52,6 +52,8 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         let photoURLString = AppUser.current.photoURLString
         let photoURL = URL(string: photoURLString)
         userImage.af_setImage(withURL: photoURL!)
+        userImage.layer.cornerRadius = 0.5*userImage.frame.width
+        userImage.layer.masksToBounds = true
         
         setupMap()
 
@@ -111,7 +113,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         let totalCost = Double(totalCostText.text!) ?? 0
         let totalAttendees = Double(self.guests.count + 1)
         let costPerPerson = totalCost / totalAttendees
-        costPerPersonText.text = String(format: "$%.2f", costPerPerson)
+        costPerPersonText.text = String(format: "$%.2f / person", costPerPerson)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
