@@ -15,6 +15,7 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var walletImage: UIImageView!
+    @IBOutlet weak var walletAmount: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         infoView.gradientLayer.gradient = GradientPoint.bottomTop.draw()
         
         tableView.allowsSelection = false
+//        self.walletAmount.text = String(AppUser.current.wallet)
     }
 
     override func viewDidAppear(_ animated: Bool) {

@@ -57,13 +57,19 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        searchController = UISearchController(searchResultsController: nil)
+        let bundle = Bundle(path: "events/SearchViewControllers")
+        let searchResultController = SearchEventsViewController(nibName: "SearchEventsViewController", bundle: bundle)
+        searchController = UISearchController(searchResultsController: searchResultController)
+        searchResultController.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = true
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
+        
+        var searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        searchTextField?.placeholder = "Search by people, name, or description"
         
         mapView.delegate = self
         // Ask for Authorization from the User
@@ -133,6 +139,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
 
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.animate(toLocation: currentLocation.coordinate)
+        print(currentLocation.coordinate)
         mapView.animate(toZoom: Utilities.zoomLevel)
     }
     
@@ -146,7 +153,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         let data = try! Data(contentsOf: URL(string: event.organizer.photoURLString)!)
         let image = UIImage(data: data)!.af_imageScaled(to: CGSize(width: 45.0, height: 45.0))
         event.icon = image.af_imageRoundedIntoCircle()
-        event.groundAnchor = CGPoint(x: event.groundAnchor.x, y: event.groundAnchor.y / 2.0)
+        event.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         //        mapView.addAnnotation(event)
         addCircle(forEvent: event)
         event.map = mapView
@@ -194,7 +201,6 @@ extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
         if let event = eventWithinCoordinate(coordinate) {
-
             showAlert(for: event)
         }
     }
@@ -313,6 +319,24 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        let text = searchController.searchBar.text
+        let resultsVC = searchController.searchResultsController as! SearchEventsViewController
+        resultsVC.filteredEvents = text == nil ? [] : AppUser.current.events.filter({ (event: Event) -> Bool in
+            let organizer = event.organizer.name.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let title = event.eventname.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let about = event.about.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            return organizer || title || about
+        })
+        resultsVC.tableView.reloadData()
+    }
+    
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        let resultsVC = searchController.searchResultsController! as! SearchEventsViewController
+        if let event = resultsVC.selectedEvent {
+            resultsVC.selectedEvent = nil
+            mapView.animate(toLocation: event.coordinate)
+            mapView.animate(toZoom: Utilities.zoomLevel)
+        }
     }
 }

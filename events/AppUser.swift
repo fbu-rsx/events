@@ -53,6 +53,7 @@ class AppUser {
     var photoURLString: String
     var events: [Event] = []
     var eventsKeys: [String: Int]!
+    var wallet: Double!
     
     var facebookFriends: [FacebookFriend]!
     
@@ -82,13 +83,13 @@ class AppUser {
             }
             FirebaseDatabaseManager.shared.addEventsListener()
             NotificationCenter.default.post(name: BashNotifications.eventsLoaded, object: nil)
+            print("events loaded notification posted")
         }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.accept(_:)), name: BashNotifications.accept, object: nil)
-        
     }
-    
+
     /**
      *
      * Events related functions
