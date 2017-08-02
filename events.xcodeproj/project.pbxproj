@@ -70,6 +70,8 @@
 		7C26DE9C1F310EEB0079BE1A /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */; };
 		7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */; };
 		7C26DEA01F312C960079BE1A /* AddPaymentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C26DE9E1F312C960079BE1A /* AddPaymentViewController.xib */; };
+		7C26DEA31F3175FE0079BE1A /* day.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C26DEA21F3175FE0079BE1A /* day.json */; };
+		7C26DEA51F3179A70079BE1A /* night.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C26DEA41F3179A70079BE1A /* night.json */; };
 		7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4745381F2930E0009CA46E /* SettingsViewController.swift */; };
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
@@ -174,6 +176,8 @@
 		7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPaymentViewController.swift; sourceTree = "<group>"; };
 		7C26DE9E1F312C960079BE1A /* AddPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPaymentViewController.xib; sourceTree = "<group>"; };
 		7C26DEA11F3147300079BE1A /* bash-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bash-Bridging-Header.h"; sourceTree = "<group>"; };
+		7C26DEA21F3175FE0079BE1A /* day.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = day.json; sourceTree = "<group>"; };
+		7C26DEA41F3179A70079BE1A /* night.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = night.json; sourceTree = "<group>"; };
 		7C4745381F2930E0009CA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -393,6 +397,8 @@
 				4FD2FE971F2C160E00E565B9 /* custom.json */,
 				4FD2FE981F2C160E00E565B9 /* dark.json */,
 				4FD2FE991F2C160E00E565B9 /* default.json */,
+				7C26DEA21F3175FE0079BE1A /* day.json */,
+				7C26DEA41F3179A70079BE1A /* night.json */,
 			);
 			path = events;
 			sourceTree = SOURCE_ROOT;
@@ -572,6 +578,7 @@
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
 				7C021E231F2BF0A300029CCB /* Assets.xcassets in Resources */,
+				7C26DEA51F3179A70079BE1A /* night.json in Resources */,
 				4FD2FE9B1F2C160E00E565B9 /* dark.json in Resources */,
 				09B321551F2BB79B0044F05C /* songSearchResultsOverlay.xib in Resources */,
 				4FD2FE9F1F2C161800E565B9 /* paper.json in Resources */,
@@ -590,6 +597,7 @@
 				4FD2FE9A1F2C160E00E565B9 /* custom.json in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
 				4FD2FE921F2ADBEE00E565B9 /* google.gpx in Resources */,
+				7C26DEA31F3175FE0079BE1A /* day.json in Resources */,
 				09F788491F2668A700A311F0 /* detailView0.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

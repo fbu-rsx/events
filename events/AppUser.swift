@@ -53,6 +53,7 @@ class AppUser {
     var photoURLString: String
     var events: [Event] = []
     var eventsKeys: [String: Int]!
+    var wallet: Double!
     
     var facebookFriends: [FacebookFriend]!
     
