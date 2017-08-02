@@ -65,7 +65,8 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        searchController = UISearchController(searchResultsController: nil)
+        let bundle = Bundle(path: "events/SearchViewControllers")
+        searchController = UISearchController(searchResultsController: SearchEventsViewController(nibName: "SearchEventsViewController", bundle: bundle))
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
@@ -140,7 +141,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         let data = try! Data(contentsOf: URL(string: event.organizer.photoURLString)!)
         let image = UIImage(data: data)!.af_imageScaled(to: CGSize(width: 45.0, height: 45.0))
         event.icon = image.af_imageRoundedIntoCircle()
-        event.groundAnchor = CGPoint(x: event.groundAnchor.x, y: event.groundAnchor.y / 2.0)
+        event.groundAnchor = CGPoint(x: 0.5, y: 0.5)
         //        mapView.addAnnotation(event)
         addCircle(forEvent: event)
         event.map = mapView
@@ -188,7 +189,6 @@ extension MapViewController: GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
         if let event = eventWithinCoordinate(coordinate) {
-
             showAlert(for: event)
         }
     }
@@ -307,6 +307,15 @@ extension MapViewController: CLLocationManagerDelegate {
 
 extension MapViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        let text = searchController.searchBar.text
+        print(text)
+        let resultsVC = searchController.searchResultsController as! SearchEventsViewController
+        resultsVC.filteredEvents = text == nil ? [] : AppUser.current.events.filter({ (event: Event) -> Bool in
+            let organizer = event.organizer.name.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let title = event.eventname.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let about = event.about.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            return organizer || title || about
+        })
+        resultsVC.tableView.reloadData()
     }
 }

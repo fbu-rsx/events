@@ -19,23 +19,27 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var events: [Event] = []
     var cellHeights: [CGFloat] = []
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
         let bundle = Bundle(path: "events/EventsTableViewPage")
         tableView.register(UINib(nibName: "EventsTableViewCell", bundle: bundle), forCellReuseIdentifier: "eventCell")
         tableView.separatorStyle = .none
-        //cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
-        cellHeights = (0..<6).map { _ in C.CellHeight.close }
-        // Load AppUser's events
-        events = AppUser.current.events
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if AppUser.current.events.count != self.events.count {
+            events = AppUser.current.events
+            cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
+            tableView.reloadData()
+        }
     }
 
     func refresh(_ notification: Notification) {
@@ -43,17 +47,18 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.events.append(event)
         tableView.reloadData()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
     func deleteEvent(_ notification: NSNotification) {
         let event = notification.object as! Event
         let index = self.events.index(of: event)!
         self.events.remove(at: index)
         tableView.reloadData()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,6 +70,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(events.count)
         return events.count
     }
     

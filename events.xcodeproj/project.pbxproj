@@ -40,6 +40,10 @@
 		4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3741F168EA0007D4E94 /* AppUser.swift */; };
 		4F87D3771F168EB5007D4E94 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3761F168EB5007D4E94 /* Event.swift */; };
 		4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */; };
+		4FB4F7E21F3151A400DD4AFD /* SearchEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4F7E01F3151A400DD4AFD /* SearchEventsViewController.swift */; };
+		4FB4F7E31F3151A400DD4AFD /* SearchEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB4F7E11F3151A400DD4AFD /* SearchEventsViewController.xib */; };
+		4FB4F7EA1F315F7800DD4AFD /* SearchEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4F7E81F315F7800DD4AFD /* SearchEventsTableViewCell.swift */; };
+		4FB4F7EB1F315F7800DD4AFD /* SearchEventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FB4F7E91F315F7800DD4AFD /* SearchEventsTableViewCell.xib */; };
 		4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */; };
 		4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB627D1F143DC400BBDC71 /* MapViewController.swift */; };
 		4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FCB627F1F143DC400BBDC71 /* Main.storyboard */; };
@@ -135,6 +139,10 @@
 		4F87D3741F168EA0007D4E94 /* AppUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		4F87D3761F168EB5007D4E94 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
+		4FB4F7E01F3151A400DD4AFD /* SearchEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventsViewController.swift; sourceTree = "<group>"; };
+		4FB4F7E11F3151A400DD4AFD /* SearchEventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchEventsViewController.xib; sourceTree = "<group>"; };
+		4FB4F7E81F315F7800DD4AFD /* SearchEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchEventsTableViewCell.swift; sourceTree = "<group>"; };
+		4FB4F7E91F315F7800DD4AFD /* SearchEventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchEventsTableViewCell.xib; sourceTree = "<group>"; };
 		4FCB62781F143DC400BBDC71 /* events.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = events.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FCB627D1F143DC400BBDC71 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +333,17 @@
 			name = APIManagers;
 			sourceTree = "<group>";
 		};
+		4FB4F7D71F3150B900DD4AFD /* SearchViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4FB4F7E01F3151A400DD4AFD /* SearchEventsViewController.swift */,
+				4FB4F7E11F3151A400DD4AFD /* SearchEventsViewController.xib */,
+				4FB4F7E81F315F7800DD4AFD /* SearchEventsTableViewCell.swift */,
+				4FB4F7E91F315F7800DD4AFD /* SearchEventsTableViewCell.xib */,
+			);
+			name = SearchViewControllers;
+			sourceTree = "<group>";
+		};
 		4FCB626F1F143DC400BBDC71 = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +369,7 @@
 		4FCB627A1F143DC400BBDC71 /* events */ = {
 			isa = PBXGroup;
 			children = (
+				4FB4F7D71F3150B900DD4AFD /* SearchViewControllers */,
 				4FCB627F1F143DC400BBDC71 /* Main.storyboard */,
 				4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */,
 				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
@@ -548,6 +568,7 @@
 				4FD2FE9C1F2C160E00E565B9 /* default.json in Resources */,
 				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
 				09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */,
+				4FB4F7E31F3151A400DD4AFD /* SearchEventsViewController.xib in Resources */,
 				4FCB62AA1F1446EB00BBDC71 /* GoogleService-Info.plist in Resources */,
 				7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */,
 				7C021E231F2BF0A300029CCB /* Assets.xcassets in Resources */,
@@ -564,6 +585,7 @@
 				09F788511F269EE800A311F0 /* detailView2.xib in Resources */,
 				09F7884D1F26781400A311F0 /* detailView1.xib in Resources */,
 				7C26DE9C1F310EEB0079BE1A /* PaymentTableViewCell.xib in Resources */,
+				4FB4F7EB1F315F7800DD4AFD /* SearchEventsTableViewCell.xib in Resources */,
 				7C9A6B801F2FBC4F00A70FD3 /* GuestsTableViewCell.xib in Resources */,
 				4FD2FE9A1F2C160E00E565B9 /* custom.json in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
@@ -744,6 +766,7 @@
 				7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */,
 				7CBC19261F29511E002C65F9 /* MyUploadsViewController.swift in Sources */,
 				09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */,
+				4FB4F7E21F3151A400DD4AFD /* SearchEventsViewController.swift in Sources */,
 				4F010D751F16EE7A00E8EA47 /* CreateLocationViewController.swift in Sources */,
 				4F87D3731F168E6F007D4E94 /* FirebaseAuthManager.swift in Sources */,
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
@@ -757,6 +780,7 @@
 				09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */,
 				09B321521F2BB55F0044F05C /* SongTableViewCell.swift in Sources */,
 				4FE3AF711F2660D20055FD90 /* MasterTabBarController.swift in Sources */,
+				4FB4F7EA1F315F7800DD4AFD /* SearchEventsTableViewCell.swift in Sources */,
 				7C26DE9B1F310EC10079BE1A /* PaymentTableViewCell.swift in Sources */,
 				7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */,
 				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
