@@ -211,6 +211,7 @@ class FirebaseDatabaseManager {
             update["users/\(userid)/events/\(event.eventid)"] = NSNull()
         }
         self.ref.updateChildValues(update)
+        FirebaseStorageManager.shared.deleteAllEventImages(event: event)
         print("successfully removed \(event.eventname)")
     }
     

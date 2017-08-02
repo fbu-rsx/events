@@ -28,49 +28,43 @@ class OAuthSwiftManager: SessionManager {
         
         oauth = OAuth2Swift(consumerKey: OAuthSwiftManager.spotifyConsumerKey, consumerSecret: OAuthSwiftManager.spotifySecret, authorizeUrl: OAuthSwiftManager.spotifyAuthorizeUrl, accessTokenUrl: OAuthSwiftManager.spotifyAccessTokenUrl, responseType: "token")
         
-        
         if let credential = retrieveCredentials() {
             oauth.client.credential.oauthToken = credential.oauthToken
             oauth.client.credential.oauthTokenSecret = credential.oauthTokenSecret
             oauth.client.credential.oauthRefreshToken = credential.oauthRefreshToken
         }
-        else{
-            spotifyLogin(success: {}, failure: { (error) in
-                print(error!.localizedDescription)
-            })
-        }
+//        else{
+//            spotifyLogin(success: {}, failure: { (error) in
+//                print(error!.localizedDescription)
+//            })
+//        }
         
         // Assign oauth request adapter to Alamofire SessionManager adapter to sign requests
         adapter = oauth.requestAdapter
     }
     
-    func spotifyLogin(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
+    func spotifyLogin(success: (()->())?, failure: @escaping (Error?) -> ()) {
         
-        // Add callback url to open app when returning from Twitter login on web
-        
-        let Scope = "playlist-modify-public playlist-modify-private user-follow-modify user-read-private"
+
+        let scope = "playlist-modify-public playlist-modify-private user-follow-modify user-read-private"
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
         //oauth.auth
         
-        oauth.authorize(withCallbackURL: callback, scope: Scope, state: "randomString", success: { (credential, response, parameters) in
-            print(credential)
+        self.oauth.authorize(withCallbackURL: callback, scope: scope, state: "randomString", success: { (credential, response, parameters) in
+            //print(credential)
             self.save(credential: credential)
-            success()
+
         }) { (error) in
             failure(error)
         }
+
         
     }
     
+    
     func refreshConnection(){
-        if testConnection() {
-            //print(OAuthSwiftManager.shared.oauth.client.credential.oauthRefreshToken)
-            print("YYYYYYYYY")
-        }
-        else{
-            print("XxxxxxXXXXXXxxxXX")
-        }
+
         oauth.renewAccessToken(withRefreshToken: oauth.client.credential.oauthRefreshToken, success: { (credential, response, parameters) in
             self.save(credential: credential)
             print(response)
@@ -80,13 +74,12 @@ class OAuthSwiftManager: SessionManager {
     }
     
     
-//    
-//    func logout() {
-//        clearCredentials()
-//        // User.current = nil
-//        NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
-//    }
-//    
+    
+    func logout() {
+        clearCredentials()
+        //NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
+    }
+    
     // MARK: Handle url
     // OAuth Step 3
     // Finish oauth process by fetching access token
@@ -101,7 +94,7 @@ class OAuthSwiftManager: SessionManager {
         let keychain = Keychain()
         let data = NSKeyedArchiver.archivedData(withRootObject: credential)
         keychain[data: "spotify_credentials"] = data
-        getSpotifyUserID()
+        getSpotifyUserID({})
     }
     
     private func retrieveCredentials() -> OAuthSwiftCredential? {
@@ -125,21 +118,14 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
-    func testConnection() -> Bool{
-        if let credential = retrieveCredentials(){
-            return true
-        }
-        else{
-            return false
-        }
-    }
+
     
     // functions to interact with spotify web client
     // use oauth
     
-    func getSpotifyUserID(){
+    func getSpotifyUserID(_ failureCompletion: @escaping (()->())){
+        
         let url = URL(string: "https://api.spotify.com/v1/me")!
-        var thing = true
         request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
                 //print(response)
                 if response.result.isSuccess{
@@ -147,13 +133,10 @@ class OAuthSwiftManager: SessionManager {
                 let uri = response["uri"] as! String
                 let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
                 UserDefaults.standard.set(id, forKey: "spotify-user")
-                
             }
             else{
                 print("Should Prompt for Spotify Login")
-                    self.spotifyLogin(success: {}, failure: { (error) in
-                        print(error?.localizedDescription)
-                    })
+                failureCompletion()
             }
         }
     }

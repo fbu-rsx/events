@@ -51,6 +51,20 @@ class FirebaseStorageManager {
         // We can also add observers later on
     }
     
+    func deleteAllEventImages(event: Event){
+        let fileRef = storageRef.child("\(event.eventid)")
+        fileRef.delete { (error) in
+            print(error?.localizedDescription ?? "couldn't delete event storage")
+        }
+    }
+    
+    func deleteImage(event: Event, imageID: String){
+        let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
+        fileRef.delete { (error) in
+            print(error?.localizedDescription ?? "couldn't delete image")
+        }
+    }
+    
 }
 
 /* How to put image into a data object!
