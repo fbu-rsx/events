@@ -66,13 +66,18 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         let bundle = Bundle(path: "events/SearchViewControllers")
-        searchController = UISearchController(searchResultsController: SearchEventsViewController(nibName: "SearchEventsViewController", bundle: bundle))
+        let searchResultController = SearchEventsViewController(nibName: "SearchEventsViewController", bundle: bundle)
+        searchController = UISearchController(searchResultsController: searchResultController)
+        searchResultController.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = true
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
+        
+        var searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        searchTextField?.placeholder = "Search by people, name, or description"
         
         mapView.delegate = self
         // Ask for Authorization from the User
@@ -308,7 +313,6 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text
-        print(text)
         let resultsVC = searchController.searchResultsController as! SearchEventsViewController
         resultsVC.filteredEvents = text == nil ? [] : AppUser.current.events.filter({ (event: Event) -> Bool in
             let organizer = event.organizer.name.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
@@ -317,5 +321,15 @@ extension MapViewController: UISearchResultsUpdating {
             return organizer || title || about
         })
         resultsVC.tableView.reloadData()
+    }
+    
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        let resultsVC = searchController.searchResultsController! as! SearchEventsViewController
+        if let event = resultsVC.selectedEvent {
+            resultsVC.selectedEvent = nil
+            mapView.animate(toLocation: event.coordinate)
+            mapView.animate(toZoom: Utilities.zoomLevel)
+        }
     }
 }
