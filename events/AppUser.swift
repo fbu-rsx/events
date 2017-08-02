@@ -18,6 +18,8 @@ struct BashNotifications {
     static let refresh = NSNotification.Name(rawValue: "refresh")
     static let enableSwipe = NSNotification.Name(rawValue: "enableSwipe")
     static let disableSwipe = NSNotification.Name(rawValue: "disableSwipe")
+    static let swipeRight = NSNotification.Name(rawValue: "swipeRight")
+    static let swipeLeft = NSNotification.Name(rawValue: "swipeLeft")
     static let eventsLoaded = NSNotification.Name(rawValue: "eventsLoaded")
     
 }

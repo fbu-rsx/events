@@ -65,6 +65,9 @@ class CreateEventPageController: UIPageViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.enableSwipe(_:)), name: BashNotifications.enableSwipe, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.disableSwipe(_:)), name: BashNotifications.disableSwipe, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.refresh), name: BashNotifications.refresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.swipeLeft), name: BashNotifications.swipeLeft, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.swipeRight), name: BashNotifications.swipeRight, object: nil)
+
     }
     
     func disableSwipe(_ notification: NSNotification){
@@ -73,6 +76,18 @@ class CreateEventPageController: UIPageViewController {
     
     func enableSwipe(_ notification: NSNotification){
         self.dataSource = self
+    }
+    
+    func swipeRight(_ notification: NSNotification) {
+        let parent = self.pageControlDelegate as! EventContainerViewController
+        self.setViewControllers([orderedViewControllers[parent.pageControl.currentPage + 1]], direction: .forward, animated: true, completion: nil)
+        self.pageControlDelegate?.eventPageController(self, didUpdatePageIndex: parent.pageControl.currentPage + 1)
+    }
+    
+    func swipeLeft(_ notification: NSNotification) {
+        let parent = self.pageControlDelegate as! EventContainerViewController
+        self.setViewControllers([orderedViewControllers[parent.pageControl.currentPage - 1]], direction: .reverse, animated: true, completion: nil)
+        self.pageControlDelegate?.eventPageController(self, didUpdatePageIndex: parent.pageControl.currentPage - 1)
     }
     
     func refresh() {

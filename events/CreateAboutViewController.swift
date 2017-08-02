@@ -24,6 +24,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var gMapView: GMSMapView!
+    @IBOutlet weak var leftArrowButton: UIButton!
     
     var gMarker: GMSMarker!
     
@@ -86,6 +87,8 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
                                               longitude: coordinate.longitude,
                                               zoom: Utilities.zoomLevel)
         gMapView.animate(to: camera)
+        
+        leftArrowButton.isEnabled = true
     }
     
     
@@ -120,13 +123,17 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "invitedCell", for: indexPath) as! InvitedCollectionViewCell
-        FirebaseDatabaseManager.shared.getSingleUser(id: self.guests[indexPath.row]) { (user: AppUser) in
-            let photoURLString = user.photoURLString
-            let photoURL = URL(string: photoURLString)
-            cell.invitedImage.af_setImage(withURL: photoURL!)
-            cell.invitedImage.layer.cornerRadius = 0.5*cell.invitedImage.frame.width
-            cell.invitedImage.layer.masksToBounds = true
+        let id = self.guests[indexPath.row]
+        var friend: FacebookFriend!
+        for f in AppUser.current.facebookFriends {
+            if f.id == id {
+                friend = f
+                break
+            }
         }
+        cell.invitedImage.af_setImage(withURL: friend.photo)
+        cell.invitedImage.layer.cornerRadius = 0.5*cell.invitedImage.frame.width
+        cell.invitedImage.layer.masksToBounds = true
         return cell
     }
     
@@ -145,6 +152,10 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     }
 
     
+    @IBAction func hitLeftArror(_ sender: Any) {
+        leftArrowButton.isEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

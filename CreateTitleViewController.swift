@@ -16,6 +16,7 @@ class CreateTitleViewController: UIViewController {
     @IBOutlet weak var currentTimeText: UILabel!
     @IBOutlet weak var selectTimeButton: UIButton!
     @IBOutlet weak var logoImage: UIImageView!
+    @IBOutlet weak var rightArrowButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class CreateTitleViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mapAnimation()
+        self.updatePageController()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -84,15 +86,28 @@ class CreateTitleViewController: UIViewController {
     }
     
     func updatePageController() {
-        let name = CreateEventMaster.shared.event[EventKey.name] as? String
-        let nameExists = name != nil && name != ""
-        let dateExists = CreateEventMaster.shared.event[EventKey.date] != nil
-        if nameExists && dateExists {
+        if valid() {
+            rightArrowButton.isEnabled = true
+            rightArrowButton.imageView!.image = UIImage(named: "right-arrow-green")
             NotificationCenter.default.post(name: BashNotifications.enableSwipe, object: nil)
         } else {
+            rightArrowButton.isEnabled = false
+            rightArrowButton.imageView!.image = UIImage(named: "right-arrow-gray")
             NotificationCenter.default.post(name: BashNotifications.disableSwipe, object: nil)
         }
     }
+    func valid() -> Bool {
+        let name = CreateEventMaster.shared.event[EventKey.name] as? String
+        let nameExists = name != nil && name != ""
+        let dateExists = CreateEventMaster.shared.event[EventKey.date] != nil
+        return nameExists && dateExists
+    }
+    
+    @IBAction func hitRightArrow(_ sender: Any) {
+        rightArrowButton.isEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
+    }
+    
 }
 
 // Enable the use of hex codes

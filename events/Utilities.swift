@@ -23,6 +23,12 @@ class Utilities {
     static var zoomLevel: Float = 15.0
     
     static func setupGoogleMap(_ mapView: GMSMapView) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH.mm"
+        let currTime = Float(dateFormatter.string(from: Date()))!
+        let theme = currTime >= 18.00 || currTime <= 6.00 ? "dark" : "paper"
+        
         mapView.isHidden = true
         mapView.settings.myLocationButton = false
         mapView.isMyLocationEnabled = true
@@ -30,7 +36,7 @@ class Utilities {
         mapView.mapType = .normal
         do {
             // Set the map style by passing the URL of the local file.
-            if let styleURL = Bundle.main.url(forResource: "paper", withExtension: "json") {
+            if let styleURL = Bundle.main.url(forResource: theme, withExtension: "json") {
                 mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
             } else {
                 NSLog("Unable to find style.json")

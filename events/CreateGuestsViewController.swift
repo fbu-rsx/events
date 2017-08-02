@@ -12,8 +12,9 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var leftArrowButton: UIButton!
+    @IBOutlet weak var rightArrowButton: UIButton!
     
-    var friends: [FacebookFriend]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,28 +22,46 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         tableView.dataSource = self
     
         self.titleLabel.textColor = UIColor(hexString: "#FEB2A4")
+        let bottomBorder = CALayer()
+        bottomBorder.borderColor = Colors.coral.cgColor
+        bottomBorder.borderWidth = 1.0
+        bottomBorder.frame = CGRect(x: -1, y: titleLabel.layer.frame.size.height-1, width: titleLabel.layer.frame.size.width, height: 1)
+        titleLabel.layer.addSublayer(bottomBorder)
         
-        self.friends = AppUser.current.facebookFriends
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        tableView.separatorColor = Colors.coral
+        tableView.separatorStyle = .singleLineEtched
+        let bundle = Bundle(path: "events/EventsTableViewPage")
+        let nib = UINib(nibName: "GuestsTableViewCell", bundle: bundle)
+        tableView.register(nib , forCellReuseIdentifier: "userCell")
         
+        tableView.reloadData()
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        leftArrowButton.isEnabled = true
+        rightArrowButton.isEnabled = true
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.friends.count
+        return AppUser.current.facebookFriends.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GuestListCell", for: indexPath) as! GuestListTableViewCell
-        cell.guestName.textColor = UIColor.darkGray
-        cell.guestImage.layer.cornerRadius = 5
+        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! GuestsTableViewCell
+        cell.nameLabel.textColor = UIColor.darkGray
+        cell.selectionStyle = .none
+        cell.guestImage.layer.cornerRadius = 0.5 * cell.guestImage.frame.width
         cell.guestImage.layer.borderWidth = 1
         cell.guestImage.layer.borderColor = UIColor.white.cgColor
         cell.guestImage.backgroundColor = UIColor(hexString: "#FEB2A4")
         cell.guestImage.clipsToBounds = true
-        let guest = friends[indexPath.row]
+        let guest = AppUser.current.facebookFriends[indexPath.row]
         cell.guestImage.af_setImage(withURL: guest.photo)
-        cell.guestName.text = guest.name
+        cell.nameLabel.text = guest.name
         return cell
     }
     
@@ -50,12 +69,23 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         let cell = self.tableView.cellForRow(at: indexPath)!
         if cell.accessoryType == .checkmark {
             cell.accessoryType = .none
-            CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = nil
+            CreateEventMaster.shared.guestlist[AppUser.current.facebookFriends[indexPath.row].id] = nil
         } else {
             cell.accessoryType = .checkmark
-            CreateEventMaster.shared.guestlist[friends[indexPath.row].id] = InviteStatus.noResponse.rawValue
+            CreateEventMaster.shared.guestlist[AppUser.current.facebookFriends[indexPath.row].id] = InviteStatus.noResponse.rawValue
         }
         print(CreateEventMaster.shared.guestlist)
+    }
+    
+    
+    @IBAction func hitLeftArror(_ sender: Any) {
+        leftArrowButton.isEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
+    }
+    
+    @IBAction func hitRightArrow(_ sender: Any) {
+        rightArrowButton.isEnabled = false
+        NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
     }
     
     override func didReceiveMemoryWarning() {

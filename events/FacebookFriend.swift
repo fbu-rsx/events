@@ -14,7 +14,7 @@ enum FriendKey: String {
     case photo = "picture"
 }
 
-class FacebookFriend {
+class FacebookFriend: NSObject {
     var id: String
     var name: String
     var photo: URL
@@ -27,5 +27,14 @@ class FacebookFriend {
         let data = picDict["data"] as! [String: Any]
         let urlString = data["url"] as! String
         self.photo = URL(string: urlString)!
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let friend = object as? FacebookFriend {
+            if self.id == friend.id {
+                return true
+            }
+        }
+        return false
     }
 }
