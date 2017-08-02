@@ -30,15 +30,8 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     @IBOutlet weak var mapView: GMSMapView!
     
-    let spotifyAlert = UIAlertController(title: "Spotify Login", message:  "Please login to Spotify", preferredStyle: .alert)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
-        // ...
-    }
-    
-    let OKAction = UIAlertAction(title: "OK", style: .default) { action in
-        // ...
-        OAuthSwiftManager.shared.spotifyLogin(success: {}, failure: {_ in })
-    }
+  
+
     
     var currentLocation: CLLocation!
     
@@ -57,7 +50,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.distanceFilter = 5
@@ -85,9 +77,23 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
         
-        spotifyAlert.addAction(cancelAction)
-        spotifyAlert.addAction(OKAction)
-        OAuthSwiftManager.shared.getSpotifyUserID()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        OAuthSwiftManager.shared.getSpotifyUserID {
+            // Make OAuth take place in webview within our app
+            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
+            // setup alert controller
+            let alertController = UIAlertController(title: "Spotify Login", message: "Please login to Spotify...", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                OAuthSwiftManager.shared.spotifyLogin(success: nil, failure: { (error) in
+                    print(error)
+                })
+            })
+            alertController.addAction(okayAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func inviteAdded(_ notification: NSNotification) {
