@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().toolbarTintColor = Colors.green
 
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
-        OAuthSwiftManager.shared.logout()
+        //OAuthSwiftManager.shared.logout()
         return true
     }
     

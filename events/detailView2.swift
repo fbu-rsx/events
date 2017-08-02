@@ -14,7 +14,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     @IBOutlet weak var searchField: UITextField!
     
     var songs: [String] = []
-    
+    var searchedSongNames: [String] = []
     var searchedSongsURIS: [String] = []
     
     var event: Event?{
@@ -56,6 +56,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         if let ID = event!.spotifyID {
             OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs) in
                 self.songs = songs
+                self.songs.sort()
                 self.tableView.reloadData()
             })
         }else{
@@ -85,6 +86,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         else if added == true {
             // update subview text
             OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris) in
+                self.searchedSongNames = songs
                 self.searchedSongsURIS = uris
                 self.subView?.Songs = songs
                 self.subView?.tableView.reloadData()
@@ -95,6 +97,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
             added = true
             // update subview text
             OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris) in
+                self.searchedSongNames = songs
                 self.searchedSongsURIS = uris
                 self.subView?.Songs = songs
                 self.subView?.tableView.reloadData()
@@ -111,7 +114,8 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         added = false
         textFieldShouldReturn(searchField)
         // inform user that song was added
-        let alertController = UIAlertController(title: "Requested", message: "Song request made", preferredStyle: .alert)
+        let songName = searchedSongNames[songIndex]
+        let alertController = UIAlertController(title: "Song Request Made", message: "\(songName) has been requested", preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(OKAction)
         var rootViewController = UIApplication.shared.keyWindow?.rootViewController
