@@ -133,6 +133,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
 
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.animate(toLocation: currentLocation.coordinate)
+        print(currentLocation.coordinate)
         mapView.animate(toZoom: Utilities.zoomLevel)
     }
     

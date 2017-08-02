@@ -9,7 +9,6 @@
 import UIKit
 import AlamofireImage
 import GoogleMaps
-import LyftSDK
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
@@ -20,7 +19,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
-    @IBOutlet weak var lyftButton: LyftButton!
     
     var guests: [String] = []
     
@@ -94,12 +92,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     self.declineButton.isEnabled = false
                     self.declineButton.backgroundColor = UIColor(hexString: "#95a5a6")
                     
-                    print(self.topMap.myLocation)
-                    // Creating the Lyft button
-//                    let pickUp = self.topMap.myLocation as CLLocationCoordinate2D
-//                    let destination = self.event!.coordinate
-//                    lyftButton.configure(rideKind: LyftSDK.RideKind.Standard, pickup: pickUp, destination: destination)
-                    
                 case .declined:
                     self.declineButton.setTitle("Declined", for: .normal)
                     self.declineButton.backgroundColor = UIColor(hexString: "#F46E79")
@@ -107,18 +99,17 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     self.declineButton.sizeToFit()
                     self.acceptButton.isEnabled = false
                     self.acceptButton.backgroundColor = UIColor(hexString: "#95a5a6")
-                    self.lyftButton.isHidden = true
                     
                 default:
                     self.acceptButton.layer.cornerRadius = 5
                     self.acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
                     self.declineButton.layer.cornerRadius = 5
                     self.declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-                    self.lyftButton.isHidden = true
                 }
             }
         }
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.guests.count
