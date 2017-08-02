@@ -14,6 +14,7 @@
                 <outlet property="infoView" destination="dDi-32-etB" id="Za8-va-QHf"/>
                 <outlet property="tableView" destination="jeK-Ma-3yf" id="h7m-Er-DMA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="walletAmount" destination="Fm2-ZB-vFF" id="Ity-qi-Ct7"/>
                 <outlet property="walletImage" destination="VhO-b1-I0y" id="CY3-8g-pFs"/>
             </connections>
         </placeholder>

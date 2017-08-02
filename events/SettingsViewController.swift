@@ -38,6 +38,7 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
         logoutButton.layer.cornerRadius = 5
         logoutButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
+
     
     @IBAction func onAddPayment(_ sender: Any) {
         let addPaymentVC = AddPaymentViewController(nibName: "AddPaymentViewController", bundle: nil)
