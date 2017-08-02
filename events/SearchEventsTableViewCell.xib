@@ -11,41 +11,63 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchEventsTableViewCell" rowHeight="78" id="KGk-i7-Jjw" customClass="SearchEventsTableViewCell" customModule="events" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchEventsTableViewCell" rowHeight="104" id="KGk-i7-Jjw" customClass="SearchEventsTableViewCell" customModule="events" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="77.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="103.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OIa-Ov-RGb">
-                        <rect key="frame" x="8" y="8" width="111" height="26"/>
+                        <rect key="frame" x="66" y="27" width="111" height="26"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SML-kL-Z9z">
+                        <rect key="frame" x="66" y="53" width="29.5" height="18.5"/>
+                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WG3-eo-stH">
+                        <rect key="frame" x="8" y="27" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Qxu-oB-UPK"/>
+                            <constraint firstAttribute="width" constant="50" id="qwg-i9-pxr"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s61-dE-bjZ">
-                        <rect key="frame" x="8" y="42" width="117.5" height="19.5"/>
+                        <rect key="frame" x="66" y="73.5" width="117.5" height="19.5"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="s61-dE-bjZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="8p2-KA-YF4"/>
-                    <constraint firstItem="s61-dE-bjZ" firstAttribute="top" secondItem="OIa-Ov-RGb" secondAttribute="bottom" constant="8" id="D7f-pF-rxO"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OIa-Ov-RGb" secondAttribute="trailing" constant="8" id="ELs-Ae-tFy"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s61-dE-bjZ" secondAttribute="bottom" constant="8" id="NAn-Ye-dWO"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s61-dE-bjZ" secondAttribute="trailing" constant="8" id="Qn3-zc-9VW"/>
-                    <constraint firstItem="OIa-Ov-RGb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="pRZ-8u-clA"/>
-                    <constraint firstItem="OIa-Ov-RGb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ymk-mt-cxC"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="OIa-Ov-RGb" secondAttribute="trailing" constant="8" id="3mk-om-kvd"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="s61-dE-bjZ" secondAttribute="trailing" constant="8" id="Agm-g6-Ihn"/>
+                    <constraint firstItem="WG3-eo-stH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="EST-GR-ZcN"/>
+                    <constraint firstItem="s61-dE-bjZ" firstAttribute="top" secondItem="SML-kL-Z9z" secondAttribute="bottom" constant="2" id="GhT-nI-xxj"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SML-kL-Z9z" secondAttribute="trailing" constant="8" id="KpA-28-Ct5"/>
+                    <constraint firstItem="OIa-Ov-RGb" firstAttribute="leading" secondItem="WG3-eo-stH" secondAttribute="trailing" constant="8" id="PIf-t0-ITy"/>
+                    <constraint firstItem="WG3-eo-stH" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SmH-fZ-dPv"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WG3-eo-stH" secondAttribute="bottom" constant="8" id="YYt-yj-ySq"/>
+                    <constraint firstItem="WG3-eo-stH" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="eHj-jE-beq"/>
+                    <constraint firstItem="SML-kL-Z9z" firstAttribute="top" secondItem="OIa-Ov-RGb" secondAttribute="bottom" id="gAe-9l-HG3"/>
+                    <constraint firstItem="OIa-Ov-RGb" firstAttribute="top" secondItem="WG3-eo-stH" secondAttribute="top" id="gwX-8N-2xt"/>
+                    <constraint firstItem="SML-kL-Z9z" firstAttribute="leading" secondItem="OIa-Ov-RGb" secondAttribute="leading" id="kO7-mk-U64"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="s61-dE-bjZ" secondAttribute="bottom" constant="8" id="mTd-ro-f6P"/>
+                    <constraint firstItem="s61-dE-bjZ" firstAttribute="leading" secondItem="OIa-Ov-RGb" secondAttribute="leading" id="vXI-oc-z9V"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="s61-dE-bjZ" id="FG2-1q-nyI"/>
+                <outlet property="eventTime" destination="SML-kL-Z9z" id="P1B-gg-odP"/>
                 <outlet property="nameLabel" destination="OIa-Ov-RGb" id="irY-Qs-fGE"/>
+                <outlet property="profileImageView" destination="WG3-eo-stH" id="0hf-Gc-rLy"/>
             </connections>
-            <point key="canvasLocation" x="26" y="35"/>
+            <point key="canvasLocation" x="26" y="48"/>
         </tableViewCell>
     </objects>
 </document>

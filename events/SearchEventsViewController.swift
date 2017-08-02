@@ -13,11 +13,12 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     
     var filteredEvents: [Event] = []
+    var searchController: UISearchController!
+    var selectedEvent: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+                
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 100
@@ -39,6 +40,9 @@ class SearchEventsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let cell = tableView.cellForRow(at: indexPath) as! SearchEventsTableViewCell
+        selectedEvent = cell.event
+        searchController.isActive = false
+        searchController.dismiss(animated: true, completion: nil)
     }
 }
