@@ -37,7 +37,7 @@ class Utilities {
         if now >= eightPM && now <= threeAM {
             do {
                 // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "day", withExtension: "json") {
+                if let styleURL = Bundle.main.url(forResource: "night", withExtension: "json") {
                     mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
                 } else {
                     NSLog("Unable to find style.json")
@@ -48,7 +48,7 @@ class Utilities {
         } else {
             do {
                 // Set the map style by passing the URL of the local file.
-                if let styleURL = Bundle.main.url(forResource: "night", withExtension: "json") {
+                if let styleURL = Bundle.main.url(forResource: "day", withExtension: "json") {
                     mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
                 } else {
                     NSLog("Unable to find style.json")

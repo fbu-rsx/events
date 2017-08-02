@@ -19,6 +19,13 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7e4-8N-Z5m" customClass="GMSMapView">
                     <rect key="frame" x="0.0" y="0.0" width="333" height="120"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7pu-ak-KIl" customClass="LyftButton" customModule="LyftSDK">
+                            <rect key="frame" x="8" y="8" width="130" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="333" id="SU1-gH-fG8"/>
@@ -128,6 +135,7 @@
                 <outlet property="declineButton" destination="mcE-xW-sSM" id="AgL-Yu-ptf"/>
                 <outlet property="eventDescription" destination="iNj-Cf-R9V" id="Tg0-EK-HTp"/>
                 <outlet property="eventTitle" destination="prb-to-Tzt" id="BpC-gS-DsW"/>
+                <outlet property="lyftButton" destination="7pu-ak-KIl" id="0Ex-3k-5hI"/>
                 <outlet property="profileImage" destination="pEZ-TD-N4u" id="to7-Ev-eAC"/>
                 <outlet property="tableView" destination="Srr-gh-wZ7" id="6pM-ix-GI3"/>
                 <outlet property="topMap" destination="7e4-8N-Z5m" id="SL7-KD-cSY"/>
