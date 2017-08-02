@@ -31,6 +31,7 @@ target 'events' do
   pod 'PeekPop', '~> 1.0'
   pod 'SCLAlertView'
   pod 'IQKeyboardManagerSwift'
+  pod 'LyftSDK'
 
   target 'eventsTests' do
     inherit! :search_paths

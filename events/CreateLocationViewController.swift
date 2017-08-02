@@ -52,8 +52,8 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        leftArrowButton.isEnabled = true
-        rightArrowButton.isEnabled = true
+        leftArrowButton.isUserInteractionEnabled = true
+        rightArrowButton.isUserInteractionEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,12 +68,12 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
     }
     
     @IBAction func hitLeftArror(_ sender: Any) {
-        leftArrowButton.isEnabled = false
+        leftArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
     }
 
     @IBAction func hitRightArrow(_ sender: Any) {
-        rightArrowButton.isEnabled = false
+        rightArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
     }
     

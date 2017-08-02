@@ -16,7 +16,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
-    @IBOutlet weak var aboutText: UITextField!
+    @IBOutlet weak var aboutText: UITextView!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var sendInvitesButton: UIButton!
@@ -40,9 +40,6 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         totalCostText.setBottomBorder()
         // Cost Per Person Label
         costPerPersonText.textColor = UIColor(hexString: "#4CB6BE")
-        // Notes about Event Text Field
-        aboutText.textColor = UIColor(hexString: "#4CB6BE")
-        aboutText.setBottomBorder()
         // Send Invites Button
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
@@ -53,9 +50,14 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         let photoURLString = AppUser.current.photoURLString
         let photoURL = URL(string: photoURLString)
         userImage.af_setImage(withURL: photoURL!)
+        userImage.layer.cornerRadius = 0.5*userImage.frame.width
+        userImage.layer.masksToBounds = true
+        
+        aboutText.delegate = self
+        aboutText.text = "description of event"
+        aboutText.textColor = .lightGray
         
         setupMap()
-
         // Show tab bar controller
         self.tabBarController?.tabBar.isHidden = false
     }
@@ -88,7 +90,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
                                               zoom: Utilities.zoomLevel)
         gMapView.animate(to: camera)
         
-        leftArrowButton.isEnabled = true
+        leftArrowButton.isUserInteractionEnabled = true
     }
     
     
@@ -114,7 +116,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         let totalCost = Double(totalCostText.text!) ?? 0
         let totalAttendees = Double(self.guests.count + 1)
         let costPerPerson = totalCost / totalAttendees
-        costPerPersonText.text = String(format: "$%.2f", costPerPerson)
+        costPerPersonText.text = String(format: "$%.2f / person", costPerPerson)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -153,7 +155,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
 
     
     @IBAction func hitLeftArror(_ sender: Any) {
-        leftArrowButton.isEnabled = false
+        leftArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
     }
     
@@ -162,4 +164,24 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension CreateAboutViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if (textView.text == "description of event")
+        {
+            textView.text = ""
+            textView.textColor = .black
+        }
+        textView.becomeFirstResponder() //Optional
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (textView.text == "")
+        {
+            textView.text = "description of event"
+            textView.textColor = .lightGray
+        }
+        textView.resignFirstResponder()
+    }
 }

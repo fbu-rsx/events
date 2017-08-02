@@ -30,19 +30,19 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         tableView.separatorColor = Colors.coral
-        tableView.separatorStyle = .singleLineEtched
+        tableView.separatorStyle = .singleLine
         let bundle = Bundle(path: "events/EventsTableViewPage")
         let nib = UINib(nibName: "GuestsTableViewCell", bundle: bundle)
         tableView.register(nib , forCellReuseIdentifier: "userCell")
-        
-        tableView.reloadData()
+        self.tableView.tableFooterView = UIView()
+        self.automaticallyAdjustsScrollViewInsets = false
         self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        leftArrowButton.isEnabled = true
-        rightArrowButton.isEnabled = true
+        leftArrowButton.isUserInteractionEnabled = true
+        rightArrowButton.isUserInteractionEnabled = true
     }
     
     
@@ -78,13 +78,14 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     
+    
     @IBAction func hitLeftArror(_ sender: Any) {
-        leftArrowButton.isEnabled = false
+        leftArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeLeft, object: nil)
     }
     
     @IBAction func hitRightArrow(_ sender: Any) {
-        rightArrowButton.isEnabled = false
+        rightArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
     }
     

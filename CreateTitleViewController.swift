@@ -87,11 +87,11 @@ class CreateTitleViewController: UIViewController {
     
     func updatePageController() {
         if valid() {
-            rightArrowButton.isEnabled = true
+            rightArrowButton.isUserInteractionEnabled = true
             rightArrowButton.imageView!.image = UIImage(named: "right-arrow-green")
             NotificationCenter.default.post(name: BashNotifications.enableSwipe, object: nil)
         } else {
-            rightArrowButton.isEnabled = false
+            rightArrowButton.isUserInteractionEnabled = false
             rightArrowButton.imageView!.image = UIImage(named: "right-arrow-gray")
             NotificationCenter.default.post(name: BashNotifications.disableSwipe, object: nil)
         }
@@ -104,7 +104,7 @@ class CreateTitleViewController: UIViewController {
     }
     
     @IBAction func hitRightArrow(_ sender: Any) {
-        rightArrowButton.isEnabled = false
+        rightArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
     }
     
