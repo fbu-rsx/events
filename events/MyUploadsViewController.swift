@@ -40,15 +40,9 @@ class MyUploadsViewController: UIViewController, IndicatorInfoProvider, UICollec
         layout.minimumLineSpacing = 0
         collectionView.collectionViewLayout = layout
         loadImages()
-  
-        
     }
     
     func loadImages(){
-        
-        
-        
-        
         for imageID in event!.photos.keys{
             FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
                 if self.photos.contains(image) == false {

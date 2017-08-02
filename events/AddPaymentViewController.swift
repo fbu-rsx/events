@@ -9,27 +9,37 @@
 import UIKit
 
 class AddPaymentViewController: UIViewController {
-
+    
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var walletImage: UIImageView!
+    @IBOutlet weak var cardNumberText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        saveButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        saveButton.layer.cornerRadius = 5
+        dismissButton.layer.cornerRadius = 5
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewWillAppear(_ animated: Bool) {
+        walletAnimation()
     }
-    */
-
+    
+    func walletAnimation() {
+        UIView.animate(withDuration: 1, delay: 0.25, options: [.autoreverse, .repeat], animations: {
+            self.walletImage.frame.origin.y -= 10
+        })
+        self.walletImage.frame.origin.y += 10
+    }
+    
+    @IBAction func onSave(_ sender: Any) {
+        let value = Double(cardNumberText.text!)
+        FirebaseDatabaseManager.shared.updateWallet(id: AppUser.current.uid, withValue: value!)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onDismiss(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
