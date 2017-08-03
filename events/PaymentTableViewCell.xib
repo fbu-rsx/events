@@ -54,6 +54,9 @@
                         <state key="normal" title="Pay">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="didTapPay:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="08U-7W-ZNk"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jun 29, 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgv-N2-neU">
                         <rect key="frame" x="63" y="79" width="263" height="19.5"/>

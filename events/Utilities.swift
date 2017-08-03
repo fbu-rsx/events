@@ -47,6 +47,7 @@ class Utilities {
         }
     }
     
+
     
     static func changeTheme(forMap map: GMSMapView) {
         do {
@@ -60,10 +61,7 @@ class Utilities {
             NSLog("One or more of the map styles failed to load. \(error)")
         }
     }
-    
- 
-    
-    
+
     static func getDateFromString(dateString: String) -> Date {
         let dateConverter = DateFormatter()
         dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"

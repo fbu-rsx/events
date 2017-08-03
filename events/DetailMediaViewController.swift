@@ -8,11 +8,19 @@
 
 import UIKit
 
+protocol deleteImageDelegate {
+    func deleteImage(imageID: String)
+}
+
 class DetailMediaViewController: UIViewController {
 
     @IBOutlet weak var image: UIImageView!
     
     var pic: UIImage?
+    
+    var event: Event?
+    var imageID: String?
+    var delegate: deleteImageDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +33,19 @@ class DetailMediaViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func close(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+    
+    override var previewActionItems: [UIPreviewActionItem]{
+        let likeAction = UIPreviewAction(title: "Download", style: .default) { (action, viewController) -> Void in
+            UIImageWriteToSavedPhotosAlbum(self.pic!, nil, nil, nil)
+        }
+        
+        let deleteAction = UIPreviewAction(title: "Delete", style: .destructive) { (action, viewController) -> Void in
+            print("You deleted the photo")
+            FirebaseStorageManager.shared.deleteImage(event: self.event!, imageID: self.imageID!)
+            self.delegate?.deleteImage(imageID: self.imageID!)
+        }
+        
+        return [likeAction, deleteAction]
     }
 
     /*
