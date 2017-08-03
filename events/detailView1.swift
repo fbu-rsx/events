@@ -15,7 +15,7 @@ protocol imagePickerDelegate2 {
     //func done(imagePicker: ImagePickerController, )
 }
 
-class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerPreviewingDelegate {
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -35,6 +35,20 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
     }
     
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var photos: [UIImage] = []
+    
+    var selectedPhotos: [UIImage] = []
+    
+    var event: Event?{
+        didSet{
+            loadImages()
+        }
+    }
+    
+    var rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    
     override func awakeFromNib() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
@@ -50,19 +64,58 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         layout.minimumLineSpacing = 0
         collectionView.collectionViewLayout = layout
         collectionView.allowsMultipleSelection = true
-    }
-    
-    @IBOutlet weak var collectionView: UICollectionView!
-    
-    var photos: [UIImage] = []
-    
-    var selectedPhotos: [UIImage] = []
-    
-    var event: Event?{
-        didSet{
-            loadImages()
+        
+        if let navigationController = rootViewController as? UINavigationController {
+            rootViewController = navigationController.viewControllers.first
         }
+        if let tabBarController = rootViewController as? UITabBarController {
+            rootViewController = tabBarController.selectedViewController
+        }
+        print(rootViewController)
+        rootViewController?.registerForPreviewing(with: self, sourceView: self)
+        
+//        if( traitCollection.forceTouchCapability == .available){
+//            
+//            if let navigationController = rootViewController as? UINavigationController {
+//                rootViewController = navigationController.viewControllers.first
+//            }
+//            if let tabBarController = rootViewController as? UITabBarController {
+//                rootViewController = tabBarController.selectedViewController
+//            }
+//            rootViewController?.registerForPreviewing(with: self, sourceView: self)
+//            
+//        }
     }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+        rootViewController?.show(viewControllerToCommit, sender: self)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        let detailVC = DetailMediaViewController(nibName: "DetailMediaViewController", bundle: nil)
+        
+        guard let indexPath = collectionView?.indexPathForItem(at: location) else { return nil }
+        
+        guard let cell = collectionView?.cellForItem(at: indexPath) else { return nil }
+
+        let photo = photos[indexPath.row]
+        
+        detailVC.pic = photo
+
+        detailVC.popoverPresentationController?.sourceView = detailVC.view
+        detailVC.popoverPresentationController?.sourceRect = CGRect(x: 8, y: 60, width: 359, height: 359)
+        //print( detailVC.popoverPresentationController)
+        //detailVC.preferredContentSize = CGSize(width: 0.0, height: 200)
+        //detailVC.
+        
+        previewingContext.sourceRect = cell.frame
+        
+        return detailVC
+    }
+    
+
     
     func loadImages(){
         for imageID in event!.photos.keys{
@@ -112,6 +165,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! imageCollectionViewCell
         cell.image.image = photos[indexPath.row]
+        rootViewController?.registerForPreviewing(with: self, sourceView: cell.contentView)
         return cell
     }
     
