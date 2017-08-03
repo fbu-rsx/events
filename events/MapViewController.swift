@@ -32,7 +32,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
   
 
-    
     var currentLocation: CLLocation!
     
     // Search Variable Instantiations
@@ -79,10 +78,12 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             Utilities.setupGoogleMap(self.mapView)
         }
         
+        
+
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
-        
+    
     }
     
     

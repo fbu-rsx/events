@@ -44,7 +44,7 @@ class MyUploadsViewController: UIViewController, IndicatorInfoProvider, UICollec
     
     func loadImages(){
         for imageID in event!.photos.keys{
-            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image, imageID) in
                 if self.photos.contains(image) == false {
                     self.photos.append(image)
                     print("here")

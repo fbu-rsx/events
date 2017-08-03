@@ -10,13 +10,12 @@ import UIKit
 import FoldingCell
 import ImagePicker
 
-class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2 {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2, UIViewControllerPreviewingDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
     let kCloseCellHeight: CGFloat = 144
     let kOpenCellHeight: CGFloat = 541
-    var events: [Event] = []
     var cellHeights: [CGFloat] = []
     
     override func viewDidLoad() {
@@ -27,35 +26,35 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let bundle = Bundle(path: "events/EventsTableViewPage")
         tableView.register(UINib(nibName: "EventsTableViewCell", bundle: bundle), forCellReuseIdentifier: "eventCell")
         tableView.separatorStyle = .none
-        self.events = AppUser.current.events
-        cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
+
 
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
+        cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
+        //tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if AppUser.current.events.count != self.events.count {
-            events = AppUser.current.events
-            cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
-            tableView.reloadData()
-        }
+
+        cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
+        tableView.reloadData()
     }
 
     func refresh(_ notification: Notification) {
-        let event = notification.object as! Event
-        self.events.append(event)
-        cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
+        //let event = notification.object as! Event
+        //self.events.append(event)
+        //events = AppUser.current.events
+        cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
         tableView.reloadData()
     }
 
     
     func deleteEvent(_ notification: NSNotification) {
-        let event = notification.object as! Event
-        let index = self.events.index(of: event)!
-        self.events.remove(at: index)
+        //let event = notification.object as! Event
+        //let index = AppUser.current.events.index(of: event)!
+        //self.events.remove(at: index)
         tableView.reloadData()
     }
     
@@ -67,13 +66,13 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
-        cell.event = events[indexPath.row]
-        cell.delegate = self
+        cell.event = AppUser.current.events[indexPath.row]
+        //cell.delegate = self
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return AppUser.current.events.count
     }
     
     fileprivate struct C {
@@ -138,5 +137,30 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.unfold(true, animated: false, completion: nil)
             }
         }
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        
+        guard let indexPath = tableView?.indexPathForRow(at: location)  else {return nil}
+        
+        guard let cell = tableView?.cellForRow(at: indexPath) else { return nil }
+        
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController else { return nil }
+        
+        let event = AppUser.current.events[indexPath.row]
+        detailVC.event = event
+        
+        //detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)
+        
+        previewingContext.sourceRect = cell.frame
+        
+        return detailVC
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+        show(viewControllerToCommit, sender: self)
+        
     }
 }

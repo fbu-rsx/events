@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */; };
-		0992DBAB1F328F67005696B4 /* DetailMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0992DBA91F328F67005696B4 /* DetailMediaViewController.xib */; };
 		09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */; };
 		09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */; };
 		09A15CC11F1568F300E847CC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC01F1568F300E847CC /* Transaction.swift */; };
@@ -24,6 +23,7 @@
 		09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */; };
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
+		09E7618E1F33CAFC005D2369 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */; };
 		09F788491F2668A700A311F0 /* detailView0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788481F2668A700A311F0 /* detailView0.xib */; };
 		09F7884B1F26694A00A311F0 /* detailView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F7884A1F26694A00A311F0 /* detailView0.swift */; };
 		09F7884D1F26781400A311F0 /* detailView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F7884C1F26781400A311F0 /* detailView1.xib */; };
@@ -113,7 +113,6 @@
 
 /* Begin PBXFileReference section */
 		0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
-		0992DBA91F328F67005696B4 /* DetailMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMediaViewController.xib; sourceTree = "<group>"; };
 		09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSwiftManager.swift; sourceTree = "<group>"; };
 		09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaDirectAPIManager.swift; sourceTree = "<group>"; };
 		09A15CC01F1568F300E847CC /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -130,6 +129,7 @@
 		09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
+		09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
 		09F788481F2668A700A311F0 /* detailView0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = detailView0.xib; path = events/detailView0.xib; sourceTree = SOURCE_ROOT; };
 		09F7884A1F26694A00A311F0 /* detailView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailView0.swift; sourceTree = "<group>"; };
 		09F7884C1F26781400A311F0 /* detailView1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailView1.xib; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
 				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
 				0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */,
-				0992DBA91F328F67005696B4 /* DetailMediaViewController.xib */,
+				09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */,
 			);
 			name = EventsTableViewPage;
 			sourceTree = "<group>";
@@ -543,7 +543,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 736R8PG8E6;
+						DevelopmentTeam = S5MHKF47DJ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -591,7 +591,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0992DBAB1F328F67005696B4 /* DetailMediaViewController.xib in Resources */,
 				09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */,
 				4FD2FE9C1F2C160E00E565B9 /* default.json in Resources */,
 				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
@@ -792,6 +791,7 @@
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
 				7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */,
+				09E7618E1F33CAFC005D2369 /* DetailEventViewController.swift in Sources */,
 				4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */,
 				7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */,
 				0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */,
@@ -980,13 +980,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
@@ -1000,14 +1000,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";

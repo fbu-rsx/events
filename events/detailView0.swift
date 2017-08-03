@@ -81,6 +81,8 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 // Extracting the ID's and their response status from guestlist
                 self.guests = Array(self.event!.guestlist.keys)
                 self.guestsStatus = Array(self.event!.guestlist.values)
+                print(self.guests)
+                print(self.guestsStatus)
                 
                 // Set event date
                 self.eventDate.text = Utilities.getDateString(date: self.event!.date)
@@ -90,7 +92,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
                 }
-               
+
                 switch self.event!.myStatus {
                 case .accepted:
                     self.acceptButton.setTitle("Accepted", for: .normal)

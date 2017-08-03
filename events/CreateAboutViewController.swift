@@ -14,7 +14,6 @@ import AlamofireImage
 class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     var guests: [String] = []
     
-    @IBOutlet weak var costPerPersonText: UILabel!
     @IBOutlet weak var totalCostText: UITextField!
     @IBOutlet weak var aboutText: UITextView!
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -25,6 +24,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var gMapView: GMSMapView!
     @IBOutlet weak var leftArrowButton: UIButton!
+    @IBOutlet weak var invitationsLabel: UILabel!
     
     var gMarker: GMSMarker!
     
@@ -38,8 +38,6 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         // Total Cost Text Field
         totalCostText.textColor = UIColor(hexString: "#4CB6BE")
         totalCostText.setBottomBorder()
-        // Cost Per Person Label
-        costPerPersonText.textColor = UIColor(hexString: "#4CB6BE")
         // Send Invites Button
         sendInvitesButton.layer.cornerRadius = 5
         sendInvitesButton.backgroundColor = UIColor(hexString: "#FEB2A4")
@@ -80,6 +78,12 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         self.guests = Array(CreateEventMaster.shared.guestlist.keys)
         self.collectionView.reloadData()
         
+        // Hide "invitations" text if no guest selected
+        if self.guests.count == 0 {
+            invitationsLabel.isHidden = true
+        } else {
+            invitationsLabel.isHidden = false
+        }
         
         //update marker  if necessary
         let location = CreateEventMaster.shared.event[EventKey.location] as! [Double]
@@ -116,8 +120,6 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     @IBAction func calculateCostPerPerson(_ sender: Any) {
         let totalCost = Double(totalCostText.text!) ?? 0
         let totalAttendees = Double(self.guests.count + 1)
-        let costPerPerson = totalCost / totalAttendees
-        costPerPersonText.text = String(format: "$%.2f / person", costPerPerson)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
