@@ -47,6 +47,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func refresh(_ notification: Notification) {
         let event = notification.object as! Event
         self.events.append(event)
+        cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
         tableView.reloadData()
     }
 
