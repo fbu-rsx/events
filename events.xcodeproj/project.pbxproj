@@ -35,6 +35,10 @@
 		4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */; };
 		4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */; };
 		4F4959811F290E31006B90EE /* FacebookFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4959801F290E31006B90EE /* FacebookFriend.swift */; };
+		4F4F61361F33C00400B27115 /* SearchPlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F61341F33C00400B27115 /* SearchPlacesViewController.swift */; };
+		4F4F61371F33C00400B27115 /* SearchPlacesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F61351F33C00400B27115 /* SearchPlacesViewController.xib */; };
+		4F4F613A1F33C0C700B27115 /* SearchPlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4F61381F33C0C700B27115 /* SearchPlacesTableViewCell.swift */; };
+		4F4F613B1F33C0C700B27115 /* SearchPlacesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F4F61391F33C0C700B27115 /* SearchPlacesTableViewCell.xib */; };
 		4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69AB331F22734D0098B191 /* CreateEventPageController.swift */; };
 		4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F69AB351F22987A0098B191 /* EventContainerViewController.swift */; };
 		4F87D3711F168E5A007D4E94 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */; };
@@ -139,6 +143,10 @@
 		4F2545691F1EDA2B0076AE0B /* TestLocations.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocations.gpx; sourceTree = "<group>"; };
 		4F2545711F1FCCF90076AE0B /* CreateEventMaster.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventMaster.swift; sourceTree = "<group>"; };
 		4F4959801F290E31006B90EE /* FacebookFriend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookFriend.swift; sourceTree = "<group>"; };
+		4F4F61341F33C00400B27115 /* SearchPlacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesViewController.swift; sourceTree = "<group>"; };
+		4F4F61351F33C00400B27115 /* SearchPlacesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlacesViewController.xib; sourceTree = "<group>"; };
+		4F4F61381F33C0C700B27115 /* SearchPlacesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlacesTableViewCell.swift; sourceTree = "<group>"; };
+		4F4F61391F33C0C700B27115 /* SearchPlacesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlacesTableViewCell.xib; sourceTree = "<group>"; };
 		4F69AB331F22734D0098B191 /* CreateEventPageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventPageController.swift; sourceTree = "<group>"; };
 		4F69AB351F22987A0098B191 /* EventContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventContainerViewController.swift; sourceTree = "<group>"; };
 		4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
@@ -353,6 +361,10 @@
 				4FB4F7E11F3151A400DD4AFD /* SearchEventsViewController.xib */,
 				4FB4F7E81F315F7800DD4AFD /* SearchEventsTableViewCell.swift */,
 				4FB4F7E91F315F7800DD4AFD /* SearchEventsTableViewCell.xib */,
+				4F4F61341F33C00400B27115 /* SearchPlacesViewController.swift */,
+				4F4F61351F33C00400B27115 /* SearchPlacesViewController.xib */,
+				4F4F61381F33C0C700B27115 /* SearchPlacesTableViewCell.swift */,
+				4F4F61391F33C0C700B27115 /* SearchPlacesTableViewCell.xib */,
 			);
 			name = SearchViewControllers;
 			sourceTree = "<group>";
@@ -531,7 +543,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = S5MHKF47DJ;
+						DevelopmentTeam = TM66RGVAQ6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -595,6 +607,7 @@
 				4FD2FE901F2ADBDE00E565B9 /* apple.gpx in Resources */,
 				4FD2FEA01F2C161800E565B9 /* retro.json in Resources */,
 				7CAAA0E71F281304005C1A76 /* WalletViewController.xib in Resources */,
+				4F4F613B1F33C0C700B27115 /* SearchPlacesTableViewCell.xib in Resources */,
 				7C26DEA01F312C960079BE1A /* AddPaymentViewController.xib in Resources */,
 				4FCB62811F143DC400BBDC71 /* Main.storyboard in Resources */,
 				4FFC02FA1F26AF1D00B55206 /* SignInViewController.xib in Resources */,
@@ -606,6 +619,7 @@
 				7C9A6B801F2FBC4F00A70FD3 /* GuestsTableViewCell.xib in Resources */,
 				4FD2FE9A1F2C160E00E565B9 /* custom.json in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
+				4F4F61371F33C00400B27115 /* SearchPlacesViewController.xib in Resources */,
 				4FD2FE921F2ADBEE00E565B9 /* google.gpx in Resources */,
 				7C26DEA31F3175FE0079BE1A /* day.json in Resources */,
 				09F788491F2668A700A311F0 /* detailView0.xib in Resources */,
@@ -792,6 +806,7 @@
 				7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */,
 				09F7884F1F26783100A311F0 /* detailView1.swift in Sources */,
 				7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */,
+				4F4F613A1F33C0C700B27115 /* SearchPlacesTableViewCell.swift in Sources */,
 				4FFC02FC1F27BDCC00B55206 /* FacebookAPIManager.swift in Sources */,
 				09A15CC11F1568F300E847CC /* Transaction.swift in Sources */,
 				7CB423771F300A1A00E31099 /* InvitedCollectionViewCell.swift in Sources */,
@@ -808,6 +823,7 @@
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
 				09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */,
+				4F4F61361F33C00400B27115 /* SearchPlacesViewController.swift in Sources */,
 				4F69AB341F22734D0098B191 /* CreateEventPageController.swift in Sources */,
 				4F87D3751F168EA0007D4E94 /* AppUser.swift in Sources */,
 				4F9887281F144AD700759564 /* FirebaseDatabaseManager.swift in Sources */,
@@ -964,13 +980,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
@@ -984,14 +1000,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";

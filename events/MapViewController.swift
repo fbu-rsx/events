@@ -30,7 +30,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     @IBOutlet weak var mapView: GMSMapView!
     
-  
 
     var currentLocation: CLLocation!
     
@@ -79,11 +78,15 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         }
         
         
-
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
     
+    }
+    
+    func changedTheme(_ notification: NSNotification) {
+        Utilities.changeTheme(forMap: self.mapView)
     }
     
     
@@ -111,18 +114,10 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         
         // Pop-Up alert when others first invite you to an event
         let alertView = SCLAlertView()
-        alertView.addButton("Show More Details") {
+        alertView.addButton("Show Details") {
             self.tabBarController?.selectedIndex = 2
         }
-        alertView.showInfo("You've Been Invited!", subTitle: event.eventname)
-
-//        let alertController = UIAlertController(title: "You've Been Invited!", message: "\(event.eventname)", preferredStyle: UIAlertControllerStyle.alert)
-//        alertController.addAction(UIAlertAction(title: "Show More Details", style: UIAlertActionStyle.default) {
-//            UIAlertAction in
-//            self.tabBarController?.selectedIndex = 2
-//        })
-//        self.present(alertController, animated: true, completion: nil)
-        
+        alertView.showTitle("You've Been Invited!", subTitle: event.eventname, style: SCLAlertViewStyle.info, closeButtonTitle: "Not now", duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
     }
     
 
@@ -162,11 +157,21 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     func remove(event: Event) {
         event.map = nil
-        if let indexInArray = events.index(of: event) {
-            events.remove(at: indexInArray)
-        }
-        //        mapView.removeAnnotation(event)
-        event.circle?.map = nil
+        event.circle!.map = nil
+        let indexInArray = events.index(of: event)!
+        events.remove(at: indexInArray)
+    }
+    
+    func accept(event: Event) {
+        event.myStatus = .accepted
+        event.circle!.strokeColor = Colors.green
+        event.circle!.fillColor = Colors.green.withAlphaComponent(0.3)
+    }
+    
+    func decline(event: Event) {
+        event.myStatus = .declined
+        event.circle!.strokeColor = Colors.coral
+        event.circle!.fillColor = Colors.coral.withAlphaComponent(0.3)
     }
     
     // MARK: Map overlay functions
@@ -215,16 +220,17 @@ extension MapViewController: GMSMapViewDelegate {
         if event.organizer.uid == AppUser.current.uid {
             alertView.addButton("Delete") {
                 NotificationCenter.default.post(name: BashNotifications.delete, object: event)
-                
+                self.remove(event: event)
             }
         } else {
             if event.myStatus == InviteStatus.noResponse {
                 alertView.addButton("Accept") {
                     NotificationCenter.default.post(name: BashNotifications.accept, object: event)
-
+                    self.accept(event: event)
                 }
                 alertView.addButton("Decline") {
-                    print("Still need to add a decline notification")
+                    NotificationCenter.default.post(name: BashNotifications.decline, object: event)
+                    self.decline(event: event)
                 }
             }
         }

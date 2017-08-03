@@ -21,7 +21,7 @@ extension UIViewController {
 class Utilities {
     
     static var zoomLevel: Float = 15.0
-    static var theme: String = ""
+    static var theme: String?
     
     static func setupGoogleMap(_ mapView: GMSMapView) {
         
@@ -47,6 +47,21 @@ class Utilities {
         }
     }
     
+
+    
+    static func changeTheme(forMap map: GMSMapView) {
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: Utilities.theme!, withExtension: "json") {
+                map.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+    }
+
     static func getDateFromString(dateString: String) -> Date {
         let dateConverter = DateFormatter()
         dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"

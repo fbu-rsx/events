@@ -21,16 +21,15 @@ target 'events' do
   pod 'TwitterKit', '2.7'
   pod 'FoldingCell', '~> 2.1.3'
   pod 'DateTimePicker'
-  pod 'FaveButton', '~> 2.0.3'
   pod 'SCLAlertView'
   pod 'FBSDKLoginKit'
   pod 'SJFluidSegmentedControl', '~> 1.0'
   pod 'XLPagerTabStrip'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
-  pod 'PeekPop', '~> 1.0'
   pod 'SCLAlertView'
   pod 'IQKeyboardManagerSwift'
+  pod 'BetterSegmentedControl', '~> 0.8'
 
   target 'eventsTests' do
     inherit! :search_paths

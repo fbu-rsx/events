@@ -90,7 +90,7 @@ class FirebaseDatabaseManager {
     }
     
     func addTransaction(transaction: Transaction) {
-        let update = ["users/\(AppUser.current.uid)/transactions": transaction.getDictionary()]
+        let update = ["users/\(AppUser.current.uid)/transactions/\(transaction.id)": transaction.getDictionary()]
         self.ref.updateChildValues(update)
     }
     
