@@ -44,6 +44,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         declineButton.layer.cornerRadius = 5
         declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        tableView.separatorColor = Colors.coral
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
     }
@@ -130,9 +131,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         
         switch self.guestsStatus[indexPath.row] {
         case 1:
-            cell.guestResponseImage.image = UIImage(named: "going-1")
-        case 2:
             cell.guestResponseImage.image = UIImage(named: "not-going-1")
+        case 2:
+            cell.guestResponseImage.image = UIImage(named: "going-1")
         default:
             cell.guestResponseImage.image = UIImage(named: "maybe-1")
         }

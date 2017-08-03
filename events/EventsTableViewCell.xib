@@ -83,6 +83,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onDecline:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="2F0-HV-siG"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Event Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ae-wF-8PT">
                                 <rect key="frame" x="82" y="12" width="180" height="32"/>
@@ -105,6 +108,9 @@
                                 <state key="normal" title="Accept">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onAccept:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nuj-vW-Zhn"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8RV-rf-JrC">
                                 <rect key="frame" x="280" y="14" width="30" height="30"/>
