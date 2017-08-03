@@ -37,7 +37,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewWillAppear(animated)
         if AppUser.current.events.count != self.events.count {
             events = AppUser.current.events
-            cellHeights = (0..<events.count).map { _ in C.CellHeight.close }
+            cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
             tableView.reloadData()
         }
     }

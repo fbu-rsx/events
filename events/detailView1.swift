@@ -94,7 +94,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
 //        detailVC.popoverPresentationController?.sourceView = detailVC.view
 //        detailVC.popoverPresentationController?.sourceRect = CGRect(x: 8, y: 60, width: 359, height: 359)
         //print( detailVC.popoverPresentationController)
-        detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)
+        detailVC.preferredContentSize = CGSize(width: 0.0, height: 375)
 
         
         previewingContext.sourceRect = cell.frame
