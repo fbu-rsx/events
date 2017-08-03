@@ -37,7 +37,8 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         infoView.gradientLayer.gradient = GradientPoint.bottomTop.draw()
         
         tableView.allowsSelection = false
-//        self.walletAmount.text = String(AppUser.current.wallet)
+        tableView.separatorColor = Colors.coral
+        walletAmount.text = String(format: "$%.2f", AppUser.current.wallet)
     }
     
     override func viewWillAppear(_ animated: Bool) {
