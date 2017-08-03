@@ -96,6 +96,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         detailVC.event = event
         
         detailVC.imageID = photoUIDS[indexPath.row]
+        
+        detailVC.delegate = self
 
 
         detailVC.preferredContentSize = CGSize(width: 0.0, height: 375)
