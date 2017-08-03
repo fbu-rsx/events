@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,13 +23,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d4C-gV-umm">
-                    <rect key="frame" x="8" y="60" width="359" height="359"/>
+                    <rect key="frame" x="8" y="8" width="359" height="359"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="d4C-gV-umm" secondAttribute="height" multiplier="1:1" id="Ma6-3F-eg2"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBP-ZP-b0O">
-                    <rect key="frame" x="8" y="29" width="46" height="30"/>
+                    <rect key="frame" x="101" y="427" width="46" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <state key="normal" title="X">
@@ -42,7 +43,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="d4C-gV-umm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="AYw-ya-ATs"/>
+                <constraint firstItem="d4C-gV-umm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="topMargin" id="AYw-ya-ATs"/>
                 <constraint firstItem="d4C-gV-umm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="j8l-bv-PNy"/>
                 <constraint firstAttribute="trailing" secondItem="d4C-gV-umm" secondAttribute="trailing" constant="8" id="yIw-Ms-w3j"/>
             </constraints>

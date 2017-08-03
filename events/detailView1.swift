@@ -71,20 +71,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         if let tabBarController = rootViewController as? UITabBarController {
             rootViewController = tabBarController.selectedViewController
         }
-        print(rootViewController)
-        rootViewController?.registerForPreviewing(with: self, sourceView: self)
-        
-//        if( traitCollection.forceTouchCapability == .available){
-//            
-//            if let navigationController = rootViewController as? UINavigationController {
-//                rootViewController = navigationController.viewControllers.first
-//            }
-//            if let tabBarController = rootViewController as? UITabBarController {
-//                rootViewController = tabBarController.selectedViewController
-//            }
-//            rootViewController?.registerForPreviewing(with: self, sourceView: self)
-//            
-//        }
+
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
@@ -104,11 +91,11 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         
         detailVC.pic = photo
 
-        detailVC.popoverPresentationController?.sourceView = detailVC.view
-        detailVC.popoverPresentationController?.sourceRect = CGRect(x: 8, y: 60, width: 359, height: 359)
+//        detailVC.popoverPresentationController?.sourceView = detailVC.view
+//        detailVC.popoverPresentationController?.sourceRect = CGRect(x: 8, y: 60, width: 359, height: 359)
         //print( detailVC.popoverPresentationController)
-        //detailVC.preferredContentSize = CGSize(width: 0.0, height: 200)
-        //detailVC.
+        detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)
+
         
         previewingContext.sourceRect = cell.frame
         
