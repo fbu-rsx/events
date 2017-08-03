@@ -15,6 +15,7 @@ struct TransactionKey {
     static let amount = "amount"
     static let date = "date"
     static let status = "status"
+    static let name = "name"
 }
 class Transaction: NSObject {
     var id: String
@@ -22,6 +23,7 @@ class Transaction: NSObject {
     var amount: Double
     var date: Date
     var status: Bool // true if paid, false if not
+    var name: String //name of the associated event
     
     init(dict: [String: Any]) {
         self.id = dict[TransactionKey.id] as! String
@@ -30,6 +32,7 @@ class Transaction: NSObject {
         self.status = dict[TransactionKey.status] as! Bool
         let dateString = dict[TransactionKey.date] as! String
         self.date = Utilities.getDateFromString(dateString: dateString)
+        self.name = dict[TransactionKey.name] as! String
     }
     
     init(event: Event) {
@@ -38,6 +41,7 @@ class Transaction: NSObject {
         self.amount = event.totalcost! / Double(event.guestlist.count)
         self.date = event.date
         self.status = false
+        self.name = event.eventname
     }
     
     func completeTransaction() {
@@ -52,7 +56,8 @@ class Transaction: NSObject {
                     TransactionKey.receiver: self.receiver.getBasicDict(),
                     TransactionKey.amount: self.amount,
                     TransactionKey.date: Utilities.getDateString(date: self.date),
-                    TransactionKey.status: self.status]
+                    TransactionKey.status: self.status,
+                    TransactionKey.name: self.name]
         return dict
     }
     
