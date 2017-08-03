@@ -24,6 +24,15 @@ class PaymentTableViewCell: UITableViewCell {
             requesterImage.af_setImage(withURL: URL(string: transaction.receiver.photoURLString)!)
             requestedDate.text = Utilities.getDateString(date: transaction.date)
             eventName.text = transaction.name
+            if transaction.status == true { // I have paid
+                payButton.isUserInteractionEnabled = false
+                payButton.isEnabled = false
+                payButton.titleLabel?.text = "Paid"
+                payButton.backgroundColor = Colors.green
+            } else {
+                payButton.backgroundColor = Colors.coral
+                payButton.titleLabel?.text = "Pay"
+            }
         }
     }
     
@@ -31,13 +40,16 @@ class PaymentTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Set default Pay and Details UI
         payButton.layer.cornerRadius = 5
-        payButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-        
         // Rounded corners for UIView
         cellView.layer.cornerRadius = 10
         cellView.layer.masksToBounds = true
     }
     
+    @IBAction func didTapPay(_ sender: Any) {
+        payButton.isUserInteractionEnabled = false
+        payButton.isEnabled = false
+        transaction.completeTransaction()
+    }
    
     
 //    
