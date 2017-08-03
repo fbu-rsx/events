@@ -1,6 +1,0 @@
-framework module PeekPop {
-  umbrella header "PeekPop-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -48,7 +48,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
     }
-
+    
     var event: Event? {
         didSet {
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
@@ -66,7 +66,8 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 
                 self.topMap.isHidden = false
                 
-                self.topMap.isHidden = false
+                NotificationCenter.default.addObserver(self, selector: #selector(detailView0.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
+                
                 self.profileImage.layer.cornerRadius = 0.5*self.profileImage.frame.width
                 self.profileImage.layer.masksToBounds = true
                 
@@ -90,7 +91,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
                 }
-               
+                
                 switch self.event!.myStatus {
                 case .accepted:
                     self.acceptButton.setTitle("Accepted", for: .normal)
@@ -125,7 +126,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! GuestsTableViewCell
-    
+        
         switch self.guestsStatus[indexPath.row] {
         case 1:
             cell.guestResponseImage.image = UIImage(named: "not-going-1")
@@ -144,5 +145,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
             cell.guestImage.layer.masksToBounds = true
         }
         return cell
+    }
+    
+    func changedTheme(_ notification: NSNotification) {
+        Utilities.changeTheme(forMap: self.topMap)
     }
 }

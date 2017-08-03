@@ -23,7 +23,7 @@ struct BashNotifications {
     static let swipeLeft = NSNotification.Name(rawValue: "swipeLeft")
     static let eventsLoaded = NSNotification.Name(rawValue: "eventsLoaded")
     static let walletChanged = NSNotification.Name(rawValue: "walletChanged")
-    
+    static let changedTheme = NSNotification.Name(rawValue: "changedTheme")
 }
 
 struct UserKey {

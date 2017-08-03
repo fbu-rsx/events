@@ -30,7 +30,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     @IBOutlet weak var mapView: GMSMapView!
     
-  
 
     var currentLocation: CLLocation!
     
@@ -79,11 +78,15 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         }
         
         
-
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
     
+    }
+    
+    func changedTheme(_ notification: NSNotification) {
+        Utilities.changeTheme(forMap: self.mapView)
     }
     
     
