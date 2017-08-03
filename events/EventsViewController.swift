@@ -10,7 +10,7 @@ import UIKit
 import FoldingCell
 import ImagePicker
 
-class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2 {
+class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2, UIViewControllerPreviewingDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -67,7 +67,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         cell.event = AppUser.current.events[indexPath.row]
-        cell.delegate = self
+        //cell.delegate = self
         return cell
     }
     
@@ -137,5 +137,30 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 cell.unfold(true, animated: false, completion: nil)
             }
         }
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        
+        guard let indexPath = tableView?.indexPathForRow(at: location)  else {return nil}
+        
+        guard let cell = tableView?.cellForRow(at: indexPath) else { return nil }
+        
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController else { return nil }
+        
+        let event = AppUser.current.events[indexPath.row]
+        detailVC.event = event
+        
+        //detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)
+        
+        previewingContext.sourceRect = cell.frame
+        
+        return detailVC
+    }
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+        show(viewControllerToCommit, sender: self)
+        
     }
 }

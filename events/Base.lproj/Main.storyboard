@@ -547,12 +547,53 @@
                     <navigationItem key="navigationItem" title="Events" id="q9j-Z6-hSa"/>
                     <connections>
                         <outlet property="tableView" destination="eeW-6O-xea" id="TQA-eK-cFz"/>
-                        <segue destination="6No-sC-DRa" kind="showDetail" id="zrH-aI-0oO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vd-MH-mtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3684" y="689.5052473763119"/>
+        </scene>
+        <!--Detail Event View Controller-->
+        <scene sceneID="bXe-gk-qRk">
+            <objects>
+                <viewController storyboardIdentifier="DetailEventViewController" id="eha-L8-lP3" customClass="DetailEventViewController" customModule="events" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ECc-UH-fLr"/>
+                        <viewControllerLayoutGuide type="bottom" id="yjo-Lo-Iuu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e6m-Ly-t95">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAF-DO-nbR">
+                                <rect key="frame" x="15" y="20" width="360" height="647"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nr-n2-XQr">
+                                <rect key="frame" x="0.0" y="20" width="15" height="647"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="AoF-fD-Uv4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NAF-DO-nbR" firstAttribute="leading" secondItem="3Nr-n2-XQr" secondAttribute="trailing" id="19f-kl-6bI"/>
+                            <constraint firstAttribute="trailing" secondItem="NAF-DO-nbR" secondAttribute="trailing" id="2AH-Km-r6k"/>
+                            <constraint firstItem="3Nr-n2-XQr" firstAttribute="leading" secondItem="e6m-Ly-t95" secondAttribute="leading" id="8f5-YA-ito"/>
+                            <constraint firstItem="yjo-Lo-Iuu" firstAttribute="top" secondItem="NAF-DO-nbR" secondAttribute="bottom" id="D9f-nr-86m"/>
+                            <constraint firstItem="yjo-Lo-Iuu" firstAttribute="top" secondItem="3Nr-n2-XQr" secondAttribute="bottom" id="UGt-Cf-rob"/>
+                            <constraint firstItem="NAF-DO-nbR" firstAttribute="top" secondItem="ECc-UH-fLr" secondAttribute="bottom" id="fmb-jB-eM9"/>
+                            <constraint firstItem="3Nr-n2-XQr" firstAttribute="top" secondItem="ECc-UH-fLr" secondAttribute="bottom" id="oOK-vV-QKe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="NAF-DO-nbR" id="86Y-6j-Ng2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kv9-Fy-SgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4460" y="690"/>
         </scene>
         <!--Detail Media View Controller-->
         <scene sceneID="xEM-RP-ufZ">
@@ -567,7 +608,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hg4-dU-9sR">
-                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hg4-dU-9sR" secondAttribute="height" multiplier="1:1" id="VSs-qk-1p8"/>
                                 </constraints>
@@ -586,7 +627,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l1p-gZ-2Sr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4482" y="690"/>
+            <point key="canvasLocation" x="5204" y="690"/>
         </scene>
         <!--CreateTitleViewController-->
         <scene sceneID="nTc-IB-847">
