@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,8 +37,22 @@
                                     <action selector="onZoomToCurrentLocation:" destination="h1v-m1-jDG" eventType="touchUpInside" id="KY4-t7-3LE"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tye-0O-8Jt">
-                                <rect key="frame" x="8" y="313" width="40" height="40"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OGU-eb-Wy1" firstAttribute="top" secondItem="Hhl-NC-GcZ" secondAttribute="bottom" id="TGI-DJ-wSC"/>
+                            <constraint firstItem="yAj-gT-oub" firstAttribute="top" secondItem="Hhl-NC-GcZ" secondAttribute="bottom" constant="8" id="dCf-Ws-xpU"/>
+                            <constraint firstAttribute="bottom" secondItem="OGU-eb-Wy1" secondAttribute="bottom" id="ge5-z9-8oE"/>
+                            <constraint firstItem="OGU-eb-Wy1" firstAttribute="leading" secondItem="rXo-JW-3t4" secondAttribute="leading" id="kPZ-kD-7QV"/>
+                            <constraint firstItem="yAj-gT-oub" firstAttribute="leading" secondItem="rXo-JW-3t4" secondAttribute="leading" constant="8" id="vwg-Py-ZYe"/>
+                            <constraint firstAttribute="trailing" secondItem="OGU-eb-Wy1" secondAttribute="trailing" id="xgT-Jq-FaI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qdH-aF-weZ">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="pVp-8Q-kdl">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Tye-0O-8Jt">
+                                <rect key="frame" x="16" y="2" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="MBa-jA-C2L"/>
                                     <constraint firstAttribute="height" constant="40" id="PgA-H8-FA7"/>
@@ -48,8 +62,11 @@
                                     <action selector="hitLeftArror:" destination="h1v-m1-jDG" eventType="touchUpInside" id="Y9q-C5-ko0"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cig-hK-Tsk">
-                                <rect key="frame" x="327" y="313" width="40" height="40"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="twG-c2-LkR">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cig-hK-Tsk">
+                                <rect key="frame" x="319" y="2" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="7ur-Mi-6yi"/>
                                     <constraint firstAttribute="height" constant="40" id="PRc-cH-iGA"/>
@@ -59,22 +76,8 @@
                                     <action selector="hitRightArrow:" destination="h1v-m1-jDG" eventType="touchUpInside" id="qh5-Jn-gQv"/>
                                 </connections>
                             </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="cig-hK-Tsk" secondAttribute="trailing" constant="8" id="Jc0-Kv-LhB"/>
-                            <constraint firstItem="OGU-eb-Wy1" firstAttribute="top" secondItem="Hhl-NC-GcZ" secondAttribute="bottom" id="TGI-DJ-wSC"/>
-                            <constraint firstItem="cig-hK-Tsk" firstAttribute="centerY" secondItem="rXo-JW-3t4" secondAttribute="centerY" id="UvH-Vm-mFo"/>
-                            <constraint firstItem="yAj-gT-oub" firstAttribute="top" secondItem="Hhl-NC-GcZ" secondAttribute="bottom" constant="8" id="dCf-Ws-xpU"/>
-                            <constraint firstAttribute="bottom" secondItem="OGU-eb-Wy1" secondAttribute="bottom" id="ge5-z9-8oE"/>
-                            <constraint firstItem="OGU-eb-Wy1" firstAttribute="leading" secondItem="rXo-JW-3t4" secondAttribute="leading" id="kPZ-kD-7QV"/>
-                            <constraint firstItem="yAj-gT-oub" firstAttribute="leading" secondItem="rXo-JW-3t4" secondAttribute="leading" constant="8" id="vwg-Py-ZYe"/>
-                            <constraint firstItem="Tye-0O-8Jt" firstAttribute="centerY" secondItem="rXo-JW-3t4" secondAttribute="centerY" id="xgK-zd-gKD"/>
-                            <constraint firstAttribute="trailing" secondItem="OGU-eb-Wy1" secondAttribute="trailing" id="xgT-Jq-FaI"/>
-                            <constraint firstItem="Tye-0O-8Jt" firstAttribute="leading" secondItem="rXo-JW-3t4" secondAttribute="leading" constant="8" id="zKf-y7-Ewy"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="qdH-aF-weZ"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="leftArrowButton" destination="Tye-0O-8Jt" id="Ytj-qa-f2r"/>
@@ -172,7 +175,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKm-mb-agL">
-                                <rect key="frame" x="327" y="313" width="40" height="40"/>
+                                <rect key="frame" x="327" y="40" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2ug-5d-Tlm"/>
                                     <constraint firstAttribute="width" constant="40" id="ZLa-VB-HsV"/>
@@ -183,7 +186,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOX-9q-SoY">
-                                <rect key="frame" x="8" y="313.5" width="40" height="40"/>
+                                <rect key="frame" x="8" y="40" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="EUK-4n-rTU"/>
                                     <constraint firstAttribute="width" constant="40" id="IJA-ds-OTC"/>
@@ -195,10 +198,10 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="mOX-9q-SoY" firstAttribute="centerY" secondItem="W5H-gb-Jx5" secondAttribute="centerY" id="FXK-Hc-Ojc"/>
                             <constraint firstAttribute="trailing" secondItem="CKm-mb-agL" secondAttribute="trailing" constant="8" id="djd-1J-0UG"/>
                             <constraint firstItem="mOX-9q-SoY" firstAttribute="leading" secondItem="W5H-gb-Jx5" secondAttribute="leading" constant="8" id="gAl-aN-y34"/>
-                            <constraint firstItem="CKm-mb-agL" firstAttribute="centerY" secondItem="W5H-gb-Jx5" secondAttribute="centerY" id="i7u-wo-a4b"/>
+                            <constraint firstItem="mOX-9q-SoY" firstAttribute="top" secondItem="W5H-gb-Jx5" secondAttribute="top" constant="40" id="lCt-7e-Uid"/>
+                            <constraint firstItem="CKm-mb-agL" firstAttribute="top" secondItem="W5H-gb-Jx5" secondAttribute="top" constant="40" id="lzb-Uh-cNh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="x4p-FY-dV3"/>
@@ -286,7 +289,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXw-Ff-LGJ">
-                                <rect key="frame" x="8" y="313" width="40" height="40"/>
+                                <rect key="frame" x="8" y="20" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="3zp-7F-aSw"/>
                                     <constraint firstAttribute="height" constant="40" id="D1H-es-k4R"/>
@@ -341,8 +344,8 @@
                             <constraint firstAttribute="trailing" secondItem="fNi-OW-Nc4" secondAttribute="trailing" id="Ari-MV-X6q"/>
                             <constraint firstItem="AEV-u1-4Aw" firstAttribute="bottom" secondItem="fNi-OW-Nc4" secondAttribute="bottom" constant="30" id="MGq-4c-nEB"/>
                             <constraint firstItem="fNi-OW-Nc4" firstAttribute="top" secondItem="qHY-wu-G4g" secondAttribute="top" id="VTY-1s-8WJ"/>
-                            <constraint firstItem="WXw-Ff-LGJ" firstAttribute="centerY" secondItem="qHY-wu-G4g" secondAttribute="centerY" id="XQm-Bo-Xum"/>
                             <constraint firstItem="fNi-OW-Nc4" firstAttribute="leading" secondItem="qHY-wu-G4g" secondAttribute="leading" id="aV0-IP-Bex"/>
+                            <constraint firstItem="WXw-Ff-LGJ" firstAttribute="top" secondItem="qHY-wu-G4g" secondAttribute="top" constant="20" id="g0o-In-CaG"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="yZR-SB-cjn" appends="YES" id="gkA-Rp-cFW"/>
@@ -683,7 +686,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJy-VR-PeL">
-                                <rect key="frame" x="327" y="313.5" width="40" height="40"/>
+                                <rect key="frame" x="327" y="35" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="7As-Pz-rRZ"/>
                                     <constraint firstAttribute="height" constant="40" id="7Qh-fr-4Yq"/>
@@ -698,7 +701,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="UJy-VR-PeL" secondAttribute="trailing" constant="8" id="AsW-Jo-dMs"/>
-                            <constraint firstItem="UJy-VR-PeL" firstAttribute="centerY" secondItem="Ro1-CW-j1D" secondAttribute="centerY" id="NPl-RF-arm"/>
+                            <constraint firstItem="UJy-VR-PeL" firstAttribute="top" secondItem="egP-Bx-Zn2" secondAttribute="bottom" constant="15" id="ZjS-wh-qBd"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="BoR-nj-OZg" appends="YES" id="E38-SD-xNg"/>

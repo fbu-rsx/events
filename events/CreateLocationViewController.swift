@@ -59,11 +59,15 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
         mapView.selectedMarker = marker
         CreateEventMaster.shared.event[EventKey.location] = [coordinate.latitude, coordinate.longitude]
         self.tabBarController?.tabBar.isHidden = false
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         leftArrowButton.isUserInteractionEnabled = true
         rightArrowButton.isUserInteractionEnabled = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateLocationViewController.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -85,6 +89,10 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
     @IBAction func hitRightArrow(_ sender: Any) {
         rightArrowButton.isUserInteractionEnabled = false
         NotificationCenter.default.post(name: BashNotifications.swipeRight, object: nil)
+    }
+    
+    func changedTheme(_ notification: NSNotification) {
+        Utilities.changeTheme(forMap: self.mapView)
     }
     
 }

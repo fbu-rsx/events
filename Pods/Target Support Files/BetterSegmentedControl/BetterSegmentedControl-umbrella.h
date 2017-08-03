@@ -10,9 +10,7 @@
 #endif
 #endif
 
-#import "PeekPop.h"
-#import "UIImage+ImageEffects.h"
 
-FOUNDATION_EXPORT double PeekPopVersionNumber;
-FOUNDATION_EXPORT const unsigned char PeekPopVersionString[];
+FOUNDATION_EXPORT double BetterSegmentedControlVersionNumber;
+FOUNDATION_EXPORT const unsigned char BetterSegmentedControlVersionString[];
 
