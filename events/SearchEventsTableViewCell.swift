@@ -19,7 +19,7 @@ class SearchEventsTableViewCell: UITableViewCell {
         didSet {
             nameLabel.text = event.eventname
             descriptionLabel.text = event.about
-            eventTime.text = event.getDateStringOnly()
+            eventTime.text = Utilities.getDateTimeString(date: event.date)
             let phototURL = URL(string: event.organizer.photoURLString)!
             profileImageView.af_setImage(withURL: phototURL)
             profileImageView.layer.cornerRadius = 0.5 * profileImageView.frame.width

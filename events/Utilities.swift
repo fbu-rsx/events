@@ -45,6 +45,31 @@ class Utilities {
             NSLog("One or more of the map styles failed to load. \(error)")
         }
     }
+    
+    static func getDateFromString(dateString: String) -> Date {
+        let dateConverter = DateFormatter()
+        dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
+        return dateConverter.date(from: dateString)!
+    }
+    
+    static func getDateString(date: Date) -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
+        return dateFormatterPrint.string(from: date)
+    }
+    
+    static func getTimeString(date: Date) -> String {
+        let dateFormatterPrint = DateFormatter()
+        dateFormatterPrint.dateFormat = "h:mm a"
+        return dateFormatterPrint.string(from: date)
+    }
+    
+    static func getDateTimeString(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        return dateFormatter.string(from: date)
+    }
+
 }
 
 extension UIColor {
@@ -61,31 +86,5 @@ extension UIColor {
             return colorAsUInt
         }
         return 0
-    }
-}
-
-extension Date
-{
-    
-    func dateAt(hours: Int, minutes: Int) -> Date
-    {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        
-        //get the month/day/year componentsfor today's date.
-        
-        
-        var date_components = calendar.components(
-            [NSCalendar.Unit.year,
-             NSCalendar.Unit.month,
-             NSCalendar.Unit.day],
-            from: self)
-        
-        //Create an NSDate for the specified time today.
-        date_components.hour = hours
-        date_components.minute = minutes
-        date_components.second = 0
-        
-        let newDate = calendar.date(from: date_components)!
-        return newDate
     }
 }

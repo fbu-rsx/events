@@ -56,6 +56,9 @@ class Event: GMSMarker {
         get {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
         }
+        set {
+            myStatus = newValue
+        }
     }
         
     var circle: GMSCircle?
@@ -89,9 +92,7 @@ class Event: GMSMarker {
             self.totalcost = cost as? Double
         }
         let datetime = dictionary[EventKey.date] as! String
-        let dateConverter = DateFormatter()
-        dateConverter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz"
-        self.date = dateConverter.date(from: datetime)!
+        self.date = Utilities.getDateFromString(dateString: datetime)
         
         let location = dictionary[EventKey.location] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: location[0], longitude: location[1])
@@ -112,24 +113,6 @@ class Event: GMSMarker {
         if organizer.uid == AppUser.current.uid {
             FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
         }
-    }
-    
-    func getDateStringOnly() -> String {
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "MMM dd, yyyy"
-        return dateFormatterPrint.string(from: self.date)
-    }
-    
-    func getTimeStringOnly() -> String {
-        let dateFormatterPrint = DateFormatter()
-        dateFormatterPrint.dateFormat = "h:mm a"
-        return dateFormatterPrint.string(from: self.date)
-    }
-    
-    func getDateTimeString() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM d, h:mm a"
-        return dateFormatter.string(from: self.date)
     }
     
     override func isEqual(_ object: Any?) -> Bool {

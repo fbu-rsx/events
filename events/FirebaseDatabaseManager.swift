@@ -59,18 +59,58 @@ class FirebaseDatabaseManager {
         }
     }
     
-    func createWallet(id: String) {
+    func createWallet(id: String, completion: @escaping (Double) -> Void) {
         self.ref.child("users/\(id)/wallet").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if !snapshot.exists() {
                 self.updateWallet(id: id, withValue: 0.0)
+                completion(0.0)
+            } else {
+                let value = snapshot.value as! Double
+                completion(value)
             }
         }
+    }
+    
+    func getTransactions(id: String, completion: @escaping ([String: Any]) -> Void) {
+        self.ref.child("users/\(id)/transactions").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.exists() {
+                let dict = snapshot.value as! [String: Any]
+                completion(dict)
+            } else {
+                completion([:])
+            }
+        }
+    }
+    
+    func addTransaction(transaction: Transaction) {
+        let update = ["users/\(AppUser.current.uid)/transactions": transaction.getDictionary()]
+        self.ref.updateChildValues(update)
+    }
+    
+    func removeTransaction(forEventID id: String) {
+        let update = ["users/\(AppUser.current.uid)/transactions/\(id)": NSNull()]
+        self.ref.updateChildValues(update)
     }
     
     func updateWallet(id: String, withValue value: Double) {
         let update = ["users/\(id)/wallet": value]
         self.ref.updateChildValues(update)
     }
+    
+    func updateOtherUserWallet(id: String, withValue value: Double) {
+        self.ref.child("users/\(id)/wallet").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if !snapshot.exists() {
+                self.updateWallet(id: id, withValue: value)
+            } else {
+                let oldValue = snapshot.value as! Double
+                self.updateWallet(id: id, withValue: oldValue + value)
+            }
+        }
+    }
+    
+    func updateTransaction(id: String) {
+        let update = ["users/\(AppUser.current.uid)/transactions/\(id)/\(TransactionKey.status)": true]
+        self.ref.updateChildValues(update)    }
     
     func addEventsListener() {
         self.ref.child("users/\(AppUser.current.uid)/events").observe(.childAdded) { (snapshot: DataSnapshot) in

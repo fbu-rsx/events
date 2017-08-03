@@ -82,7 +82,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.guestsStatus = Array(self.event!.guestlist.values)
                 
                 // Set event date
-                self.eventDate.text = self.event!.getDateTimeString()
+                self.eventDate.text = Utilities.getDateString(date: self.event!.date)
                 
                 self.tableView.reloadData()
                 // Setting button colors depending on myStatus
