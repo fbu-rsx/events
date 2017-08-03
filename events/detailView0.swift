@@ -92,11 +92,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
                 }
-                /*
-                for guest in (self.event?.guestlist.keys)!{
-                    self.guests.append(guest)
-                }*/
-                
+
                 switch self.event!.myStatus {
                 case .accepted:
                     self.acceptButton.setTitle("Accepted", for: .normal)
@@ -131,7 +127,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! GuestsTableViewCell
-        
+    
         switch self.guestsStatus[indexPath.row] {
         case 1:
             cell.guestResponseImage.image = UIImage(named: "not-going-1")

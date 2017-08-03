@@ -15,7 +15,7 @@ protocol imagePickerDelegate2 {
     //func done(imagePicker: ImagePickerController, )
 }
 
-class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerPreviewingDelegate {
+class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerPreviewingDelegate, deleteImageDelegate{
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -40,6 +40,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     var photos: [UIImage] = []
     
     var selectedPhotos: [UIImage] = []
+    
+    var photoUIDS: [String] = []
     
     var event: Event?{
         didSet{
@@ -81,7 +83,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        let detailVC = DetailMediaViewController(nibName: "DetailMediaViewController", bundle: nil)
+        let detailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailMedia") as! DetailMediaViewController
         
         guard let indexPath = collectionView?.indexPathForItem(at: location) else { return nil }
         
@@ -90,6 +92,10 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         let photo = photos[indexPath.row]
         
         detailVC.pic = photo
+        
+        detailVC.event = event
+        
+        detailVC.imageID = photoUIDS[indexPath.row]
 
 
         detailVC.preferredContentSize = CGSize(width: 0.0, height: 375)
@@ -100,17 +106,24 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         return detailVC
     }
     
-
     
     func loadImages(){
         for imageID in event!.photos.keys{
-            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image) in
+            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image, imageID) in
                 if self.photos.contains(image) == false {
                     self.photos.append(image)
+                    self.photoUIDS.append(imageID)
                 }
                 self.collectionView.reloadData()
             })
         }
+    }
+    
+    func deleteImage(imageID: String) {
+        let index = photoUIDS.index(of: imageID)
+        photos.remove(at: index!)
+        photoUIDS.remove(at: index!)
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

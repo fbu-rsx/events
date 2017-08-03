@@ -33,7 +33,7 @@ class FirebaseStorageManager {
         }
     }
     
-    func downloadImage(event: Event, imageID: String, completion: @escaping (_ image: UIImage)->()){
+    func downloadImage(event: Event, imageID: String, completion: @escaping (_ image: UIImage, _ imageID: String)->()){
         let fileRef = storageRef.child("\(event.eventid)/images/\(imageID)")
         // temporary maxSize
         fileRef.getData(maxSize: 30000*30000) { (data, error) in
@@ -45,7 +45,7 @@ class FirebaseStorageManager {
                 // Assuming that return value of request is a UIImage
                 let image = UIImage(data: data!)
                 // either return image or pass it into completion
-                completion(image!)
+                completion(image!, imageID)
             }
         }
         // We can also add observers later on
