@@ -27,6 +27,8 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         let bundle = Bundle(path: "/Users/xiuchen/Desktop/events/events/PaymentTableViewCell.swift")
         let nib = UINib(nibName: "PaymentTableViewCell", bundle: bundle)
         tableView.register(nib, forCellReuseIdentifier: "PaymentCell")
+        
+        walletAmount.text = String(format: "%.2F", AppUser.current.wallet)
 
         // Gradient
         let coral = UIColor(hexString: "#FEB2A4")

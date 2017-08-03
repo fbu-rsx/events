@@ -21,7 +21,7 @@ struct EventKey {
     static let spotifyID = "spotifyID"
     static let playlistCreatorID = "playlistCreatorID"
     static let name = "eventname"
-    static let cost = "totalcost"
+    static let cost = "cost"
     static let date = "datetime"
     static let location = "location"
     static let radius = "radius"
@@ -42,7 +42,7 @@ class Event: GMSMarker {
 
     //all below are required in the dictionary user to initialize an event
     var eventname: String
-    var totalcost: Double?
+    var cost: Double?
     var date: Date
     var coordinate: CLLocationCoordinate2D
     var radius: Double = 100
@@ -89,7 +89,7 @@ class Event: GMSMarker {
         self.eventid = dictionary[EventKey.id] as! String
         self.eventname = dictionary[EventKey.name] as! String
         if let cost = dictionary[EventKey.cost] {
-            self.totalcost = cost as? Double
+            self.cost = cost as? Double
         }
         let datetime = dictionary[EventKey.date] as! String
         self.date = Utilities.getDateFromString(dateString: datetime)

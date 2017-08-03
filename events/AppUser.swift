@@ -22,6 +22,7 @@ struct BashNotifications {
     static let swipeRight = NSNotification.Name(rawValue: "swipeRight")
     static let swipeLeft = NSNotification.Name(rawValue: "swipeLeft")
     static let eventsLoaded = NSNotification.Name(rawValue: "eventsLoaded")
+    static let walletChanged = NSNotification.Name(rawValue: "walletChanged")
     
 }
 
@@ -87,6 +88,7 @@ class AppUser {
         }
         FirebaseDatabaseManager.shared.createWallet(id: uid) { (value: Double) in
             self.wallet = value
+            FirebaseDatabaseManager.shared.addWalletListener(id: self.uid)
         }
         FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
             self.facebookFriends = friends
@@ -103,6 +105,7 @@ class AppUser {
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.accept(_:)), name: BashNotifications.accept, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.decline(_:)), name: BashNotifications.decline, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.walletChanged(_:)), name: BashNotifications.walletChanged, object: nil)
     }
 
     /**
@@ -127,7 +130,7 @@ class AppUser {
         let event = notification.object as! Event
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .accepted)
         event.myStatus = .accepted
-        if event.totalcost != nil {
+        if event.cost != nil {
             let transaction = Transaction(event: event)
             self.transactions.append(transaction)
             FirebaseDatabaseManager.shared.addTransaction(transaction: transaction)
@@ -150,6 +153,11 @@ class AppUser {
             self.transactions.remove(at: idx)
         }
         event.myStatus = .declined
+    }
+    
+    @objc func walletChanged(_ notification: NSNotification) {
+        let value = notification.object as! Double
+        self.wallet = value
     }
 
     
@@ -180,7 +188,7 @@ class AppUser {
     }
     
     func addToWallet(amount: Double) {
-        self.wallet = self.wallet + amount
+        FirebaseDatabaseManager.shared.updateWallet(id: self.uid, withValue: self.wallet + amount)
     }
 }
 
