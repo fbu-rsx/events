@@ -296,13 +296,6 @@
                                     <action selector="hitLeftArror:" destination="TFw-CM-ad2" eventType="touchUpInside" id="REU-ht-uSJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.00 / person" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYH-c8-Sue">
-                                <rect key="frame" x="176" y="271" width="192" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Picnic in Menlo Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVN-yU-7LG">
                                 <rect key="frame" x="0.0" y="203" width="375" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -317,24 +310,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="description of event" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="K6K-WL-RwA">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="enter description of event" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="K6K-WL-RwA">
                                 <rect key="frame" x="16" y="308" width="343" height="107"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="total cost" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-tE-igi">
-                                <rect key="frame" x="56" y="270" width="107" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.17893835620000001" colorSpace="calibratedWhite"/>
-                                <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="21"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                <connections>
-                                    <action selector="calculateCostPerPerson:" destination="TFw-CM-ad2" eventType="editingChanged" id="2hY-Iq-JZa"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Invitations" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDo-Vg-BuL">
                                 <rect key="frame" x="82" y="418" width="211" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -342,6 +324,14 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="estimated cost / person" placeholder="estimated cost / person" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="Un7-tE-igi">
+                                <rect key="frame" x="53" y="270" width="270" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="0.17893835620000001" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="21"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -362,10 +352,10 @@
                     <connections>
                         <outlet property="aboutText" destination="K6K-WL-RwA" id="55h-YF-FlG"/>
                         <outlet property="collectionView" destination="ncV-Md-Ilj" id="Rfe-CH-CaM"/>
-                        <outlet property="costPerPersonText" destination="wYH-c8-Sue" id="eIf-DU-OCk"/>
                         <outlet property="eventTimeLabel" destination="g9B-ez-dwe" id="aiK-1h-rDa"/>
                         <outlet property="eventTitleLabel" destination="EVN-yU-7LG" id="bwq-yZ-I0r"/>
                         <outlet property="gMapView" destination="fNi-OW-Nc4" id="jXj-BF-Y7Y"/>
+                        <outlet property="invitationsLabel" destination="GDo-Vg-BuL" id="Ysu-mP-vVa"/>
                         <outlet property="leftArrowButton" destination="WXw-Ff-LGJ" id="tn2-eJ-VjV"/>
                         <outlet property="sendInvitesButton" destination="w4e-2h-fum" id="y8B-Py-Qum"/>
                         <outlet property="totalCostText" destination="Un7-tE-igi" id="HFy-Dh-bBE"/>
@@ -509,7 +499,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="hfl-ce-2ab"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="le7-gx-8ns" id="Y3U-OL-fpa"/>
                         <outlet property="searchDisplayController" destination="3pA-ee-CMu" id="6gp-Em-sFk"/>
