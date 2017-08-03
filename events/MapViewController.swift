@@ -16,7 +16,7 @@ import GoogleMaps
 import SCLAlertView
 
 struct Colors {
-    static let coral = UIColor(hexString: "#EF5B5B")
+    static let coral = UIColor(hexString: "#FEB2A4")
     static let lightBlue = UIColor(hexString: "#B6E7EF")
     static let green = UIColor(hexString: "#4CB6BE")
     static let orange = UIColor(hexString: "#FF9D00")
@@ -227,7 +227,7 @@ extension MapViewController: GMSMapViewDelegate {
                 }
             }
         }
-        alertView.showTitle(event.eventname, subTitle: event.getDateTimeString(), style: SCLAlertViewStyle.info, closeButtonTitle: "Not now", duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+        alertView.showTitle(event.eventname, subTitle: Utilities.getDateTimeString(date: event.date), style: SCLAlertViewStyle.info, closeButtonTitle: "Not now", duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
     }
 
     func eventWithinCoordinate(_ coordinate: CLLocationCoordinate2D) -> Event? {

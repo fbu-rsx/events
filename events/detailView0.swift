@@ -19,8 +19,10 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
+    @IBOutlet weak var eventDate: UILabel!
     
     var guests: [String] = []
+    var guestsStatus: [Int] = []
     
     @IBAction func goingTap(_ sender: UIButton) {
         NotificationCenter.default.post(name: BashNotifications.accept, object: event)
@@ -42,6 +44,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         declineButton.layer.cornerRadius = 5
         declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        tableView.separatorColor = Colors.coral
+        tableView.tableFooterView = UIView()
+        tableView.allowsSelection = false
     }
 
     var event: Event? {
@@ -73,7 +78,13 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.eventTitle.text = self.event!.title
                 self.eventDescription.text = self.event!.about
                 
+                // Extracting the ID's and their response status from guestlist
                 self.guests = Array(self.event!.guestlist.keys)
+                self.guestsStatus = Array(self.event!.guestlist.values)
+                
+                // Set event date
+                self.eventDate.text = Utilities.getDateString(date: self.event!.date)
+                
                 self.tableView.reloadData()
                 // Setting button colors depending on myStatus
                 for guest in self.event!.guestlist {
@@ -117,6 +128,16 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! GuestsTableViewCell
+        
+        switch self.guestsStatus[indexPath.row] {
+        case 1:
+            cell.guestResponseImage.image = UIImage(named: "not-going-1")
+        case 2:
+            cell.guestResponseImage.image = UIImage(named: "going-1")
+        default:
+            cell.guestResponseImage.image = UIImage(named: "maybe-1")
+        }
+        
         FirebaseDatabaseManager.shared.getSingleUser(id: self.guests[indexPath.row]) { (user: AppUser) in
             cell.nameLabel.text = user.name
             let photoURLString = user.photoURLString

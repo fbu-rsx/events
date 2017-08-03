@@ -35,7 +35,14 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         infoView.gradientLayer.gradient = GradientPoint.bottomTop.draw()
         
         tableView.allowsSelection = false
-//        self.walletAmount.text = String(AppUser.current.wallet)
+        tableView.separatorColor = Colors.coral
+        walletAmount.text = String(format: "$%.2f", AppUser.current.wallet)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,12 +50,13 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("hello: \(AppUser.current.events.count )")
-        return AppUser.current.events.count
+
+        return AppUser.current.transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentCell", for: indexPath) as! PaymentTableViewCell
+        cell.transaction = AppUser.current.transactions[indexPath.row]
         return cell
     }
     

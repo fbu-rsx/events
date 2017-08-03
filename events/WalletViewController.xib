@@ -43,7 +43,7 @@
                             <rect key="frame" x="208" y="23" width="147" height="29"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.34628807109999998" green="0.34628807109999998" blue="0.34628807109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallet-with-card-sticking-out" translatesAutoresizingMaskIntoConstraints="NO" id="VhO-b1-I0y">

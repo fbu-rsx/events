@@ -18,7 +18,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     @IBOutlet weak var view1topConstraint: NSLayoutConstraint!
     @IBOutlet weak var view1: RotatedView!
     @IBOutlet weak var view2: RotatedView!
-    @IBOutlet weak var view2topConstraint: NSLayoutConstraint!  
+    @IBOutlet weak var view2topConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
@@ -28,6 +28,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     @IBOutlet weak var closedUserCost: UILabel!
     @IBOutlet weak var closedInvitedNum: UILabel!
     @IBOutlet weak var closedComingNum: UILabel!
+    @IBOutlet weak var responseIcon: UIImageView!
     
     var pageView : UIPageControl = UIPageControl()
     @IBOutlet weak var scrollView: UIScrollView!
@@ -35,7 +36,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     var delegate: imagePickerDelegate2? {
         didSet{
             if self.delegate == nil {
-                return 
+                return
             }
             pageView = UIPageControl(frame:CGRect(x: (self.view2.frame.width-10)/2 - 10, y: self.view2.frame.height - 40, width: 40, height: 40))
             configurePageControl()
@@ -109,30 +110,58 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 var sideBarColor: UIColor!
                 var backViewColor: UIColor!
                 // var backViewColor: UIColor!
-                switch self.event!.myStatus {
-                case .accepted:
-                    color = Colors.greenAccepted
-                    sideBarColor = UIColor(hexString: "#8CF7AC")
-                    backViewColor = UIColor(hexString: "#8CF7AC")
-                    // if accepted, hide "accept" and "decline" buttons
+                
+                
+                
+                // check if the event is created by AppUser.current
+                let eventOrganizer = (self.event?.organizer)!
+                if eventOrganizer.uid == AppUser.current.uid {
+              
+                    self.oneCell.backgroundColor = UIColor(hexString: "#B6A6CA")
+                    self.sideBar.backgroundColor = UIColor(hexString: "#D5CFE1")
+                    self.sideBar1.backgroundColor = UIColor(hexString: "#D5CFE1")
+                    self.backViewColor = UIColor(hexString: "#D5CFE1")
+                    
+                    // if my event, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
-                case .declined:
-                    color = Colors.redDeclined
-                    backViewColor = UIColor(hexString: "#F4ABB1")
-                    sideBarColor = UIColor(hexString: "#F4ABB1")
-                    // if declined, hide "accept" and "decline" buttons
-                    self.acceptButton.isHidden = true
-                    self.declineButton.isHidden = true
-                default:
-                    color = Colors.pendingBlue
-                    sideBarColor = UIColor(hexString: "#ABEEFC")
-                    backViewColor = UIColor(hexString: "#ABEEFC")
+    
+                    // Setting resposne icon to a star
+                    self.responseIcon.image = UIImage(named: "my-event")
+                    
+                } else {
+                    switch self.event!.myStatus {
+                    case .accepted:
+                        color = Colors.greenAccepted
+                        sideBarColor = UIColor(hexString: "#8CF7AC")
+                        backViewColor = UIColor(hexString: "#8CF7AC")
+                        // if accepted, hide "accept" and "decline" buttons
+                        self.acceptButton.isHidden = true
+                        self.declineButton.isHidden = true
+                        
+                        // Setting resposne icon to a check mark
+                        self.responseIcon.image = UIImage(named: "going")
+                        
+                    case .declined:
+                        color = Colors.redDeclined
+                        backViewColor = UIColor(hexString: "#F4ABB1")
+                        sideBarColor = UIColor(hexString: "#F4ABB1")
+                        // if declined, hide "accept" and "decline" buttons
+                        self.acceptButton.isHidden = true
+                        self.declineButton.isHidden = true
+                        self.responseIcon.image = UIImage(named: "not-going")
+                        
+                    default:
+                        color = Colors.pendingBlue
+                        sideBarColor = UIColor(hexString: "#ABEEFC")
+                        backViewColor = UIColor(hexString: "#ABEEFC")
+                        
+                    }
+                    self.sideBar.backgroundColor = sideBarColor
+                    self.sideBar1.backgroundColor = sideBarColor
+                    self.oneCell.backgroundColor = color
+                    self.backViewColor = backViewColor
                 }
-                self.sideBar.backgroundColor = sideBarColor
-                self.sideBar1.backgroundColor = sideBarColor
-                self.oneCell.backgroundColor = color
-                self.backViewColor = backViewColor
             }
         }
     }
@@ -155,7 +184,15 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
         declineButton.layer.cornerRadius = 5
         declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
-        
+    
+    @IBAction func onAccept(_ sender: Any) {
+        NotificationCenter.default.post(name: BashNotifications.accept, object: event)
+    }
+    
+    @IBAction func onDecline(_ sender: Any) {
+        NotificationCenter.default.post(name: BashNotifications.decline, object: event)
+    }
+    
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
         self.pageView.numberOfPages = 3

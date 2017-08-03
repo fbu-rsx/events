@@ -89,6 +89,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
                                               longitude: coordinate.longitude,
                                               zoom: Utilities.zoomLevel)
         gMapView.animate(to: camera)
+   
         
         leftArrowButton.isUserInteractionEnabled = true
     }

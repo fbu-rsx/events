@@ -14,6 +14,7 @@ struct BashNotifications {
     static let invite = NSNotification.Name(rawValue: "inviteAdded")
     static let delete = NSNotification.Name(rawValue: "deleteEvent")
     static let accept = NSNotification.Name(rawValue: "acceptedInvitation")
+    static let decline = NSNotification.Name(rawValue: "declineInvitation")
     static let logout = NSNotification.Name(rawValue: "logout")
     static let refresh = NSNotification.Name(rawValue: "refresh")
     static let enableSwipe = NSNotification.Name(rawValue: "enableSwipe")
@@ -56,6 +57,7 @@ class AppUser {
     var events: [Event] = []
     var eventsKeys: [String: Int]!
     var wallet: Double!
+    var transactions: [Transaction]!
     
     var facebookFriends: [FacebookFriend]!
     
@@ -73,10 +75,6 @@ class AppUser {
         
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.addUser(userDict: userDict)
-        FirebaseDatabaseManager.shared.createWallet(id: uid)
-        FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
-            self.facebookFriends = friends
-        }
         FirebaseDatabaseManager.shared.fetchUserEvents(userid: self.uid) { (keys: [String: Int], events: [String: Any]) in
             self.eventsKeys = keys
             for id in events.keys {
@@ -87,9 +85,24 @@ class AppUser {
             NotificationCenter.default.post(name: BashNotifications.eventsLoaded, object: nil)
             print("events loaded notification posted")
         }
+        FirebaseDatabaseManager.shared.createWallet(id: uid) { (value: Double) in
+            self.wallet = value
+        }
+        FacebookAPIManager.shared.getUserFriendsList { (friends: [FacebookFriend]) in
+            self.facebookFriends = friends
+        }
+        FirebaseDatabaseManager.shared.getTransactions(id: self.uid) { (dict: [String : Any]) in
+            var arr: [Transaction] = []
+            for key in dict.keys {
+                let transaction = Transaction(dict: dict[key] as! [String: Any])
+                arr.append(transaction)
+            }
+            self.transactions = arr
+        }
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.accept(_:)), name: BashNotifications.accept, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.decline(_:)), name: BashNotifications.decline, object: nil)
     }
 
     /**
@@ -113,6 +126,38 @@ class AppUser {
     @objc func accept(_ notification: NSNotification) {
         let event = notification.object as! Event
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .accepted)
+        event.myStatus = .accepted
+        if event.totalcost != nil {
+            let transaction = Transaction(event: event)
+            self.transactions.append(transaction)
+            FirebaseDatabaseManager.shared.addTransaction(transaction: transaction)
+        }
+    }
+    
+    @objc func decline(_ notification: NSNotification) {
+        let event = notification.object as! Event
+        FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .declined)
+        FirebaseDatabaseManager.shared.removeTransaction(forEventID: event.eventid)
+        if event.myStatus == .accepted {
+            var idx: Int!
+            for i in 0..<self.transactions.count {
+                let transaction = self.transactions[i]
+                if transaction.id == event.eventid {
+                    idx = i
+                    break
+                }
+            }
+            self.transactions.remove(at: idx)
+        }
+        event.myStatus = .declined
+    }
+
+    
+    func getBasicDict() -> [String: Any] {
+        let dict = [UserKey.id: self.uid,
+                    UserKey.name: self.name,
+                    UserKey.photo: self.photoURLString]
+        return dict
     }
     
     //create event and add to user event list and event database
@@ -132,6 +177,10 @@ class AppUser {
         let index = self.events.index(of: event)!
         self.events.remove(at: index)
         self.eventsKeys.removeValue(forKey: event.eventid)
+    }
+    
+    func addToWallet(amount: Double) {
+        self.wallet = self.wallet + amount
     }
 }
 

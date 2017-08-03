@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -61,17 +61,6 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3M-nE-3cE">
-                        <rect key="frame" x="226" y="48" width="100" height="32"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="wYp-SZ-gjX"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
-                        <state key="normal" title="Details">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="wgv-N2-neU" firstAttribute="leading" secondItem="fDa-Ab-IGS" secondAttribute="trailing" constant="5" id="0hh-WP-Qci"/>
@@ -85,22 +74,19 @@
                     <constraint firstAttribute="trailing" secondItem="wIr-b2-fLa" secondAttribute="trailing" constant="8" id="atD-0O-HW8"/>
                     <constraint firstItem="g8s-OO-PGT" firstAttribute="top" secondItem="7dJ-AF-emt" secondAttribute="bottom" constant="8" id="f88-WC-59D"/>
                     <constraint firstItem="wIr-b2-fLa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="hha-0D-3Ak"/>
-                    <constraint firstAttribute="trailing" secondItem="A3M-nE-3cE" secondAttribute="trailing" constant="8" id="nRr-fa-elJ"/>
                     <constraint firstItem="wIr-b2-fLa" firstAttribute="leading" secondItem="7dJ-AF-emt" secondAttribute="trailing" constant="8" id="njo-W9-kYm"/>
                     <constraint firstItem="wgv-N2-neU" firstAttribute="top" secondItem="g8s-OO-PGT" secondAttribute="bottom" constant="5" id="oSc-gP-dbB"/>
                     <constraint firstItem="fDa-Ab-IGS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sFP-nr-Qmo"/>
-                    <constraint firstItem="A3M-nE-3cE" firstAttribute="top" secondItem="wIr-b2-fLa" secondAttribute="bottom" constant="8" id="vbD-IV-6f2"/>
                     <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="g8s-OO-PGT" secondAttribute="trailing" constant="8" id="yBg-Ow-Uup"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cellView" destination="H2p-sc-9uM" id="35u-Jl-r3n"/>
-                <outlet property="detailsButton" destination="A3M-nE-3cE" id="Afd-g5-beD"/>
+                <outlet property="eventName" destination="g8s-OO-PGT" id="fuD-jl-P0h"/>
                 <outlet property="payButton" destination="wIr-b2-fLa" id="e7R-Kr-NoR"/>
                 <outlet property="paymentValueLabel" destination="7dJ-AF-emt" id="ciH-yM-an9"/>
                 <outlet property="requestedDate" destination="wgv-N2-neU" id="meo-QL-4vZ"/>
                 <outlet property="requesterImage" destination="fDa-Ab-IGS" id="4iv-Nd-o9Z"/>
-                <outlet property="requesterName" destination="g8s-OO-PGT" id="kaU-cA-rJL"/>
             </connections>
             <point key="canvasLocation" x="102" y="-6"/>
         </tableViewCell>

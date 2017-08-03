@@ -44,6 +44,8 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
                                               zoom: Utilities.zoomLevel)
         mapView.camera = camera
         marker = GMSMarker(position: coordinate)
+        marker.title = "Drag me to desired location"
+        mapView.selectedMarker = marker
         marker.isDraggable = true
         marker.map = mapView
         mapView.isHidden = false
