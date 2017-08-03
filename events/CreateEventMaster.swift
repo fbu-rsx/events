@@ -14,6 +14,7 @@ class CreateEventMaster {
     
     var event: [String: Any]
     var guestlist: [String: Int]
+
     
     init() {
         self.event = [EventKey.id: FirebaseDatabaseManager.shared.getNewEventID(),

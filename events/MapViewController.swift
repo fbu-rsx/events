@@ -16,7 +16,7 @@ import GoogleMaps
 import SCLAlertView
 
 struct Colors {
-    static let coral = UIColor(hexString: "#EF5B5B")
+    static let coral = UIColor(hexString: "#FEB2A4")
     static let lightBlue = UIColor(hexString: "#B6E7EF")
     static let green = UIColor(hexString: "#4CB6BE")
     static let orange = UIColor(hexString: "#FF9D00")
@@ -336,7 +336,7 @@ extension MapViewController: UISearchResultsUpdating {
         if let event = resultsVC.selectedEvent {
             resultsVC.selectedEvent = nil
             mapView.animate(toLocation: event.coordinate)
-            mapView.animate(toZoom: Utilities.zoomLevel)
+            mapView.animate(toZoom: 17.0)
         }
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */; };
+		0992DBAB1F328F67005696B4 /* DetailMediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0992DBA91F328F67005696B4 /* DetailMediaViewController.xib */; };
 		09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */; };
 		09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */; };
 		09A15CC11F1568F300E847CC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC01F1568F300E847CC /* Transaction.swift */; };
@@ -65,7 +67,6 @@
 		7C10FC9D1F1D6F2E009EE12F /* CreateTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */; };
 		7C10FCA61F1D8941009EE12F /* CreateGuestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */; };
 		7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */; };
-		7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */; };
 		7C26DE9B1F310EC10079BE1A /* PaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */; };
 		7C26DE9C1F310EEB0079BE1A /* PaymentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */; };
 		7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */; };
@@ -105,6 +106,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
+		0992DBA91F328F67005696B4 /* DetailMediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailMediaViewController.xib; sourceTree = "<group>"; };
 		09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSwiftManager.swift; sourceTree = "<group>"; };
 		09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaDirectAPIManager.swift; sourceTree = "<group>"; };
 		09A15CC01F1568F300E847CC /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -172,7 +175,6 @@
 		7C10FC9C1F1D6F2E009EE12F /* CreateTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateTitleViewController.swift; path = ../CreateTitleViewController.swift; sourceTree = "<group>"; };
 		7C10FCA51F1D8941009EE12F /* CreateGuestsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGuestsViewController.swift; sourceTree = "<group>"; };
 		7C10FCA71F1DD4BB009EE12F /* CreateAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAboutViewController.swift; sourceTree = "<group>"; };
-		7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuestListTableViewCell.swift; path = ../GuestListTableViewCell.swift; sourceTree = "<group>"; };
 		7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPaymentViewController.swift; sourceTree = "<group>"; };
 		7C26DE9E1F312C960079BE1A /* AddPaymentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPaymentViewController.xib; sourceTree = "<group>"; };
 		7C26DEA11F3147300079BE1A /* bash-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bash-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -268,6 +270,8 @@
 				09B321541F2BB79B0044F05C /* songSearchResultsOverlay.xib */,
 				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
 				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
+				0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */,
+				0992DBA91F328F67005696B4 /* DetailMediaViewController.xib */,
 			);
 			name = EventsTableViewPage;
 			sourceTree = "<group>";
@@ -302,7 +306,6 @@
 				7CBC19251F29511E002C65F9 /* MyUploadsViewController.xib */,
 				7CAAA0ED1F281A94005C1A76 /* PaymentTableViewCell.swift */,
 				7CAAA0EE1F281A94005C1A76 /* PaymentTableViewCell.xib */,
-				7C10FCAB1F1EA361009EE12F /* GuestListTableViewCell.swift */,
 				7C4745381F2930E0009CA46E /* SettingsViewController.swift */,
 				7C4745391F2930E0009CA46E /* SettingsViewController.xib */,
 				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
@@ -522,7 +525,6 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = S5MHKF47DJ;
 						DevelopmentTeam = TM66RGVAQ6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -571,6 +573,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0992DBAB1F328F67005696B4 /* DetailMediaViewController.xib in Resources */,
 				09B321531F2BB55F0044F05C /* SongTableViewCell.xib in Resources */,
 				4FD2FE9C1F2C160E00E565B9 /* default.json in Resources */,
 				7CBC19271F29511E002C65F9 /* MyUploadsViewController.xib in Resources */,
@@ -768,9 +771,9 @@
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
 				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
 				7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */,
-				7C10FCAC1F1EA361009EE12F /* GuestListTableViewCell.swift in Sources */,
 				4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */,
 				7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */,
+				0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */,
 				7C9A6B7F1F2FBC4F00A70FD3 /* GuestsTableViewCell.swift in Sources */,
 				7CAAA0E61F281304005C1A76 /* WalletViewController.swift in Sources */,
 				7CBC19261F29511E002C65F9 /* MyUploadsViewController.swift in Sources */,
@@ -952,16 +955,16 @@
 			baseConfigurationReference = CCAC109E9CF8667FBF9C91A2 /* Pods-events.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruasesga.events;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -972,7 +975,7 @@
 			baseConfigurationReference = C744BF3E9604EAC5019FA3B0 /* Pods-events.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -980,9 +983,9 @@
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruasesga.events;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
