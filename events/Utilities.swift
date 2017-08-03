@@ -21,13 +21,14 @@ extension UIViewController {
 class Utilities {
     
     static var zoomLevel: Float = 15.0
+    static var theme: String = ""
     
     static func setupGoogleMap(_ mapView: GMSMapView) {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH.mm"
         let currTime = Float(dateFormatter.string(from: Date()))!
-        let theme = currTime >= 18.00 || currTime <= 6.00 ? "night" : "day"
+        theme = currTime >= 18.00 || currTime <= 6.00 ? "night" : "day"
         
         mapView.isHidden = true
         mapView.settings.myLocationButton = false

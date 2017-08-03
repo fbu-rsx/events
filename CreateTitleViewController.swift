@@ -39,16 +39,6 @@ class CreateTitleViewController: UIViewController {
         self.logoImage.frame.origin.y += 10
     }
     
-//    func shrinkAndGrowAnimation () {
-//        UIView.animate(withDuration: 1, animations: {
-//            self.rightArrowButton.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-//        }) { (finished) in
-//            UIView.animate(withDuration: 1, delay: 0.1, options: [.autoreverse, .repeat, .allowUserInteraction], animations: {
-//                self.rightArrowButton.transform = CGAffineTransform.identity
-//            })
-//        }
-//    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mapAnimation()
