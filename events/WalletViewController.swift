@@ -37,17 +37,25 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         tableView.allowsSelection = false
 //        self.walletAmount.text = String(AppUser.current.wallet)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         walletAnimation()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AppUser.current.events.count
+
+        return AppUser.current.transactions.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentCell", for: indexPath) as! PaymentTableViewCell
+        cell.transaction = AppUser.current.transactions[indexPath.row]
         return cell
     }
     
