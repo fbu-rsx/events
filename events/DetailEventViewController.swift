@@ -177,6 +177,18 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
         let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
         pageView.currentPage = Int(pageNumber)
     }
+    
+    override var previewActionItems: [UIPreviewActionItem]{
+        let acceptAction = UIPreviewAction(title: "Accept", style: .default) { (action, viewController) -> Void in
+            // do stuff that accepts event invite
+        }
+        
+        let declineAction = UIPreviewAction(title: "Decline", style: .destructive) { (action, viewController) -> Void in
+            // do stuff the declines event invite
+        }
+        
+        return [acceptAction, declineAction]
+    }
 
     /*
     // MARK: - Navigation

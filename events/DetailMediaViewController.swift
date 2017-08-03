@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 protocol deleteImageDelegate {
     func deleteImage(imageID: String)
@@ -18,6 +19,10 @@ class DetailMediaViewController: UIViewController {
     
     var pic: UIImage?
     
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    var profileImageURLString: String?
     var event: Event?
     var imageID: String?
     var delegate: deleteImageDelegate?
@@ -26,6 +31,9 @@ class DetailMediaViewController: UIViewController {
         super.viewDidLoad()
         image.image = pic
         // Do any additional setup after loading the view.
+        profileImageView.layer.cornerRadius = profileImageView.frame.width/2
+        profileImageView.layer.masksToBounds = true
+        profileImageView.af_setImage(withURL: URL(string: profileImageURLString!)!)
     }
 
     override func didReceiveMemoryWarning() {

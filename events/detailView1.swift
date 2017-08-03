@@ -49,6 +49,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
     }
     
+    // Need to associate each image with an app user upon insertion to the dictionary
+    
     var rootViewController = UIApplication.shared.keyWindow?.rootViewController
     
     override func awakeFromNib() {
@@ -98,10 +100,10 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         detailVC.imageID = photoUIDS[indexPath.row]
         
         detailVC.delegate = self
-
+        
+        
 
         detailVC.preferredContentSize = CGSize(width: 0.0, height: 375)
-
         
         previewingContext.sourceRect = cell.frame
         
