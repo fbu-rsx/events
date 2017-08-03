@@ -69,6 +69,16 @@ class Utilities {
         dateFormatter.dateFormat = "MMM d, h:mm a"
         return dateFormatter.string(from: date)
     }
+    
+    static func shrinkAndGrowAnimation (button: UIButton) {
+        UIView.animate(withDuration: 1, animations: {
+            button.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+        }) { (finished) in
+            UIView.animate(withDuration: 1, delay: 0.1, options: [.autoreverse, .repeat, .allowUserInteraction], animations: {
+                button.transform = CGAffineTransform.identity
+            })
+        }
+    }
 
 }
 

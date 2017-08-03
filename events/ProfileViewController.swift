@@ -38,11 +38,11 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
         let bundle_wallet = Bundle(path: "/Users/xiuchen/Desktop/events/events/WalletViewController.swift")
         let bundle_settings = Bundle(path: "/Users/xiuchen/Desktop/events/events/SettingsViewController.swift")
-        let bundle_uploads = Bundle(path: "/Users/xiuchen/Desktop/events/events/MyUploadsViewController.swift")
+        let bundle_created = Bundle(path: "/Users/xiuchen/Desktop/events/events/MyCreatedEventsViewController.swift")
         let wallet = WalletViewController(nibName: "WalletViewController", bundle: bundle_wallet)
+        let created = MyCreatedEventsViewController(nibName: "MyCreatedEventsViewController", bundle: bundle_created)
         let settings = SettingsViewController(nibName: "SettingsViewController", bundle: bundle_settings)
-        let uploads = MyUploadsViewController(nibName: "MyUploadsViewController", bundle: bundle_uploads)
-        return [wallet, uploads, settings]
+        return [wallet, created, settings]
     }
     
 }
@@ -56,34 +56,34 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
 //
 //
 //    @IBOutlet weak var segmentedController: SJFluidSegmentedControl!
-//    
+//
 //    override func viewDidLoad() {
 //        super.viewDidLoad()
 //        // Set Profile Picture
-//        
+//
 ////        nameLabel.text = AppUser.current.name
-//        
+//
 //        segmentedController.dataSource = self
 //        segmentedController.backgroundColor = UIColor(hexString: "#4CB6BE")
 //        segmentedController.selectorViewColor = UIColor(hexString: "#FEB2A4")
 //        //segmentedController.textFont = .custom(ofSize: 16, weight: UIFontWeightSemibold)
 //
 //    }
-//    
+//
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
 ////        segmentedControl(segmentedController, didScrollWithXOffset: 0)
-//        
+//
 //        // Set the current segment upon loading programatically
 //         segmentedController.currentSegment = 1
 //    }
-//    
-//    
+//
+//
 //    // Setting the number segments in segmentedController
 //    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
 //        return 3
 //    }
-//    
+//
 //    // Setting text of each segmentedController
 //    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
 //                          titleForSegmentAtIndex index: Int) -> String? {
@@ -94,9 +94,9 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
 //        }
 //        return "Uploads"
 //    }
-//    
-//    
-//    
+//
+//
+//
 //
 //    /*
 //    // MARK: - Navigation

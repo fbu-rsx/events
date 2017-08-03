@@ -39,6 +39,16 @@ class CreateTitleViewController: UIViewController {
         self.logoImage.frame.origin.y += 10
     }
     
+//    func shrinkAndGrowAnimation () {
+//        UIView.animate(withDuration: 1, animations: {
+//            self.rightArrowButton.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+//        }) { (finished) in
+//            UIView.animate(withDuration: 1, delay: 0.1, options: [.autoreverse, .repeat, .allowUserInteraction], animations: {
+//                self.rightArrowButton.transform = CGAffineTransform.identity
+//            })
+//        }
+//    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mapAnimation()
@@ -90,6 +100,7 @@ class CreateTitleViewController: UIViewController {
             rightArrowButton.isUserInteractionEnabled = true
             rightArrowButton.imageView!.image = UIImage(named: "right-arrow-green")
             NotificationCenter.default.post(name: BashNotifications.enableSwipe, object: nil)
+            Utilities.shrinkAndGrowAnimation(button: rightArrowButton)
         } else {
             rightArrowButton.isUserInteractionEnabled = false
             rightArrowButton.imageView!.image = UIImage(named: "right-arrow-gray")
