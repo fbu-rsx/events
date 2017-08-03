@@ -38,14 +38,14 @@ class Transaction: NSObject {
     init(event: Event) {
         self.id = event.eventid
         self.receiver = event.organizer
-        self.amount = event.totalcost! / Double(event.guestlist.count)
+        self.amount = event.cost!
         self.date = event.date
         self.status = false
         self.name = event.eventname
     }
     
     func completeTransaction() {
-        AppUser.current.addToWallet(amount: -self.amount)
+        AppUser.current.wallet = AppUser.current.wallet - self.amount
         FirebaseDatabaseManager.shared.updateWallet(id: AppUser.current.uid, withValue: AppUser.current.wallet)
         FirebaseDatabaseManager.shared.updateOtherUserWallet(id: self.receiver.uid, withValue: self.amount)
         FirebaseDatabaseManager.shared.updateTransaction(id: self.id)

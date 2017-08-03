@@ -71,6 +71,13 @@ class FirebaseDatabaseManager {
         }
     }
     
+    func addWalletListener(id: String) {
+        self.ref.child("users/\(id)/wallet").observe(.value) { (snapshot: DataSnapshot) in
+            let value = snapshot.value as! Double
+            NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+        }
+    }
+    
     func getTransactions(id: String, completion: @escaping ([String: Any]) -> Void) {
         self.ref.child("users/\(id)/transactions").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if snapshot.exists() {
@@ -110,7 +117,8 @@ class FirebaseDatabaseManager {
     
     func updateTransaction(id: String) {
         let update = ["users/\(AppUser.current.uid)/transactions/\(id)/\(TransactionKey.status)": true]
-        self.ref.updateChildValues(update)    }
+        self.ref.updateChildValues(update)
+    }
     
     func addEventsListener() {
         self.ref.child("users/\(AppUser.current.uid)/events").observe(.childAdded) { (snapshot: DataSnapshot) in
