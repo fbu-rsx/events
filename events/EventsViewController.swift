@@ -67,6 +67,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         cell.event = AppUser.current.events[indexPath.row]
+        registerForPreviewing(with: self, sourceView: cell.contentView)
         //cell.delegate = self
         return cell
     }
@@ -91,41 +92,41 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cellHeights[indexPath.row]
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath)
-            else {
-            return
-        }
-        
-        for heightnum in 0..<cellHeights.count{
-            if cellHeights[heightnum] == kOpenCellHeight{
-                if heightnum != indexPath.row {
-                    return
-                }
-            }
-        }
-        
-        var duration = 0.0
-        
-        if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
-            cellHeights[indexPath.row] = kOpenCellHeight
-            cell.unfold(true, animated: true, completion: nil)
-            duration = 0.3
-            tableView.isScrollEnabled = false
-        } else {// close cell
-            cellHeights[indexPath.row] = kCloseCellHeight
-            cell.unfold(false, animated: true, completion: nil)
-            duration = 0.5
-            tableView.isScrollEnabled = true
-        }
-        
-        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { 
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        }) { (finished: Bool) in
-        }
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        guard case let cell as FoldingCell = tableView.cellForRow(at: indexPath)
+//            else {
+//            return
+//        }
+//        
+//        for heightnum in 0..<cellHeights.count{
+//            if cellHeights[heightnum] == kOpenCellHeight{
+//                if heightnum != indexPath.row {
+//                    return
+//                }
+//            }
+//        }
+//        
+//        var duration = 0.0
+//        
+//        if cellHeights[indexPath.row] == kCloseCellHeight { // open cell
+//            cellHeights[indexPath.row] = kOpenCellHeight
+//            cell.unfold(true, animated: true, completion: nil)
+//            duration = 0.3
+//            tableView.isScrollEnabled = false
+//        } else {// close cell
+//            cellHeights[indexPath.row] = kCloseCellHeight
+//            cell.unfold(false, animated: true, completion: nil)
+//            duration = 0.5
+//            tableView.isScrollEnabled = true
+//        }
+//        
+//        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear, animations: { 
+//            tableView.beginUpdates()
+//            tableView.endUpdates()
+//        }) { (finished: Bool) in
+//        }
+//        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+//    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if case let cell as FoldingCell = cell {
@@ -150,6 +151,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let event = AppUser.current.events[indexPath.row]
         detailVC.event = event
+        detailVC.delegate = self
         
         //detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)
         

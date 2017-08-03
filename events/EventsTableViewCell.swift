@@ -14,6 +14,7 @@ class EventsTableViewCell: UITableViewCell{
     
     @IBOutlet weak var sideBar: UIView!
     
+    @IBOutlet weak var oneCell: UIView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var closedProfileImageView: UIImageView!
@@ -29,30 +30,37 @@ class EventsTableViewCell: UITableViewCell{
             if self.event == nil {
                 return
             }
+            
+            self.selectionStyle = .none
+            
+            
+            oneCell.layer.cornerRadius = 5
+            oneCell.layer.masksToBounds = true
+            
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
                 // Set organizer's profile picture
                 let url = URL(string: user.photoURLString)
-                //self.closedProfileImageView.af_setImage(withURL: url!)
+                self.closedProfileImageView.af_setImage(withURL: url!)
                 // Set event title
-                //self.closedEventTitle.text = self.event!.title
+                self.closedEventTitle.text = self.event!.title
                 // Set and format event location
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, h:mm a"
-                //self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
-                // Set total cost
-                //if let cost = self.event!.cost, cost > 0.00999 {
-                //    self.closedUserCost.text = String(format: "$%.2f", cost)
-                //} else{
-                //    self.closedUserCost.text = "Free"
-                //}
-                // Set number of guests invited
-                //self.closedInvitedNum.text = String(self.event!.guestlist.count)
+                self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
+                 //Set total cost
+                if let cost = self.event!.cost, cost > 0.00999 {
+                    self.closedUserCost.text = String(format: "$%.2f", cost)
+                } else{
+                    self.closedUserCost.text = "Free"
+                }
+                 //Set number of guests invited
+                self.closedInvitedNum.text = String(self.event!.guestlist.count)
                 // accepted num will eventually be added to Event class
                 var coming: Int = 0
                 for user in self.event!.guestlist.keys{
                     if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
                 }
-                //self.closedComingNum.text = String(coming)
+                self.closedComingNum.text = String(coming)
                 // Set the cell color depending on invite status
                 var color: UIColor!
                 var sideBarColor: UIColor!
@@ -63,13 +71,12 @@ class EventsTableViewCell: UITableViewCell{
                 
                 // check if the event is created by AppUser.current
                 let eventOrganizer = (self.event?.organizer)!
-                /*
+                
                  if eventOrganizer.uid == AppUser.current.uid {
                  
                  self.oneCell.backgroundColor = UIColor(hexString: "#B6A6CA")
                  self.sideBar.backgroundColor = UIColor(hexString: "#D5CFE1")
-                 self.sideBar1.backgroundColor = UIColor(hexString: "#D5CFE1")
-                 self.backViewColor = UIColor(hexString: "#D5CFE1")
+
                  
                  // if my event, hide "accept" and "decline" buttons
                  self.acceptButton.isHidden = true
@@ -107,10 +114,10 @@ class EventsTableViewCell: UITableViewCell{
                  
                  }
                  self.sideBar.backgroundColor = sideBarColor
-                 self.sideBar1.backgroundColor = sideBarColor
+                 
                  self.oneCell.backgroundColor = color
-                 self.backViewColor = backViewColor
-                 }*/
+                 
+                 }
             }
         }
     }

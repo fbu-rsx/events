@@ -29,13 +29,14 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
             if self.delegate == nil {
                 return
             }
-            pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width-10)/2 - 10, y: self.view.frame.height - 40, width: 40, height: 40))
+
+            pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width-10)/2 - 10, y: 578, width: 40, height: 40))
             configurePageControl()
             scrollView.delegate = self
             for index in 0...2 {
                 var frame = CGRect.zero
                 frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
-                //print(frame.origin.x)
+                print(frame.origin.x)
                 frame.size = self.scrollView.frame.size
                 if index == 0{
                     let nib = UINib(nibName: "detailView0", bundle: nil)
@@ -61,7 +62,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                 }
             }
             self.scrollView.isPagingEnabled = true
-            self.scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 3, height: self.scrollView.frame.size.height)
+            self.scrollView.contentSize = CGSize(width: 1080, height: 554)
             pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
         }
     }

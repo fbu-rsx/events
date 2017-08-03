@@ -531,14 +531,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-6O-xea">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-6O-xea">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" id="0wY-K3-aGz"/>
+                            <constraint firstItem="eeW-6O-xea" firstAttribute="top" secondItem="2UQ-QE-zyQ" secondAttribute="bottom" constant="-64" id="0wY-K3-aGz"/>
                             <constraint firstItem="eeW-6O-xea" firstAttribute="leading" secondItem="Lhf-XP-lMH" secondAttribute="leading" id="E9g-Bi-OPo"/>
                             <constraint firstItem="EKf-qR-McR" firstAttribute="top" secondItem="eeW-6O-xea" secondAttribute="bottom" id="HGb-Gt-M97"/>
                             <constraint firstAttribute="trailing" secondItem="eeW-6O-xea" secondAttribute="trailing" id="izd-Vh-12E"/>
@@ -547,6 +547,7 @@
                     <navigationItem key="navigationItem" title="Events" id="q9j-Z6-hSa"/>
                     <connections>
                         <outlet property="tableView" destination="eeW-6O-xea" id="TQA-eK-cFz"/>
+                        <segue destination="eha-L8-lP3" kind="show" id="hG5-vO-5qM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Vd-MH-mtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -565,35 +566,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAF-DO-nbR">
-                                <rect key="frame" x="15" y="20" width="360" height="647"/>
-                            </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Nr-n2-XQr">
-                                <rect key="frame" x="0.0" y="20" width="15" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="15" height="554"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="AoF-fD-Uv4"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceHorizontal="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NAF-DO-nbR">
+                                <rect key="frame" x="15" y="64" width="360" height="554"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NAF-DO-nbR" firstAttribute="leading" secondItem="3Nr-n2-XQr" secondAttribute="trailing" id="19f-kl-6bI"/>
-                            <constraint firstAttribute="trailing" secondItem="NAF-DO-nbR" secondAttribute="trailing" id="2AH-Km-r6k"/>
+                            <constraint firstAttribute="trailing" secondItem="NAF-DO-nbR" secondAttribute="trailing" id="6UQ-Qf-xCT"/>
                             <constraint firstItem="3Nr-n2-XQr" firstAttribute="leading" secondItem="e6m-Ly-t95" secondAttribute="leading" id="8f5-YA-ito"/>
-                            <constraint firstItem="yjo-Lo-Iuu" firstAttribute="top" secondItem="NAF-DO-nbR" secondAttribute="bottom" id="D9f-nr-86m"/>
                             <constraint firstItem="yjo-Lo-Iuu" firstAttribute="top" secondItem="3Nr-n2-XQr" secondAttribute="bottom" id="UGt-Cf-rob"/>
-                            <constraint firstItem="NAF-DO-nbR" firstAttribute="top" secondItem="ECc-UH-fLr" secondAttribute="bottom" id="fmb-jB-eM9"/>
+                            <constraint firstItem="yjo-Lo-Iuu" firstAttribute="top" secondItem="NAF-DO-nbR" secondAttribute="bottom" id="Ybf-Nu-8Rv"/>
+                            <constraint firstItem="NAF-DO-nbR" firstAttribute="leading" secondItem="3Nr-n2-XQr" secondAttribute="trailing" id="bMo-Fg-ych"/>
                             <constraint firstItem="3Nr-n2-XQr" firstAttribute="top" secondItem="ECc-UH-fLr" secondAttribute="bottom" id="oOK-vV-QKe"/>
+                            <constraint firstItem="NAF-DO-nbR" firstAttribute="top" secondItem="ECc-UH-fLr" secondAttribute="bottom" id="pB6-96-8yM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="NAF-DO-nbR" id="86Y-6j-Ng2"/>
+                        <segue destination="6No-sC-DRa" kind="show" id="Jz9-Ed-gU6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kv9-Fy-SgW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4460" y="690"/>
+            <point key="canvasLocation" x="4460" y="689.5052473763119"/>
         </scene>
         <!--Detail Media View Controller-->
         <scene sceneID="xEM-RP-ufZ">
@@ -608,7 +610,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hg4-dU-9sR">
-                                <rect key="frame" x="0.0" y="20" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="hg4-dU-9sR" secondAttribute="height" multiplier="1:1" id="VSs-qk-1p8"/>
                                 </constraints>
@@ -617,7 +619,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hg4-dU-9sR" secondAttribute="trailing" id="EHh-FG-nus"/>
-                            <constraint firstItem="hg4-dU-9sR" firstAttribute="top" secondItem="Hd1-h6-v5F" secondAttribute="bottom" id="NYA-si-RLi"/>
+                            <constraint firstItem="hg4-dU-9sR" firstAttribute="top" secondItem="Hd1-h6-v5F" secondAttribute="bottom" id="GeI-Wa-Isq"/>
                             <constraint firstItem="hg4-dU-9sR" firstAttribute="leading" secondItem="mRE-In-te1" secondAttribute="leading" id="e6Z-Dq-qE9"/>
                         </constraints>
                     </view>

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="detailView1" customModule="events" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="333" height="525"/>
+            <rect key="frame" x="0.0" y="0.0" width="360" height="554"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Nbc-sO-eQa">
-                    <rect key="frame" x="0.0" y="60" width="333" height="465"/>
+                    <rect key="frame" x="0.0" y="58" width="360" height="496"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="465" id="ewR-II-hWh"/>
+                        <constraint firstAttribute="height" constant="496" id="ewR-II-hWh"/>
                     </constraints>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bfq-SD-jXj">
                         <size key="itemSize" width="50" height="50"/>
@@ -35,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAZ-Fe-1NS">
-                    <rect key="frame" x="246" y="7.5" width="58" height="35"/>
+                    <rect key="frame" x="273" y="-21.5" width="58" height="93"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <state key="normal" title="Upload"/>
                     <connections>
@@ -45,13 +45,14 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Nbc-sO-eQa" firstAttribute="top" secondItem="RAZ-Fe-1NS" secondAttribute="bottom" constant="17.5" id="A8a-4T-Zqm"/>
+                <constraint firstItem="Nbc-sO-eQa" firstAttribute="top" secondItem="RAZ-Fe-1NS" secondAttribute="bottom" constant="-13.5" id="A8a-4T-Zqm"/>
                 <constraint firstItem="Rhz-3A-2iU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="CWh-Sv-jXl"/>
                 <constraint firstAttribute="trailing" secondItem="RAZ-Fe-1NS" secondAttribute="trailing" constant="29" id="Pn1-jt-ZcJ"/>
                 <constraint firstAttribute="trailing" secondItem="Nbc-sO-eQa" secondAttribute="trailing" id="fJe-UT-OOa"/>
                 <constraint firstItem="Rhz-3A-2iU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="26" id="hMl-DM-gyJ"/>
                 <constraint firstItem="Nbc-sO-eQa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jrc-uk-iMB"/>
                 <constraint firstItem="RAZ-Fe-1NS" firstAttribute="centerY" secondItem="Rhz-3A-2iU" secondAttribute="centerY" id="nYr-pz-oKf"/>
+                <constraint firstAttribute="bottom" secondItem="Nbc-sO-eQa" secondAttribute="bottom" id="sgV-5m-JoK"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -61,7 +62,7 @@
                 <outlet property="button" destination="RAZ-Fe-1NS" id="sQS-D9-KoQ"/>
                 <outlet property="collectionView" destination="Nbc-sO-eQa" id="pFy-sl-b9Y"/>
             </connections>
-            <point key="canvasLocation" x="36.5" y="4.5"/>
+            <point key="canvasLocation" x="36" y="4"/>
         </view>
     </objects>
 </document>

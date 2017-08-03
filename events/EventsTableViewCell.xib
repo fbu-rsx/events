@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="163.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-AQ-Woc" customClass="RotatedView" customModule="FoldingCell">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RpP-AQ-Woc">
                         <rect key="frame" x="16" y="16" width="343" height="128"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon-avatar-60x60.png" translatesAutoresizingMaskIntoConstraints="NO" id="FCb-EM-Tmr">
@@ -142,13 +142,9 @@
                 <outlet property="closedProfileImageView" destination="FCb-EM-Tmr" id="Wlp-cl-Z4B"/>
                 <outlet property="closedUserCost" destination="jnC-7k-Zq0" id="T2P-E7-1TE"/>
                 <outlet property="declineButton" destination="Ihz-uS-LFs" id="Da9-s1-3Fa"/>
-                <outlet property="foregroundView" destination="RpP-AQ-Woc" id="era-un-7uX"/>
-                <outlet property="oneCell" destination="RpP-AQ-Woc" id="cck-43-BRW"/>
+                <outlet property="oneCell" destination="RpP-AQ-Woc" id="1c9-CO-d64"/>
                 <outlet property="responseIcon" destination="8RV-rf-JrC" id="N4r-q3-i7q"/>
                 <outlet property="sideBar" destination="pRR-lD-k3e" id="dxM-Zh-0vH"/>
-                <outlet property="view1" destination="RpP-AQ-Woc" id="Vxv-wX-BFT"/>
-                <outlet property="view1topConstraint" destination="3pF-V2-G6k" id="Cgd-Tv-5qD"/>
-                <outletCollection property="foregroundView" destination="RpP-AQ-Woc" collectionClass="NSMutableArray" id="Q4J-8m-545"/>
             </connections>
             <point key="canvasLocation" x="-203.5" y="160"/>
         </tableViewCell>
