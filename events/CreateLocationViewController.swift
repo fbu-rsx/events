@@ -51,7 +51,7 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
         mapView.camera = camera
         marker = GMSMarker(position: coordinate)
         marker.title = "Select a location"
-        marker.snippet = "Drag me!"
+        marker.snippet = "Hold and drag me!"
         mapView.selectedMarker = marker
         marker.isDraggable = true
         marker.map = mapView
