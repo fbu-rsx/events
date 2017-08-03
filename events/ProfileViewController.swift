@@ -18,7 +18,7 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
     override func viewDidLoad() {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = UIColor(hexString: "#4CB6BE")
-        settings.style.buttonBarItemBackgroundColor = UIColor(hexString: "#FEB2A4")
+        settings.style.buttonBarItemBackgroundColor = UIColor(hexString: "#FFFFFF")
         settings.style.selectedBarBackgroundColor = UIColor(hexString: "#4CB6BE")
         settings.style.buttonBarItemFont = UIFont(name: "Futura", size: 20)!
         settings.style.selectedBarHeight = 4.0
@@ -29,8 +29,8 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
         settings.style.buttonBarRightContentInset = 0
         changeCurrentIndexProgressive = { [weak self] (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = UIColor(hexString: "#484848")
-            newCell?.label.textColor = UIColor(hexString: "#F5F5F5")
+            oldCell?.label.textColor = UIColor(hexString: "#FEB2A4")
+            newCell?.label.textColor = UIColor(hexString: "#FEB2A4")
         }
         super.viewDidLoad()
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -106,6 +106,10 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8RV-rf-JrC">
+                                <rect key="frame" x="280" y="14" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.86801654220000002" green="0.86801654220000002" blue="0.86801654220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -163,6 +167,7 @@
                 <outlet property="declineButton" destination="Ihz-uS-LFs" id="Da9-s1-3Fa"/>
                 <outlet property="foregroundView" destination="RpP-AQ-Woc" id="era-un-7uX"/>
                 <outlet property="oneCell" destination="RpP-AQ-Woc" id="cck-43-BRW"/>
+                <outlet property="responseIcon" destination="8RV-rf-JrC" id="N4r-q3-i7q"/>
                 <outlet property="scrollView" destination="cvr-Lm-S0p" id="q1X-kB-01g"/>
                 <outlet property="sideBar" destination="pRR-lD-k3e" id="dxM-Zh-0vH"/>
                 <outlet property="sideBar1" destination="ebP-AO-Do6" id="mzD-CB-msf"/>
@@ -172,7 +177,7 @@
                 <outlet property="view2topConstraint" destination="rQh-hf-aby" id="Is2-J9-LRO"/>
                 <outletCollection property="foregroundView" destination="RpP-AQ-Woc" collectionClass="NSMutableArray" id="Q4J-8m-545"/>
             </connections>
-            <point key="canvasLocation" x="-251" y="277"/>
+            <point key="canvasLocation" x="-251.5" y="276.5"/>
         </tableViewCell>
     </objects>
     <resources>

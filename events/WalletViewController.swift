@@ -43,7 +43,6 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("hello: \(AppUser.current.events.count )")
         return AppUser.current.events.count
     }
     

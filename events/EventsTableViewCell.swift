@@ -28,6 +28,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
     @IBOutlet weak var closedUserCost: UILabel!
     @IBOutlet weak var closedInvitedNum: UILabel!
     @IBOutlet weak var closedComingNum: UILabel!
+    @IBOutlet weak var responseIcon: UIImageView!
     
     var pageView : UIPageControl = UIPageControl()
     @IBOutlet weak var scrollView: UIScrollView!
@@ -117,6 +118,10 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     // if accepted, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
+                    
+                    // Setting resposne icon to a check mark
+                    self.responseIcon.image = UIImage(named: "going")
+                    
                 case .declined:
                     color = Colors.redDeclined
                     backViewColor = UIColor(hexString: "#F4ABB1")
@@ -124,10 +129,13 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                     // if declined, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
+                    self.responseIcon.image = UIImage(named: "not-going")
+                    
                 default:
                     color = Colors.pendingBlue
                     sideBarColor = UIColor(hexString: "#ABEEFC")
                     backViewColor = UIColor(hexString: "#ABEEFC")
+                    
                 }
                 self.sideBar.backgroundColor = sideBarColor
                 self.sideBar1.backgroundColor = sideBarColor

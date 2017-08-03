@@ -12,6 +12,7 @@ class GuestsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var guestImage: UIImageView!
+    @IBOutlet weak var guestResponseImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
