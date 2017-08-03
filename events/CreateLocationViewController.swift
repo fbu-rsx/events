@@ -83,7 +83,25 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
 
 extension CreateLocationViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        let text = searchController.searchBar.text
+        let resultsVC = searchController.searchResultsController as! SearchEventsViewController
+        resultsVC.filteredEvents = text == nil ? [] : AppUser.current.events.filter({ (event: Event) -> Bool in
+            let organizer = event.organizer.name.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let title = event.eventname.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            let about = event.about.range(of: text!, options: .caseInsensitive, range: nil, locale: nil) != nil
+            return organizer || title || about
+        })
+        resultsVC.tableView.reloadData()
+    }
+    
+    
+    func didDismissSearchController(_ searchController: UISearchController) {
+        let resultsVC = searchController.searchResultsController! as! SearchEventsViewController
+        if let event = resultsVC.selectedEvent {
+            resultsVC.selectedEvent = nil
+            mapView.animate(toLocation: event.coordinate)
+            mapView.animate(toZoom: 17.0)
+        }
     }
 }
 
