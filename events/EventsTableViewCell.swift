@@ -91,8 +91,7 @@ class EventsTableViewCell: FoldingCell, UIScrollViewDelegate {
                 dateFormatter.dateFormat = "MMM d, h:mm a"
                 self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
                 // Set total cost
-                if let total = self.event!.totalcost {
-                    let cost = total/Double(self.event!.guestlist.count + 1)
+                if let cost = self.event!.cost, cost > 0.00999 {
                     self.closedUserCost.text = String(format: "$%.2f", cost)
                 } else{
                     self.closedUserCost.text = "Free"
