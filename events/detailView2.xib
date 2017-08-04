@@ -15,16 +15,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-5M-chh">
-                    <rect key="frame" x="8" y="113" width="344" height="433"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search and queue a song" placeholder="search and queue a song" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-Rs-eaO">
-                    <rect key="frame" x="0.0" y="54" width="360" height="41"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search and queue a song" placeholder="search and queue a song" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-Rs-eaO">
+                    <rect key="frame" x="0.0" y="54" width="375" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="ahR-2X-pBl"/>
+                    </constraints>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -33,18 +28,31 @@
                     </connections>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotify_Logo_CMYK_Green" translatesAutoresizingMaskIntoConstraints="NO" id="fyo-p8-PpZ">
-                    <rect key="frame" x="127.5" y="6" width="120" height="40"/>
+                    <rect key="frame" x="128" y="6" width="120" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Ppn-Lj-xbq"/>
                         <constraint firstAttribute="width" constant="120" id="dcI-sc-8Rc"/>
                     </constraints>
                 </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-5M-chh">
+                    <rect key="frame" x="0.0" y="89" width="375" height="465"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstItem="RLN-Rs-eaO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1wP-jk-ygQ"/>
                 <constraint firstItem="fyo-p8-PpZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="Agq-CE-4yu"/>
+                <constraint firstAttribute="trailing" secondItem="Rk1-5M-chh" secondAttribute="trailing" id="FfX-cR-T6z"/>
+                <constraint firstItem="RLN-Rs-eaO" firstAttribute="top" secondItem="fyo-p8-PpZ" secondAttribute="bottom" constant="8" id="dJ4-Jn-v5o"/>
                 <constraint firstItem="fyo-p8-PpZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="h5u-pq-2G4"/>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="top" secondItem="RLN-Rs-eaO" secondAttribute="bottom" id="lKo-c1-u1c"/>
+                <constraint firstAttribute="bottom" secondItem="Rk1-5M-chh" secondAttribute="bottom" id="ltk-ds-92O"/>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="t6Y-9g-PvZ"/>
+                <constraint firstAttribute="trailing" secondItem="RLN-Rs-eaO" secondAttribute="trailing" id="tAl-tj-BN1"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -54,7 +62,7 @@
                 <outlet property="searchField" destination="RLN-Rs-eaO" id="Yps-vz-dWL"/>
                 <outlet property="tableView" destination="Rk1-5M-chh" id="7MQ-de-o6I"/>
             </connections>
-            <point key="canvasLocation" x="-12" y="190"/>
+            <point key="canvasLocation" x="-12.5" y="190"/>
         </view>
     </objects>
     <resources>
