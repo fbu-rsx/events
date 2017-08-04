@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 protocol deleteImageDelegate {
     func deleteImage(imageID: String)
@@ -18,14 +19,33 @@ class DetailMediaViewController: UIViewController {
     
     var pic: UIImage?
     
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var downloadButton: UIButton!
+    
+    var profileImageURLString: String?
     var event: Event?
     var imageID: String?
     var delegate: deleteImageDelegate?
+    var name: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deleteButton.layer.cornerRadius = 5
+        deleteButton.backgroundColor = UIColor(hexString: "#95a5a6")
+        downloadButton.layer.cornerRadius = 5
+        downloadButton.backgroundColor = Colors.coral
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         image.image = pic
         // Do any additional setup after loading the view.
+        profileImageView.layer.cornerRadius = profileImageView.frame.width/2
+        profileImageView.layer.masksToBounds = true
+        profileImageView.af_setImage(withURL: URL(string: profileImageURLString!)!)
+        nameLabel.text = name
     }
 
     override func didReceiveMemoryWarning() {

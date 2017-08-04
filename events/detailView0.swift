@@ -27,6 +27,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBAction func goingTap(_ sender: UIButton) {
         AppUser.current.accept(event: event!)
         NotificationCenter.default.post(name: BashNotifications.accept, object: event)
+        
+        // Automatically refresh
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
     }
     
     @IBAction func notGoingTap(_ sender: UIButton) {
@@ -95,7 +98,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 for guest in self.event!.guestlist {
                     print("guest: \(guest)")
                 }
-
+                
                 switch self.event!.myStatus {
                 case .accepted:
                     self.acceptButton.setTitle("Accepted", for: .normal)
@@ -108,6 +111,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 case .declined:
                     self.declineButton.setTitle("Declined", for: .normal)
                     self.declineButton.backgroundColor = UIColor(hexString: "#F46E79")
+
                     self.declineButton.isEnabled = false
                     self.declineButton.sizeToFit()
                     self.acceptButton.isEnabled = false
@@ -123,6 +127,33 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    
+    func refresh(_ notification: Notification) {
+        switch self.event!.myStatus {
+        case .accepted:
+            self.acceptButton.setTitle("Accepted", for: .normal)
+            self.acceptButton.backgroundColor = UIColor(hexString: "#4ADB75")
+            self.acceptButton.isEnabled = false
+            self.acceptButton.sizeToFit()
+            self.declineButton.isEnabled = false
+            self.declineButton.backgroundColor = UIColor(hexString: "#95a5a6")
+            
+        case .declined:
+            self.declineButton.setTitle("Declined", for: .normal)
+            self.declineButton.backgroundColor = UIColor(hexString: "#F46E79")
+            self.declineButton.isEnabled = false
+            self.declineButton.sizeToFit()
+            self.acceptButton.isEnabled = false
+            self.acceptButton.backgroundColor = UIColor(hexString: "#95a5a6")
+            
+        default:
+            self.acceptButton.layer.cornerRadius = 5
+            self.acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+            self.declineButton.layer.cornerRadius = 5
+            self.declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        }
+        tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.guests.count
