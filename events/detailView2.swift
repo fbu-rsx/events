@@ -38,9 +38,11 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         subView!.frame = CGRect(x: 8, y: 92, width: self.frame.width, height: self.frame.height - 92)
         subView?.delegate = self
         searchField.delegate = self
-        self.backgroundColor = .black
-        tableView.backgroundColor = .black
+        searchField.setBottomBorder()
+        self.backgroundColor = .white
+        tableView.backgroundColor = .white
         tableView.separatorInset = .zero
+        tableView.separatorColor = Colors.coral
         tableView.layoutMargins = .zero
     }
     
