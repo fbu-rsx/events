@@ -73,6 +73,7 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         cell.event = myEvents[indexPath.row]
+        cell.canDeleteMyEvent = true
         
         return cell
     }
