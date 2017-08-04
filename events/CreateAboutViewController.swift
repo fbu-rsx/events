@@ -150,7 +150,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         OAuthSwiftManager.shared.createPlaylist(name: name as! String, completion: {id in
             CreateEventMaster.shared.event[EventKey.spotifyID] = id
             CreateEventMaster.shared.event[EventKey.playlistCreatorID] = UserDefaults.standard.value(forKey: "spotify-user") as! String
-            let event = CreateEventMaster.shared.createNewEvent()
+            let event = CreateEventMaster.shared.createNewEvent() //adds to appuser and firebase, calls AppUser.current.createEvent
             NotificationCenter.default.post(name: BashNotifications.refresh, object: event)
             self.tabBarController?.selectedIndex = 0
         })

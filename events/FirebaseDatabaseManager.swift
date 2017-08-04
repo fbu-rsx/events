@@ -74,7 +74,7 @@ class FirebaseDatabaseManager {
     func addWalletListener(id: String) {
         self.ref.child("users/\(id)/wallet").observe(.value) { (snapshot: DataSnapshot) in
             let value = snapshot.value as! Double
-            NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+            AppUser.current.addToWallet(amount: value)
         }
     }
     
@@ -101,7 +101,13 @@ class FirebaseDatabaseManager {
     
     func updateWallet(id: String, withValue value: Double) {
         let update = ["users/\(id)/wallet": value]
-        self.ref.updateChildValues(update)
+        self.ref.updateChildValues(update) { (error: Error?, ref: DatabaseReference) in
+            if let error = error {
+                print("error updating wallet: \(error.localizedDescription)")
+                return
+            }
+            NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+        }
     }
     
     func updateOtherUserWallet(id: String, withValue value: Double) {
@@ -129,6 +135,7 @@ class FirebaseDatabaseManager {
             FirebaseDatabaseManager.shared.getSingleEvent(withID: snapshot.key, completion: { (eventDict: [String : Any]) in
                 let event = Event(dictionary: eventDict)
                 if event.organizer.uid != AppUser.current.uid {
+                    AppUser.current.addInvite(event: event)
                     NotificationCenter.default.post(name: BashNotifications.invite, object: event)
                 }
             })
