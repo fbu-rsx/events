@@ -15,9 +15,13 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func didReceiveMemoryWarning() {

@@ -33,7 +33,11 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor(hexString: "#FEB2A4")
         }
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
