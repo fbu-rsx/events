@@ -56,10 +56,9 @@ class Event: GMSMarker {
         get {
             return InviteStatus(rawValue: AppUser.current.eventsKeys[eventid]!)!
         }
-        set {
-        }
     }
-        
+    
+    var notNowTimer: Date?
     var circle: GMSCircle?
     
     

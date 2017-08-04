@@ -25,11 +25,13 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     var guestsStatus: [Int] = []
     
     @IBAction func goingTap(_ sender: UIButton) {
+        AppUser.current.accept(event: event!)
         NotificationCenter.default.post(name: BashNotifications.accept, object: event)
     }
     
     @IBAction func notGoingTap(_ sender: UIButton) {
-        NotificationCenter.default.post(name: BashNotifications.delete, object: event)
+        AppUser.current.decline(event: event!)
+        NotificationCenter.default.post(name: BashNotifications.decline, object: event)
     }
     
     override func awakeFromNib() {

@@ -37,10 +37,8 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     var searchController: UISearchController!
     var lastTimeStamp = Date()
     
-    
     // Creates an instance of Core Location class
     var locationManager = CLLocationManager()
-    var events: [Event] = []
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -50,7 +48,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 5
+        locationManager.distanceFilter = 0
         locationManager.pausesLocationUpdatesAutomatically = true
         locationManager.allowsBackgroundLocationUpdates = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -82,7 +80,9 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
-    
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.accept(_:)), name: BashNotifications.accept, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.decline(_:)), name: BashNotifications.decline, object: nil)
     }
     
     func changedTheme(_ notification: NSNotification) {
@@ -95,53 +95,62 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             // Make OAuth take place in webview within our app
             OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
             // setup alert controller
-            let alertController = UIAlertController(title: "Spotify Login", message: "Please login to Spotify...", preferredStyle: .alert)
-            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+            let alertView = SCLAlertView()
+            alertView.addButton("Okay") {
+                alertView.dismiss(animated: true, completion: nil)
                 OAuthSwiftManager.shared.spotifyLogin(success: nil, failure: { (error) in
                     print(error)
                 })
-            })
-            alertController.addAction(okayAction)
-            self.present(alertController, animated: true, completion: nil)
+            }
+            alertView.showTitle("Spotify Login", subTitle: "Please login to Spotify", style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
         }
     }
     
     func inviteAdded(_ notification: NSNotification) {
         let event = notification.object as! Event
-        add(event: event)
+        addToMap(event: event)
         print("invited added")
-        print("Invite events: \(self.events)")
+        print("Invite events: \(AppUser.current.events)")
         
+        mapView.animate(toLocation: event.coordinate)
+        mapView.animate(toZoom: 17.0)
+        mapView.selectedMarker = event
+
         // Pop-Up alert when others first invite you to an event
         let alertView = SCLAlertView()
         alertView.addButton("Show Details") {
             self.tabBarController?.selectedIndex = 2
         }
-        alertView.showTitle("You've Been Invited!", subTitle: event.eventname, style: SCLAlertViewStyle.info, closeButtonTitle: "Not now", duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+        alertView.addButton("Not now") {
+            alertView.dismiss(animated: true, completion: nil)
+        }
+        self.tabBarController?.selectedIndex = 0
+        alertView.showTitle("You've Been Invited!", subTitle: event.eventname, style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 4, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
     }
     
 
     func eventsLoaded(_ notification: NSNotification) {
         self.loadAllEvents()
-        print("MapViewController Events: \(self.events)")
+        print("MapViewController Events: \(AppUser.current.events)")
     }
     
     func refresh(_ notification: NSNotification) {
         let event = notification.object as! Event
-        add(event: event)
-        print("new event added")
+        addToMap(event: event)
+        print("new event added to map")
+        mapView.animate(toLocation: event.coordinate)
+        mapView.animate(toZoom: 17.0)
+        mapView.selectedMarker = event
     }
     
 
     @IBAction func onZoomtoCurrent(_ sender: Any) {
         mapView.animate(toLocation: currentLocation.coordinate)
-        print(currentLocation.coordinate)
         mapView.animate(toZoom: Utilities.zoomLevel)
     }
     
     // MARK: Add an event to the mapView
-    func add(event: Event) {
-        self.events.append(event)
+    func addToMap(event: Event) {
         //for google maps marker
         event.title = event.eventname
         event.snippet = event.about.isEmpty ? "No description." : event.about
@@ -155,21 +164,20 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         event.map = mapView
     }
     
-    func remove(event: Event) {
+    func deleteEvent(_ notification: NSNotification) {
+        let event = notification.object as! Event
         event.map = nil
         event.circle!.map = nil
-        let indexInArray = events.index(of: event)!
-        events.remove(at: indexInArray)
     }
     
-    func accept(event: Event) {
-        event.myStatus = .accepted
+    func accept(_ notification: NSNotification) {
+        let event = notification.object as! Event
         event.circle!.strokeColor = Colors.green
         event.circle!.fillColor = Colors.green.withAlphaComponent(0.3)
     }
     
-    func decline(event: Event) {
-        event.myStatus = .declined
+    func decline(_ notification: NSNotification) {
+        let event = notification.object as! Event
         event.circle!.strokeColor = Colors.coral
         event.circle!.fillColor = Colors.coral.withAlphaComponent(0.3)
     }
@@ -195,7 +203,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     func loadAllEvents() {
         for event in AppUser.current.events {
-            add(event: event)
+            addToMap(event: event)
         }
     }
 }
@@ -214,35 +222,67 @@ extension MapViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didLongPressInfoWindowOf marker: GMSMarker) {
         showAlert(for: marker as! Event)
     }
-
+    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        let event = marker as! Event
+        mapView.animate(toLocation: event.coordinate)
+        mapView.animate(toZoom: 17.0)
+        mapView.selectedMarker = marker
+        return true
+    }
+    
+    func mapView(_ mapView: GMSMapView, didCloseInfoWindowOf marker: GMSMarker) {
+        mapView.animate(toLocation: currentLocation.coordinate)
+        mapView.animate(toZoom: Utilities.zoomLevel)
+    }
+    
     func showAlert(for event: Event) {
         let alertView = SCLAlertView()
+
         if event.organizer.uid == AppUser.current.uid {
             alertView.addButton("Delete") {
+                AppUser.current.delete(event: event)
                 NotificationCenter.default.post(name: BashNotifications.delete, object: event)
-                self.remove(event: event)
             }
         } else {
-            if event.myStatus == InviteStatus.noResponse {
+            switch event.myStatus {
+            case .accepted:
+                alertView.addButton("Decline") {
+                    AppUser.current.decline(event: event)
+                    NotificationCenter.default.post(name: BashNotifications.decline, object: event)
+                }
+            case .declined:
                 alertView.addButton("Accept") {
+                    AppUser.current.accept(event: event)
                     NotificationCenter.default.post(name: BashNotifications.accept, object: event)
-                    self.accept(event: event)
+                }
+            case . noResponse:
+                alertView.addButton("Accept") {
+                    AppUser.current.accept(event: event)
+                    NotificationCenter.default.post(name: BashNotifications.accept, object: event)
                 }
                 alertView.addButton("Decline") {
+                    AppUser.current.decline(event: event)
                     NotificationCenter.default.post(name: BashNotifications.decline, object: event)
-                    self.decline(event: event)
                 }
             }
         }
-        alertView.showTitle(event.eventname, subTitle: Utilities.getDateTimeString(date: event.date), style: SCLAlertViewStyle.info, closeButtonTitle: "Not now", duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+        self.tabBarController?.selectedIndex = 0
+        mapView.animate(toLocation: event.coordinate)
+        mapView.animate(toZoom: 17.0)
+        alertView.addButton("Not now") {
+            event.notNowTimer = Date()
+            alertView.dismiss(animated: true, completion: nil)
+        }
+        alertView.showTitle(event.eventname, subTitle: Utilities.getDateTimeString(date: event.date), style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
     }
 
     func eventWithinCoordinate(_ coordinate: CLLocationCoordinate2D) -> Event? {
-        guard self.events.count > 0 else { return nil}
+        guard AppUser.current.events.count > 0 else { return nil}
         let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         var closest: Event!
         var closestDist = Double.greatestFiniteMagnitude
-        for event in self.events {
+        for event in AppUser.current.events {
             let loc = CLLocation(latitude: event.coordinate.latitude, longitude: event.coordinate.longitude)
             let dist = location.distance(from: loc)
             if dist < closestDist {
@@ -250,7 +290,7 @@ extension MapViewController: GMSMapViewDelegate {
                 closest = event
             }
         }
-        if closestDist < 3 * closest.radius {
+        if closestDist < 4 * closest.radius {
             return closest
         }
         return nil
@@ -270,7 +310,8 @@ extension MapViewController: CLLocationManagerDelegate {
         //        print("New location: \(location)")
         updateGoogleMaps(location)
         currentLocation = location
-        guard location.timestamp.timeIntervalSince(self.lastTimeStamp) > 3 else { return }
+        print(location)
+        guard location.timestamp.timeIntervalSince(self.lastTimeStamp) > 2 else { return }
         self.lastTimeStamp = location.timestamp
         guard AppUser.current.events.count > 0 else { return }
         var closest: Event!
@@ -283,7 +324,10 @@ extension MapViewController: CLLocationManagerDelegate {
                 closest = event
             }
         }
-        if closestDistance <= closest.radius {
+        if closest.myStatus != .noResponse || closest.notNowTimer != nil && Date().timeIntervalSince(closest.notNowTimer!) < 900 {
+            return
+        }
+        if closestDistance <= closest.radius{
             handleEvent(closest)
         }
     }
@@ -306,8 +350,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func handleEvent(_ event: Event) {
         switch UIApplication.shared.applicationState {
         case .active:
-            let message = "Would you like to check in to \"\(event.eventname)\"?"
-            self.showAlert(withTitle: "Check In", message: message)
+            showAlert(for: event)
         case .inactive: fallthrough
         case .background:
             let content = UNMutableNotificationContent()
