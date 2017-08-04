@@ -97,14 +97,23 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         return cellHeights[indexPath.row]
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let blah = UIStoryboard(name: "Main", bundle: nil)
+        let detailVC = blah.instantiateViewController(withIdentifier: "DetailEventViewController") as! DetailEventViewController
+        let event = AppUser.current.events[indexPath.row]
+        detailVC.event = event
+        detailVC.delegate = self
+        self.navigationController?.pushViewController(detailVC, animated: true)
+        //show(detailVC, sender: nil)
+    }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
         guard let indexPath = tableView?.indexPathForRow(at: location)  else {return nil}
         
         guard let cell = tableView?.cellForRow(at: indexPath) else { return nil }
-        
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController else { return nil }
+        let blah = UIStoryboard(name: "Main", bundle: nil)
+        guard let detailVC =  blah.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController else { return nil }
         
         let event = myEvents[indexPath.row]
         detailVC.event = event

@@ -426,7 +426,7 @@
                         <outlet property="barButtonView" destination="sRZ-w2-dah" id="Lc9-ot-56A"/>
                         <outlet property="buttonBarView" destination="sRZ-w2-dah" id="zAP-Av-yYD"/>
                         <outlet property="containerView" destination="u3M-v2-MWG" id="Ml3-r2-mAv"/>
-                        <segue destination="eha-L8-lP3" kind="show" id="O5i-07-fz1"/>
+                        <segue destination="eha-L8-lP3" kind="show" identifier="myToDetail" id="O5i-07-fz1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzr-oX-uJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -798,7 +798,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5vP-o7-9Jm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="lKx-Q3-tPz" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QTU-y1-5sq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QTU-y1-5sq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -818,7 +818,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="37B-x8-Lru" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="s1M-MY-l19">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s1M-MY-l19">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -837,7 +837,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h5V-kl-bUm" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Events" id="FkV-xV-Dt9" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="iZI-yZ-5Ox">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iZI-yZ-5Ox">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -856,7 +856,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bwb-74-W3H" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" id="f0n-il-0vH" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cwr-UH-hbb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cwr-UH-hbb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

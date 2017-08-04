@@ -58,12 +58,18 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController
+        let event = AppUser.current.events[indexPath.row]
+        detailVC?.event = event
+        detailVC?.delegate = self
+        show(detailVC!, sender: nil)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         cell.event = AppUser.current.events[indexPath.row]
-        
-        //cell.delegate = self
         return cell
     }
     

@@ -15,6 +15,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
 
         // Do any additional setup after loading the view.
     }
@@ -30,7 +31,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                 return
             }
 
-            pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width)/2 - 10, y: 578, width: 40, height: 40))
+            pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width)/2 - 20, y: 578, width: 40, height: 40))
             configurePageControl()
             scrollView.delegate = self
             for index in 0...2 {
@@ -113,7 +114,9 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
         let declineAction = UIPreviewAction(title: "Decline", style: .destructive) { (action, viewController) -> Void in
             // do stuff the declines event invite
         }
-        
+        if event?.organizer.uid == AppUser.current.uid{
+            return []
+        }
         return [acceptAction, declineAction]
     }
 
