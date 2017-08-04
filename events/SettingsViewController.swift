@@ -38,62 +38,68 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
         themeSwitch.titleFont = UIFont(name: "Futura", size: 20.0)!
         themeSwitch.selectedTitleFont = UIFont(name: "Futura", size: 20.0)!
         themeSwitch.selectedTitleColor = UIColor.white
-//        themeSwitch.addTarget(self, action: #selector(themeSwitch.controlValueChanged(_:)), for: .valueChanged)
+        var index: UInt = 0
+        if Utilities.theme == "night" {
+            index = 1
+        }
+        do {
+            try themeSwitch.setIndex(index, animated: true)
+        } catch {
+            NSLog("Unable to switch index")
+        }
         
+        
+        
+        // Customize payment method button
+        addPaymentButton.layer.cornerRadius = 5
+        addPaymentButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        
+        // Customize logout button
+        logoutButton.layer.cornerRadius = 5
+        logoutButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+    }
     
     
+    @IBAction func onAddPayment(_ sender: Any) {
+        let addPaymentVC = AddPaymentViewController(nibName: "AddPaymentViewController", bundle: nil)
+        self.present(addPaymentVC, animated: true, completion: nil)
+    }
     
     
-    // Customize payment method button
-    addPaymentButton.layer.cornerRadius = 5
-    addPaymentButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-    
-    // Customize logout button
-    logoutButton.layer.cornerRadius = 5
-    logoutButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-}
-
-
-@IBAction func onAddPayment(_ sender: Any) {
-    let addPaymentVC = AddPaymentViewController(nibName: "AddPaymentViewController", bundle: nil)
-    self.present(addPaymentVC, animated: true, completion: nil)
-}
-
-   
     @IBAction func themeSwitchValueChanged(_ sender: BetterSegmentedControl) {
         if sender.index == 0 {
             Utilities.theme = "day"
             NotificationCenter.default.post(name: BashNotifications.changedTheme, object: nil)
-        }
-        else {
+        } else {
             Utilities.theme = "night"
             NotificationCenter.default.post(name: BashNotifications.changedTheme, object: nil)
-
         }
+        UserDefaults.standard.set(Utilities.theme, forKey: "theme")
+        UserDefaults.standard.synchronize()
     }
-
-func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "Settings")
-}
-
-@IBAction func didLogout(_ sender: Any) {
-    FirebaseDatabaseManager.shared.logout()
-    FBSDKLoginManager().logOut()
-    //        let creds = URLCredentialStorage.shared.allCredentials
-    //        for (protectionSpace, userCredsDict) in creds {
-    //            for (_, cred) in userCredsDict {
-    //                print("DELETING CREDENTIAL")
-    //                URLCredentialStorage.shared.remove(cred, for: protectionSpace, options: ["NSURLCredentialStorageRemoveSynchronizableCredentials" : true])
-    //            }
-    //        }
-    //        URLCache.shared.removeAllCachedResponses()
-    //        if let cookies = HTTPCookieStorage.shared.cookies {
-    //            for cookie in cookies {
-    //                HTTPCookieStorage.shared.deleteCookie(cookie)
-    //            }
-    //        }
-    //        UserDefaults.standard.synchronize()
-    NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
-}
-
+    
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Settings")
+    }
+    
+    @IBAction func didLogout(_ sender: Any) {
+        FirebaseDatabaseManager.shared.logout()
+        FBSDKLoginManager().logOut()
+        //        let creds = URLCredentialStorage.shared.allCredentials
+        //        for (protectionSpace, userCredsDict) in creds {
+        //            for (_, cred) in userCredsDict {
+        //                print("DELETING CREDENTIAL")
+        //                URLCredentialStorage.shared.remove(cred, for: protectionSpace, options: ["NSURLCredentialStorageRemoveSynchronizableCredentials" : true])
+        //            }
+        //        }
+        //        URLCache.shared.removeAllCachedResponses()
+        //        if let cookies = HTTPCookieStorage.shared.cookies {
+        //            for cookie in cookies {
+        //                HTTPCookieStorage.shared.deleteCookie(cookie)
+        //            }
+        //        }
+        //        UserDefaults.standard.synchronize()
+        NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
+    }
+    
 }

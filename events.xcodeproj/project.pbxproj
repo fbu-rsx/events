@@ -309,7 +309,7 @@
 			name = SignInViewControllers;
 			sourceTree = "<group>";
 		};
-		4F87D3781F168F59007D4E94 /* Views */ = {
+		4F87D3781F168F59007D4E94 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				7C26DE9D1F312C960079BE1A /* AddPaymentViewController.swift */,
@@ -325,7 +325,7 @@
 				7CAAA0E41F281304005C1A76 /* WalletViewController.swift */,
 				7CAAA0E51F281304005C1A76 /* WalletViewController.xib */,
 			);
-			name = Views;
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		4F87D3791F1696AF007D4E94 /* ViewControllers */ = {
@@ -399,7 +399,7 @@
 				4FFC02F81F26AF1D00B55206 /* SignInViewController.xib */,
 				4F2545661F1D59D00076AE0B /* SignInViewControllers */,
 				4F87D3791F1696AF007D4E94 /* ViewControllers */,
-				4F87D3781F168F59007D4E94 /* Views */,
+				4F87D3781F168F59007D4E94 /* Profile */,
 				09EB68D81F2F89CE00967BA8 /* EventsTableViewPage */,
 				09A15CBF1F1568E300E847CC /* Models */,
 				4F9887261F144A7B00759564 /* APIManagers */,
@@ -544,6 +544,7 @@
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = S5MHKF47DJ;
+						DevelopmentTeam = 736R8PG8E6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -981,12 +982,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
@@ -1001,6 +1004,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5MHKF47DJ;
+				DEVELOPMENT_TEAM = 736R8PG8E6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1008,6 +1012,7 @@
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";

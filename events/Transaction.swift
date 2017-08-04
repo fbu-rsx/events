@@ -55,7 +55,7 @@ class Transaction: NSObject {
         let dict: [String: Any] = [TransactionKey.id: self.id,
                     TransactionKey.receiver: self.receiver.getBasicDict(),
                     TransactionKey.amount: self.amount,
-                    TransactionKey.date: Utilities.getDateString(date: self.date),
+                    TransactionKey.date: self.date.description,
                     TransactionKey.status: self.status,
                     TransactionKey.name: self.name]
         return dict

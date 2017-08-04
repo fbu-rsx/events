@@ -47,6 +47,8 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         tableView.separatorColor = Colors.coral
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(detailView0.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
     }
     
     var event: Event? {
@@ -65,8 +67,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 marker.isDraggable = false
                 
                 self.topMap.isHidden = false
-                
-                NotificationCenter.default.addObserver(self, selector: #selector(detailView0.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
                 
                 self.profileImage.layer.cornerRadius = 0.5*self.profileImage.frame.width
                 self.profileImage.layer.masksToBounds = true
