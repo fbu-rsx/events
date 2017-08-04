@@ -73,8 +73,9 @@ class FirebaseDatabaseManager {
     
     func addWalletListener(id: String) {
         self.ref.child("users/\(id)/wallet").observe(.value) { (snapshot: DataSnapshot) in
+            print("WALLET FUNC CALLED")
             let value = snapshot.value as! Double
-            AppUser.current.addToWallet(amount: value)
+            NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
         }
     }
     

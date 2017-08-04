@@ -101,6 +101,7 @@ class AppUser {
             }
             self.transactions = arr
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.walletChanged(_:)), name: BashNotifications.walletChanged, object: nil)
     }
 
     /**

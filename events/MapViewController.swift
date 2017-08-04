@@ -39,6 +39,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     // Creates an instance of Core Location class
     var locationManager = CLLocationManager()
+    var currentAlert: SCLAlertView?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -122,9 +123,12 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             self.tabBarController?.selectedIndex = 2
         }
         alertView.addButton("Not now") {
+            self.currentAlert = nil
             alertView.dismiss(animated: true, completion: nil)
         }
         self.tabBarController?.selectedIndex = 0
+        currentAlert?.dismiss(animated: false, completion: nil)
+        currentAlert = alertView
         alertView.showTitle("You've Been Invited!", subTitle: event.eventname, style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 4, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
     }
     
@@ -272,8 +276,11 @@ extension MapViewController: GMSMapViewDelegate {
         mapView.animate(toZoom: 17.0)
         alertView.addButton("Not now") {
             event.notNowTimer = Date()
+            self.currentAlert = nil
             alertView.dismiss(animated: true, completion: nil)
         }
+        currentAlert?.dismiss(animated: false, completion: nil)
+        currentAlert = alertView
         alertView.showTitle(event.eventname, subTitle: Utilities.getDateTimeString(date: event.date), style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
     }
 
@@ -310,7 +317,6 @@ extension MapViewController: CLLocationManagerDelegate {
         //        print("New location: \(location)")
         updateGoogleMaps(location)
         currentLocation = location
-        print(location)
         guard location.timestamp.timeIntervalSince(self.lastTimeStamp) > 2 else { return }
         self.lastTimeStamp = location.timestamp
         guard AppUser.current.events.count > 0 else { return }
