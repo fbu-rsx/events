@@ -7,16 +7,13 @@
 //
 
 import UIKit
-import FoldingCell
 import ImagePicker
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2, UIViewControllerPreviewingDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     
-    let kCloseCellHeight: CGFloat = 144
-    let kOpenCellHeight: CGFloat = 541
-    var cellHeights: [CGFloat] = []
+    var cellHeight: CGFloat = 144
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,27 +26,14 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
-        // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
-        cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
-        registerForPreviewing(with: self, sourceView: tableView)
-        //tableView.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
-        tableView.reloadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.delete, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.invite, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.accept, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.decline, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.delete, object: nil)
     }
 
     func refresh(_ notification: Notification) {
-        cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
-        tableView.reloadData()
-    }
-
-    
-    func deleteEvent(_ notification: NSNotification) {
         tableView.reloadData()
     }
     
@@ -77,21 +61,15 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return AppUser.current.events.count
     }
     
-    fileprivate struct C {
-        struct CellHeight {
-            static let close: CGFloat = 144 // equal or greater foregroundView height
-            static let open: CGFloat = 541 // equal or greater containerView height
-        }
-    }
-    
     func presenter(imagePicker : ImagePickerController) {
         present(imagePicker, animated: true, completion: nil)
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[indexPath.row]
+        return cellHeight
     }
+
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         

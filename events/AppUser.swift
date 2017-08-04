@@ -56,11 +56,10 @@ class AppUser {
     var name: String
     var photoURLString: String
     var events: [Event] = []
-    var eventsKeys: [String: Int]!
-    var wallet: Double!
-    var transactions: [Transaction]!
-    
-    var facebookFriends: [FacebookFriend]!
+    var eventsKeys: [String: Int] = [:]
+    var wallet: Double = 0
+    var transactions: [Transaction] = []
+    var facebookFriends: [FacebookFriend] = []
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary[UserKey.id] as! String
@@ -68,7 +67,7 @@ class AppUser {
         self.photoURLString = dictionary[UserKey.photo] as! String
     }
     
-    convenience init(user: User) {
+    convenience init(user: User, completion: (() -> Void)?) {
         let userDict: [String: Any] = [UserKey.id: FBSDKAccessToken.current().userID,
                                           UserKey.name: user.displayName!,
                                           UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
@@ -82,6 +81,7 @@ class AppUser {
                 let dict = events[id] as! [String: Any]
                 self.events.append(Event(dictionary: dict))
             }
+            completion?()
             FirebaseDatabaseManager.shared.addEventsListener()
             NotificationCenter.default.post(name: BashNotifications.eventsLoaded, object: nil)
             print("events loaded notification posted")
@@ -101,11 +101,6 @@ class AppUser {
             }
             self.transactions = arr
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.delete(_:)), name: BashNotifications.delete, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.accept(_:)), name: BashNotifications.accept, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.decline(_:)), name: BashNotifications.decline, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AppUser.walletChanged(_:)), name: BashNotifications.walletChanged, object: nil)
     }
 
     /**
@@ -114,22 +109,19 @@ class AppUser {
      *
      */
     //adds existing event to user event list
-    @objc func inviteAdded(_ notification: NSNotification) {
-        let event = notification.object as! Event
+    func addInvite(event: Event) {
         self.eventsKeys[event.eventid] = InviteStatus.noResponse.rawValue
         self.events.append(event)
     }
     
-    @objc func delete(_ notification: NSNotification) {
-        let event = notification.object as! Event
+    func delete(event: Event) {
         FirebaseDatabaseManager.shared.deleteEvent(event)
         self.removeUserFromEvent(event)
     }
     
-    @objc func accept(_ notification: NSNotification) {
-        let event = notification.object as! Event
+    func accept(event: Event) {
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .accepted)
-        event.myStatus = .accepted
+        self.eventsKeys[event.eventid] = InviteStatus.accepted.rawValue
         if event.cost != nil {
             let transaction = Transaction(event: event)
             self.transactions.append(transaction)
@@ -137,8 +129,7 @@ class AppUser {
         }
     }
     
-    @objc func decline(_ notification: NSNotification) {
-        let event = notification.object as! Event
+    func decline(event: Event) {
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .declined)
         FirebaseDatabaseManager.shared.removeTransaction(forEventID: event.eventid)
         if event.myStatus == .accepted {
@@ -152,7 +143,7 @@ class AppUser {
             }
             self.transactions.remove(at: idx)
         }
-        event.myStatus = .declined
+        self.eventsKeys[event.eventid] = InviteStatus.declined.rawValue
     }
     
     @objc func walletChanged(_ notification: NSNotification) {
@@ -180,7 +171,7 @@ class AppUser {
     }
     
     //remove event from user event list
-    func removeUserFromEvent(_ event: Event) {
+    private func removeUserFromEvent(_ event: Event) {
         FirebaseDatabaseManager.shared.removeUserFromEvent(event)
         let index = self.events.index(of: event)!
         self.events.remove(at: index)

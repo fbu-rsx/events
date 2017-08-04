@@ -25,6 +25,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     var guestsStatus: [Int] = []
     
     @IBAction func goingTap(_ sender: UIButton) {
+        AppUser.current.accept(event: event!)
         NotificationCenter.default.post(name: BashNotifications.accept, object: event)
         
         // Automatically refresh
@@ -32,6 +33,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     @IBAction func notGoingTap(_ sender: UIButton) {
+        AppUser.current.decline(event: event!)
         NotificationCenter.default.post(name: BashNotifications.decline, object: event)
     }
     

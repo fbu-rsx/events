@@ -8,7 +8,6 @@
 
 import UIKit
 import AlamofireImage
-import FoldingCell
 
 class EventsTableViewCell: UITableViewCell{
     
@@ -142,10 +141,12 @@ class EventsTableViewCell: UITableViewCell{
     }
     
     @IBAction func onAccept(_ sender: Any) {
+        AppUser.current.accept(event: event!)
         NotificationCenter.default.post(name: BashNotifications.accept, object: event)
     }
     
     @IBAction func onDecline(_ sender: Any) {
+        AppUser.current.decline(event: event!)
         NotificationCenter.default.post(name: BashNotifications.decline, object: event)
     }
     

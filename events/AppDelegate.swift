@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSPlacesClient.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
         
         if Auth.auth().currentUser != nil && FBSDKAccessToken.current() != nil {
-            AppUser.current = AppUser(user: Auth.auth().currentUser!)
+            AppUser.current = AppUser(user: Auth.auth().currentUser!, completion: nil)
         } else {
             let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
             loginController.signInDelegate = self
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.sharedManager().toolbarTintColor = Colors.green
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
-        //OAuthSwiftManager.shared.logout()
+
         return true
     }
     
@@ -108,7 +108,7 @@ extension AppDelegate: SignInDelegate {
         }
         
         if let error = error {
-            print(error.localizedDescription)
+            print("error with facebook authentication: \(error.localizedDescription)")
             return
         }
         if result.isCancelled {
@@ -122,10 +122,15 @@ extension AppDelegate: SignInDelegate {
                 print(error.localizedDescription)
                 return
             }
-            AppUser.current = AppUser(user: user!)
-            print("Welcome \(user!.displayName!)! 😊")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            self.window?.rootViewController = storyboard.instantiateInitialViewController()!
+            
+            let signInVC = self.window?.rootViewController as? SignInViewController
+            signInVC?.startSpinner()
+            AppUser.current = AppUser(user: user!) {
+                signInVC?.stopSpinner()
+                print("Welcome \(user!.displayName!)! 😊")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                self.window?.rootViewController = storyboard.instantiateInitialViewController()!
+            }
         }
     }
     
