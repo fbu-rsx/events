@@ -30,13 +30,13 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                 return
             }
 
-            pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width-10)/2 - 10, y: 578, width: 40, height: 40))
+            pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width)/2 - 10, y: 578, width: 40, height: 40))
             configurePageControl()
             scrollView.delegate = self
             for index in 0...2 {
                 var frame = CGRect.zero
                 frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
-                print(frame.origin.x)
+                //print(frame.origin.x)
                 frame.size = self.scrollView.frame.size
                 if index == 0{
                     let nib = UINib(nibName: "detailView0", bundle: nil)
@@ -62,7 +62,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                 }
             }
             self.scrollView.isPagingEnabled = true
-            self.scrollView.contentSize = CGSize(width: 1080, height: 554)
+            self.scrollView.contentSize = CGSize(width: 1125, height: 554)
             pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
         }
     }
@@ -73,87 +73,14 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                 return
             }
             FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
-                // Set organizer's profile picture
-                let url = URL(string: user.photoURLString)
-                //self.closedProfileImageView.af_setImage(withURL: url!)
-                // Set event title
-                //self.closedEventTitle.text = self.event!.title
-                // Set and format event location
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MMM d, h:mm a"
-                //self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
-                // Set total cost
-                //if let cost = self.event!.cost, cost > 0.00999 {
-                //    self.closedUserCost.text = String(format: "$%.2f", cost)
-                //} else{
-                //    self.closedUserCost.text = "Free"
-                //}
-                // Set number of guests invited
-                //self.closedInvitedNum.text = String(self.event!.guestlist.count)
-                // accepted num will eventually be added to Event class
+
                 var coming: Int = 0
                 for user in self.event!.guestlist.keys{
                     if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
                 }
-                //self.closedComingNum.text = String(coming)
-                // Set the cell color depending on invite status
-                var color: UIColor!
-                var sideBarColor: UIColor!
-                var backViewColor: UIColor!
-                // var backViewColor: UIColor!
-                
-                
-                
-                // check if the event is created by AppUser.current
-                let eventOrganizer = (self.event?.organizer)!
-                /*
-                if eventOrganizer.uid == AppUser.current.uid {
-                    
-                    self.oneCell.backgroundColor = UIColor(hexString: "#B6A6CA")
-                    self.sideBar.backgroundColor = UIColor(hexString: "#D5CFE1")
-                    self.sideBar1.backgroundColor = UIColor(hexString: "#D5CFE1")
-                    self.backViewColor = UIColor(hexString: "#D5CFE1")
-                    
-                    // if my event, hide "accept" and "decline" buttons
-                    self.acceptButton.isHidden = true
-                    self.declineButton.isHidden = true
-                    
-                    // Setting resposne icon to a star
-                    self.responseIcon.image = UIImage(named: "my-event")
-                    
-                } else {
-                    switch self.event!.myStatus {
-                    case .accepted:
-                        color = Colors.greenAccepted
-                        sideBarColor = UIColor(hexString: "#8CF7AC")
-                        backViewColor = UIColor(hexString: "#8CF7AC")
-                        // if accepted, hide "accept" and "decline" buttons
-                        self.acceptButton.isHidden = true
-                        self.declineButton.isHidden = true
-                        
-                        // Setting resposne icon to a check mark
-                        self.responseIcon.image = UIImage(named: "going")
-                        
-                    case .declined:
-                        color = Colors.redDeclined
-                        backViewColor = UIColor(hexString: "#F4ABB1")
-                        sideBarColor = UIColor(hexString: "#F4ABB1")
-                        // if declined, hide "accept" and "decline" buttons
-                        self.acceptButton.isHidden = true
-                        self.declineButton.isHidden = true
-                        self.responseIcon.image = UIImage(named: "not-going")
-                        
-                    default:
-                        color = Colors.pendingBlue
-                        sideBarColor = UIColor(hexString: "#ABEEFC")
-                        backViewColor = UIColor(hexString: "#ABEEFC")
-                        
-                    }
-                    self.sideBar.backgroundColor = sideBarColor
-                    self.sideBar1.backgroundColor = sideBarColor
-                    self.oneCell.backgroundColor = color
-                    self.backViewColor = backViewColor
-                }*/
+
             }
         }
     }

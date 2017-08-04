@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FoldingCell
 import ImagePicker
 import XLPagerTabStrip
 
@@ -35,6 +34,8 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
         cellHeights = (0..<myEvents.count).map { _ in C.CellHeight.close }
         //tableView.reloadData()
+        
+        self.registerForPreviewing(with: self, sourceView: tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +73,7 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         // return cell to present associated with user's events
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventsTableViewCell
         cell.event = myEvents[indexPath.row]
-        registerForPreviewing(with: self, sourceView: cell.contentView)
+        
         return cell
     }
     
@@ -96,18 +97,6 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         return cellHeights[indexPath.row]
     }
     
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if case let cell as FoldingCell = cell {
-            
-            cell.backgroundColor = .clear
-            if cellHeights[indexPath.row] == C.CellHeight.close {
-                cell.unfold(false, animated: false, completion: nil)
-            } else {
-                cell.unfold(true, animated: false, completion: nil)
-            }
-        }
-    }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         

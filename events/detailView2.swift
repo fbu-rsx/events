@@ -35,7 +35,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         tableView.register(nib1, forCellReuseIdentifier: "songCell")
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = (nib.instantiate(withOwner: self, options: nil).first as! songOverlayView)
-        subView!.frame = CGRect(x: 8, y: 92, width: self.frame.width, height: self.frame.height - 92)
+        subView!.frame = CGRect(x: 8, y: 113, width: self.frame.width, height: self.frame.height - 92)
         subView?.delegate = self
         searchField.delegate = self
         searchField.setBottomBorder()
@@ -110,8 +110,9 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     func addSong(songIndex: Int) {
         let song = searchedSongsURIS[songIndex].replacingOccurrences(of: "spotify:track:", with: "")
         FirebaseDatabaseManager.shared.addQueuedSong(event: event!, songID: song)
-        songs.append(song)
+        songs.append(searchedSongNames[songIndex])
         songs.sort()
+        tableView.reloadData()
         searchField.text = nil
         subView?.removeFromSuperview()
         added = false
