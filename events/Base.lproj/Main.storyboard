@@ -872,7 +872,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bwb-74-W3H" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" id="f0n-il-0vH" customClass="SimpleTabBarItem" customModule="SimpleTab"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cwr-UH-hbb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="cwr-UH-hbb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
