@@ -9,6 +9,7 @@
 import UIKit
 import FoldingCell
 import ImagePicker
+import OAuthSwift
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2, UIViewControllerPreviewingDelegate{
 
@@ -41,6 +42,22 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         cellHeights = (0..<AppUser.current.events.count).map { _ in C.CellHeight.close }
         tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        OAuthSwiftManager.shared.getSpotifyUserID {
+            // Make OAuth take place in webview within our app
+            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
+            // setup alert controller
+            let alertController = UIAlertController(title: "Spotify Login", message: "Please login to Spotify...", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                OAuthSwiftManager.shared.spotifyLogin(success: nil, failure: { (error) in
+                    print(error)
+                })
+            })
+            alertController.addAction(okayAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     func refresh(_ notification: Notification) {
