@@ -154,6 +154,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         selectedPhotos.remove(at: selectedPhotos.index(of: photos[indexPath.row])!)
         if selectedPhotos.count == 0 {
             button.setTitle("Upload", for: .normal)
+            button.backgroundColor = Colors.coral
         }
         return true
     }
