@@ -60,14 +60,12 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
         CreateEventMaster.shared.event[EventKey.location] = [coordinate.latitude, coordinate.longitude]
         self.tabBarController?.tabBar.isHidden = false
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateLocationViewController.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         leftArrowButton.isUserInteractionEnabled = true
         rightArrowButton.isUserInteractionEnabled = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(CreateLocationViewController.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
