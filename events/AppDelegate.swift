@@ -18,8 +18,6 @@ import GooglePlaces
 import IQKeyboardManagerSwift
 
 
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     

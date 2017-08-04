@@ -12,6 +12,9 @@ import KeychainAccess
 import Alamofire
 import OAuthSwiftAlamofire
 
+//import Spot
+//#import <SpotifyAudioPlayback/SpotifyAudioPlayback.h>
+
 class OAuthSwiftManager: SessionManager {
     
     static let spotifyConsumerKey = "c4ee2fb79ba345f39fc00914f36fe4a7"
