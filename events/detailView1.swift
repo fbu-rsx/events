@@ -80,7 +80,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         if let tabBarController = rootViewController as? UITabBarController {
             rootViewController = tabBarController.selectedViewController
         }
-
+        rootViewController?.registerForPreviewing(with: self, sourceView: collectionView)
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
@@ -181,7 +181,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath) as! imageCollectionViewCell
         cell.image.image = photos[indexPath.row]
-        rootViewController?.registerForPreviewing(with: self, sourceView: cell.contentView)
+        
         return cell
     }
     
@@ -192,8 +192,9 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
         for image in stride(from: 0, to: images.count, by: 1){
+            self.photoUIDS.insert("none", at: 0)
             event?.uploadImage(images[image], completion: {id in
-                self.photoUIDS.insert(id, at: 0)
+                self.photoUIDS[0] = id
             })
             photos.insert(images[image], at: 0)
             users.insert(AppUser.current, at: 0)
