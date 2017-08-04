@@ -15,7 +15,7 @@ class imageCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             self.layer.borderWidth = 3.0
-            self.layer.borderColor = isSelected ? UIColor.black.cgColor : UIColor.clear.cgColor
+            self.layer.borderColor = isSelected ? Colors.coral.cgColor : UIColor.clear.cgColor
         }
     }
     

@@ -21,6 +21,8 @@ class DetailMediaViewController: UIViewController {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var downloadButton: UIButton!
     
     var profileImageURLString: String?
     var event: Event?
@@ -30,6 +32,10 @@ class DetailMediaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deleteButton.layer.cornerRadius = 5
+        deleteButton.backgroundColor = UIColor(hexString: "#95a5a6")
+        downloadButton.layer.cornerRadius = 5
+        downloadButton.backgroundColor = Colors.coral
         
     }
     
