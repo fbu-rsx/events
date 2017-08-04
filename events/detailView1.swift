@@ -67,6 +67,9 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         collectionView.collectionViewLayout = layout
         collectionView.allowsMultipleSelection = true
         
+        button.layer.cornerRadius = 5
+        button.backgroundColor = UIColor(hexString: "#FEB2A4")
+        
         if let navigationController = rootViewController as? UINavigationController {
             rootViewController = navigationController.viewControllers.first
         }
@@ -132,6 +135,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         selectedPhotos.append(photos[indexPath.row])
         if selectedPhotos.count != 0 {
             button.setTitle("Download", for: .normal)
+            button.backgroundColor = Colors.greenAccepted
         }
     }
     

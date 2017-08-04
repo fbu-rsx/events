@@ -22,6 +22,8 @@ class PaymentTableViewCell: UITableViewCell {
         didSet {
             paymentValueLabel.text = String(format: "%.2f", transaction.amount)
             requesterImage.af_setImage(withURL: URL(string: transaction.receiver.photoURLString)!)
+            requesterImage.layer.cornerRadius = 0.5 * requesterImage.frame.width
+            requesterImage.layer.masksToBounds = true
             requestedDate.text = Utilities.getDateString(date: transaction.date)
             eventName.text = transaction.name
             if transaction.status == true { // I have paid

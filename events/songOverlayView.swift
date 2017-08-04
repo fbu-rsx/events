@@ -33,7 +33,7 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate, UIGes
         // initialization code
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .black
+        tableView.backgroundColor = .white
         tableView.register(UINib(nibName: "SongTableViewCell", bundle: nil), forCellReuseIdentifier: "songCell")
     }
     

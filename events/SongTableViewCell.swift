@@ -15,13 +15,14 @@ protocol tapped {
 class SongTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var songName: UILabel!
     
     var index: Int?
     var delegate: tapped?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        songName.textColor = Colors.coral
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
