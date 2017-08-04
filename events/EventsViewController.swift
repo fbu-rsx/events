@@ -32,6 +32,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.accept, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.decline, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.delete, object: nil)
+        registerForPreviewing(with: self, sourceView: tableView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
