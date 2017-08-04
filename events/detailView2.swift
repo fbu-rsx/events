@@ -48,7 +48,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchField.resignFirstResponder()
-        getTracks()
+        //getTracks()
         return true
     }
     
@@ -108,7 +108,8 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     func addSong(songIndex: Int) {
         let song = searchedSongsURIS[songIndex].replacingOccurrences(of: "spotify:track:", with: "")
         FirebaseDatabaseManager.shared.addQueuedSong(event: event!, songID: song)
-        getTracks()
+        songs.append(song)
+        songs.sort()
         searchField.text = nil
         subView?.removeFromSuperview()
         added = false
