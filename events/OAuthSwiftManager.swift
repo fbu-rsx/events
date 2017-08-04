@@ -46,7 +46,7 @@ class OAuthSwiftManager: SessionManager {
     func spotifyLogin(success: (()->())?, failure: @escaping (Error?) -> ()) {
         
 
-        let scope = "playlist-modify-public playlist-modify-private user-follow-modify user-read-private"
+        let scope = "playlist-modify-public playlist-modify-private user-follow-modify user-read-private streaming"
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
         //oauth.auth
@@ -119,9 +119,9 @@ class OAuthSwiftManager: SessionManager {
     }
     
 
-    
-    // functions to interact with spotify web client
-    // use oauth
+    ////////////////////////////////////////////////////////
+    //   Functions to Interact with Spotify Web Client    //
+    ////////////////////////////////////////////////////////
     
     func getSpotifyUserID(_ failureCompletion: @escaping (()->())){
         
@@ -211,6 +211,29 @@ class OAuthSwiftManager: SessionManager {
             completion(songs, uris)
         }
     }
+    
+    ////////////////////////////////////////////////
+    //   Functions to Control Spotify Playback    //
+    ////////////////////////////////////////////////
+    
+    func startMusic(creatorUserID: String?, playlistID: String?){
+        let url = URL(string: "https://api.spotify.com/v1/me/player/play")
+        var Parameters: [String: Any]?
+        if let ID = playlistID{
+            Parameters = ["context_uri": "spotify:\(creatorUserID!):thelinmichael:playlist:\(ID)"]
+        }
+        request(url!, method: .post, parameters: Parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            print(response)
+        }
+    }
+    
+    func pauseMusic(){
+        let url = URL(string: "https://api.spotify.com/v1/me/player/pause")
+        request(url!, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            print(response)
+        }
+    }
+    
     
 }
 

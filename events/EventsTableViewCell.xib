@@ -113,6 +113,18 @@
                                 <rect key="frame" x="280" y="14" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3x-T1-F12">
+                                <rect key="frame" x="263" y="49" width="68" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDelete:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="u6b-fl-Vb5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86801654220000002" green="0.86801654220000002" blue="0.86801654220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -145,6 +157,7 @@
                 <outlet property="closedProfileImageView" destination="FCb-EM-Tmr" id="Wlp-cl-Z4B"/>
                 <outlet property="closedUserCost" destination="jnC-7k-Zq0" id="T2P-E7-1TE"/>
                 <outlet property="declineButton" destination="Ihz-uS-LFs" id="Da9-s1-3Fa"/>
+                <outlet property="deleteButton" destination="i3x-T1-F12" id="CG2-bN-B4u"/>
                 <outlet property="oneCell" destination="RpP-AQ-Woc" id="1c9-CO-d64"/>
                 <outlet property="responseIcon" destination="8RV-rf-JrC" id="N4r-q3-i7q"/>
                 <outlet property="sideBar" destination="pRR-lD-k3e" id="dxM-Zh-0vH"/>

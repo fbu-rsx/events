@@ -24,6 +24,9 @@
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
 		09E7618E1F33CAFC005D2369 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */; };
+		09E761901F351D64005D2369 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E7618F1F351D64005D2369 /* SpotifyAudioPlayback.framework */; };
+		09E761921F351E24005D2369 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E761911F351E24005D2369 /* AVFoundation.framework */; };
+		09E761941F351E30005D2369 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E761931F351E30005D2369 /* SystemConfiguration.framework */; };
 		09F788491F2668A700A311F0 /* detailView0.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F788481F2668A700A311F0 /* detailView0.xib */; };
 		09F7884B1F26694A00A311F0 /* detailView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F7884A1F26694A00A311F0 /* detailView0.swift */; };
 		09F7884D1F26781400A311F0 /* detailView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F7884C1F26781400A311F0 /* detailView1.xib */; };
@@ -79,6 +82,8 @@
 		7C26DEA51F3179A70079BE1A /* night.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C26DEA41F3179A70079BE1A /* night.json */; };
 		7C3C19CC1F3390EB00A32A2E /* MyCreatedEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C19CA1F3390EB00A32A2E /* MyCreatedEventsViewController.swift */; };
 		7C3C19CD1F3390EB00A32A2E /* MyCreatedEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3C19CB1F3390EB00A32A2E /* MyCreatedEventsViewController.xib */; };
+		7C3C19D01F35136B00A32A2E /* detailView3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C3C19CF1F35136B00A32A2E /* detailView3.xib */; };
+		7C3C19D21F3513AC00A32A2E /* detailView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C19D11F3513AC00A32A2E /* detailView3.swift */; };
 		7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4745381F2930E0009CA46E /* SettingsViewController.swift */; };
 		7C47453B1F2930E0009CA46E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C4745391F2930E0009CA46E /* SettingsViewController.xib */; };
 		7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4BA22A1F18163B004739EE /* Utilities.swift */; };
@@ -130,6 +135,9 @@
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
 		09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
+		09E7618F1F351D64005D2369 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		09E761911F351E24005D2369 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		09E761931F351E30005D2369 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		09F788481F2668A700A311F0 /* detailView0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = detailView0.xib; path = events/detailView0.xib; sourceTree = SOURCE_ROOT; };
 		09F7884A1F26694A00A311F0 /* detailView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailView0.swift; sourceTree = "<group>"; };
 		09F7884C1F26781400A311F0 /* detailView1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailView1.xib; sourceTree = "<group>"; };
@@ -192,6 +200,8 @@
 		7C26DEA41F3179A70079BE1A /* night.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = night.json; sourceTree = "<group>"; };
 		7C3C19CA1F3390EB00A32A2E /* MyCreatedEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCreatedEventsViewController.swift; sourceTree = "<group>"; };
 		7C3C19CB1F3390EB00A32A2E /* MyCreatedEventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCreatedEventsViewController.xib; sourceTree = "<group>"; };
+		7C3C19CF1F35136B00A32A2E /* detailView3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = detailView3.xib; sourceTree = "<group>"; };
+		7C3C19D11F3513AC00A32A2E /* detailView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = detailView3.swift; sourceTree = "<group>"; };
 		7C4745381F2930E0009CA46E /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7C4745391F2930E0009CA46E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7C4BA22A1F18163B004739EE /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -218,7 +228,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E761941F351E30005D2369 /* SystemConfiguration.framework in Frameworks */,
+				09E761921F351E24005D2369 /* AVFoundation.framework in Frameworks */,
 				7F92027EDD6ECD0EF332F353 /* Pods_events.framework in Frameworks */,
+				09E761901F351D64005D2369 /* SpotifyAudioPlayback.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +284,8 @@
 				09F7884C1F26781400A311F0 /* detailView1.xib */,
 				09F788521F269F0900A311F0 /* detailView2.swift */,
 				09F788501F269EE800A311F0 /* detailView2.xib */,
+				7C3C19CF1F35136B00A32A2E /* detailView3.xib */,
+				7C3C19D11F3513AC00A32A2E /* detailView3.swift */,
 				09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */,
 				09A15CC61F17DE7600E847CC /* EventsViewController.swift */,
 				09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */,
@@ -459,6 +474,9 @@
 		D46BB857F2F73624A5871E37 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09E761931F351E30005D2369 /* SystemConfiguration.framework */,
+				09E761911F351E24005D2369 /* AVFoundation.framework */,
+				09E7618F1F351D64005D2369 /* SpotifyAudioPlayback.framework */,
 				1049C4B47D6A2EF2BF4A7F99 /* Pods_events.framework */,
 				2C04120232A3D15602FB929F /* Pods_eventsTests.framework */,
 				A0CC4CC9003125A309623E90 /* Pods_eventsUITests.framework */,
@@ -544,6 +562,7 @@
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 736R8PG8E6;
+						DevelopmentTeam = S5MHKF47DJ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -620,6 +639,7 @@
 				4FD2FE9A1F2C160E00E565B9 /* custom.json in Resources */,
 				4F25456A1F1EDA2B0076AE0B /* TestLocations.gpx in Resources */,
 				4F4F61371F33C00400B27115 /* SearchPlacesViewController.xib in Resources */,
+				7C3C19D01F35136B00A32A2E /* detailView3.xib in Resources */,
 				4FD2FE921F2ADBEE00E565B9 /* google.gpx in Resources */,
 				7C26DEA31F3175FE0079BE1A /* day.json in Resources */,
 				09F788491F2668A700A311F0 /* detailView0.xib in Resources */,
@@ -833,6 +853,7 @@
 				09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */,
 				09F7884B1F26694A00A311F0 /* detailView0.swift in Sources */,
 				09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */,
+				7C3C19D21F3513AC00A32A2E /* detailView3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,12 +1002,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
@@ -1001,6 +1024,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 736R8PG8E6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1008,6 +1032,7 @@
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";

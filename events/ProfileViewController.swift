@@ -10,6 +10,7 @@ import UIKit
 import SJFluidSegmentedControl
 import AlamofireImage
 import XLPagerTabStrip
+import OAuthSwift
 
 class ProfileViewController: ButtonBarPagerTabStripViewController {
     
@@ -38,6 +39,19 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        OAuthSwiftManager.shared.getSpotifyUserID {
+            // Make OAuth take place in webview within our app
+            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
+            // setup alert controller
+            let alertController = UIAlertController(title: "Spotify Login", message: "Please login to Spotify...", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                OAuthSwiftManager.shared.spotifyLogin(success: nil, failure: { (error) in
+                    print(error)
+                })
+            })
+            alertController.addAction(okayAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -50,7 +64,10 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
         return [wallet, created, settings]
     }
     
+    
 }
+
+
 
 
 

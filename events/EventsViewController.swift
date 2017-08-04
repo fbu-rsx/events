@@ -8,6 +8,7 @@
 
 import UIKit
 import ImagePicker
+import OAuthSwift
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, imagePickerDelegate2, UIViewControllerPreviewingDelegate{
 
@@ -31,6 +32,22 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.accept, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.decline, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.delete, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        OAuthSwiftManager.shared.getSpotifyUserID {
+            // Make OAuth take place in webview within our app
+            OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)
+            // setup alert controller
+            let alertController = UIAlertController(title: "Spotify Login", message: "Please login to Spotify...", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                OAuthSwiftManager.shared.spotifyLogin(success: nil, failure: { (error) in
+                    print(error)
+                })
+            })
+            alertController.addAction(okayAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     func refresh(_ notification: Notification) {

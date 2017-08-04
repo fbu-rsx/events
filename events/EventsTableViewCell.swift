@@ -16,6 +16,7 @@ class EventsTableViewCell: UITableViewCell{
     @IBOutlet weak var oneCell: UIView!
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var closedProfileImageView: UIImageView!
     @IBOutlet weak var closedEventTitle: UILabel!
     @IBOutlet weak var closedEventTime: UILabel!
@@ -23,6 +24,7 @@ class EventsTableViewCell: UITableViewCell{
     @IBOutlet weak var closedInvitedNum: UILabel!
     @IBOutlet weak var closedComingNum: UILabel!
     @IBOutlet weak var responseIcon: UIImageView!
+    var canDeleteMyEvent = false
     
     weak var event: Event? {
         didSet{
@@ -80,6 +82,9 @@ class EventsTableViewCell: UITableViewCell{
                     // if my event, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
+                    self.deleteButton.backgroundColor = UIColor(hexString: "#F4ABB1")
+                    self.deleteButton.isHidden = false
+                    self.deleteButton.layer.cornerRadius = 5
                     
                     // Setting resposne icon to a star
                     self.responseIcon.image = UIImage(named: "my-event")
@@ -132,6 +137,7 @@ class EventsTableViewCell: UITableViewCell{
         acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         declineButton.layer.cornerRadius = 5
         declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        deleteButton.isHidden = true
     }
     
     @IBAction func onAccept(_ sender: Any) {
@@ -144,6 +150,9 @@ class EventsTableViewCell: UITableViewCell{
         NotificationCenter.default.post(name: BashNotifications.decline, object: event)
     }
     
+    @IBAction func onDelete(_ sender: Any) {
+        NotificationCenter.default.post(name: BashNotifications.delete, object: event)
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

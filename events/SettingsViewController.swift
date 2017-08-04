@@ -102,4 +102,15 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
         NotificationCenter.default.post(name: BashNotifications.logout, object: nil)
     }
     
+    @IBAction func play(_ sender: Any) {
+        OAuthSwiftManager.shared.startMusic(creatorUserID: nil, playlistID: nil)
+        
+    }
+    
+    
+    @IBAction func pause(_ sender: Any) {
+        
+        OAuthSwiftManager.shared.pauseMusic()
+    }
+    
 }

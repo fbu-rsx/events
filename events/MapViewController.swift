@@ -210,6 +210,14 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             addToMap(event: event)
         }
     }
+
+
+
+
+
+
+
+
 }
 
 extension MapViewController: GMSMapViewDelegate {
@@ -371,6 +379,13 @@ extension MapViewController: CLLocationManagerDelegate {
             center.add(request)
         }
     }
+    
+    
+    
+    
+    
+    
+    
 }
 
 extension MapViewController: UISearchResultsUpdating {
