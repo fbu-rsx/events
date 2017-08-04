@@ -48,7 +48,7 @@ class Event: GMSMarker {
     var radius: Double = 100
     var organizer: AppUser
     var guestlist: [String: Int] // int is same as InviteStatus values
-    var photos: [String: Bool]
+    var photos: [String: String]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var spotifyID: String?
     var playlistCreatorID: String?
@@ -105,8 +105,8 @@ class Event: GMSMarker {
         self.about = dictionary[EventKey.about] as! String
         self.spotifyID = dictionary[EventKey.spotifyID] as? String
         self.playlistCreatorID = dictionary[EventKey.playlistCreatorID] as? String
-        self.guestlist = dictionary[EventKey.guestlist] as! [String: Int]
-        self.photos = dictionary[EventKey.photos] as? [String: Bool] ?? [:]
+        self.guestlist = dictionary[EventKey.guestlist] as? [String: Int] ?? [:]
+        self.photos = dictionary[EventKey.photos] as? [String: String] ?? [:]
         self.eventDictionary = dictionary
         super.init()
         if organizer.uid == AppUser.current.uid {
@@ -123,8 +123,10 @@ class Event: GMSMarker {
         return false
     }
     
-    func uploadImage(_ image: UIImage) {
+    func uploadImage(_ image: UIImage, completion: (_ photoID: String)->()) {
         FirebaseDatabaseManager.shared.addImage(eventID: self.eventid) { (id) in
+            completion(id)
+            photos[id] = AppUser.current.uid
             FirebaseStorageManager.shared.uploadImage(user: AppUser.current, image: image, imageID: id, eventID: self.eventid)
         }
     }

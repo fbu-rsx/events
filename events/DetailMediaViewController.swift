@@ -26,14 +26,20 @@ class DetailMediaViewController: UIViewController {
     var event: Event?
     var imageID: String?
     var delegate: deleteImageDelegate?
+    var name: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         image.image = pic
         // Do any additional setup after loading the view.
         profileImageView.layer.cornerRadius = profileImageView.frame.width/2
         profileImageView.layer.masksToBounds = true
         profileImageView.af_setImage(withURL: URL(string: profileImageURLString!)!)
+        nameLabel.text = name
     }
 
     override func didReceiveMemoryWarning() {

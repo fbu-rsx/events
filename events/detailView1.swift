@@ -43,6 +43,8 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     
     var photoUIDS: [String] = []
     
+    var users: [AppUser] = []
+    
     var event: Event?{
         didSet{
             loadImages()
@@ -99,9 +101,13 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         
         detailVC.imageID = photoUIDS[indexPath.row]
         
+        let user = users[indexPath.row]
+        
+        detailVC.profileImageURLString = user.photoURLString
+        
         detailVC.delegate = self
         
-        
+        detailVC.name = user.name
 
         detailVC.preferredContentSize = CGSize(width: 0.0, height: 375)
         
@@ -113,13 +119,16 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     
     func loadImages(){
         for imageID in event!.photos.keys{
-            FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image, imageID) in
-                if self.photos.contains(image) == false {
+            if self.photoUIDS.contains(imageID) == false{
+                FirebaseStorageManager.shared.downloadImage(event: self.event!, imageID: imageID, completion: { (image, imageID) in
                     self.photos.append(image)
                     self.photoUIDS.append(imageID)
-                }
-                self.collectionView.reloadData()
-            })
+                    FirebaseDatabaseManager.shared.pullImageData(eventID: (self.event?.eventid)!, imageID: imageID, completion: { (user) in
+                        self.users.append(user)
+                    })
+                    self.collectionView.reloadData()
+                })
+            }
         }
     }
     
@@ -178,8 +187,12 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
     
     func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]){
         for image in stride(from: 0, to: images.count, by: 1){
-            event?.uploadImage(images[image])
+            event?.uploadImage(images[image], completion: {id in
+                self.photoUIDS.insert(id, at: 0)
+            })
             photos.insert(images[image], at: 0)
+            users.insert(AppUser.current, at: 0)
+            
         }
         collectionView.reloadData()
         imagePicker.dismiss(animated: true, completion: nil)
