@@ -198,13 +198,22 @@ class FirebaseDatabaseManager {
     // add images to existing event
     func addImage(eventID: String, completion: (_ id: String)->()){
         let id = self.ref.child("users/\(AppUser.current.uid)/photos").childByAutoId().key
-        let update: [String: Any] = ["users/\(AppUser.current.uid)/photos/\(id)":true,
-                                     "events/\(eventID)/photos/\(id)":true]
+        let update: [String: Any] = ["users/\(AppUser.current.uid)/photos/\(id)":AppUser.current.uid,
+                                     "events/\(eventID)/photos/\(id)":AppUser.current.uid]
         self.ref.updateChildValues(update)
         completion(id)
     }
     
-    
+    func pullImageData(eventID: String, imageID: String,  completion: @escaping ((_ user : AppUser)->())){
+        self.ref.child("events/\(eventID)/photos/\(imageID)").observeSingleEvent(of: .value, with: { (snapshot: DataSnapshot) in
+            if snapshot.exists(){
+                let userID = snapshot.value as! String
+                self.getSingleUser(id: userID, completion: { (user) in
+                    completion(user)
+                })
+            }
+        })
+    }
     
     
     /**
