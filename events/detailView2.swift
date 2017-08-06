@@ -35,7 +35,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         tableView.register(nib1, forCellReuseIdentifier: "songCell")
         let nib = UINib(nibName: "songSearchResultsOverlay", bundle: nil)
         subView = (nib.instantiate(withOwner: self, options: nil).first as! songOverlayView)
-        subView!.frame = CGRect(x: 8, y: 113, width: self.frame.width, height: self.frame.height - 92)
+        subView!.frame = CGRect(x: 8, y: 89, width: self.frame.width, height: self.frame.height - 92)
         subView?.delegate = self
         searchField.delegate = self
         searchField.setBottomBorder()
