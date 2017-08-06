@@ -151,6 +151,7 @@ class EventsTableViewCell: UITableViewCell{
     }
     
     @IBAction func onDelete(_ sender: Any) {
+        AppUser.current.delete(event: event!)
         NotificationCenter.default.post(name: BashNotifications.delete, object: event)
     }
     

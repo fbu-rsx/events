@@ -51,10 +51,12 @@ class PaymentTableViewCell: UITableViewCell {
         payButton.isUserInteractionEnabled = false
         payButton.isEnabled = false
         transaction.completeTransaction()
+        payButton.titleLabel?.text = "Paid"
+        payButton.backgroundColor = Colors.green
     }
    
     
-//    
+//
 //    override func setSelected(_ selected: Bool, animated: Bool) {
 //        super.setSelected(selected, animated: animated)
 //        

@@ -38,7 +38,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
             pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width)/2 - 20, y: 578, width: 40, height: 40))
             configurePageControl()
             scrollView.delegate = self
-            for index in 0...2 {
+            for index in 0...3 {
                 var frame = CGRect.zero
                 frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
                 //print(frame.origin.x)
@@ -56,6 +56,11 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                     subView.event = event
                     subView.frame = frame
                     subView.delegate = delegate
+                    self.scrollView.addSubview(subView)
+                }
+                else if index == 2 {
+                    let subView = ChattingView(frame: frame)
+//                    subView.delegate = delegate
                     self.scrollView.addSubview(subView)
                 }
                 else{
