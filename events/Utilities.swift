@@ -20,7 +20,7 @@ extension UIViewController {
 
 class Utilities {
     
-    static var zoomLevel: Float = 15.0
+    static var zoomLevel: Float = 16.0
     static var theme: String = Utilities.getTheme()
     
     static func getTheme() -> String {

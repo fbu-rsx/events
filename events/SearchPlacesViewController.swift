@@ -28,6 +28,8 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate, UITable
         let bundle = Bundle(path: "events/SearchViewControllers")
         tableView.register(UINib(nibName: "SearchPlacesTableViewCell", bundle: bundle), forCellReuseIdentifier: "SearchPlacesTableViewCell")
         
+        
+        
         tableView.reloadData()
     }
     
