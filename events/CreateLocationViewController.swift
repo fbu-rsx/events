@@ -122,6 +122,10 @@ extension CreateLocationViewController: UISearchResultsUpdating {
                 self.mapView.selectedMarker = self.marker
             })
         }
+        self.navigationItem.titleView = nil
+        self.navigationItem.titleView = searchController.searchBar
+        self.leftArrowButton.isHidden = false
+        self.rightArrowButton.isHidden = false
     }
     
     func placeAutocomplete(text: String, vc: SearchPlacesViewController) {

@@ -39,7 +39,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     private lazy var usersTypingQuery: DatabaseQuery = self.channelRef!.child("typingIndicator").queryOrderedByValue().queryEqual(toValue: true)
     //photos
-    lazy var storageRef: StorageReference = FirebaseStorageManager.shared.storageRef
+    lazy var storageRef: StorageReference = Storage.storage().reference(forURL: "gs://events-86286.appspot.com/")
     private let imageURLNotSetKey = "NOTSET"
     private var photoMessageMap = [String: JSQPhotoMediaItem]()
     private var updatedMessageRefHandle: DatabaseHandle?
@@ -55,7 +55,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     private var loaded = false
-    private var activityIndicator: UIActivityIndicatorView?
+//    private var activityIndicator: UIActivityIndicatorView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +72,13 @@ final class ChatViewController: JSQMessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !loaded {
-            self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x - 20,
-                                                                           y: self.view.center.y - 20,
-                                                                           width: 40,
-                                                                           height: 40))
-            self.activityIndicator!.activityIndicatorViewStyle = .whiteLarge
-            self.activityIndicator!.color = Colors.coral
-            self.view.addSubview(self.activityIndicator!)
+//            self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x - 20,
+//                                                                           y: self.view.center.y - 20,
+//                                                                           width: 40,
+//                                                                           height: 40))
+//            self.activityIndicator!.activityIndicatorViewStyle = .whiteLarge
+//            self.activityIndicator!.color = Colors.coral
+//            self.view.addSubview(self.activityIndicator!)
             observeMessages()
             loaded = true
         }
@@ -216,7 +216,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     private func observeMessages() {
-        self.activityIndicator?.startAnimating()
+//        self.activityIndicator?.startAnimating()
         messageRef = channelRef!.child("messages")
         // 1.
         let messageQuery = messageRef.queryLimited(toLast:25)
@@ -247,8 +247,8 @@ final class ChatViewController: JSQMessagesViewController {
             } else {
                 print("Error! Could not decode message data")
             }
-            self.activityIndicator?.stopAnimating()
-            self.activityIndicator?.removeFromSuperview()
+//            self.activityIndicator?.stopAnimating()
+//            self.activityIndicator?.removeFromSuperview()
         })
         
         updatedMessageRefHandle = messageRef.observe(.childChanged, with: { (snapshot) in
