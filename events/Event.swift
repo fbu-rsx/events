@@ -32,6 +32,8 @@ struct EventKey {
     static let guestlist = "guestlist"
     static let photos = "photos"
     static let active = "active"
+    
+    static let channels = "channels"
 }
 
 

@@ -58,11 +58,6 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                     subView.delegate = delegate
                     self.scrollView.addSubview(subView)
                 }
-                else if index == 2 {
-                    let subView = ChattingView(frame: frame)
-//                    subView.delegate = delegate
-                    self.scrollView.addSubview(subView)
-                }
                 else{
                     let nib = UINib(nibName: "detailView2", bundle: nil)
                     let subView = nib.instantiate(withOwner: self, options: nil).first as! detailView2
