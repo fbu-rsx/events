@@ -38,13 +38,18 @@ class WalletViewController: UIViewController, IndicatorInfoProvider, UITableView
         
         tableView.allowsSelection = false
         tableView.separatorColor = Colors.coral
-        walletAmount.text = String(format: "$%.2f", AppUser.current.wallet)
+        NotificationCenter.default.addObserver(self, selector: #selector(WalletViewController.walletChanged(_:)), name: BashNotifications.walletChanged, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+    }
+    
+    func walletChanged(_ notification: NSNotification) {
+        let value = notification.object as! Double
+        walletAmount.text = String(format: "%.2f", value)
     }
 
     override func viewDidAppear(_ animated: Bool) {
