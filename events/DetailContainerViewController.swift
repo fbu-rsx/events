@@ -23,7 +23,7 @@ class DetailContainerViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.pageControl.currentPageIndicatorTintColor = UIColor(hexString: "4CB6BE")
         self.pageControl.pageIndicatorTintColor = UIColor(hexString: "F2F2F2")
-        self.navigationController?.navigationBar.addSubview(pageControl)
+        self.navigationItem.titleView = self.pageControl
     }
     
     override func didReceiveMemoryWarning() {
