@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,14 +23,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jeK-Ma-3yf">
-                    <rect key="frame" x="0.0" y="146" width="375" height="521"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jeK-Ma-3yf">
+                    <rect key="frame" x="0.0" y="267" width="375" height="400"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="NmX-z6-ZOX"/>
+                    </constraints>
                 </tableView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dDi-32-etB" customClass="GradientView" customModule="events" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDi-32-etB" customClass="GradientView" customModule="events" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$108.50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fm2-ZB-vFF">
                             <rect key="frame" x="18" y="51" width="340" height="59"/>
@@ -52,9 +53,20 @@
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="141" id="c8U-dC-5mQ"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jeK-Ma-3yf" secondAttribute="bottom" id="9MG-oz-jP6"/>
+                <constraint firstItem="dDi-32-etB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gjc-RY-ou2"/>
+                <constraint firstAttribute="trailing" secondItem="dDi-32-etB" secondAttribute="trailing" id="Wxx-ud-Mo9"/>
+                <constraint firstItem="dDi-32-etB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X8e-5m-afH"/>
+                <constraint firstItem="jeK-Ma-3yf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eEP-7w-4TK"/>
+                <constraint firstAttribute="trailing" secondItem="jeK-Ma-3yf" secondAttribute="trailing" id="h5z-Zr-u0a"/>
+            </constraints>
             <point key="canvasLocation" x="44.5" y="-3.5"/>
         </view>
     </objects>
