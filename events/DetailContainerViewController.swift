@@ -26,6 +26,11 @@ class DetailContainerViewController: UIViewController {
         self.navigationController?.navigationBar.addSubview(pageControl)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.pageControl.removeFromSuperview()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

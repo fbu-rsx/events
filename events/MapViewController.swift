@@ -107,6 +107,14 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        for event in AppUser.current.events {
+            event.map = mapView
+            event.circle?.map = mapView
+        }
+    }
+    
     func inviteAdded(_ notification: NSNotification) {
         let event = notification.object as! Event
         addToMap(event: event)
