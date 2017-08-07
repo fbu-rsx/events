@@ -40,6 +40,7 @@ class CreateLocationViewController: UIViewController, UISearchControllerDelegate
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         
+        
         let searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
         searchTextField?.placeholder = "Search for a location"
         
