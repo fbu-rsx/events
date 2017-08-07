@@ -33,6 +33,12 @@ class SearchPlacesViewController: UIViewController, UITableViewDelegate, UITable
         tableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        let vc = searchController.delegate as! CreateLocationViewController
+        vc.leftArrowButton.isHidden = true
+        vc.rightArrowButton.isHidden = true
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return predictions.count
     }
