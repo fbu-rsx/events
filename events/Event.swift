@@ -32,6 +32,8 @@ struct EventKey {
     static let guestlist = "guestlist"
     static let photos = "photos"
     static let active = "active"
+    
+    static let channels = "channels"
 }
 
 
@@ -48,6 +50,7 @@ class Event: GMSMarker {
     var radius: Double = 100
     var organizer: AppUser
     var guestlist: [String: Int] // int is same as InviteStatus values
+    var appUserGuests = [String: AppUser]()
     var photos: [String: String]
     var about: String //description of event, the description variable as unfortunately taken by Objective C
     var spotifyID: String?
@@ -100,7 +103,6 @@ class Event: GMSMarker {
                                        UserKey.name: dictionary[EventKey.orgName]!,
                                        UserKey.photo: dictionary[EventKey.orgURLString]!]
         self.organizer = AppUser(dictionary: userDict)
-        
         self.about = dictionary[EventKey.about] as! String
         self.spotifyID = dictionary[EventKey.spotifyID] as? String
         self.playlistCreatorID = dictionary[EventKey.playlistCreatorID] as? String
@@ -111,6 +113,17 @@ class Event: GMSMarker {
         if organizer.uid == AppUser.current.uid {
             FirebaseDatabaseManager.shared.addQueuedSongsListener(event: self)
         }
+        
+        getGuests()
+    }
+    
+    private func getGuests() {
+        for id in self.guestlist.keys {
+            FirebaseDatabaseManager.shared.getSingleUser(id: id) { (user: AppUser) in
+                self.appUserGuests[id] = user
+            }
+        }
+        self.appUserGuests[organizer.uid] = organizer
     }
     
     override func isEqual(_ object: Any?) -> Bool {

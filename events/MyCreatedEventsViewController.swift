@@ -14,9 +14,7 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBOutlet weak var tableView: UITableView!
     
-    let kCloseCellHeight: CGFloat = 144
-    let kOpenCellHeight: CGFloat = 541
-    var cellHeights: [CGFloat] = []
+    var cellHeight: CGFloat = 144
     var myEvents: [Event] = []
     
     override func viewDidLoad() {
@@ -32,7 +30,6 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController .refresh), name: BashNotifications.refresh, object: nil)
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
-        cellHeights = (0..<myEvents.count).map { _ in C.CellHeight.close }
         //tableView.reloadData()
         
         self.registerForPreviewing(with: self, sourceView: tableView)
@@ -40,7 +37,6 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cellHeights = (0..<myEvents.count).map { _ in C.CellHeight.close }
         tableView.reloadData()
     }
     
@@ -57,7 +53,6 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         //let event = notification.object as! Event
         //self.events.append(event)
         //events = AppUser.current.events
-        cellHeights = (0..<myEvents.count).map { _ in C.CellHeight.close }
         tableView.reloadData()
     }
     
@@ -82,28 +77,21 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         return myEvents.count
     }
     
-    fileprivate struct C {
-        struct CellHeight {
-            static let close: CGFloat = 144 // equal or greater foregroundView height
-            static let open: CGFloat = 541 // equal or greater containerView height
-        }
-    }
-    
     func presenter(imagePicker : ImagePickerController) {
         present(imagePicker, animated: true, completion: nil)
     }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[indexPath.row]
+        return cellHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let blah = UIStoryboard(name: "Main", bundle: nil)
-        let detailVC = blah.instantiateViewController(withIdentifier: "DetailEventViewController") as! DetailEventViewController
+        let detailVC = blah.instantiateViewController(withIdentifier: "DetailContainerViewController") as! DetailContainerViewController
         let event = AppUser.current.events[indexPath.row]
         detailVC.event = event
-        detailVC.delegate = self
+        detailVC.imageDelegate = self
         self.navigationController?.pushViewController(detailVC, animated: true)
         //show(detailVC, sender: nil)
     }
@@ -114,11 +102,11 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         
         guard let cell = tableView?.cellForRow(at: indexPath) else { return nil }
         let blah = UIStoryboard(name: "Main", bundle: nil)
-        guard let detailVC =  blah.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController else { return nil }
+        guard let detailVC =  blah.instantiateViewController(withIdentifier: "DetailContainerViewController") as? DetailContainerViewController else { return nil }
         
         let event = myEvents[indexPath.row]
         detailVC.event = event
-        detailVC.delegate = self
+        detailVC.imageDelegate = self
         
         
         //detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)

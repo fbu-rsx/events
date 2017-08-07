@@ -165,7 +165,6 @@ class FirebaseDatabaseManager {
     
     
     
-    
     /**
      *
      * Functions for additions to the database
@@ -271,7 +270,8 @@ class FirebaseDatabaseManager {
     
     // delete an event from the database
     func deleteEvent(_ event: Event) {
-        var update: [String: Any] = ["events/\(event.eventid)": NSNull()]
+        var update: [String: Any] = ["events/\(event.eventid)": NSNull(),
+                                     "channels/\(event.eventid)": NSNull()]
         for userid in event.guestlist.keys {
             update["users/\(userid)/events/\(event.eventid)"] = NSNull()
         }

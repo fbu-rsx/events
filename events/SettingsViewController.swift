@@ -10,7 +10,6 @@ import UIKit
 import FBSDKLoginKit
 import XLPagerTabStrip
 import BetterSegmentedControl
-import SendBirdSDK
 
 class SettingsViewController: UIViewController, IndicatorInfoProvider {
     
@@ -86,7 +85,6 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
     @IBAction func didLogout(_ sender: Any) {
         FirebaseDatabaseManager.shared.logout()
         FBSDKLoginManager().logOut()
-        SBDMain.disconnect(completionHandler: nil)
         //        let creds = URLCredentialStorage.shared.allCredentials
         //        for (protectionSpace, userCredsDict) in creds {
         //            for (_, cred) in userCredsDict {
