@@ -67,15 +67,13 @@ class OAuthSwiftManager: SessionManager {
     
     
     func refreshConnection(){
-
         oauth.renewAccessToken(withRefreshToken: oauth.client.credential.oauthRefreshToken, success: { (credential, response, parameters) in
             self.save(credential: credential)
-            print(response)
+            print(response ?? "defaul refresh response")
         }) { (error) in
             print(error.localizedDescription)
         }
     }
-    
     
     
     func logout() {
@@ -136,11 +134,11 @@ class OAuthSwiftManager: SessionManager {
                 let uri = response["uri"] as! String
                 let id = uri.replacingOccurrences(of: "spotify:user:", with: "")
                 UserDefaults.standard.set(id, forKey: "spotify-user")
-            }
-            else{
-                print("Should Prompt for Spotify Login")
-                failureCompletion()
-            }
+                }
+                else{
+                    print("Should Prompt for Spotify Login")
+                    failureCompletion()
+                }
         }
     }
     

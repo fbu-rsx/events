@@ -65,7 +65,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         
-        var searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        let searchTextField: UITextField? = searchController.searchBar.value(forKey: "searchField") as? UITextField
         searchTextField?.placeholder = "Search by people, name, or description"
         
         mapView.delegate = self
@@ -92,6 +92,22 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     
     override func viewDidAppear(_ animated: Bool) {
+        SplitwiseAPIManger.shared.createGroup(memberIDs: nil)
+        
+           /*
+        SplitwiseAPIManger.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: SplitwiseAPIManger.shared.oauth)
+        // setup alert controller
+        let alertView = SCLAlertView()
+        alertView.addButton("Okay") {
+            alertView.dismiss(animated: true, completion: nil)
+            SplitwiseAPIManger.shared.splitwiseLogin(success: nil, failure: { (error) in
+                print(error)
+            })
+        }
+        alertView.showTitle("Splitwise Login", subTitle: "Please login to Splitwise", style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+        */
+        
+        
         OAuthSwiftManager.shared.getSpotifyUserID {
             // Make OAuth take place in webview within our app
             OAuthSwiftManager.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: OAuthSwiftManager.shared.oauth)

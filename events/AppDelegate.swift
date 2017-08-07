@@ -60,7 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
 
-        //OAuthSwiftManager.shared.logout()
+        OAuthSwiftManager.shared.logout()
+        //OAuthSwiftManager.shared.refreshConnection()
 
         return true
     }
@@ -74,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
         // Spotify OAuth Management
-        
+        //SplitwiseAPIManger.shared.handle(url: url)
         OAuthSwift.handle(url: url)
         
         return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String, annotation: [:])

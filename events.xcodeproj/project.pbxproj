@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0972C05A1F38E676009FDE30 /* SplitwiseAPIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0972C0591F38E676009FDE30 /* SplitwiseAPIManger.swift */; };
 		0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */; };
 		09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */; };
 		09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */; };
@@ -151,6 +152,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0972C0591F38E676009FDE30 /* SplitwiseAPIManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitwiseAPIManger.swift; sourceTree = "<group>"; };
 		0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
 		09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSwiftManager.swift; sourceTree = "<group>"; };
 		09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaDirectAPIManager.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
 				09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */,
 				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
+				0972C0591F38E676009FDE30 /* SplitwiseAPIManger.swift */,
 			);
 			name = APIManagers;
 			sourceTree = "<group>";
@@ -712,8 +715,6 @@
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = S5MHKF47DJ;
-						DevelopmentTeam = 736R8PG8E6;
-						DevelopmentTeam = TM66RGVAQ6;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -1026,6 +1027,7 @@
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
+				0972C05A1F38E676009FDE30 /* SplitwiseAPIManger.swift in Sources */,
 				09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */,
 				4F4F61361F33C00400B27115 /* SearchPlacesViewController.swift in Sources */,
 				4F7821CF1F354B040016E3D8 /* OutgoingUserMessageTableViewCell.swift in Sources */,
@@ -1188,16 +1190,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5MHKF47DJ;
-				DEVELOPMENT_TEAM = 736R8PG8E6;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
@@ -1212,8 +1210,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5MHKF47DJ;
-				DEVELOPMENT_TEAM = 736R8PG8E6;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1221,8 +1217,6 @@
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";

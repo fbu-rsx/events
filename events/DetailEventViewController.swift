@@ -34,7 +34,6 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
             if self.delegate == nil {
                 return
             }
-
             pageView = UIPageControl(frame:CGRect(x: (self.view.frame.width)/2 - 20, y: 578, width: 40, height: 40))
             configurePageControl()
             scrollView.delegate = self
@@ -72,7 +71,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
                 }
             }
             self.scrollView.isPagingEnabled = true
-            self.scrollView.contentSize = CGSize(width: 1125, height: 554)
+            self.scrollView.contentSize = CGSize(width: 1500, height: 554)
             pageView.addTarget(self, action: #selector(self.changePage(sender:)), for: UIControlEvents.valueChanged)
         }
     }
@@ -97,7 +96,7 @@ class DetailEventViewController: UIViewController, UIScrollViewDelegate{
     
     func configurePageControl() {
         // The total number of pages that are available is based on how many available colors we have.
-        self.pageView.numberOfPages = 3
+        self.pageView.numberOfPages = 4
         self.pageView.currentPage = 0
         self.pageView.tintColor = UIColor.red
         self.pageView.pageIndicatorTintColor = UIColor.black
