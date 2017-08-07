@@ -165,7 +165,6 @@ class FirebaseDatabaseManager {
     
     
     
-    
     /**
      *
      * Functions for additions to the database

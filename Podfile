@@ -30,9 +30,7 @@ target 'events' do
   pod 'SCLAlertView'
   pod 'IQKeyboardManagerSwift'
   pod 'BetterSegmentedControl', '~> 0.8'
-  pod 'SendBirdSDK'
-  pod 'FLAnimatedImage'
-  pod 'TTTAttributedLabel'
+  pod 'JSQMessagesViewController'
 
   target 'eventsTests' do
     inherit! :search_paths

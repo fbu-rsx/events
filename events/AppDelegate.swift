@@ -16,7 +16,6 @@ import FBSDKLoginKit
 import GoogleMaps
 import GooglePlaces
 import IQKeyboardManagerSwift
-import SendBirdSDK
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,20 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        SBDMain.initWithApplicationId("1725CAEE-3960-4B7D-B885-B130306E2E41")
         
         GMSServices.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
         GMSPlacesClient.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
         
         if Auth.auth().currentUser != nil && FBSDKAccessToken.current() != nil {
             AppUser.current = AppUser(user: Auth.auth().currentUser!, completion: nil)
-            SBDMain.connect(withUserId: AppUser.current.uid, completionHandler: { (user: SBDUser?, error: SBDError?) in
-                if let error = error {
-                    print("SENDBIRD ERROR: \(error.localizedDescription)")
-                } else {
-                    SBDMain.updateCurrentUserInfo(withNickname: AppUser.current.name, profileUrl: AppUser.current.photoURLString, completionHandler: nil)
-                }
-            })
         } else {
             let loginController = SignInViewController(nibName: "SignInViewController", bundle: nil)
             loginController.signInDelegate = self
@@ -141,13 +132,6 @@ extension AppDelegate: SignInDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 self.window?.rootViewController = storyboard.instantiateInitialViewController()!
             }
-            SBDMain.connect(withUserId: AppUser.current.uid, completionHandler: { (user: SBDUser?, error: SBDError?) in
-                if let error = error {
-                    print("SENDBIRD ERROR: \(error.localizedDescription)")
-                } else {
-                    SBDMain.updateCurrentUserInfo(withNickname: AppUser.current.name, profileUrl: AppUser.current.photoURLString, completionHandler: nil)
-                }
-            })
         }
     }
     

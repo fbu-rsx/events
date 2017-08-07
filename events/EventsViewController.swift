@@ -35,6 +35,18 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         registerForPreviewing(with: self, sourceView: tableView)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let sections = tableView.numberOfSections
+        var rows = 0
+        for i in 0..<sections {
+            rows += tableView.numberOfRows(inSection: i)
+        }
+        if rows < AppUser.current.events.count {
+            tableView.reloadData()
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         OAuthSwiftManager.shared.getSpotifyUserID {
             // Make OAuth take place in webview within our app
@@ -61,10 +73,10 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController
+        let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailContainerViewController") as? DetailContainerViewController
         let event = AppUser.current.events[indexPath.row]
         detailVC?.event = event
-        detailVC?.delegate = self
+        detailVC?.imageDelegate = self
         show(detailVC!, sender: nil)
     }
     
@@ -97,12 +109,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         guard let cell = tableView?.cellForRow(at: indexPath) else { return nil }
         
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailEventViewController") as? DetailEventViewController else { return nil }
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "DetailContainerViewController") as? DetailContainerViewController else { return nil }
         //let row = indexPath.row
         
         let event = AppUser.current.events[indexPath.row]
         detailVC.event = event
-        detailVC.delegate = self
+        detailVC.imageDelegate = self
         
         previewingContext.sourceRect = cell.frame
         
