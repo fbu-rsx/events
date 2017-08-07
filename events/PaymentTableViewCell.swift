@@ -53,5 +53,6 @@ class PaymentTableViewCell: UITableViewCell {
         transaction.completeTransaction()
         payButton.titleLabel?.text = "Paid"
         payButton.backgroundColor = Colors.green
+        print("pay complete")
     }
 }

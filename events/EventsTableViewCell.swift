@@ -120,6 +120,7 @@ class EventsTableViewCell: UITableViewCell{
                         self.acceptButton.isHidden = false
                         self.declineButton.isHidden = false
                         self.deleteButton.isHidden = true
+                        self.responseIcon.isHidden = true
                         
                     }
                     self.sideBar.backgroundColor = sideBarColor
