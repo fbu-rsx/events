@@ -210,14 +210,6 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             addToMap(event: event)
         }
     }
-
-
-
-
-
-
-
-
 }
 
 extension MapViewController: GMSMapViewDelegate {
@@ -352,7 +344,8 @@ extension MapViewController: CLLocationManagerDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
                                               zoom: Utilities.zoomLevel)
-        
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = false
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -379,12 +372,6 @@ extension MapViewController: CLLocationManagerDelegate {
             center.add(request)
         }
     }
-    
-    
-    
-    
-    
-    
     
 }
 

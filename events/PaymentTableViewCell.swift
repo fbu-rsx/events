@@ -29,7 +29,7 @@ class PaymentTableViewCell: UITableViewCell {
             if transaction.status == true { // I have paid
                 payButton.isUserInteractionEnabled = false
                 payButton.isEnabled = false
-                payButton.titleLabel?.text = "Paid"
+                payButton.setTitle("Paid", for: UIControlState.normal)
                 payButton.backgroundColor = Colors.green
             } else {
                 payButton.backgroundColor = Colors.coral
@@ -51,7 +51,7 @@ class PaymentTableViewCell: UITableViewCell {
         payButton.isUserInteractionEnabled = false
         payButton.isEnabled = false
         transaction.completeTransaction()
+        payButton.titleLabel?.text = "Paid"
+        payButton.backgroundColor = Colors.green
     }
-   
-    
 }
