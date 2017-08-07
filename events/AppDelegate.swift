@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.logout), name: BashNotifications.logout, object: nil)
 
-        OAuthSwiftManager.shared.logout()
+        //OAuthSwiftManager.shared.logout()
         //OAuthSwiftManager.shared.refreshConnection()
 
         return true

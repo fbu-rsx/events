@@ -81,6 +81,7 @@ class DetailPageViewController: UIPageViewController {
             case "detailView1":
                 let temp = nib.instantiate(withOwner: self, options: nil).first as! detailView1
                 temp.event = event
+                temp.delegate = imageDelegate
                 newView = temp
             case "detailView2":
                 let temp = nib.instantiate(withOwner: self, options: nil).first as! detailView2

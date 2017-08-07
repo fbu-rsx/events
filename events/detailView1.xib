@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,8 +34,15 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAZ-Fe-1NS">
-                    <rect key="frame" x="225" y="8" width="119" height="35"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap to Download" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQd-BN-GnA">
+                    <rect key="frame" x="9" y="37" width="110" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAZ-Fe-1NS">
+                    <rect key="frame" x="301" y="8" width="58" height="35"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <state key="normal" title="Upload">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -44,23 +51,16 @@
                         <action selector="upload:" destination="iN0-l3-epB" eventType="touchUpInside" id="i17-33-slf"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap to Download" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQd-BN-GnA">
-                    <rect key="frame" x="9" y="37" width="110" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="14"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="RAZ-Fe-1NS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="099-ET-ilN"/>
+                <constraint firstItem="RAZ-Fe-1NS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="6f8-Ay-1If"/>
                 <constraint firstItem="Rhz-3A-2iU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="CWh-Sv-jXl"/>
+                <constraint firstAttribute="trailing" secondItem="RAZ-Fe-1NS" secondAttribute="trailing" constant="16" id="YVi-OK-JG3"/>
                 <constraint firstAttribute="trailing" secondItem="Nbc-sO-eQa" secondAttribute="trailing" id="fJe-UT-OOa"/>
                 <constraint firstItem="Rhz-3A-2iU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="9" id="hMl-DM-gyJ"/>
                 <constraint firstItem="Nbc-sO-eQa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jrc-uk-iMB"/>
                 <constraint firstAttribute="bottom" secondItem="Nbc-sO-eQa" secondAttribute="bottom" id="sgV-5m-JoK"/>
-                <constraint firstAttribute="trailing" secondItem="RAZ-Fe-1NS" secondAttribute="trailing" constant="9" id="vUb-t7-EF9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
