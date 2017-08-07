@@ -68,6 +68,18 @@ class DetailMediaViewController: UIViewController {
         return [likeAction, deleteAction]
     }
 
+    @IBAction func onDelete(_ sender: Any) {
+         FirebaseStorageManager.shared.deleteImage(event: self.event!, imageID: self.imageID!)
+        self.delegate?.deleteImage(imageID: self.imageID!)
+        navigationController?.popViewController(animated: true)
+        
+    }
+    
+    @IBAction func onDownload(_ sender: Any) {
+        UIImageWriteToSavedPhotosAlbum(self.pic!, nil, nil, nil)
+    }
+
+    
     /*
     // MARK: - Navigation
 

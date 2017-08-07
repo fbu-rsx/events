@@ -98,6 +98,7 @@ class EventsTableViewCell: UITableViewCell{
                         // if accepted, hide "accept" and "decline" buttons
                         self.acceptButton.isHidden = true
                         self.declineButton.isHidden = true
+                        self.deleteButton.isHidden = true
                         
                         // Setting resposne icon to a check mark
                         self.responseIcon.image = UIImage(named: "going")
@@ -110,11 +111,15 @@ class EventsTableViewCell: UITableViewCell{
                         self.acceptButton.isHidden = true
                         self.declineButton.isHidden = true
                         self.responseIcon.image = UIImage(named: "not-going")
+                        self.deleteButton.isHidden = true
                         
                     default:
                         color = Colors.pendingBlue
                         sideBarColor = UIColor(hexString: "#ABEEFC")
                         backViewColor = UIColor(hexString: "#ABEEFC")
+                        self.acceptButton.isHidden = false
+                        self.declineButton.isHidden = false
+                        self.deleteButton.isHidden = true
                         
                     }
                     self.sideBar.backgroundColor = sideBarColor
