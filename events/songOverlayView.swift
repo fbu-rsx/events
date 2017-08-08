@@ -25,6 +25,7 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate, UIGes
     var delegate: addSongDelegate?
     
     var Songs: [String] = []
+    var artists: [String] = []
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,6 +41,7 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate, UIGes
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as! SongTableViewCell
         cell.label.text = Songs[indexPath.row]
+        cell.artistLabel.text = artists[indexPath.row]
         cell.index = indexPath.row
         cell.delegate = self
         return cell
@@ -47,6 +49,10 @@ class songOverlayView: UIView, UITableViewDataSource, UITableViewDelegate, UIGes
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Songs.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(84)
     }
     
     func wasTapped(songIndex: Int) {

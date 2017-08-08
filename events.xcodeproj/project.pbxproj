@@ -587,8 +587,7 @@
 				TargetAttributes = {
 					4FCB62771F143DC400BBDC71 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 736R8PG8E6;
-						DevelopmentTeam = TM66RGVAQ6;
+						DevelopmentTeam = S5MHKF47DJ;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -1032,15 +1031,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 736R8PG8E6;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";
@@ -1054,16 +1051,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 736R8PG8E6;
-				DEVELOPMENT_TEAM = TM66RGVAQ6;
+				DEVELOPMENT_TEAM = S5MHKF47DJ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = events/Info.plist;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.sruesga.events;
-				PRODUCT_BUNDLE_IDENTIFIER = com.xiuchen.events;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xxxsruesga.events;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "events/bash-Bridging-Header.h";

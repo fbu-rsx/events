@@ -16,6 +16,7 @@ class SongTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var songName: UILabel!
+    @IBOutlet weak var artistLabel: UILabel!
     
     var index: Int?
     var delegate: tapped?
@@ -23,6 +24,7 @@ class SongTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         songName.textColor = Colors.coral
+        artistLabel.textColor = Colors.coral
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

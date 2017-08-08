@@ -14,8 +14,10 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     @IBOutlet weak var searchField: UITextField!
     
     var songs: [String] = []
+    var artists: [String] = []
     var searchedSongNames: [String] = []
     var searchedSongsURIS: [String] = []
+    var searchedSongsArtists: [String] = []
     
     var event: Event?{
         didSet{
@@ -56,8 +58,9 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     
     func getTracks(){
         if let ID = event!.spotifyID {
-            OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs) in
+            OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs, artists) in
                 self.songs = songs
+                self.artists = artists
                 self.songs.sort()
                 self.tableView.reloadData()
             })
@@ -73,6 +76,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "songCell", for: indexPath) as! SongTableViewCell
         cell.label.text = songs[indexPath.row]
+        cell.artistLabel.text = artists[indexPath.row]
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsets.zero
         cell.layoutMargins = UIEdgeInsets.zero
@@ -87,10 +91,12 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         }
         else if added == true {
             // update subview text
-            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris) in
+            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris, artists) in
                 self.searchedSongNames = songs
                 self.searchedSongsURIS = uris
+                self.searchedSongsArtists = artists
                 self.subView?.Songs = songs
+                self.subView?.artists = artists
                 self.subView?.tableView.reloadData()
             })
         }
@@ -98,19 +104,27 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
             self.addSubview(subView!)
             added = true
             // update subview text
-            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris) in
+            OAuthSwiftManager.shared.search(songName: searchField.text!, completion: { (songs, uris, artists) in
                 self.searchedSongNames = songs
                 self.searchedSongsURIS = uris
+                self.searchedSongsArtists = artists
                 self.subView?.Songs = songs
+                self.subView?.artists = artists
                 self.subView?.tableView.reloadData()
             })
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(84)
     }
     
     func addSong(songIndex: Int) {
         let song = searchedSongsURIS[songIndex].replacingOccurrences(of: "spotify:track:", with: "")
         FirebaseDatabaseManager.shared.addQueuedSong(event: event!, songID: song)
         songs.append(searchedSongNames[songIndex])
+        artists.append(searchedSongsArtists[songIndex])
+        artists.sort()
         songs.sort()
         tableView.reloadData()
         searchField.text = nil
