@@ -177,7 +177,7 @@ class OAuthSwiftManager: SessionManager {
         
     }
     
-    func getTracksForPlaylist(userID: String, playlistID: String, completion: @escaping (_ tracks: [String]) -> ()){
+    func getTracksForPlaylist(userID: String, playlistID: String, completion: @escaping (_ tracks: [String], _ artists: [String]) -> ()){
         //let spotifyUserID = UserDefaults.standard.value(forKey: "spotify-user") as? String
         let url = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists/\(playlistID)/tracks")
         // can later specify parameters to only return specific parts of JSON
@@ -187,13 +187,17 @@ class OAuthSwiftManager: SessionManager {
                 var names: [String] = []
                 let tracks = result["items"] as! [[String: Any]]
                 //print(tracks)
-                
+                var artists: [String] = []
                 for track in tracks{
                     let inner = track["track"] as! [String: Any]
+                    //print(inner)
                     names.append(inner["name"] as! String)
+                    let album = inner["album"] as! [String: Any]
+                    let artist = album["artists"] as! [[String: Any]]
+                    artists.append(artist[0]["name"] as! String)
                 }
                 //print(names)
-                completion(names)
+                completion(names, artists)
             }
             else{
                 print("Error: Couldn't fetch Spotify Tracks")
@@ -212,7 +216,7 @@ class OAuthSwiftManager: SessionManager {
         }
     }
     
-    func search(songName: String, completion: @escaping (_ songs: [String], _ uris: [String])->()){
+    func search(songName: String, completion: @escaping (_ songs: [String], _ uris: [String], _ artists: [String])->()){
         let name = songName.replacingOccurrences(of: " ", with: "%20")
         let url = URL(string: "https://api.spotify.com/v1/search?q=\(name)&type=track")
         request(url!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
@@ -221,11 +225,16 @@ class OAuthSwiftManager: SessionManager {
             let items = tracks["items"] as! [[String: Any]]
             var songs: [String] = []
             var uris: [String] = []
+            var artists: [String] = []
             for item in items{
+                print(item)
                 songs.append(item["name"] as! String)
+                let album = item["album"] as! [String: Any]
+                let artist = album["artists"] as! [[String: Any]]
+                artists.append(artist[0]["name"] as! String)
                 uris.append(item["uri"] as! String)
             }
-            completion(songs, uris)
+            completion(songs, uris, artists)
         }
     }
     
