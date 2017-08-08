@@ -26,7 +26,7 @@ class EventsTableViewCell: UITableViewCell{
     @IBOutlet weak var responseIcon: UIImageView!
     var canDeleteMyEvent = false
     
-    weak var event: Event? {
+    var event: Event? {
         didSet{
             if self.event == nil {
                 return
@@ -38,96 +38,89 @@ class EventsTableViewCell: UITableViewCell{
             oneCell.layer.cornerRadius = 5
             oneCell.layer.masksToBounds = true
             
-            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
-                // Set organizer's profile picture
-                let url = URL(string: user.photoURLString)
-                self.closedProfileImageView.af_setImage(withURL: url!)
-                // Set event title
-                self.closedEventTitle.text = self.event!.title
-                // Set and format event location
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMM d, h:mm a"
-                self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
-                //Set total cost
-                if let cost = self.event!.cost, cost > 0.00999 {
-                    self.closedUserCost.text = String(format: "$%.2f", cost)
-                } else{
-                    self.closedUserCost.text = "Free"
-                }
-                //Set number of guests invited
-                self.closedInvitedNum.text = String(self.event!.guestlist.count)
-                // accepted num will eventually be added to Event class
-                var coming: Int = 0
-                for user in self.event!.guestlist.keys{
-                    if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
-                }
-                self.closedComingNum.text = String(coming)
-                // Set the cell color depending on invite status
-                var color: UIColor!
-                var sideBarColor: UIColor!
-                var backViewColor: UIColor!
-                // var backViewColor: UIColor!
+            // Set organizer's profile picture
+            let url = URL(string: event!.organizer.photoURLString)
+            self.closedProfileImageView.af_setImage(withURL: url!)
+            // Set event title
+            self.closedEventTitle.text = self.event!.title
+            // Set and format event location
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMM d, h:mm a"
+            self.closedEventTime.text = dateFormatter.string(from: self.event!.date)
+            //Set total cost
+            if let cost = self.event!.cost, cost > 0.00999 {
+                self.closedUserCost.text = String(format: "$%.2f", cost)
+            } else{
+                self.closedUserCost.text = "Free"
+            }
+            //Set number of guests invited
+            self.closedInvitedNum.text = String(self.event!.guestlist.count)
+            // accepted num will eventually be added to Event class
+            var coming: Int = 0
+            for user in self.event!.guestlist.keys {
+                if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
+            }
+            self.closedComingNum.text = String(coming)
+            // Set the cell color depending on invite status
+            var color: UIColor!
+            var sideBarColor: UIColor!
+            var backViewColor: UIColor!
+            // var backViewColor: UIColor!
+    
+            if self.event!.organizer.uid == AppUser.current.uid {
+                
+                self.oneCell.backgroundColor = UIColor(hexString: "#B6A6CA")
+                self.sideBar.backgroundColor = UIColor(hexString: "#D5CFE1")
                 
                 
+                // if my event, hide "accept" and "decline" buttons
+                self.acceptButton.isHidden = true
+                self.declineButton.isHidden = true
+                self.deleteButton.backgroundColor = UIColor(hexString: "#F4ABB1")
+                self.deleteButton.isHidden = false
+                self.deleteButton.layer.cornerRadius = 5
                 
-                // check if the event is created by AppUser.current
-                let eventOrganizer = (self.event?.organizer)!
+                // Setting resposne icon to a star
+                self.responseIcon.image = UIImage(named: "my-event")
                 
-                if eventOrganizer.uid == AppUser.current.uid {
-                    
-                    self.oneCell.backgroundColor = UIColor(hexString: "#B6A6CA")
-                    self.sideBar.backgroundColor = UIColor(hexString: "#D5CFE1")
-                    
-                    
-                    // if my event, hide "accept" and "decline" buttons
+            } else {
+                switch self.event!.myStatus {
+                case .accepted:
+                    color = Colors.greenAccepted
+                    sideBarColor = UIColor(hexString: "#8CF7AC")
+                    backViewColor = UIColor(hexString: "#8CF7AC")
+                    // if accepted, hide "accept" and "decline" buttons
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
-                    self.deleteButton.backgroundColor = UIColor(hexString: "#F4ABB1")
-                    self.deleteButton.isHidden = false
-                    self.deleteButton.layer.cornerRadius = 5
+                    self.deleteButton.isHidden = true
                     
-                    // Setting resposne icon to a star
-                    self.responseIcon.image = UIImage(named: "my-event")
+                    // Setting resposne icon to a check mark
+                    self.responseIcon.image = UIImage(named: "going")
                     
-                } else {
-                    switch self.event!.myStatus {
-                    case .accepted:
-                        color = Colors.greenAccepted
-                        sideBarColor = UIColor(hexString: "#8CF7AC")
-                        backViewColor = UIColor(hexString: "#8CF7AC")
-                        // if accepted, hide "accept" and "decline" buttons
-                        self.acceptButton.isHidden = true
-                        self.declineButton.isHidden = true
-                        self.deleteButton.isHidden = true
-                        
-                        // Setting resposne icon to a check mark
-                        self.responseIcon.image = UIImage(named: "going")
-                        
-                    case .declined:
-                        color = Colors.redDeclined
-                        backViewColor = UIColor(hexString: "#F4ABB1")
-                        sideBarColor = UIColor(hexString: "#F4ABB1")
-                        // if declined, hide "accept" and "decline" buttons
-                        self.acceptButton.isHidden = true
-                        self.declineButton.isHidden = true
-                        self.responseIcon.image = UIImage(named: "not-going")
-                        self.deleteButton.isHidden = true
-                        
-                    default:
-                        color = Colors.pendingBlue
-                        sideBarColor = UIColor(hexString: "#ABEEFC")
-                        backViewColor = UIColor(hexString: "#ABEEFC")
-                        self.acceptButton.isHidden = false
-                        self.declineButton.isHidden = false
-                        self.deleteButton.isHidden = true
-                        self.responseIcon.isHidden = true
-                        
-                    }
-                    self.sideBar.backgroundColor = sideBarColor
+                case .declined:
+                    color = Colors.redDeclined
+                    backViewColor = UIColor(hexString: "#F4ABB1")
+                    sideBarColor = UIColor(hexString: "#F4ABB1")
+                    // if declined, hide "accept" and "decline" buttons
+                    self.acceptButton.isHidden = true
+                    self.declineButton.isHidden = true
+                    self.responseIcon.image = UIImage(named: "not-going")
+                    self.deleteButton.isHidden = true
                     
-                    self.oneCell.backgroundColor = color
+                default:
+                    color = Colors.pendingBlue
+                    sideBarColor = UIColor(hexString: "#ABEEFC")
+                    backViewColor = UIColor(hexString: "#ABEEFC")
+                    self.acceptButton.isHidden = false
+                    self.declineButton.isHidden = false
+                    self.deleteButton.isHidden = true
+                    self.responseIcon.isHidden = true
                     
                 }
+                self.sideBar.backgroundColor = sideBarColor
+                
+                self.oneCell.backgroundColor = color
+                
             }
         }
     }

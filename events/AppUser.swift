@@ -123,6 +123,7 @@ class AppUser {
     func accept(event: Event) {
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .accepted)
         self.eventsKeys[event.eventid] = InviteStatus.accepted.rawValue
+        event.guestlist[self.uid] = InviteStatus.accepted.rawValue
         if event.cost != nil {
             let transaction = Transaction(event: event)
             self.transactions.append(transaction)
@@ -145,6 +146,7 @@ class AppUser {
             self.transactions.remove(at: idx)
         }
         self.eventsKeys[event.eventid] = InviteStatus.declined.rawValue
+        event.guestlist[self.uid] = InviteStatus.declined.rawValue
     }
     
     @objc func walletChanged(_ notification: NSNotification) {
