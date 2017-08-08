@@ -66,7 +66,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 Utilities.setupGoogleMap(self.topMap)
                 let camera = GMSCameraPosition.camera(withLatitude: self.event!.coordinate.latitude,
                                                       longitude: self.event!.coordinate.longitude,
-                                                      zoom: Utilities.zoomLevel)
+                                                      zoom: 14.0)
                 self.topMap.camera = camera
                 self.topMap.isUserInteractionEnabled = false
                 

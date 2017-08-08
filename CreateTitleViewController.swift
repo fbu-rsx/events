@@ -74,14 +74,6 @@ class CreateTitleViewController: UIViewController {
         }
     }
     
-    @IBAction func didSetTitle(_ sender: Any) {
-        if let title = eventTitle.text, title != "" {
-            CreateEventMaster.shared.event[EventKey.name] = title
-            
-        }
-        self.updatePageController()
-    }
-    
     @IBAction func didTapDismiss(_ sender: Any) {
         self.view.endEditing(true)
     }
@@ -100,7 +92,7 @@ class CreateTitleViewController: UIViewController {
     }
     func valid() -> Bool {
         let name = CreateEventMaster.shared.event[EventKey.name] as? String
-        let nameExists = name != nil && name != ""
+        let nameExists = name != nil && name != "enter a title"
         let dateExists = CreateEventMaster.shared.event[EventKey.date] != nil
         return nameExists && dateExists
     }
@@ -151,6 +143,12 @@ extension CreateTitleViewController: UITextViewDelegate {
             textView.text = "enter a title"
             textView.textColor = .lightGray
         }
+        if let title = eventTitle.text, title != "enter a title" {
+            CreateEventMaster.shared.event[EventKey.name] = title
+            
+        }
+        self.updatePageController()
+
         textView.resignFirstResponder()
     }
 }
