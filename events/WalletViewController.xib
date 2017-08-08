@@ -11,11 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletViewController" customModule="events" customModuleProvider="target">
             <connections>
-                <outlet property="infoView" destination="dDi-32-etB" id="Za8-va-QHf"/>
                 <outlet property="tableView" destination="jeK-Ma-3yf" id="h7m-Er-DMA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="walletAmount" destination="Fm2-ZB-vFF" id="Ity-qi-Ct7"/>
-                <outlet property="walletImage" destination="VhO-b1-I0y" id="CY3-8g-pFs"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -24,53 +21,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="115" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jeK-Ma-3yf">
-                    <rect key="frame" x="0.0" y="267" width="375" height="400"/>
+                    <rect key="frame" x="0.0" y="8" width="375" height="659"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="400" id="NmX-z6-ZOX"/>
-                    </constraints>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDi-32-etB" customClass="GradientView" customModule="events" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$108.50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fm2-ZB-vFF">
-                            <rect key="frame" x="18" y="51" width="340" height="59"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="45"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpC-7S-HlD">
-                            <rect key="frame" x="208" y="23" width="147" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
-                            <color key="textColor" red="0.34628807109999998" green="0.34628807109999998" blue="0.34628807109999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wallet-with-card-sticking-out" translatesAutoresizingMaskIntoConstraints="NO" id="VhO-b1-I0y">
-                            <rect key="frame" x="172" y="21" width="30" height="29"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="141" id="c8U-dC-5mQ"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="jeK-Ma-3yf" secondAttribute="bottom" id="9MG-oz-jP6"/>
-                <constraint firstItem="dDi-32-etB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gjc-RY-ou2"/>
-                <constraint firstAttribute="trailing" secondItem="dDi-32-etB" secondAttribute="trailing" id="Wxx-ud-Mo9"/>
-                <constraint firstItem="dDi-32-etB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="X8e-5m-afH"/>
-                <constraint firstItem="jeK-Ma-3yf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eEP-7w-4TK"/>
-                <constraint firstAttribute="trailing" secondItem="jeK-Ma-3yf" secondAttribute="trailing" id="h5z-Zr-u0a"/>
+                <constraint firstAttribute="bottom" secondItem="jeK-Ma-3yf" secondAttribute="bottom" id="5PE-fJ-fxu"/>
+                <constraint firstItem="jeK-Ma-3yf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HhU-Yo-vHE"/>
+                <constraint firstAttribute="trailing" secondItem="jeK-Ma-3yf" secondAttribute="trailing" id="ewY-E3-GvB"/>
+                <constraint firstItem="jeK-Ma-3yf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="mSn-oq-ll8"/>
             </constraints>
             <point key="canvasLocation" x="44.5" y="-3.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="wallet-with-card-sticking-out" width="256" height="256"/>
-    </resources>
 </document>
