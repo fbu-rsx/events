@@ -52,7 +52,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         userImage.layer.masksToBounds = true
         
         aboutText.delegate = self
-        aboutText.text = "description of event"
+        aboutText.text = "enter description of event 💬📝"
         aboutText.textColor = .lightGray
         
         setupMap()
