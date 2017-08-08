@@ -119,7 +119,7 @@ extension AppDelegate: SignInDelegate {
         }
 
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-
+//        Auth.auth().signIn(withCustomToken: <#T##String#>, completion: <#T##AuthResultCallback?##AuthResultCallback?##(User?, Error?) -> Void#>)
         Auth.auth().signIn(with: credential) { (user: User?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
