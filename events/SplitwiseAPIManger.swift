@@ -50,6 +50,7 @@ class SplitwiseAPIManger: SessionManager {
         let callback = URL(string: SplitwiseAPIManger.callBackUrl)!
         
         oauth.authorize(withCallbackURL: callback, success: { (credential, response, parameters) in
+            print(response)
             self.save(credential: credential)
         }) { (error) in
             failure(error)
@@ -124,28 +125,54 @@ class SplitwiseAPIManger: SessionManager {
             print(response)
         }
     }
+    
+    func createFriends(invitedFirstNames:[String], invitedEmails: [String]){
+        var baseString = "https://secure.splitwise.com/api/v3.0/create_friends?"
+        for userNum in 0..<invitedEmails.count{
+            let stringIndex = String(userNum)
+            if userNum == 0{
+                baseString += "friends__\(stringIndex)__user_email=\(invitedEmails[userNum])&friends__\(stringIndex)__user_first_name=\(invitedFirstNames[userNum])"
+            }
+            else{
+                baseString += "&friends__\(stringIndex)__user_email=\(invitedEmails[userNum])&friends__\(stringIndex)__user_first_name=\(invitedFirstNames[userNum])"
+            }
+        }
+        let url = URL(string: baseString)!
+        print(url)
+        request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+            print(response)
+            self.createGroup(memberIDs: ["9262736"])
+        }
+    }
 
     func createGroup(memberIDs: [String]?){
-        let url = URL(string: "https://secure.splitwise.com/api/v3.0/create_group")!
-        var params: [String: Any] = ["name":"test group 2"]
-        if let IDs = memberIDs{
-            params = ["name":"test group 3", "users__ARRAYINDEX__PARAMNAME": IDs]
-        }
-        request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
+        let url = URL(string: "https://secure.splitwise.com/api/v3.0/create_group?name=TestGroup6&users__0__user_id=\(memberIDs![0])")!
+        //var params: [String: Any] = ["name":"test group 4"]
+
+        request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)
             if response.result.isSuccess{
                 let response = response.result.value as! [String: Any]
                 let group = response["group"] as! [String: Any]
-                let idnum = group["id"] as! Int
-                let id = String(idnum)
-                print(idnum)
-                self.createExpense(name: "test", cost: "100", description: "test", groupID: id)
+                print(group)
+                let id = group["id"] as! Int
+                let idString = String(id)
+                self.createExpense(individualCost: 10, description: "testing", groupID: idString, invitedUsersIDs: ["9262736"])
             }
         }
     }
     
-    func createExpense(name: String, cost: String, description: String, groupID: String){
-        let url = URL(string: "https://secure.splitwise.com/api/v3.0/create_expense?payment=0&amp;cost=100.0&amp;description=\(description)&amp;group_id=\(groupID)")!
+    func createExpense(individualCost: Int, description: String, groupID: String, invitedUsersIDs: [String]){
+        // need to make user 0's id current users splitwise ID and say they are owed the total
+        let invididualCostString = String(individualCost)
+        let total = individualCost*invitedUsersIDs.count
+        let totalString = String(total)
+        var baseString: String = "https://secure.splitwise.com/api/v3.0/create_expense?payment=0&cost=\(totalString)&description=\(description)&group_id=\(groupID)&users__0__user_id=9255512&users__0__paid_share=\(totalString)&users__0__owed_share=0"
+        for userNum in 1...invitedUsersIDs.count{
+            let stringIndex = String(userNum)
+            baseString += "&users__\(stringIndex)__user_id=\(invitedUsersIDs[userNum-1])&users__\(stringIndex)__paid_share=0&users__\(stringIndex)__owed_share=\(invididualCostString)"
+        }
+        let url = URL(string: baseString)!
         print(url)
         //let params: [String: Any] = ["payment": 0, "cost": "100", "description": description, "group_id": String(groupID)]
         request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
