@@ -77,6 +77,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let event = AppUser.current.events[indexPath.row]
         detailVC?.event = event
         detailVC?.imageDelegate = self
+        detailVC?.addPageControl()
+        detailVC?.showPageControl()
         show(detailVC!, sender: nil)
     }
     
@@ -122,7 +124,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        
+        let vc = viewControllerToCommit as! DetailContainerViewController
+        vc.addPageControl()
+        vc.showPageControl()
         show(viewControllerToCommit, sender: self)
         
     }

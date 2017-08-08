@@ -11,9 +11,10 @@ import UIKit
 class DetailContainerViewController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var pageControl: UIPageControl!
+    var pageControl = UIPageControl()
     
     weak var event: Event?
+    
     var imageDelegate: imagePickerDelegate2?
     
     override func viewDidLoad() {
@@ -23,7 +24,12 @@ class DetailContainerViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.pageControl.currentPageIndicatorTintColor = UIColor(hexString: "4CB6BE")
         self.pageControl.pageIndicatorTintColor = UIColor(hexString: "F2F2F2")
-        self.navigationItem.titleView = self.pageControl
+        self.pageControl.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        pageControl.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {
@@ -37,6 +43,17 @@ class DetailContainerViewController: UIViewController {
             viewController.event = self.event
             viewController.imageDelegate = self.imageDelegate
         }
+    }
+    
+    func addPageControl() {
+        if event?.myStatus == .accepted {
+            pageControl.frame.origin = CGPoint(x: self.view.center.x - 0.5*pageControl.frame.width, y: 20)
+            self.navigationController?.navigationBar.addSubview(pageControl)
+        }
+    }
+    
+    func showPageControl() {
+        pageControl.isHidden = false
     }
 }
 

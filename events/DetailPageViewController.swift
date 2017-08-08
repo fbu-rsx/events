@@ -35,23 +35,7 @@ class DetailPageViewController: UIPageViewController {
     
     weak var pageControlDelegate: DetailPageViewControllerDelegate?
     
-    weak var event: Event? {
-        didSet{
-            if self.event == nil {
-                return
-            }
-            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMM d, h:mm a"
-                
-                var coming: Int = 0
-                for user in self.event!.guestlist.keys{
-                    if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
-                }
-                
-            }
-        }
-    }
+    weak var event: Event?
     
     var imageDelegate: imagePickerDelegate2?
     
