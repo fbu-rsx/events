@@ -195,6 +195,19 @@ class AppUser {
         FirebaseDatabaseManager.shared.createEvent(eventDict) {
             FirebaseDatabaseManager.shared.inviteGuests(event.guestlist, to: event)
         }
+        var splitwiseUserIDs: [String] = []
+        var splitwiseNames: [String] = []
+        var splitwiseEmails: [String] = []
+        for fireBaseUserID in Array(event.guestlist.keys){
+            FirebaseDatabaseManager.shared.getSingleUser(id: fireBaseUserID, completion: { (appUser) in
+                splitwiseEmails.append(appUser.splitwiseEmail)
+                splitwiseNames.append(appUser.splitwiseName)
+                splitwiseUserIDs.append(String(appUser.splitwiseID))
+            })
+        }
+        SplitwiseAPIManger.shared.createFriends(invitedFirstNames: splitwiseNames, invitedEmails: splitwiseEmails) { 
+            SplitwiseAPIManger.shared.createGroup(groupName: event.eventname, individualCost: event.cost!, description: event.description, memberIDs: splitwiseUserIDs)
+        }
         return event
     }
     

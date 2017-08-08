@@ -170,7 +170,7 @@ class SplitwiseAPIManger: SessionManager {
         }
     }
 
-    func createGroup(groupName: String, individualCost: Int, description: String, memberIDs: [String]){
+    func createGroup(groupName: String, individualCost: Double, description: String, memberIDs: [String]){
         var baseString: String = "https://secure.splitwise.com/api/v3.0/create_group?name=\(groupName)"
         for userNum in 0..<memberIDs.count{
             let stringIndex = String(userNum)
@@ -191,12 +191,12 @@ class SplitwiseAPIManger: SessionManager {
         }
     }
     
-    private func createExpense(individualCost: Int, description: String, groupID: String, invitedUsersIDs: [String]){
+    private func createExpense(individualCost: Double, description: String, groupID: String, invitedUsersIDs: [String]){
         // need to make user 0's id current users splitwise ID and say they are owed the total
         let invididualCostString = String(individualCost)
-        let total = individualCost*invitedUsersIDs.count
+        let total = individualCost*Double(invitedUsersIDs.count)
         let totalString = String(total)
-        var baseString: String = "https://secure.splitwise.com/api/v3.0/create_expense?payment=0&cost=\(totalString)&description=\(description)&group_id=\(groupID)&users__0__user_id=9255512&users__0__paid_share=\(totalString)&users__0__owed_share=0"
+        var baseString: String = "https://secure.splitwise.com/api/v3.0/create_expense?payment=0&cost=\(totalString)&description=\(description)&group_id=\(groupID)&users__0__user_id=\(String(AppUser.current.splitwiseID))&users__0__paid_share=\(totalString)&users__0__owed_share=0"
         for userNum in 1...invitedUsersIDs.count{
             let stringIndex = String(userNum)
             baseString += "&users__\(stringIndex)__user_id=\(invitedUsersIDs[userNum-1])&users__\(stringIndex)__paid_share=0&users__\(stringIndex)__owed_share=\(invididualCostString)"
