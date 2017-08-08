@@ -37,6 +37,7 @@ class FirebaseDatabaseManager {
     func addSplitwiseToDatabase(id: String, dict: [String: Any]) {
         self.ref.child("users/\(id)").updateChildValues(dict)
     }
+    
     // completion function provides dictionary of events
     func fetchUserEvents(userid: String, completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("users/\(userid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in

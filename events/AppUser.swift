@@ -113,7 +113,7 @@ class AppUser {
             }
             self.transactions = arr
         }
-        SplitwiseAPIManger.shared.logout()
+        
         if !SplitwiseAPIManger.shared.checkIfHaveCredentials() {
             SplitwiseAPIManger.shared.splitwiseLogin(success: { (idNum, name, email) in
                 self.splitwiseID = idNum
@@ -126,6 +126,8 @@ class AppUser {
             }, failure: { (error) in
                 print(error?.localizedDescription)
             })
+        } else {
+            
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.walletChanged(_:)), name: BashNotifications.walletChanged, object: nil)
