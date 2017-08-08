@@ -129,6 +129,14 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             }
             alertView.showTitle("Spotify Login", subTitle: "Please login to Spotify", style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
         }
+        /*
+        OAuthSwiftManager.shared.spotifyLogin(success: {
+            
+        }
+            , failure: { (error) in
+                print(error)
+        })*/
+        //OAuthSwiftManager.shared.refreshConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
