@@ -27,9 +27,9 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         tableView.separatorStyle = .none
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController .refresh), name: BashNotifications.refresh, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController .refresh), name: BashNotifications.refresh, object: nil)
         // Do any additional setup after loading the view.
-        NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
+   //     NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
         //tableView.reloadData()
         
         self.registerForPreviewing(with: self, sourceView: tableView)
@@ -37,32 +37,20 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        filterMyEvents()
         tableView.reloadData()
     }
     
     func filterMyEvents() {
+        myEvents = []
         for event in AppUser.current.events {
-            if event.organizer.uid == AppUser.current.uid {
+            if event.organizer.uid == AppUser.current.uid && !myEvents.contains(event) {
                 self.myEvents.append(event)
             }
         }
     }
     
     
-    func refresh(_ notification: Notification) {
-        //let event = notification.object as! Event
-        //self.events.append(event)
-        //events = AppUser.current.events
-        tableView.reloadData()
-    }
-    
-    
-    func deleteEvent(_ notification: NSNotification) {
-        //let event = notification.object as! Event
-        //let index = AppUser.current.events.index(of: event)!
-        //self.events.remove(at: index)
-        tableView.reloadData()
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // return cell to present associated with user's events

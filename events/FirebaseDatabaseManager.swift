@@ -34,6 +34,9 @@ class FirebaseDatabaseManager {
         self.ref.child("users/\(uid)").updateChildValues(userDict)
     }
     
+    func addSplitwiseToDatabase(id: String, dict: [String: Any]) {
+        self.ref.child("users/\(id)").updateChildValues(dict)
+    }
     // completion function provides dictionary of events
     func fetchUserEvents(userid: String, completion: @escaping ([String: Int], [String: Any]) -> Void) {
         self.ref.child("users/\(userid)/events").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
@@ -58,6 +61,10 @@ class FirebaseDatabaseManager {
             completion(dictionary, eventsDict) //sent to AppUser.current.fetchevents
         }
     }
+    
+    // splitwise data
+    
+    
     
     func createWallet(id: String, completion: @escaping (Double) -> Void) {
         self.ref.child("users/\(id)/wallet").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in

@@ -55,6 +55,20 @@ class DetailContainerViewController: UIViewController {
     func showPageControl() {
         pageControl.isHidden = false
     }
+    
+    override var previewActionItems: [UIPreviewActionItem]{
+        let acceptAction = UIPreviewAction(title: "Accept", style: .default) { (action, viewController) -> Void in
+            // do stuff that accepts event invite
+        }
+        
+        let declineAction = UIPreviewAction(title: "Decline", style: .destructive) { (action, viewController) -> Void in
+            // do stuff the declines event invite
+        }
+        if event?.organizer.uid == AppUser.current.uid{
+            return []
+        }
+        return [acceptAction, declineAction]
+    }
 }
 
 extension DetailContainerViewController: DetailPageViewControllerDelegate {
