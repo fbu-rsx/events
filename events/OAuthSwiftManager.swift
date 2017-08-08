@@ -53,21 +53,37 @@ class OAuthSwiftManager: SessionManager {
         
         let callback = URL(string: OAuthSwiftManager.callBackUrl)!
         //oauth.auth
-        
+        let state = generateState(withLength: 20)
+        /*
         self.oauth.authorize(withCallbackURL: callback, scope: scope, state: "randomString", success: { (credential, response, parameters) in
-            //print(credential)
+            print(response)
+            print("XXXX")
+            print(parameters)
             self.save(credential: credential)
+            print(credential.oauthRefreshToken)
+            print(credential.oauthToken)
 
         }) { (error) in
             failure(error)
         }
-
-        
+        */
+        oauth.authorize(withCallbackURL: callback, scope: scope, state: state, success: { (credential, response, parameters) in
+            print(response)
+            print("XXXX")
+            print(parameters)
+            self.save(credential: credential)
+            print(credential.oauthRefreshToken)
+            print(credential.oauthToken)
+        }) { (error) in
+            failure(error)
+        }
     }
     
     
     func refreshConnection(){
-        oauth.renewAccessToken(withRefreshToken: oauth.client.credential.oauthRefreshToken, success: { (credential, response, parameters) in
+        let refreshToken = oauth.client.credential.oauthRefreshToken
+        print(refreshToken)
+        oauth.renewAccessToken(withRefreshToken: refreshToken, success: { (credential, response, parameters) in
             self.save(credential: credential)
             print(response ?? "defaul refresh response")
         }) { (error) in
