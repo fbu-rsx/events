@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rH5-Xk-wSQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -163,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="76" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hee-rI-lJJ">
-                                <rect key="frame" x="48" y="101" width="279" height="566"/>
+                                <rect key="frame" x="16" y="101" width="343" height="566"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -575,10 +575,6 @@
                                     <segue destination="auz-Jw-oal" kind="embed" id="E8R-Dm-y7U"/>
                                 </connections>
                             </containerView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="zdS-Zd-TzJ">
-                                <rect key="frame" x="168" y="0.0" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -590,7 +586,6 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="CG8-KZ-Lnj" id="Cvt-Lj-VXK"/>
-                        <outlet property="pageControl" destination="zdS-Zd-TzJ" id="nv3-VN-4Ho"/>
                         <segue destination="6No-sC-DRa" kind="show" id="Jz9-Ed-gU6"/>
                     </connections>
                 </viewController>
@@ -696,19 +691,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="enter a title" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="45" translatesAutoresizingMaskIntoConstraints="NO" id="D8s-3x-Bwp">
-                                <rect key="frame" x="16" y="365" width="343" height="67"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="31"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="didSetTitle:" destination="4fP-pC-bW5" eventType="editingDidEnd" id="wye-sv-Fdh"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dw6-72-6OB">
-                                <rect key="frame" x="16" y="441" width="343" height="67"/>
+                                <rect key="frame" x="16" y="455" width="343" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="31"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -755,6 +739,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" text="enter a title" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FL9-tm-41o">
+                                <rect key="frame" x="16" y="372" width="343" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -772,7 +765,7 @@
                         <outlet property="createAnEventText" destination="3yV-ff-kv9" id="tbo-wT-QVo"/>
                         <outlet property="currentTimeText" destination="Dw6-72-6OB" id="0gh-HT-UDb"/>
                         <outlet property="eventTime" destination="Dw6-72-6OB" id="Yam-6N-tm3"/>
-                        <outlet property="eventTitle" destination="D8s-3x-Bwp" id="KHy-1w-a9y"/>
+                        <outlet property="eventTitle" destination="FL9-tm-41o" id="xNP-I1-Kbe"/>
                         <outlet property="logoImage" destination="KRv-Gg-Gpt" id="j3w-CC-6ls"/>
                         <outlet property="rightArrowButton" destination="UJy-VR-PeL" id="FVc-pc-H7t"/>
                         <outlet property="selectTimeButton" destination="fQL-6J-raL" id="nuN-kb-vFE"/>

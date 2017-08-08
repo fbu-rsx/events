@@ -171,7 +171,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
 
 extension CreateAboutViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if (textView.text == "description of event")
+        if (textView.text == "enter description of event 💬📝")
         {
             textView.text = ""
             textView.textColor = .black
