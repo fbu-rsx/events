@@ -10,9 +10,7 @@
 		0972C05A1F38E676009FDE30 /* SplitwiseAPIManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0972C0591F38E676009FDE30 /* SplitwiseAPIManger.swift */; };
 		0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */; };
 		09A15CBC1F15487700E847CC /* OAuthSwiftManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */; };
-		09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */; };
 		09A15CC11F1568F300E847CC /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC01F1568F300E847CC /* Transaction.swift */; };
-		09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC21F159DB000E847CC /* PKCS12.swift */; };
 		09A15CC71F17DE7600E847CC /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC61F17DE7600E847CC /* EventsViewController.swift */; };
 		09A15CCA1F17E29D00E847CC /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */; };
 		09A15CCB1F17E29D00E847CC /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */; };
@@ -24,7 +22,6 @@
 		09C808A71F2BFDDE009AA56F /* imageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */; };
 		09D42D451F1FCFE900438801 /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D441F1FCFE900438801 /* MediaViewController.swift */; };
 		09D42D471F1FD62300438801 /* DetailPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D42D461F1FD62300438801 /* DetailPictureViewController.swift */; };
-		09E7618E1F33CAFC005D2369 /* DetailEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */; };
 		09E761901F351D64005D2369 /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E7618F1F351D64005D2369 /* SpotifyAudioPlayback.framework */; };
 		09E761921F351E24005D2369 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E761911F351E24005D2369 /* AVFoundation.framework */; };
 		09E761941F351E30005D2369 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E761931F351E30005D2369 /* SystemConfiguration.framework */; };
@@ -128,10 +125,7 @@
 		0972C0591F38E676009FDE30 /* SplitwiseAPIManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitwiseAPIManger.swift; sourceTree = "<group>"; };
 		0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailMediaViewController.swift; sourceTree = "<group>"; };
 		09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthSwiftManager.swift; sourceTree = "<group>"; };
-		09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisaDirectAPIManager.swift; sourceTree = "<group>"; };
 		09A15CC01F1568F300E847CC /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		09A15CC21F159DB000E847CC /* PKCS12.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKCS12.swift; sourceTree = "<group>"; };
-		09A15CC51F15A2B600E847CC /* eventsKeyCertBundle.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = eventsKeyCertBundle.p12; sourceTree = "<group>"; };
 		09A15CC61F17DE7600E847CC /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		09A15CC81F17E29D00E847CC /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		09A15CC91F17E29D00E847CC /* EventsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
@@ -143,7 +137,6 @@
 		09C808A61F2BFDDE009AA56F /* imageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09D42D441F1FCFE900438801 /* MediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		09D42D461F1FD62300438801 /* DetailPictureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailPictureViewController.swift; sourceTree = "<group>"; };
-		09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailEventViewController.swift; sourceTree = "<group>"; };
 		09E7618F1F351D64005D2369 /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
 		09E761911F351E24005D2369 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		09E761931F351E30005D2369 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -282,15 +275,6 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		09A15CC41F15A28700E847CC /* certs */ = {
-			isa = PBXGroup;
-			children = (
-				09A15CC21F159DB000E847CC /* PKCS12.swift */,
-				09A15CC51F15A2B600E847CC /* eventsKeyCertBundle.p12 */,
-			);
-			name = certs;
-			sourceTree = "<group>";
-		};
 		09EB68D81F2F89CE00967BA8 /* EventsTableViewPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,7 +300,6 @@
 				09B321501F2BB55F0044F05C /* SongTableViewCell.swift */,
 				09B321511F2BB55F0044F05C /* SongTableViewCell.xib */,
 				0992DBA81F328F67005696B4 /* DetailMediaViewController.swift */,
-				09E7618D1F33CAFC005D2369 /* DetailEventViewController.swift */,
 			);
 			name = EventsTableViewPage;
 			sourceTree = "<group>";
@@ -407,7 +390,6 @@
 				4F9887271F144AD700759564 /* FirebaseDatabaseManager.swift */,
 				4F87D3701F168E5A007D4E94 /* FirebaseStorageManager.swift */,
 				09A15CBB1F15487700E847CC /* OAuthSwiftManager.swift */,
-				09A15CBD1F15676500E847CC /* VisaDirectAPIManager.swift */,
 				0972C0591F38E676009FDE30 /* SplitwiseAPIManger.swift */,
 			);
 			name = APIManagers;
@@ -465,7 +447,6 @@
 				09EB68D81F2F89CE00967BA8 /* EventsTableViewPage */,
 				09A15CBF1F1568E300E847CC /* Models */,
 				4F9887261F144A7B00759564 /* APIManagers */,
-				09A15CC41F15A28700E847CC /* certs */,
 				4FCB627B1F143DC400BBDC71 /* AppDelegate.swift */,
 				7C4BA22A1F18163B004739EE /* Utilities.swift */,
 				4F7821F31F38D8C90016E3D8 /* UIImage+Gif.swift */,
@@ -859,9 +840,7 @@
 				4F4959811F290E31006B90EE /* FacebookFriend.swift in Sources */,
 				7C10FCA81F1DD4BB009EE12F /* CreateAboutViewController.swift in Sources */,
 				4FCB627E1F143DC400BBDC71 /* MapViewController.swift in Sources */,
-				09A15CBE1F15676500E847CC /* VisaDirectAPIManager.swift in Sources */,
 				7C26DE9F1F312C960079BE1A /* AddPaymentViewController.swift in Sources */,
-				09E7618E1F33CAFC005D2369 /* DetailEventViewController.swift in Sources */,
 				4F69AB361F22987A0098B191 /* EventContainerViewController.swift in Sources */,
 				7CAAA0E11F27CC49005C1A76 /* ProfileViewController.swift in Sources */,
 				0992DBAA1F328F67005696B4 /* DetailMediaViewController.swift in Sources */,
@@ -891,7 +870,6 @@
 				7C26DE9B1F310EC10079BE1A /* PaymentTableViewCell.swift in Sources */,
 				7C67C1A71F38F3B1009D0C44 /* LaunchScreenViewController.swift in Sources */,
 				7C47453A1F2930E0009CA46E /* SettingsViewController.swift in Sources */,
-				09A15CC31F159DB000E847CC /* PKCS12.swift in Sources */,
 				7C4BA22B1F18163B004739EE /* Utilities.swift in Sources */,
 				4FCB627C1F143DC400BBDC71 /* AppDelegate.swift in Sources */,
 				4F2545721F1FCCF90076AE0B /* CreateEventMaster.swift in Sources */,
