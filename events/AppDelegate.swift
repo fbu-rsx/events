@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //OAuthSwiftManager.shared.logout()
         //OAuthSwiftManager.shared.refreshConnection()
-
+        
         return true
     }
     
