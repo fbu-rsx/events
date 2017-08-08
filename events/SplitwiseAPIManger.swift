@@ -145,7 +145,8 @@ class SplitwiseAPIManger: SessionManager {
     }
     
     func createExpense(name: String, cost: String, description: String, groupID: String){
-        let url = URL(string: "https://secure.splitwise.com/api/v3.0/create_expense?payment=0&cost=100&description=\(description)&group_id=\(groupID)")!
+        let url = URL(string: "https://secure.splitwise.com/api/v3.0/create_expense?payment=0&amp;cost=100.0&amp;description=\(description)&amp;group_id=\(groupID)")!
+        print(url)
         //let params: [String: Any] = ["payment": 0, "cost": "100", "description": description, "group_id": String(groupID)]
         request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)
