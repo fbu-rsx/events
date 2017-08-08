@@ -35,23 +35,7 @@ class DetailPageViewController: UIPageViewController {
     
     weak var pageControlDelegate: DetailPageViewControllerDelegate?
     
-    weak var event: Event? {
-        didSet{
-            if self.event == nil {
-                return
-            }
-            FirebaseDatabaseManager.shared.getSingleUser(id: (event?.organizer.uid)!) { (user: AppUser) in
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "MMM d, h:mm a"
-                
-                var coming: Int = 0
-                for user in self.event!.guestlist.keys{
-                    if self.event!.guestlist[user] == InviteStatus.accepted.rawValue {coming += 1}
-                }
-                
-            }
-        }
-    }
+    weak var event: Event?
     
     var imageDelegate: imagePickerDelegate2?
     
@@ -102,8 +86,16 @@ class DetailPageViewController: UIPageViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.dataSource = self
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailPageViewController.enableSwipe(_:)), name: BashNotifications.accept, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailPageViewController.disableSwipe(_:)), name: BashNotifications.decline, object: nil)
+
         self.delegate = self
+        
+        if event?.myStatus == .accepted {
+            self.dataSource = self
+        } else {
+            self.dataSource = nil
+        }
         
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController],
@@ -115,6 +107,28 @@ class DetailPageViewController: UIPageViewController {
         pageControlDelegate?.eventPageController(self,
                                                  didUpdatePageCount: orderedViewControllers.count)
     }
+    
+    func enableSwipe(_ notification: NSNotification) {
+        let acceptedEvent = notification.object as! Event
+        if acceptedEvent.eventid == event?.eventid {
+            self.dataSource = self
+        }
+    }
+    
+    func disableSwipe(_ notification: NSNotification) {
+        let declinedEvent = notification.object as! Event
+        if declinedEvent.eventid == event?.eventid {
+            if let firstViewController = orderedViewControllers.first {
+                setViewControllers([firstViewController],
+                                   direction: .forward,
+                                   animated: true,
+                                   completion: nil)
+            }
+            self.dataSource = nil
+        }
+    }
+    
+    
     
     override var previewActionItems: [UIPreviewActionItem] {
         let acceptAction = UIPreviewAction(title: "Accept", style: .default) { (action, viewController) -> Void in

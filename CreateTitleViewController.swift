@@ -10,7 +10,7 @@ import UIKit
 import DateTimePicker
 
 class CreateTitleViewController: UIViewController {
-    @IBOutlet weak var eventTitle: UITextField!
+    @IBOutlet weak var eventTitle: UITextView!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var createAnEventText: UILabel!
     @IBOutlet weak var currentTimeText: UILabel!
@@ -20,7 +20,8 @@ class CreateTitleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.eventTitle.textColor = UIColor(hexString: "#4CB6BE")
+        self.eventTitle.textColor = UIColor.lightGray
+        self.eventTitle.delegate = self
         eventTitle.setBottomBorder()
         self.createAnEventText.textColor = UIColor(hexString: "#484848")
         self.currentTimeText.textColor = UIColor(hexString: "#484848")
@@ -44,7 +45,7 @@ class CreateTitleViewController: UIViewController {
         mapAnimation()
         self.updatePageController()
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.logoImage.layer.removeAllAnimations()
@@ -67,7 +68,7 @@ class CreateTitleViewController: UIViewController {
             dateFormatter.dateFormat = "MMM d, h:mm a"
             self.eventTime.text = dateFormatter.string(from: picker.selectedDate)
             self.eventTime.textColor = UIColor(hexString: "#FEB2A4")
-
+            
             CreateEventMaster.shared.event[EventKey.date] = date.description
             self.updatePageController()
         }
@@ -76,7 +77,7 @@ class CreateTitleViewController: UIViewController {
     @IBAction func didSetTitle(_ sender: Any) {
         if let title = eventTitle.text, title != "" {
             CreateEventMaster.shared.event[EventKey.name] = title
-
+            
         }
         self.updatePageController()
     }
@@ -132,13 +133,52 @@ extension UIColor {
     }
 }
 
+
+
+extension CreateTitleViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if (textView.text == "enter a title")
+        {
+            textView.text = ""
+            textView.textColor = UIColor(hexString: "#4CB6BE")
+        }
+        textView.becomeFirstResponder() //Optional
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if (textView.text == "")
+        {
+            textView.text = "enter a title"
+            textView.textColor = .lightGray
+        }
+        textView.resignFirstResponder()
+    }
+}
+
+extension UITextView {
+    func setBottomBorder() {
+        
+        let bottomBorder = CALayer()
+        bottomBorder.backgroundColor = UIColor.lightGray.cgColor
+        bottomBorder.frame = CGRect(x: 0, y: self.frame.maxY - 1, width: self.frame.width, height: 1)
+        bottomBorder.name = "BottomBorder"
+        layer.addSublayer(bottomBorder)
+        
+        //            let topBorder = CALayer()
+        //            topBorder.backgroundColor = UIColor.lightGray.cgColor
+        //            topBorder.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), 1)
+        //            topBorder.name = "TopBorder"
+        //            layer.addSublayer(topBorder)
+    }
+}
+
 // Shows a line under text field
 extension UITextField {
     func setBottomBorder() {
         self.borderStyle = .none
         self.layer.backgroundColor = UIColor.white.cgColor
         self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowColor = UIColor.lightGray.cgColor
         self.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         self.layer.shadowOpacity = 0.8
         self.layer.shadowRadius = 0.0

@@ -11,7 +11,7 @@ import UIKit
 class DetailContainerViewController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var pageControl: UIPageControl!
+    var pageControl = UIPageControl()
     
     weak var event: Event?
     var imageDelegate: imagePickerDelegate2?
@@ -23,7 +23,11 @@ class DetailContainerViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.pageControl.currentPageIndicatorTintColor = UIColor(hexString: "4CB6BE")
         self.pageControl.pageIndicatorTintColor = UIColor(hexString: "F2F2F2")
-        self.navigationItem.titleView = self.pageControl
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        pageControl.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,17 +44,50 @@ class DetailContainerViewController: UIViewController {
     }
     
     override var previewActionItems: [UIPreviewActionItem]{
+        if event!.organizer.uid == AppUser.current.uid{
+            let deleteAction = UIPreviewAction(title: "Delete", style: .destructive) { (action, viewController) -> Void in
+                AppUser.current.delete(event: self.event!)
+                NotificationCenter.default.post(name: BashNotifications.delete, object: self.event!)
+            }
+            return [deleteAction]
+        }
+        
+        var actions = [UIPreviewAction]()
+     
         let acceptAction = UIPreviewAction(title: "Accept", style: .default) { (action, viewController) -> Void in
-            // do stuff that accepts event invite
+            AppUser.current.accept(event: self.event!)
+            NotificationCenter.default.post(name: BashNotifications.accept, object: self.event!)
+
         }
         
         let declineAction = UIPreviewAction(title: "Decline", style: .destructive) { (action, viewController) -> Void in
-            // do stuff the declines event invite
+            AppUser.current.decline(event: self.event!)
+            NotificationCenter.default.post(name: BashNotifications.decline, object: self.event!)
         }
-        if event?.organizer.uid == AppUser.current.uid{
-            return []
+        switch event!.myStatus {
+            
+        case .accepted:
+            actions.append(declineAction)
+        case .declined:
+            actions.append(acceptAction)
+        case .noResponse:
+            actions.append(acceptAction)
+            actions.append(declineAction)
         }
-        return [acceptAction, declineAction]
+    
+        return actions
+    }
+    
+    func addPageControl() {
+        if event?.myStatus == .accepted {
+            pageControl.frame.origin = CGPoint(x: self.view.center.x - 0.5*pageControl.frame.width, y: 40)
+            let window = UIApplication.shared.keyWindow
+            window?.addSubview(pageControl)
+        }
+    }
+    
+    func showPageControl() {
+        pageControl.isHidden = false
     }
 }
 
