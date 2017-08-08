@@ -45,13 +45,17 @@ class SplitwiseAPIManger: SessionManager {
         adapter = oauth.requestAdapter
     }
     
-    func splitwiseLogin(success: (()->())?, failure: @escaping (Error?) -> ()) {
+    func splitwiseLogin(success: ((_ id: Int, _ name: String, _ email: String)->())?, failure: @escaping (Error?) -> ()) {
         
         let callback = URL(string: SplitwiseAPIManger.callBackUrl)!
         
         oauth.authorize(withCallbackURL: callback, success: { (credential, response, parameters) in
-            print(response)
+            //print(response)
             self.save(credential: credential)
+            self.getCurrentUser(closure: success)
+            
+            
+            
         }) { (error) in
             failure(error)
         }
@@ -112,43 +116,68 @@ class SplitwiseAPIManger: SessionManager {
     //   Functions to Interact with Splitwise Web Client    //
     //////////////////////////////////////////////////////////
     
-    func getCurrentUser(){
+    func getCurrentUser(closure: ((_ id: Int, _ name: String, _ email: String)->())?){
         let url = URL(string: "https://secure.splitwise.com/api/v3.0/get_current_user")!
         request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)
+            if response.result.isSuccess{
+                var result = response.result.value as! [String: Any]
+                result = result["user"] as! [String: Any]
+                let idInt = result["id"] as! Int
+                
+                //let idString = String(idInt)!
+                let name = result["first_name"] as! String
+                let email = result["email"] as! String
+                // we now have name, idString, and email which should be added to the Firebase Database and associated with current user
+                if let closure = closure{
+                    closure(idInt, name, email)
+                }
+            }
         }
     }
     
-    func getUser(id: String){
+    func getUser(id: String, completion: ()->()){
         let url = URL(string: "https://secure.splitwise.com/api/v3.0/get_user/\(id)")!
         request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)
         }
     }
     
-    func createFriends(invitedFirstNames:[String], invitedEmails: [String]){
+    func checkIfHaveCredentials()-> Bool{
+        let keychain = Keychain()
+        if let data = keychain[data: "splitwise_credentials"] {
+            //let credential = NSKeyedUnarchiver.unarchiveObject(with: data) as! OAuthSwiftCredential
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func createFriends(invitedFirstNames:[String], invitedEmails: [String], closure: @escaping ()->()){
         var baseString = "https://secure.splitwise.com/api/v3.0/create_friends?"
         for userNum in 0..<invitedEmails.count{
             let stringIndex = String(userNum)
-            if userNum == 0{
-                baseString += "friends__\(stringIndex)__user_email=\(invitedEmails[userNum])&friends__\(stringIndex)__user_first_name=\(invitedFirstNames[userNum])"
+            if userNum != 0{
+                baseString += "&"
             }
-            else{
-                baseString += "&friends__\(stringIndex)__user_email=\(invitedEmails[userNum])&friends__\(stringIndex)__user_first_name=\(invitedFirstNames[userNum])"
-            }
+            baseString += "&friends__\(stringIndex)__user_email=\(invitedEmails[userNum])&friends__\(stringIndex)__user_first_name=\(invitedFirstNames[userNum])"
         }
         let url = URL(string: baseString)!
         print(url)
         request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)
-            self.createGroup(memberIDs: ["9262736"])
+            closure()
         }
     }
 
-    func createGroup(memberIDs: [String]?){
-        let url = URL(string: "https://secure.splitwise.com/api/v3.0/create_group?name=TestGroup6&users__0__user_id=\(memberIDs![0])")!
-        //var params: [String: Any] = ["name":"test group 4"]
-
+    func createGroup(groupName: String, individualCost: Int, description: String, memberIDs: [String]){
+        var baseString: String = "https://secure.splitwise.com/api/v3.0/create_group?name=\(groupName)"
+        for userNum in 0..<memberIDs.count{
+            let stringIndex = String(userNum)
+            baseString += "&users__\(stringIndex)__user_id=\(memberIDs[userNum])"
+        }
+        let url = URL(string: baseString)!
+        print(url)
         request(url, method: .post, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { (response) in
             print(response)
             if response.result.isSuccess{
@@ -157,12 +186,12 @@ class SplitwiseAPIManger: SessionManager {
                 print(group)
                 let id = group["id"] as! Int
                 let idString = String(id)
-                self.createExpense(individualCost: 10, description: "testing", groupID: idString, invitedUsersIDs: ["9262736"])
+                self.createExpense(individualCost: individualCost, description: description, groupID: idString, invitedUsersIDs: memberIDs)
             }
         }
     }
     
-    func createExpense(individualCost: Int, description: String, groupID: String, invitedUsersIDs: [String]){
+    private func createExpense(individualCost: Int, description: String, groupID: String, invitedUsersIDs: [String]){
         // need to make user 0's id current users splitwise ID and say they are owed the total
         let invididualCostString = String(individualCost)
         let total = individualCost*invitedUsersIDs.count

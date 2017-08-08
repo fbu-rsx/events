@@ -32,6 +32,9 @@ struct UserKey {
     static let photo = "photoURLString"
     static let events = "events"
     static let wallet = "wallet"
+    static let splitwiseID = "splitwiseID"
+    static let splitwiseName = "splitwiseName"
+    static let splitwiseEmail = "splitwiseEmail"
 }
 
 /*
@@ -60,18 +63,27 @@ class AppUser {
     var wallet: Double = 0
     var transactions: [Transaction] = []
     var facebookFriends: [FacebookFriend] = []
+    var splitwiseID: Int!
+    var splitwiseName: String!
+    var splitwiseEmail: String!
     
     init(dictionary: [String: Any]) {
         self.uid = dictionary[UserKey.id] as! String
         self.name = dictionary[UserKey.name] as! String
         self.photoURLString = dictionary[UserKey.photo] as! String
+        /// add splitwise stuff
+        self.splitwiseID = dictionary[UserKey.splitwiseID] as! Int
+        self.splitwiseEmail = dictionary[UserKey.splitwiseEmail] as! String
+        self.splitwiseName = dictionary[UserKey.splitwiseName] as! String
     }
     
-    convenience init(user: User, completion: (() -> Void)?) {
-        let userDict: [String: Any] = [UserKey.id: FBSDKAccessToken.current().userID,
-                                          UserKey.name: user.displayName!,
-                                          UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
-        self.init(dictionary: userDict)
+    init(user: User, completion: (() -> Void)?) {
+        var userDict: [String: Any] = [UserKey.id: FBSDKAccessToken.current().userID,
+                                       UserKey.name: user.displayName!,
+                                       UserKey.photo: user.photoURL?.absoluteString ?? "gs://events-86286.appspot.com/default"]
+        self.uid = userDict[UserKey.id] as! String
+        self.name = userDict[UserKey.name] as! String
+        self.photoURLString = userDict[UserKey.photo] as! String
         
         // Adds user only if the user does not exists
         FirebaseDatabaseManager.shared.addUser(userDict: userDict)
@@ -101,6 +113,21 @@ class AppUser {
             }
             self.transactions = arr
         }
+        SplitwiseAPIManger.shared.logout()
+        if !SplitwiseAPIManger.shared.checkIfHaveCredentials() {
+            SplitwiseAPIManger.shared.splitwiseLogin(success: { (idNum, name, email) in
+                self.splitwiseID = idNum
+                self.splitwiseName = name
+                self.splitwiseEmail = email
+                let dict: [String: Any] = [UserKey.splitwiseID: self.splitwiseID,
+                                           UserKey.splitwiseName: self.splitwiseName,
+                                           UserKey.splitwiseEmail: self.splitwiseEmail]
+                FirebaseDatabaseManager.shared.addSplitwiseToDatabase(id: self.uid, dict: dict)
+            }, failure: { (error) in
+                print(error?.localizedDescription)
+            })
+        }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(AppUser.walletChanged(_:)), name: BashNotifications.walletChanged, object: nil)
     }
 
