@@ -31,7 +31,6 @@ target 'events' do
   pod 'IQKeyboardManagerSwift'
   pod 'BetterSegmentedControl', '~> 0.8'
   pod 'JSQMessagesViewController'
-  pod 'LyftSDK'
 
   target 'eventsTests' do
     inherit! :search_paths

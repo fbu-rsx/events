@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Unknown constraint types" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -19,13 +19,6 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7e4-8N-Z5m" customClass="GMSMapView">
                     <rect key="frame" x="0.0" y="0.0" width="333" height="120"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bwP-Hu-QYi" customClass="LyftButton" customModule="LyftSDK">
-                            <rect key="frame" x="8" y="8" width="150" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="333" id="SU1-gH-fG8"/>
@@ -139,12 +132,11 @@
                 <outlet property="eventDate" destination="QNY-3l-8KZ" id="jk5-mt-L8W"/>
                 <outlet property="eventDescription" destination="iNj-Cf-R9V" id="Tg0-EK-HTp"/>
                 <outlet property="eventTitle" destination="prb-to-Tzt" id="BpC-gS-DsW"/>
-                <outlet property="lyftButton" destination="bwP-Hu-QYi" id="a6G-3F-4Gu"/>
                 <outlet property="profileImage" destination="pEZ-TD-N4u" id="to7-Ev-eAC"/>
                 <outlet property="tableView" destination="Srr-gh-wZ7" id="6pM-ix-GI3"/>
                 <outlet property="topMap" destination="7e4-8N-Z5m" id="SL7-KD-cSY"/>
             </connections>
-            <point key="canvasLocation" x="63.5" y="14"/>
+            <point key="canvasLocation" x="63.5" y="14.5"/>
         </view>
     </objects>
 </document>

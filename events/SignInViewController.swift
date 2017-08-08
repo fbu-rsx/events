@@ -29,7 +29,7 @@ class SignInViewController: UIViewController {
         fbLoginButton.readPermissions = ["public_profile", "user_friends"]
         fbLoginButton.loginBehavior = .browser
         
-        self.titleLabel.textColor = Colors.coral
+        self.titleLabel.textColor = UIColor(hexString: "#4CB6BE")
     }
     
     // Bounce up-and-down animation for photo

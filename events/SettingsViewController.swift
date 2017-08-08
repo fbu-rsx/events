@@ -16,6 +16,7 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var addPaymentButton: UIButton!
     @IBOutlet weak var themeSwitch: BetterSegmentedControl!
     
     override func viewDidLoad() {
@@ -47,12 +48,22 @@ class SettingsViewController: UIViewController, IndicatorInfoProvider {
             NSLog("Unable to switch index")
         }
         
+        
+        
+        // Customize payment method button
+        addPaymentButton.layer.cornerRadius = 5
+        addPaymentButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        
         // Customize logout button
         logoutButton.layer.cornerRadius = 5
         logoutButton.backgroundColor = UIColor(hexString: "#FEB2A4")
     }
     
     
+    @IBAction func onAddPayment(_ sender: Any) {
+        let addPaymentVC = AddPaymentViewController(nibName: "AddPaymentViewController", bundle: nil)
+        self.present(addPaymentVC, animated: true, completion: nil)
+    }
     
     
     @IBAction func themeSwitchValueChanged(_ sender: BetterSegmentedControl) {

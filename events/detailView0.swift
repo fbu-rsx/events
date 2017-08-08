@@ -9,7 +9,6 @@
 import UIKit
 import AlamofireImage
 import GoogleMaps
-import LyftSDK
 
 class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     
@@ -21,11 +20,9 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var acceptButton: UIButton!
     @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var eventDate: UILabel!
-    @IBOutlet weak var lyftButton: LyftButton!
     
     var guests: [String] = []
     var guestsStatus: [Int] = []
-    var locationManager = CLLocationManager()
     
     @IBAction func goingTap(_ sender: UIButton) {
         AppUser.current.accept(event: event!)
@@ -102,7 +99,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     print("guest: \(guest)")
                 }
                 
-                
                 switch self.event!.myStatus {
                 case .accepted:
                     self.acceptButton.setTitle("Accepted", for: .normal)
@@ -112,13 +108,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     self.declineButton.isEnabled = false
                     self.declineButton.backgroundColor = UIColor(hexString: "#95a5a6")
                     
-                    // Configure Lyft Button
-                    let pickup = self.locationManager.location?.coordinate
-                    let destination = self.event!.coordinate
-                    self.lyftButton.configure(rideKind: LyftSDK.RideKind.Standard, pickup: pickup, destination: destination)
-                    self.lyftButton.style = LyftButtonStyle.multicolor
-                    self.lyftButton.isHidden = false
-                    
                 case .declined:
                     self.declineButton.setTitle("Declined", for: .normal)
                     self.declineButton.backgroundColor = UIColor(hexString: "#F46E79")
@@ -127,14 +116,12 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     self.declineButton.sizeToFit()
                     self.acceptButton.isEnabled = false
                     self.acceptButton.backgroundColor = UIColor(hexString: "#95a5a6")
-                    self.lyftButton.isHidden = true
                     
                 default:
                     self.acceptButton.layer.cornerRadius = 5
                     self.acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
                     self.declineButton.layer.cornerRadius = 5
                     self.declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
-                    self.lyftButton.isHidden = true
                 }
             }
         }

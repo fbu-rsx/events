@@ -66,13 +66,10 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - ImagePicker (2.1.1)
   - IQKeyboardManagerSwift (4.0.10)
-  - JSQMessagesViewController (7.3.4):
+  - JSQMessagesViewController (7.3.5):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - KeychainAccess (3.0.2)
-  - LyftSDK (1.0.5):
-    - LyftSDK/Core (= 1.0.5)
-  - LyftSDK/Core (1.0.5)
   - OAuthSwift (1.1.2)
   - OAuthSwiftAlamofire (0.1.0):
     - Alamofire
@@ -103,7 +100,6 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JSQMessagesViewController
   - KeychainAccess
-  - LyftSDK
   - OAuthSwift (~> 1.1.2)
   - OAuthSwiftAlamofire
   - SCLAlertView
@@ -135,10 +131,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
-  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
-  LyftSDK: 2b08f3c1869214ff4f9ed8a0096fafa2ebeeed21
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
   OAuthSwiftAlamofire: 20bb998ac506f82c3bab0625fbc98a9c6fca783f
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
@@ -148,6 +143,6 @@ SPEC CHECKSUMS:
   TwitterKit: 97e729ceea041d174126235bf6ff67dcf37772d4
   XLPagerTabStrip: 9be80a66c6b7d60306b2c0a6004965016d68f813
 
-PODFILE CHECKSUM: 3712f7693c0c16d55095486eb7b9e3683e9e1884
+PODFILE CHECKSUM: 8fcdcc102adf18cc08feeeaab5bf81598c2f1307
 
 COCOAPODS: 1.2.1

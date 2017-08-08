@@ -28,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
         GMSPlacesClient.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
-       
-        
         
         if Auth.auth().currentUser != nil && FBSDKAccessToken.current() != nil {
             AppUser.current = AppUser(user: Auth.auth().currentUser!, completion: nil)
@@ -119,7 +117,7 @@ extension AppDelegate: SignInDelegate {
         }
 
         let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-//        Auth.auth().signIn(withCustomToken: <#T##String#>, completion: <#T##AuthResultCallback?##AuthResultCallback?##(User?, Error?) -> Void#>)
+
         Auth.auth().signIn(with: credential) { (user: User?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
