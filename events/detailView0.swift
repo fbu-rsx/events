@@ -22,6 +22,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var declineButton: UIButton!
     @IBOutlet weak var eventDate: UILabel!
     @IBOutlet weak var lyftButton: LyftButton!
+    @IBOutlet weak var directionsButton: UIButton!
     
     var guests: [String] = []
     var guestsStatus: [Int] = []
@@ -105,7 +106,8 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 
                 let pickup = self.locationManager.location?.coordinate
                 let destination = self.event!.coordinate
-                self.lyftButton.configure(rideKind: LyftSDK.RideKind.Plus, pickup: pickup, destination: destination)
+                
+                self.lyftButton.configure(rideKind: LyftSDK.RideKind.Plus, pickup: pickup!, destination: destination)
                 self.lyftButton.style = LyftButtonStyle.hotPink
                 
                 switch self.event!.myStatus {
@@ -119,16 +121,18 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     
                     // Configure Lyft Button
                     self.lyftButton.isHidden = false
+                    self.directionsButton.isHidden = false
                     
                 case .declined:
                     self.declineButton.setTitle("Declined", for: .normal)
                     self.declineButton.backgroundColor = UIColor(hexString: "#F46E79")
-
+                    
                     self.declineButton.isEnabled = false
                     self.declineButton.sizeToFit()
                     self.acceptButton.isEnabled = false
                     self.acceptButton.backgroundColor = UIColor(hexString: "#95a5a6")
                     self.lyftButton.isHidden = true
+                    self.directionsButton.isHidden = true
                     
                 default:
                     self.acceptButton.layer.cornerRadius = 5
@@ -136,6 +140,7 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                     self.declineButton.layer.cornerRadius = 5
                     self.declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
                     self.lyftButton.isHidden = true
+                    self.directionsButton.isHidden = true
                 }
             }
         }
@@ -196,6 +201,19 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    
+    @IBAction func getDirections(_ sender: Any) {
+        let destinationLongitude = self.event?.coordinate.longitude
+        let destinationLatitude = self.event?.coordinate.latitude
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))
+        {
+            UIApplication.shared.openURL(NSURL(string:
+                "comgooglemaps://?saddr=&daddr=\(Float(destinationLatitude!)),\(Float(destinationLongitude!))&directionsmode=driving")! as URL)
+        } else
+        {
+            NSLog("Can't use com.google.maps://");
+        }    }
+    
     
     func changedTheme(_ notification: NSNotification) {
         Utilities.changeTheme(forMap: self.topMap)
