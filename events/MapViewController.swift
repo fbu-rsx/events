@@ -92,9 +92,13 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
     
     
     override func viewDidAppear(_ animated: Bool) {
-        SplitwiseAPIManger.shared.createGroup(memberIDs: nil)
+        // testMan ID 9262736
+        //SplitwiseAPIManger.shared.createFriends(invitedFirstNames: ["testMan"], invitedEmails: ["rhianchavez11@gmail.com"])
+        //SplitwiseAPIManger.shared.createExpense(individualCost: 10, description: "testing", groupID: "4603410", invitedUsersIDs: ["9262736"])
+        //SplitwiseAPIManger.shared.createExpense(individualCost: 10, description: "testing", groupID: "4603410", invitedUsersIDs: ["9262736"])
+        //SplitwiseAPIManger.shared.createGroup(memberIDs: ["9262736"])
         
-           /*
+        /*
         SplitwiseAPIManger.shared.oauth.authorizeURLHandler = SafariURLHandler(viewController: self, oauthSwift: SplitwiseAPIManger.shared.oauth)
         // setup alert controller
         let alertView = SCLAlertView()
@@ -107,6 +111,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         alertView.showTitle("Splitwise Login", subTitle: "Please login to Splitwise", style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
         */
         
+        //SplitwiseAPIManger.shared.getCurrentUser()
         
         OAuthSwiftManager.shared.getSpotifyUserID {
             // Make OAuth take place in webview within our app
@@ -115,7 +120,10 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
             let alertView = SCLAlertView()
             alertView.addButton("Okay") {
                 alertView.dismiss(animated: true, completion: nil)
-                OAuthSwiftManager.shared.spotifyLogin(success: nil, failure: { (error) in
+                OAuthSwiftManager.shared.spotifyLogin(success: {
+                
+                }
+                , failure: { (error) in
                     print(error)
                 })
             }
