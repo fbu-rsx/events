@@ -66,7 +66,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.11)
   - ImagePicker (2.1.1)
   - IQKeyboardManagerSwift (4.0.10)
-  - JSQMessagesViewController (7.3.5):
+  - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
   - KeychainAccess (3.0.2)
@@ -131,7 +131,7 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
   IQKeyboardManagerSwift: 75ba21a23794a1e6b6fe6d9a267ea17f80e06771
-  JSQMessagesViewController: 6587f56aedbcb150a8ba1d968e1ef58b1bc758b7
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   KeychainAccess: a986406022dfc7c634c691ad3bec670cc6a32002
   OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
