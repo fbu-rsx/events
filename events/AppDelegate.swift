@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GMSServices.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
         GMSPlacesClient.provideAPIKey("AIzaSyArsx5jQEJafCsAgFFw_4OiuCtrqmYA08Q")
+       
+        
         
         if Auth.auth().currentUser != nil && FBSDKAccessToken.current() != nil {
             AppUser.current = AppUser(user: Auth.auth().currentUser!, completion: nil)
