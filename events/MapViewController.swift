@@ -419,6 +419,7 @@ extension MapViewController: UISearchResultsUpdating {
             resultsVC.selectedEvent = nil
             mapView.animate(toLocation: event.coordinate)
             mapView.animate(toZoom: 17.0)
+            mapView.selectedMarker = event
         }
     }
 }

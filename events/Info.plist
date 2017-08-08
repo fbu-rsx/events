@@ -50,7 +50,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Need camera access to upload photos</string>
+	<string>Used to share photos</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Need access to display contacts</string>
 	<key>NSLocationAlwaysUsageDescription</key>

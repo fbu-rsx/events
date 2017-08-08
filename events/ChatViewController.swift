@@ -12,6 +12,7 @@ import FirebaseStorage
 import IQKeyboardManagerSwift
 import JSQMessagesViewController
 import Photos
+import ImagePicker
 
 final class ChatViewController: JSQMessagesViewController {
     
@@ -44,6 +45,8 @@ final class ChatViewController: JSQMessagesViewController {
     private var photoMessageMap = [String: JSQPhotoMediaItem]()
     private var updatedMessageRefHandle: DatabaseHandle?
     
+    let picker = ImagePickerController()
+    
     deinit {
         if let refHandle = newMessageRefHandle {
             messageRef.removeObserver(withHandle: refHandle)
@@ -55,30 +58,31 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     private var loaded = false
-//    private var activityIndicator: UIActivityIndicatorView?
+    //    private var activityIndicator: UIActivityIndicatorView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        channelRef = FirebaseDatabaseManager.shared.ref.child("channels/\(event.eventid)")
+        channelRef = Database.database().reference().child("channels/\(event.eventid)")
         senderDisplayName = AppUser.current.name
         senderId = AppUser.current.uid
         
+        picker.delegate = self
+        
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize(width: 30, height: 30)
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: 30, height: 30)
-        print("loaded")
     }
-        
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !loaded {
-//            self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x - 20,
-//                                                                           y: self.view.center.y - 20,
-//                                                                           width: 40,
-//                                                                           height: 40))
-//            self.activityIndicator!.activityIndicatorViewStyle = .whiteLarge
-//            self.activityIndicator!.color = Colors.coral
-//            self.view.addSubview(self.activityIndicator!)
+            //            self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: self.view.center.x - 20,
+            //                                                                           y: self.view.center.y - 20,
+            //                                                                           width: 40,
+            //                                                                           height: 40))
+            //            self.activityIndicator!.activityIndicatorViewStyle = .whiteLarge
+            //            self.activityIndicator!.color = Colors.coral
+            //            self.view.addSubview(self.activityIndicator!)
             observeMessages()
             loaded = true
         }
@@ -103,7 +107,6 @@ final class ChatViewController: JSQMessagesViewController {
         return messages.count
     }
     
-    
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         let message = messages[indexPath.item] // 1
         if message.senderId == senderId { // 2
@@ -114,7 +117,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
-        let guest = event.appUserGuests[messages[indexPath.row].senderId]!
+        let guest = event.appUserGuests[messages[indexPath.item].senderId]!
         let data = try! Data(contentsOf: URL(string: guest.photoURLString)!)
         let image = UIImage(data: data)
         let imageSource = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
@@ -132,7 +135,38 @@ final class ChatViewController: JSQMessagesViewController {
         }
         return cell
     }
-
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString!
+    {
+        let message = messages[indexPath.item]
+        
+        if message.senderId == senderId {
+            return nil
+        } else {
+            guard let senderDisplayName = message.senderDisplayName else {
+                assertionFailure()
+                return nil
+            }
+            return NSAttributedString(string: senderDisplayName)
+            
+        }
+        
+    }
+    
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat
+    {
+        //return 17.0
+        let message = messages[indexPath.item]
+        
+        if message.senderId == senderId {
+            return 0.0
+        } else {
+            
+            return 17.0
+            
+        }
+    }
+    
     
     //Change message buble colors
     private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
@@ -216,7 +250,7 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     private func observeMessages() {
-//        self.activityIndicator?.startAnimating()
+        //        self.activityIndicator?.startAnimating()
         messageRef = channelRef!.child("messages")
         // 1.
         let messageQuery = messageRef.queryLimited(toLast:25)
@@ -247,8 +281,8 @@ final class ChatViewController: JSQMessagesViewController {
             } else {
                 print("Error! Could not decode message data")
             }
-//            self.activityIndicator?.stopAnimating()
-//            self.activityIndicator?.removeFromSuperview()
+            //            self.activityIndicator?.stopAnimating()
+            //            self.activityIndicator?.removeFromSuperview()
         })
         
         updatedMessageRefHandle = messageRef.observe(.childChanged, with: { (snapshot) in
@@ -310,59 +344,28 @@ final class ChatViewController: JSQMessagesViewController {
     }
     
     override func didPressAccessoryButton(_ sender: UIButton) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)) {
-            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        } else if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-        }
+        //        let picker = UIImagePickerController()
+        //        picker.delegate = self
+        //        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)) {
+        //            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        //        } else if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+        //            picker.sourceType = UIImagePickerControllerSourceType.camera
+        //        }
         
         present(picker, animated: true, completion:nil)
     }
 }
 
-// MARK: Image Picker Delegate
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
+extension ChatViewController: ImagePickerDelegate {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
         
-        picker.dismiss(animated: true, completion:nil)
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        picker.dismiss(animated: true, completion: nil)
         
-        // 1
-        if let photoReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
-            // Handle picking a Photo from the Photo Library
-            // 2
-            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoReferenceUrl], options: nil)
-            let asset = assets.firstObject
-            
-            // 3
+        for image in images {
             if let key = sendPhotoMessage() {
-                // 4
-                asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
-                    let imageFileURL = contentEditingInput?.fullSizeImageURL
-                    
-                    // 5
-                    let path = "\(AppUser.current.uid)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(photoReferenceUrl.lastPathComponent)"
-                    
-                    // 6
-                    self.storageRef.child(path).putFile(from: imageFileURL!, metadata: nil) { (metadata, error) in
-                        if let error = error {
-                            print("Error uploading photo: \(error.localizedDescription)")
-                            return
-                        }
-                        // 7
-                        self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
-                    }
-                })
-            }
-        } else {
-            // Handle picking a Photo from the Camera - TODO
-            // 1
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            // 2
-            if let key = sendPhotoMessage() {
-                // 3
                 let imageData = UIImageJPEGRepresentation(image, 1.0)
                 // 4
                 let imagePath = AppUser.current.uid + "/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
@@ -378,11 +381,78 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     // 7
                     self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
                 }
+                
             }
         }
+        picker.resetAssets()
     }
     
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion:nil)
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
     }
 }
+
+//// MARK: Image Picker Delegate
+//extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    func imagePickerController(_ picker: UIImagePickerController,
+//                               didFinishPickingMediaWithInfo info: [String : Any]) {
+//
+//        picker.dismiss(animated: true, completion:nil)
+//
+//        // 1
+//        if let photoReferenceUrl = info[UIImagePickerControllerReferenceURL] as? URL {
+//            // Handle picking a Photo from the Photo Library
+//            // 2
+//            let assets = PHAsset.fetchAssets(withALAssetURLs: [photoReferenceUrl], options: nil)
+//            let asset = assets.firstObject
+//
+//            // 3
+//            if let key = sendPhotoMessage() {
+//                // 4
+//                asset?.requestContentEditingInput(with: nil, completionHandler: { (contentEditingInput, info) in
+//                    let imageFileURL = contentEditingInput?.fullSizeImageURL
+//                    let data = try! Data(contentsOf: imageFileURL!)
+//
+//                    // 5
+//                    let path = "\(AppUser.current.uid)/\(Int(Date.timeIntervalSinceReferenceDate * 1000))/\(photoReferenceUrl.lastPathComponent)"
+//
+//                    // 6
+//                    self.storageRef.child(path).putData(data, metadata: nil) { (metadata, error) in
+//                        if let error = error {
+//                            print("Error uploading photo: \(error.localizedDescription)")
+//                            return
+//                        }
+//                        // 7
+//                        self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
+//                    }
+//                })
+//            }
+//        } else {
+//            // Handle picking a Photo from the Camera - TODO
+//            // 1
+//            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+//            // 2
+//            if let key = sendPhotoMessage() {
+//                // 3
+//                let imageData = UIImageJPEGRepresentation(image, 1.0)
+//                // 4
+//                let imagePath = AppUser.current.uid + "/\(Int(Date.timeIntervalSinceReferenceDate * 1000)).jpg"
+//                // 5
+//                let metadata = StorageMetadata()
+//                metadata.contentType = "image/jpeg"
+//                // 6
+//                storageRef.child(imagePath).putData(imageData!, metadata: metadata) { (metadata, error) in
+//                    if let error = error {
+//                        print("Error uploading photo: \(error)")
+//                        return
+//                    }
+//                    // 7
+//                    self.setImageURL(self.storageRef.child((metadata?.path)!).description, forPhotoMessageWithKey: key)
+//                }
+//            }
+//        }
+//    }
+//
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        picker.dismiss(animated: true, completion:nil)
+//    }
+//}
