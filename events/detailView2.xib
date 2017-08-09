@@ -31,10 +31,10 @@
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODa-4R-3Rs">
-                    <rect key="frame" x="122.5" y="8" width="130" height="35"/>
+                    <rect key="frame" x="127.5" y="8" width="120" height="35"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="rW9-Nb-UEO"/>
-                        <constraint firstAttribute="width" constant="130" id="v5m-Sn-gTe"/>
+                        <constraint firstAttribute="width" constant="120" id="v5m-Sn-gTe"/>
                     </constraints>
                     <state key="normal" title="Button" image="Spotify_Logo_CMYK_Green"/>
                     <connections>
