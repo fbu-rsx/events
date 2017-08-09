@@ -196,6 +196,14 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
             self.declineButton.layer.cornerRadius = 5
             self.declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
         }
+        if event!.organizer.uid == AppUser.current.uid {
+            self.acceptButton.isEnabled = false
+            self.acceptButton.isUserInteractionEnabled = false
+            self.acceptButton.isHidden = true
+            self.declineButton.isEnabled = false
+            self.declineButton.isUserInteractionEnabled = false
+            self.declineButton.isHidden = true
+        }
         tableView.reloadData()
     }
     
