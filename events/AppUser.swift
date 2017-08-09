@@ -16,6 +16,7 @@ struct BashNotifications {
     static let accept = NSNotification.Name(rawValue: "acceptedInvitation")
     static let decline = NSNotification.Name(rawValue: "declineInvitation")
     static let logout = NSNotification.Name(rawValue: "logout")
+    static let reload = NSNotification.Name(rawValue: "reload")
     static let refresh = NSNotification.Name(rawValue: "refresh")
     static let enableSwipe = NSNotification.Name(rawValue: "enableSwipe")
     static let disableSwipe = NSNotification.Name(rawValue: "disableSwipe")
@@ -24,6 +25,9 @@ struct BashNotifications {
     static let eventsLoaded = NSNotification.Name(rawValue: "eventsLoaded")
     static let walletChanged = NSNotification.Name(rawValue: "walletChanged")
     static let changedTheme = NSNotification.Name(rawValue: "changedTheme")
+    static let acceptOnDetailContainer = NSNotification.Name(rawValue: "acceptOnDetailContainer")
+    static let declineOnDetailContainer = NSNotification.Name(rawValue: "declineOnDetailContainer")
+
 }
 
 struct UserKey {
@@ -113,6 +117,7 @@ class AppUser {
     func addInvite(event: Event) {
         self.eventsKeys[event.eventid] = InviteStatus.noResponse.rawValue
         self.events.append(event)
+        NotificationCenter.default.post(name: BashNotifications.invite, object: event)
     }
     
     func delete(event: Event) {
@@ -135,7 +140,7 @@ class AppUser {
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .declined)
         FirebaseDatabaseManager.shared.removeTransaction(forEventID: event.eventid)
         if event.myStatus == .accepted {
-            var idx: Int!
+            var idx: Int?
             for i in 0..<self.transactions.count {
                 let transaction = self.transactions[i]
                 if transaction.id == event.eventid {
@@ -143,7 +148,9 @@ class AppUser {
                     break
                 }
             }
-            self.transactions.remove(at: idx)
+            if let idx = idx {
+                self.transactions.remove(at: idx)
+            }
         }
         self.eventsKeys[event.eventid] = InviteStatus.declined.rawValue
         event.guestlist[self.uid] = InviteStatus.declined.rawValue
@@ -181,8 +188,18 @@ class AppUser {
         self.eventsKeys.removeValue(forKey: event.eventid)
     }
     
-    func addToWallet(amount: Double) {
-        FirebaseDatabaseManager.shared.updateWallet(id: self.uid, withValue: self.wallet + amount)
-    }
+//    func deleteEventFromLocal(id: String) {
+//        var index: Int?
+//        for i in 0..<self.events.count {
+//            if self.events[i].eventid == id {
+//                index = i
+//                break
+//            }
+//        }
+//        if let index = index {
+//            self.events.remove(at: index)
+//        }
+//        NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
+//    }
 }
 

@@ -76,7 +76,7 @@ class EventsTableViewCell: UITableViewCell{
                 // if my event, hide "accept" and "decline" buttons
                 self.acceptButton.isHidden = true
                 self.declineButton.isHidden = true
-                self.deleteButton.backgroundColor = UIColor(hexString: "#F4ABB1")
+                self.deleteButton.backgroundColor = Colors.redDeclined
                 self.deleteButton.isHidden = false
                 self.deleteButton.layer.cornerRadius = 5
                 
@@ -96,7 +96,7 @@ class EventsTableViewCell: UITableViewCell{
                     
                     // Setting resposne icon to a check mark
                     self.responseIcon.image = UIImage(named: "going")
-                    
+                    self.responseIcon.isHidden = false
                 case .declined:
                     color = Colors.redDeclined
                     backViewColor = UIColor(hexString: "#F4ABB1")
@@ -105,6 +105,7 @@ class EventsTableViewCell: UITableViewCell{
                     self.acceptButton.isHidden = true
                     self.declineButton.isHidden = true
                     self.responseIcon.image = UIImage(named: "not-going")
+                    self.responseIcon.isHidden = false
                     self.deleteButton.isHidden = true
                     
                 default:
@@ -133,9 +134,9 @@ class EventsTableViewCell: UITableViewCell{
         super.awakeFromNib()
         //closedProfileImageView.image = UIImage(named: "icon-avatar-60x60.png")
         acceptButton.layer.cornerRadius = 5
-        acceptButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        acceptButton.backgroundColor = Colors.greenAccepted
         declineButton.layer.cornerRadius = 5
-        declineButton.backgroundColor = UIColor(hexString: "#FEB2A4")
+        declineButton.backgroundColor = Colors.coral
         deleteButton.isHidden = true
     }
     

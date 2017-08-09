@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class PaymentTableViewCell: UITableViewCell {
     
@@ -29,11 +30,11 @@ class PaymentTableViewCell: UITableViewCell {
             if transaction.status == true { // I have paid
                 payButton.isUserInteractionEnabled = false
                 payButton.isEnabled = false
-                payButton.setTitle("Paid", for: UIControlState.normal)
+                payButton.setTitle("Paid", for: .normal)
                 payButton.backgroundColor = Colors.green
             } else {
                 payButton.backgroundColor = Colors.coral
-                payButton.titleLabel?.text = "Pay"
+                payButton.setTitle("Pay", for: .normal)
             }
         }
     }
@@ -48,11 +49,20 @@ class PaymentTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapPay(_ sender: Any) {
-        payButton.isUserInteractionEnabled = false
-        payButton.isEnabled = false
-        transaction.completeTransaction()
-        payButton.titleLabel?.text = "Paid"
-        payButton.backgroundColor = Colors.green
-        print("pay complete")
+        if AppUser.current.wallet - transaction.amount > 0 {
+            payButton.isUserInteractionEnabled = false
+            payButton.isEnabled = false
+            transaction.completeTransaction()
+            payButton.setTitle("Paid", for: .normal)
+            payButton.backgroundColor = Colors.green
+            print("pay complete")
+        } else {
+            let alertView = SCLAlertView()
+            alertView.addButton("Ok", action: { 
+                alertView.dismiss(animated: true, completion: nil)
+            })
+            alertView.showTitle("Insufficient Funds", subTitle: "Add money to complete transaction.", style: SCLAlertViewStyle.error, closeButtonTitle: nil, duration: 4, colorStyle: Colors.coral.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+
+        }
     }
 }

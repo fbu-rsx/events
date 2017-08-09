@@ -27,7 +27,7 @@ class MyCreatedEventsViewController: UIViewController, UITableViewDelegate, UITa
         tableView.separatorStyle = .none
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController .refresh), name: BashNotifications.refresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController .refresh), name: BashNotifications.reload, object: nil)
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(MyCreatedEventsViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
         //tableView.reloadData()

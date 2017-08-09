@@ -46,7 +46,7 @@ class Transaction: NSObject {
     
     func completeTransaction() {
         AppUser.current.wallet = AppUser.current.wallet - self.amount
-        FirebaseDatabaseManager.shared.updateWallet(id: AppUser.current.uid, withValue: AppUser.current.wallet)
+        FirebaseDatabaseManager.shared.updateWallet(id: AppUser.current.uid, withValue: AppUser.current.wallet, completion: {})
         FirebaseDatabaseManager.shared.updateOtherUserWallet(id: self.receiver.uid, withValue: self.amount)
         FirebaseDatabaseManager.shared.updateTransaction(id: self.id)
     }

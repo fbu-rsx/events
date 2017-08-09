@@ -144,14 +144,14 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
     
     @IBAction func onCreate(_ sender: Any) {
         CreateEventMaster.shared.event[EventKey.cost] = Double(totalCostText.text ?? "")
-        CreateEventMaster.shared.event[EventKey.about] = aboutText.text
+        CreateEventMaster.shared.event[EventKey.about] = aboutText.text == "enter description of event 💬📝" ? "No description 😔" : aboutText.text
         CreateEventMaster.shared.event[EventKey.guestlist] = CreateEventMaster.shared.guestlist
         let name = CreateEventMaster.shared.event[EventKey.name]
         OAuthSwiftManager.shared.createPlaylist(name: name as! String, completion: {id in
             CreateEventMaster.shared.event[EventKey.spotifyID] = id
             CreateEventMaster.shared.event[EventKey.playlistCreatorID] = UserDefaults.standard.value(forKey: "spotify-user") as! String
             let event = CreateEventMaster.shared.createNewEvent() //adds to appuser and firebase, calls AppUser.current.createEvent
-            NotificationCenter.default.post(name: BashNotifications.refresh, object: event)
+            NotificationCenter.default.post(name: BashNotifications.reload, object: event)
             self.tabBarController?.selectedIndex = 0
         })
     }
@@ -182,7 +182,7 @@ extension CreateAboutViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if (textView.text == "")
         {
-            textView.text = "description of event"
+            textView.text = "enter description of event 💬📝"
             textView.textColor = .lightGray
         }
         textView.resignFirstResponder()

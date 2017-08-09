@@ -115,6 +115,7 @@ class Event: GMSMarker {
         }
         
         getGuests()
+        FirebaseDatabaseManager.shared.addGuestListener(forEvent: self)
     }
     
     private func getGuests() {

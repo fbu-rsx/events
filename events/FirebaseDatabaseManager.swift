@@ -62,8 +62,9 @@ class FirebaseDatabaseManager {
     func createWallet(id: String, completion: @escaping (Double) -> Void) {
         self.ref.child("users/\(id)/wallet").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if !snapshot.exists() {
-                self.updateWallet(id: id, withValue: 0.0)
-                completion(0.0)
+                self.updateWallet(id: id, withValue: 0.0) {
+                    completion(0.0)
+                }
             } else {
                 let value = snapshot.value as! Double
                 completion(value)
@@ -73,7 +74,7 @@ class FirebaseDatabaseManager {
     
     func addWalletListener(id: String) {
         self.ref.child("users/\(id)/wallet").observe(.value) { (snapshot: DataSnapshot) in
-            print("WALLET FUNC CALLED")
+            print("WALLET Listener Added")
             let value = snapshot.value as! Double
             NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
         }
@@ -100,24 +101,27 @@ class FirebaseDatabaseManager {
         self.ref.updateChildValues(update)
     }
     
-    func updateWallet(id: String, withValue value: Double) {
+    func updateWallet(id: String, withValue value: Double, completion: @escaping () -> Void) {
         let update = ["users/\(id)/wallet": value]
         self.ref.updateChildValues(update) { (error: Error?, ref: DatabaseReference) in
             if let error = error {
                 print("error updating wallet: \(error.localizedDescription)")
                 return
             }
-            NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+            completion()
+            if AppUser.current.uid == id {
+                NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+            }
         }
     }
     
     func updateOtherUserWallet(id: String, withValue value: Double) {
         self.ref.child("users/\(id)/wallet").observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
             if !snapshot.exists() {
-                self.updateWallet(id: id, withValue: value)
+                self.updateWallet(id: id, withValue: value, completion: {} )
             } else {
                 let oldValue = snapshot.value as! Double
-                self.updateWallet(id: id, withValue: oldValue + value)
+                self.updateWallet(id: id, withValue: oldValue + value, completion: {} )
             }
         }
     }
@@ -137,9 +141,21 @@ class FirebaseDatabaseManager {
                 let event = Event(dictionary: eventDict)
                 if event.organizer.uid != AppUser.current.uid {
                     AppUser.current.addInvite(event: event)
-                    NotificationCenter.default.post(name: BashNotifications.invite, object: event)
                 }
             })
+        }
+//        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
+//            let id = snapshot.key
+//            AppUser.current.deleteEventFromLocal(id: id)
+//        }
+    }
+    
+    func addGuestListener(forEvent event: Event) {
+        self.ref.child("events/\(event.eventid)/guestlist").observe(.childChanged) { (snapshot: DataSnapshot) in
+            let guest = snapshot.key
+            let value = snapshot.value as! Int
+            event.guestlist[guest] = value
+            NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
         }
     }
     
@@ -274,6 +290,7 @@ class FirebaseDatabaseManager {
                                      "channels/\(event.eventid)": NSNull()]
         for userid in event.guestlist.keys {
             update["users/\(userid)/events/\(event.eventid)"] = NSNull()
+            update["users/\(userid)/events/transactions/\(event.eventid)"] = NSNull()
         }
         self.ref.updateChildValues(update)
         FirebaseStorageManager.shared.deleteAllEventImages(event: event)
