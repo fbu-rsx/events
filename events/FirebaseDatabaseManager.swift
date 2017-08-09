@@ -109,7 +109,9 @@ class FirebaseDatabaseManager {
                 return
             }
             completion()
-            NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+            if AppUser.current.uid == id {
+                NotificationCenter.default.post(name: BashNotifications.walletChanged, object: value)
+            }
         }
     }
     
