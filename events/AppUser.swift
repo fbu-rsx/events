@@ -25,6 +25,9 @@ struct BashNotifications {
     static let eventsLoaded = NSNotification.Name(rawValue: "eventsLoaded")
     static let walletChanged = NSNotification.Name(rawValue: "walletChanged")
     static let changedTheme = NSNotification.Name(rawValue: "changedTheme")
+    static let acceptOnDetailContainer = NSNotification.Name(rawValue: "acceptOnDetailContainer")
+    static let declineOnDetailContainer = NSNotification.Name(rawValue: "declineOnDetailContainer")
+
 }
 
 struct UserKey {

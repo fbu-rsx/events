@@ -23,6 +23,8 @@ class DetailContainerViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         self.pageControl.currentPageIndicatorTintColor = UIColor(hexString: "4CB6BE")
         self.pageControl.pageIndicatorTintColor = UIColor(hexString: "F2F2F2")
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailContainerViewController.enablePageControl(_:)), name: BashNotifications.acceptOnDetailContainer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailContainerViewController.disablePageControl(_:)), name: BashNotifications.declineOnDetailContainer, object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -88,6 +90,16 @@ class DetailContainerViewController: UIViewController {
     
     func showPageControl() {
         pageControl.isHidden = false
+    }
+    
+    func enablePageControl(_ notification: NSNotification) {
+        addPageControl()
+        showPageControl()
+    }
+    
+    func disablePageControl(_ notification: NSNotification) {
+        pageControl.isHidden = true
+        pageControl.removeFromSuperview()
     }
 }
 
