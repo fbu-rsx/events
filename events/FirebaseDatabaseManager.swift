@@ -141,6 +141,10 @@ class FirebaseDatabaseManager {
                 }
             })
         }
+        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
+            let event = snapshot.value as! Event
+            AppUser.current.deleteEventFromLocal(event: event)
+        }
     }
     
     func addQueuedSongsListener(event: Event) {
@@ -274,6 +278,7 @@ class FirebaseDatabaseManager {
                                      "channels/\(event.eventid)": NSNull()]
         for userid in event.guestlist.keys {
             update["users/\(userid)/events/\(event.eventid)"] = NSNull()
+            update["users/\(userid)/events/transactions/\(event.eventid)"] = NSNull()
         }
         self.ref.updateChildValues(update)
         FirebaseStorageManager.shared.deleteAllEventImages(event: event)
