@@ -140,14 +140,19 @@ class FirebaseDatabaseManager {
                 }
             })
         }
-//        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
-//            let event = snapshot.value as! Event
-//            AppUser.current.deleteEventFromLocal(event: event)
-//        }
-//        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childChanged) { (snapshot: DataSnapshot) in
-//            let event = snapshot.value as! Event
-//            AppUser.current.changedEvent(event: event)
-//        }
+        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
+            let id = snapshot.key
+            AppUser.current.deleteEventFromLocal(id: id)
+        }
+    }
+    
+    func addGuestListener(forEvent event: Event) {
+        self.ref.child("events/\(event.eventid)/guestlist").observe(.childChanged) { (snapshot: DataSnapshot) in
+            let guest = snapshot.key
+            let value = snapshot.value as! Int
+            event.guestlist[guest] = value
+            NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
+        }
     }
     
     func addQueuedSongsListener(event: Event) {
