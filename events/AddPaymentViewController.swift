@@ -35,7 +35,7 @@ class AddPaymentViewController: UIViewController {
     
     @IBAction func onSave(_ sender: Any) {
         let value = Double(cardNumberText.text!)
-        FirebaseDatabaseManager.shared.updateWallet(id: AppUser.current.uid, withValue: value!, completion: {})
+        FirebaseDatabaseManager.shared.updateWallet(id: AppUser.current.uid, withValue: AppUser.current.wallet + value!, completion: {})
         self.dismiss(animated: true, completion: nil)
     }
     
