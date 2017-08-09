@@ -45,6 +45,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         tableView.backgroundColor = .white
         tableView.separatorInset = .zero
         tableView.separatorColor = Colors.coral
+        
         tableView.layoutMargins = .zero
     }
     
@@ -61,7 +62,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
             OAuthSwiftManager.shared.getTracksForPlaylist(userID: event!.playlistCreatorID!, playlistID: ID, completion: { (songs, artists) in
                 self.songs = songs
                 self.artists = artists
-                self.songs.sort()
+                //self.songs.sort()
                 self.tableView.reloadData()
             })
         }else{
@@ -114,6 +115,16 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
             })
         }
     }
+    @IBAction func spotifyPress(_ sender: UIButton) {
+        if (UIApplication.shared.canOpenURL(URL(string:"spotify://")!))
+        {
+            UIApplication.shared.openURL(NSURL(string:
+                "spotify://")! as URL)
+        } else
+        {
+            NSLog("Can't use spotify://");
+        }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(84)
@@ -124,8 +135,8 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         FirebaseDatabaseManager.shared.addQueuedSong(event: event!, songID: song)
         songs.append(searchedSongNames[songIndex])
         artists.append(searchedSongsArtists[songIndex])
-        artists.sort()
-        songs.sort()
+        //artists.sort()
+        //songs.sort()
         tableView.reloadData()
         searchField.text = nil
         subView?.removeFromSuperview()

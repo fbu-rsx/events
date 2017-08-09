@@ -80,7 +80,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.changedTheme(_:)), name: BashNotifications.changedTheme, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.inviteAdded(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.eventsLoaded(_:)), name: BashNotifications.eventsLoaded, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.refresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.refresh(_:)), name: BashNotifications.reload, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.deleteEvent(_:)), name: BashNotifications.delete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.accept(_:)), name: BashNotifications.accept, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MapViewController.decline(_:)), name: BashNotifications.decline, object: nil)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -16,10 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="search and queue a song" placeholder="search and queue a song" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RLN-Rs-eaO">
-                    <rect key="frame" x="0.0" y="54" width="375" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="ahR-2X-pBl"/>
-                    </constraints>
+                    <rect key="frame" x="0.0" y="54" width="375" height="25"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
@@ -27,32 +24,36 @@
                         <action selector="editingChanged:" destination="iN0-l3-epB" eventType="editingChanged" id="Ewt-xO-Vxh"/>
                     </connections>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Spotify_Logo_CMYK_Green" translatesAutoresizingMaskIntoConstraints="NO" id="fyo-p8-PpZ">
-                    <rect key="frame" x="128" y="6" width="120" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Ppn-Lj-xbq"/>
-                        <constraint firstAttribute="width" constant="120" id="dcI-sc-8Rc"/>
-                    </constraints>
-                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Rk1-5M-chh">
                     <rect key="frame" x="0.0" y="89" width="375" height="465"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODa-4R-3Rs">
+                    <rect key="frame" x="127.5" y="8" width="120" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="rW9-Nb-UEO"/>
+                        <constraint firstAttribute="width" constant="120" id="v5m-Sn-gTe"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="Spotify_Logo_CMYK_Green"/>
+                    <connections>
+                        <action selector="spotifyPress:" destination="iN0-l3-epB" eventType="touchUpInside" id="h23-Rp-Yen"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="RLN-Rs-eaO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1wP-jk-ygQ"/>
-                <constraint firstItem="fyo-p8-PpZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="Agq-CE-4yu"/>
-                <constraint firstAttribute="trailing" secondItem="Rk1-5M-chh" secondAttribute="trailing" id="FfX-cR-T6z"/>
-                <constraint firstItem="RLN-Rs-eaO" firstAttribute="top" secondItem="fyo-p8-PpZ" secondAttribute="bottom" constant="8" id="dJ4-Jn-v5o"/>
-                <constraint firstItem="fyo-p8-PpZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="h5u-pq-2G4"/>
-                <constraint firstItem="Rk1-5M-chh" firstAttribute="top" secondItem="RLN-Rs-eaO" secondAttribute="bottom" id="lKo-c1-u1c"/>
-                <constraint firstAttribute="bottom" secondItem="Rk1-5M-chh" secondAttribute="bottom" id="ltk-ds-92O"/>
-                <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="t6Y-9g-PvZ"/>
-                <constraint firstAttribute="trailing" secondItem="RLN-Rs-eaO" secondAttribute="trailing" id="tAl-tj-BN1"/>
+                <constraint firstItem="ODa-4R-3Rs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3PG-fK-OOd"/>
+                <constraint firstAttribute="trailing" secondItem="Rk1-5M-chh" secondAttribute="trailing" id="DMW-dc-RhJ"/>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EKp-tJ-8Yc"/>
+                <constraint firstAttribute="bottom" secondItem="Rk1-5M-chh" secondAttribute="bottom" id="JgK-eE-Sgi"/>
+                <constraint firstAttribute="trailing" secondItem="RLN-Rs-eaO" secondAttribute="trailing" id="a6r-OP-iBv"/>
+                <constraint firstItem="ODa-4R-3Rs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="aFJ-fw-NVA"/>
+                <constraint firstItem="RLN-Rs-eaO" firstAttribute="top" secondItem="ODa-4R-3Rs" secondAttribute="bottom" constant="11" id="aeB-fu-ieh"/>
+                <constraint firstItem="Rk1-5M-chh" firstAttribute="top" secondItem="RLN-Rs-eaO" secondAttribute="bottom" constant="10" id="epT-h2-pg3"/>
+                <constraint firstItem="RLN-Rs-eaO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="faH-aR-axi"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

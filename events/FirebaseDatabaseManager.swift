@@ -137,10 +137,17 @@ class FirebaseDatabaseManager {
                 let event = Event(dictionary: eventDict)
                 if event.organizer.uid != AppUser.current.uid {
                     AppUser.current.addInvite(event: event)
-                    NotificationCenter.default.post(name: BashNotifications.invite, object: event)
                 }
             })
         }
+//        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
+//            let event = snapshot.value as! Event
+//            AppUser.current.deleteEventFromLocal(event: event)
+//        }
+//        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childChanged) { (snapshot: DataSnapshot) in
+//            let event = snapshot.value as! Event
+//            AppUser.current.changedEvent(event: event)
+//        }
     }
     
     func addQueuedSongsListener(event: Event) {
@@ -274,6 +281,7 @@ class FirebaseDatabaseManager {
                                      "channels/\(event.eventid)": NSNull()]
         for userid in event.guestlist.keys {
             update["users/\(userid)/events/\(event.eventid)"] = NSNull()
+            update["users/\(userid)/events/transactions/\(event.eventid)"] = NSNull()
         }
         self.ref.updateChildValues(update)
         FirebaseStorageManager.shared.deleteAllEventImages(event: event)

@@ -52,7 +52,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
         userImage.layer.masksToBounds = true
         
         aboutText.delegate = self
-        aboutText.text = "description of event"
+        aboutText.text = "enter description of event 💬📝"
         aboutText.textColor = .lightGray
         
         setupMap()
@@ -151,7 +151,7 @@ class CreateAboutViewController: UIViewController, UICollectionViewDelegate, UIC
             CreateEventMaster.shared.event[EventKey.spotifyID] = id
             CreateEventMaster.shared.event[EventKey.playlistCreatorID] = UserDefaults.standard.value(forKey: "spotify-user") as! String
             let event = CreateEventMaster.shared.createNewEvent() //adds to appuser and firebase, calls AppUser.current.createEvent
-            NotificationCenter.default.post(name: BashNotifications.refresh, object: event)
+            NotificationCenter.default.post(name: BashNotifications.reload, object: event)
             self.tabBarController?.selectedIndex = 0
         })
     }
