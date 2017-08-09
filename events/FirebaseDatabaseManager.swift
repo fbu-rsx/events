@@ -140,10 +140,10 @@ class FirebaseDatabaseManager {
                 }
             })
         }
-        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
-            let id = snapshot.key
-            AppUser.current.deleteEventFromLocal(id: id)
-        }
+//        self.ref.child("users/\(AppUser.current.uid)/events").observe(.childRemoved) { (snapshot: DataSnapshot) in
+//            let id = snapshot.key
+//            AppUser.current.deleteEventFromLocal(id: id)
+//        }
     }
     
     func addGuestListener(forEvent event: Event) {

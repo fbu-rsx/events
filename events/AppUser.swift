@@ -187,18 +187,18 @@ class AppUser {
         FirebaseDatabaseManager.shared.updateWallet(id: self.uid, withValue: self.wallet + amount)
     }
     
-    func deleteEventFromLocal(id: String) {
-        var index: Int?
-        for i in 0..<self.events.count {
-            if self.events[i].eventid == id {
-                index = i
-                break
-            }
-        }
-        if let index = index {
-            self.events.remove(at: index)
-        }
-        NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
-    }
+//    func deleteEventFromLocal(id: String) {
+//        var index: Int?
+//        for i in 0..<self.events.count {
+//            if self.events[i].eventid == id {
+//                index = i
+//                break
+//            }
+//        }
+//        if let index = index {
+//            self.events.remove(at: index)
+//        }
+//        NotificationCenter.default.post(name: BashNotifications.refresh, object: nil)
+//    }
 }
 
