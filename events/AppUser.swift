@@ -183,10 +183,6 @@ class AppUser {
         self.eventsKeys.removeValue(forKey: event.eventid)
     }
     
-    func addToWallet(amount: Double) {
-        FirebaseDatabaseManager.shared.updateWallet(id: self.uid, withValue: self.wallet + amount)
-    }
-    
 //    func deleteEventFromLocal(id: String) {
 //        var index: Int?
 //        for i in 0..<self.events.count {

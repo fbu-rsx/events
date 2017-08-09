@@ -127,7 +127,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate, UISearchB
                     print(error)
                 })
             }
-            alertView.showTitle("Spotify Login", subTitle: "Please login to Spotify", style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.lightBlue.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
+            alertView.showTitle("Spotify Login", subTitle: "Please login to Spotify", style: SCLAlertViewStyle.info, closeButtonTitle: nil, duration: 0, colorStyle: Colors.green.getUInt(), colorTextButton: UIColor.white.getUInt(), circleIconImage: nil, animationStyle: .topToBottom)
         }
         /*
         OAuthSwiftManager.shared.spotifyLogin(success: {
