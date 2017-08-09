@@ -26,7 +26,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.separatorStyle = .none
 
 
-        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.reload, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.delete, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.invite, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh(_:)), name: BashNotifications.accept, object: nil)

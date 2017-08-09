@@ -16,6 +16,7 @@ struct BashNotifications {
     static let accept = NSNotification.Name(rawValue: "acceptedInvitation")
     static let decline = NSNotification.Name(rawValue: "declineInvitation")
     static let logout = NSNotification.Name(rawValue: "logout")
+    static let reload = NSNotification.Name(rawValue: "reload")
     static let refresh = NSNotification.Name(rawValue: "refresh")
     static let enableSwipe = NSNotification.Name(rawValue: "enableSwipe")
     static let disableSwipe = NSNotification.Name(rawValue: "disableSwipe")
@@ -113,6 +114,7 @@ class AppUser {
     func addInvite(event: Event) {
         self.eventsKeys[event.eventid] = InviteStatus.noResponse.rawValue
         self.events.append(event)
+        NotificationCenter.default.post(name: BashNotifications.invite, object: event)
     }
     
     func delete(event: Event) {
@@ -185,9 +187,17 @@ class AppUser {
         FirebaseDatabaseManager.shared.updateWallet(id: self.uid, withValue: self.wallet + amount)
     }
     
-    func deleteEventFromLocal(event: Event) {
-        let index = self.events.index(of: event)!
-        self.events.remove(at: index)
-    }
+//    func deleteEventFromLocal(event: Event) {
+//        let index = self.events.index(of: event)!
+//        self.events.remove(at: index)
+//        NotificationCenter.default.post(name: BashNotifications.invite, object: event)
+//    }
+//    
+//    func changedEvent(event: Event) {
+//        let index = self.events.index(of: event)!
+//        self.events.remove(at: index)
+//        self.events.insert(event, at: index)
+//        NotificationCenter.default.post(name: BashNotifications.invite, object: event)
+//    }
 }
 

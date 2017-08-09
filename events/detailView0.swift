@@ -31,9 +31,6 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
     @IBAction func goingTap(_ sender: UIButton) {
         AppUser.current.accept(event: event!)
         NotificationCenter.default.post(name: BashNotifications.accept, object: event)
-        
-        // Automatically refresh
-        NotificationCenter.default.addObserver(self, selector: #selector(EventsViewController.refresh), name: BashNotifications.refresh, object: nil)
     }
     
     @IBAction func notGoingTap(_ sender: UIButton) {

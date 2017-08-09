@@ -64,7 +64,7 @@ class CreateEventPageController: UIPageViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.enableSwipe(_:)), name: BashNotifications.enableSwipe, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.disableSwipe(_:)), name: BashNotifications.disableSwipe, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.refresh), name: BashNotifications.refresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.refresh), name: BashNotifications.reload, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.swipeLeft), name: BashNotifications.swipeLeft, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(CreateEventPageController.swipeRight), name: BashNotifications.swipeRight, object: nil)
 
