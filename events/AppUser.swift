@@ -140,7 +140,7 @@ class AppUser {
         FirebaseDatabaseManager.shared.updateInvitation(for: event, withStatus: .declined)
         FirebaseDatabaseManager.shared.removeTransaction(forEventID: event.eventid)
         if event.myStatus == .accepted {
-            var idx: Int!
+            var idx: Int?
             for i in 0..<self.transactions.count {
                 let transaction = self.transactions[i]
                 if transaction.id == event.eventid {
@@ -148,7 +148,9 @@ class AppUser {
                     break
                 }
             }
-            self.transactions.remove(at: idx)
+            if let idx = idx {
+                self.transactions.remove(at: idx)
+            }
         }
         self.eventsKeys[event.eventid] = InviteStatus.declined.rawValue
         event.guestlist[self.uid] = InviteStatus.declined.rawValue
