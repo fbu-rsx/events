@@ -159,6 +159,14 @@ class detailView0: UIView, UITableViewDelegate, UITableViewDataSource {
                 self.lyftButton.isHidden = true
                 self.directionsButton.isHidden = true
             }
+            if event!.organizer.uid == AppUser.current.uid {
+                self.acceptButton.isEnabled = false
+                self.acceptButton.isUserInteractionEnabled = false
+                self.acceptButton.isHidden = true
+                self.declineButton.isEnabled = false
+                self.declineButton.isUserInteractionEnabled = false
+                self.declineButton.isHidden = true
+            }
         }
     }
     
