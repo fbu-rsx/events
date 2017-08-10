@@ -42,6 +42,7 @@ class DetailContainerViewController: UIViewController {
             viewController.pageControlDelegate = self
             viewController.event = self.event
             viewController.imageDelegate = self.imageDelegate
+            viewController.width = Int(self.view.frame.width)
         }
     }
     

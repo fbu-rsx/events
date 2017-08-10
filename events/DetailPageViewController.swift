@@ -46,6 +46,8 @@ class DetailPageViewController: UIPageViewController {
                 self.newViewController("detailView2")]
     }()
     
+    var width: Int?
+    
     private func newViewController(_ name: String) -> UIViewController {
         let frame = self.view.frame
         
@@ -66,6 +68,7 @@ class DetailPageViewController: UIPageViewController {
                 let temp = nib.instantiate(withOwner: self, options: nil).first as! detailView1
                 temp.event = event
                 temp.delegate = imageDelegate
+                temp.width = width!
                 newView = temp
             case "detailView2":
                 let temp = nib.instantiate(withOwner: self, options: nil).first as! detailView2
@@ -128,7 +131,7 @@ class DetailPageViewController: UIPageViewController {
         }
     }
     
-    
+    /*(
     
     override var previewActionItems: [UIPreviewActionItem] {
         let acceptAction = UIPreviewAction(title: "Accept", style: .default) { (action, viewController) -> Void in
@@ -143,7 +146,7 @@ class DetailPageViewController: UIPageViewController {
         }
         return [acceptAction, declineAction]
     }
-    
+    */
 }
 
 extension DetailPageViewController: UIPageViewControllerDataSource {

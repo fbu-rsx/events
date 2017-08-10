@@ -18,6 +18,7 @@ class ProfileViewController: ButtonBarPagerTabStripViewController {
     
     override func viewDidLoad() {
         // change selected bar color
+        //settings.style.buttonBarRightContentInset = 0
         settings.style.buttonBarBackgroundColor = UIColor(hexString: "#4CB6BE")
         settings.style.buttonBarItemBackgroundColor = UIColor(hexString: "#FFFFFF")
         settings.style.selectedBarBackgroundColor = UIColor(hexString: "#4CB6BE")
