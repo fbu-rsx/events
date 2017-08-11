@@ -45,7 +45,7 @@ class detailView2: UIView, UITableViewDelegate, UITableViewDataSource, addSongDe
         tableView.backgroundColor = .white
         tableView.separatorInset = .zero
         tableView.separatorColor = Colors.coral
-        
+        tableView.estimatedRowHeight = 84
         tableView.layoutMargins = .zero
     }
     

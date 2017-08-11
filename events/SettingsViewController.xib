@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,17 +25,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rhian Chavez" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFy-EX-Wki">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rhian Chavez" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFy-EX-Wki">
                     <rect key="frame" x="0.0" y="117" width="375" height="46"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="35"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfD-4a-62w">
-                    <rect key="frame" x="15" y="391" width="343" height="53"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JfD-4a-62w">
+                    <rect key="frame" x="15" y="391" width="345" height="53"/>
                     <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="Qii-3d-Q1t"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
                     <state key="normal" title="logout">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,14 +45,19 @@
                         <action selector="didLogout:" destination="-1" eventType="touchUpInside" id="lMB-Dw-Ekv"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="udF-2w-8Q3">
-                    <rect key="frame" x="149" y="25" width="88" height="88"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="udF-2w-8Q3">
+                    <rect key="frame" x="143.5" y="25" width="88" height="88"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="udF-2w-8Q3" secondAttribute="height" multiplier="1:1" id="8uI-gH-L4x"/>
+                        <constraint firstAttribute="width" constant="88" id="dXs-cX-9If"/>
+                    </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-id-znR">
-                    <rect key="frame" x="15" y="307" width="343" height="53"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OX9-id-znR">
+                    <rect key="frame" x="15" y="307" width="345" height="53"/>
                     <color key="backgroundColor" red="0.89936944799999996" green="0.89936944799999996" blue="0.89936944799999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="Ox5-FY-URO"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
                     <state key="normal" title="add money">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,9 +66,11 @@
                         <action selector="onAddPayment:" destination="-1" eventType="touchUpInside" id="BPC-pa-KLP"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dam-Ya-a89" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
-                    <rect key="frame" x="17" y="221" width="342" height="51"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dam-Ya-a89" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
+                    <rect key="frame" x="16" y="221" width="343" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="52" id="6ee-IS-vH7"/>
+                    </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="8"/>
@@ -73,6 +82,22 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="OX9-id-znR" secondAttribute="trailing" constant="15" id="1sO-aD-1SQ"/>
+                <constraint firstItem="SFy-EX-Wki" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5vO-2l-zqm"/>
+                <constraint firstItem="JfD-4a-62w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="AyE-Rf-8mf"/>
+                <constraint firstItem="udF-2w-8Q3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="EbD-ia-lxL"/>
+                <constraint firstAttribute="trailing" secondItem="dam-Ya-a89" secondAttribute="trailing" constant="16" id="Hg3-RQ-y8k"/>
+                <constraint firstItem="dam-Ya-a89" firstAttribute="top" secondItem="SFy-EX-Wki" secondAttribute="bottom" constant="58" id="R5O-YQ-VPX"/>
+                <constraint firstItem="udF-2w-8Q3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Xwn-g9-uBJ"/>
+                <constraint firstAttribute="trailing" secondItem="SFy-EX-Wki" secondAttribute="trailing" id="bOR-TT-ztT"/>
+                <constraint firstItem="SFy-EX-Wki" firstAttribute="top" secondItem="udF-2w-8Q3" secondAttribute="bottom" constant="4" id="cgS-X9-SIe"/>
+                <constraint firstAttribute="trailing" secondItem="JfD-4a-62w" secondAttribute="trailing" constant="15" id="gKq-Be-WJN"/>
+                <constraint firstItem="OX9-id-znR" firstAttribute="top" secondItem="dam-Ya-a89" secondAttribute="bottom" constant="34" id="hHH-Y7-hZ4"/>
+                <constraint firstItem="OX9-id-znR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="iQt-p7-2fb"/>
+                <constraint firstItem="dam-Ya-a89" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="jOH-zM-RAO"/>
+                <constraint firstItem="JfD-4a-62w" firstAttribute="top" secondItem="OX9-id-znR" secondAttribute="bottom" constant="31" id="zgz-77-Npb"/>
+            </constraints>
             <point key="canvasLocation" x="34.5" y="53.5"/>
         </view>
     </objects>

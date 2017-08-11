@@ -50,6 +50,10 @@ class CreateGuestsViewController: UIViewController, UITableViewDataSource, UITab
         return AppUser.current.facebookFriends.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(65)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as! GuestsTableViewCell
         cell.nameLabel.textColor = UIColor.darkGray

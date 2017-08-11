@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,22 +19,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pRT-yX-SDo">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pRT-yX-SDo">
                         <rect key="frame" x="8" y="7" width="50" height="50"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="24V-iQ-KD8"/>
+                            <constraint firstAttribute="height" constant="50" id="cyg-oT-dKm"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guest name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfl-6F-sVN">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guest name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hfl-6F-sVN">
                         <rect key="frame" x="66" y="14" width="235" height="37"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9fc-Od-Krs">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9fc-Od-Krs">
                         <rect key="frame" x="267" y="17" width="30" height="30"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="JdT-xK-Sm8"/>
+                            <constraint firstAttribute="height" constant="30" id="kF8-L3-R7L"/>
+                        </constraints>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="pRT-yX-SDo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="1uz-NL-ffx"/>
+                    <constraint firstItem="Hfl-6F-sVN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="2Fx-gG-xFX"/>
+                    <constraint firstItem="pRT-yX-SDo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="7ho-nU-EhH"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="9fc-Od-Krs" secondAttribute="trailing" constant="15" id="88k-cb-vnK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Hfl-6F-sVN" secondAttribute="bottom" constant="5.5" id="Ird-dK-KqX"/>
+                    <constraint firstItem="9fc-Od-Krs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="dy4-rd-5Kh"/>
+                    <constraint firstItem="Hfl-6F-sVN" firstAttribute="leading" secondItem="pRT-yX-SDo" secondAttribute="trailing" constant="8" id="ejc-id-6WV"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Hfl-6F-sVN" secondAttribute="trailing" constant="11" id="hPs-fH-NEZ"/>
+                    <constraint firstAttribute="bottom" secondItem="pRT-yX-SDo" secondAttribute="bottom" constant="7.5" id="ied-la-ppZ"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="guestImage" destination="pRT-yX-SDo" id="Ulq-Gm-Rxl"/>

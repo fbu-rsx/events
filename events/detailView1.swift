@@ -51,6 +51,20 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         }
     }
     
+    var width: Int?{
+        didSet{
+            let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            layout.itemSize = CGSize(width: width!/3, height: width!/3)
+            layout.sectionInset.left = 0
+            layout.sectionInset.right = 0
+            layout.sectionInset.bottom = 0
+            layout.sectionInset.top = 0
+            layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
+            collectionView.collectionViewLayout = layout
+        }
+    }
+    
     // Need to associate each image with an app user upon insertion to the dictionary
     
     var rootViewController = UIApplication.shared.keyWindow?.rootViewController
@@ -60,15 +74,7 @@ class detailView1: UIView, ImagePickerDelegate, UICollectionViewDelegate, UIColl
         self.collectionView.delegate = self
         let nib = UINib(nibName: "imageCollectionViewCell", bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: "imageCell")
-        let layout:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.frame.width/3, height: self.frame.width/3)
-        layout.sectionInset.left = 0
-        layout.sectionInset.right = 0
-        layout.sectionInset.bottom = 0
-        layout.sectionInset.top = 0
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        collectionView.collectionViewLayout = layout
+        
         collectionView.allowsMultipleSelection = true
         
         button.layer.cornerRadius = 5

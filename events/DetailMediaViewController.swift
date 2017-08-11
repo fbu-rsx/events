@@ -36,7 +36,7 @@ class DetailMediaViewController: UIViewController {
         deleteButton.backgroundColor = UIColor(hexString: "#95a5a6")
         downloadButton.layer.cornerRadius = 5
         downloadButton.backgroundColor = Colors.coral
-        
+        image.clipsToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
