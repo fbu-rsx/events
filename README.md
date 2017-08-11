@@ -35,7 +35,7 @@ Tab 4:
 
 Here's a walkthrough of our app:
 
-<img src='http://i.imgur.com/T88OccI.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/VuudYlg.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
